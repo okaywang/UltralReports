@@ -1,0 +1,203 @@
+﻿<div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label class="control-label">用户名</label>
+            <input type="text" name="NamePart" class="form-control input-sm" />
+        </div>
+        <div class="form-group">
+            <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
+        </div>
+    </form>
+</div>
+
+<div class="search-feedback">
+</div>
+
+<div class="search-action">
+    @if (UserContext.Current.HasAuthority(AuthorityNames.AccountAdd))
+    {
+        <button type="button" class="btn btn-primary btn-sm" command-name="addAccount">添加员工</button>
+    }
+    
+</div>
+
+<div class="search-result table-responsive" style="margin-top: 20px;">
+</div>
+
+<div class="search-widget">
+    <div class="search-widget-reset-password">
+        @Html.Partial("_ChangePassword")
+    </div>
+    <div class="search-widget-edit-account">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加员工</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group" property-name="Name" control-type="@ControlTypes.NativeInputText" validate-rule="required:true">
+                                <label class="col-md-3 control-label">员工名称</label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group" property-name="LoginName" control-type="@ControlTypes.NativeInputText" validate-rule="required:true">
+                                <label class="col-md-3 control-label">登录名</label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group" property-name="Password" control-type="@ControlTypes.NativeInputPassword" validate-rule="required:true" container-bind="invisible:AccountId>0">
+                                <label class="col-md-3 control-label">密码</label>
+                                <div class="col-md-5">
+                                    <input type="password" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group" property-name="Department" control-type="@ControlTypes.NativeInputText" validate-rule="required:true">
+                                <label class="col-md-3 control-label">所属部门</label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary btn-save">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-widget-edit-auth">
+        @Html.Partial("_AuthSet",true)
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/views/base/se.ui.view.Module.js"></script>
+    <script src="~/Scripts/views/base/se.ui.view.EditModule.js"></script>
+    <script src="~/Scripts/views/base/se.ui.control.ChinaArea.js"></script>
+    <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
+    <script>
+        viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+            url: "/Account/Persons",
+            modules: {
+                changePassword: new se.ui.view.EditModule(new se.ui.view.EditModule.Settings({
+                    container: $(".search-widget-reset-password"),
+                    updateUrl: "/Account/ChangePassword",
+                    getSaveModelId: function (saveModel) {
+                        return saveModel.AccountId;
+                    },
+                    activate: function () {
+                        var validator = $("form", $(".modal-content")).validate();
+                        validator.resetForm();
+                        $('#myModal').modal("show");
+                    },
+                    inactivate: function () {
+                        $('#myModal').modal("hide");
+                    }
+                })),
+                editAccount: new se.ui.view.EditModule(new se.ui.view.EditModule.Settings({
+                    container: $(".search-widget-edit-account"),
+                    addUrl: "/Account/AddPersonAccount",
+                    updateUrl: "/Account/UpdatePersonAccount",
+                    getSaveModelId: function (model) {
+                        return model.AccountId;
+                    },
+                    setTitle: function (title) {
+                        $(".modal-title", this.container).text(title);
+                    },
+                    activate: function () {
+                        var validator = $("form", this.container).validate();
+                        validator.resetForm();
+                        $('#myModal', this.container).modal("show");
+                    },
+                    inactivate: function () {
+                        $('#myModal', this.container).modal("hide");
+                    },
+                    eventHandlers: {
+                        added: function () {
+                            viewInstance.search();
+                        },
+                        updated: function () {
+                            viewInstance.refresh();
+                        }
+                    }
+                })),
+                editAuth: new se.ui.view.EditModule(new se.ui.view.EditModule.Settings({
+                    container: $(".search-widget-edit-auth"),
+                    addUrl: "/Account/UpdateAuthorities",
+                    updateUrl: "/Account/UpdateAuthorities",
+                    setTitle: function (title) {
+                        
+                    },
+                    getSaveModelId: function (model) {
+                        return model.AccountId;
+                    },
+                    activate: function () {
+                        $(":checkbox").prop("checked", false);
+                        $("#authSetModal").modal("show");
+                    },
+                    inactivate: function () {
+                        $("#authSetModal").modal("hide");
+                    },
+                    eventHandlers: {
+                        updated: function () {
+                            viewInstance.refresh();
+                        }
+                    },
+                    getSaveModel: function (model) {
+                        var authorityIds = $.makeArray($(":checkbox:checked[value!='']").map(function (index, item) {
+                            return item.value;
+                        }));
+                        return { AccountId: model.AccountId, AuthorityIds: authorityIds };
+                    }
+                }))
+            },
+            rowCommands: {
+                editAccount: function (model) {
+                    viewInstance.modules.editAccount.activate();
+                    viewInstance.modules.editAccount.bindModel(model);
+                },
+                changePassword: function (model) {
+                    viewInstance.modules.changePassword.activate();
+                    viewInstance.modules.changePassword.bindModel(model);
+                },
+                deleteAccount: function (model) {
+                    var container = $(this).closest(".table");
+                    se.helper.ajax.request({
+                        confirmMessage: "您确定删除 " + model.LoginName + " 吗？",
+                        container: container,
+                        url: "/Account/Delete",
+                        model: { accountId: model.AccountId },
+                        onSuccess: function () {
+                            viewInstance.refresh();
+                        }
+                    });
+                },
+                setAuthority: function (model) {
+                    viewInstance.modules.editAuth.activate();
+                    viewInstance.modules.editAuth.bindModel(model);
+                    var url = "/Account/GetAuthorities";
+                    webExpress.utility.ajax.request(url, { accountId: model.AccountId }, function (result) {
+                        for (var i = 0; i < result.length; i++) {
+                            $(":checkbox[value=" + result[i] + "]").prop("checked", true);
+                        }
+                    });
+                }
+            },
+            viewCommands: {
+                addAccount: function () {
+                    viewInstance.modules.editAccount.activate();
+                    viewInstance.modules.editAccount.bindModel({});
+                }
+            }
+        }));
+
+        viewInstance.init();
+    </script>
+}

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C5637D1E-9A03-481E-876A-76B615D860EC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebExpress.Core</RootNamespace>
+    <AssemblyName>WebExpress.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NuGet.VisualStudio">
+      <HintPath>..\..\packages\NuGet.VisualStudio.2.8.1\lib\net40\NuGet.VisualStudio.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\ConfigManager\StandaloneConfigBase.cs" />
+    <Compile Include="Configuration\EnumSettings\EnumConfigManager.cs" />
+    <Compile Include="Configuration\EnumSettings\EnumItem\EnumItemElement.cs" />
+    <Compile Include="Configuration\EnumSettings\EnumItem\EnumItemElementCollection.cs" />
+    <Compile Include="Configuration\EnumSettings\EnumSettingSection.cs" />
+    <Compile Include="Configuration\EnumSettings\EnumType\EnumTypeElementCollection.cs" />
+    <Compile Include="Configuration\EnumSettings\EnumType\EnumTypeElement.cs" />
+    <Compile Include="DisplayTextAttribute.cs" />
+    <Compile Include="Enums\EnumItem.cs" />
+    <Compile Include="Enums\IEnumItem.cs" />
+    <Compile Include="Expressions\PropertyName.cs" />
+    <Compile Include="Graphics\Captcha\ICaptcha.cs" />
+    <Compile Include="Graphics\Captcha\LiteralCaptcha.cs" />
+    <Compile Include="Graphics\Captcha\ArithmeticCaptcha.cs" />
+    <Compile Include="Graphics\ImageHelper.cs" />
+    <Compile Include="Graphics\Images\Base\ImageResizeType.cs" />
+    <Compile Include="Graphics\Images\FixedSizeTransformer.cs" />
+    <Compile Include="Graphics\Images\Base\IImageSizeTransformer.cs" />
+    <Compile Include="Graphics\Images\Base\ImageTransformer.cs" />
+    <Compile Include="Graphics\Images\KeepMinHeightSizeTransformer.cs" />
+    <Compile Include="Guards\Guard.cs" />
+    <Compile Include="IValueTextEntry.cs" />
+    <Compile Include="Paging\OrderByItem.cs" />
+    <Compile Include="Paging\PagedList.cs" />
+    <Compile Include="Paging\PagingRequest.cs" />
+    <Compile Include="Paging\PagingResult.cs" />
+    <Compile Include="Paging\SearchCriteria.cs" />
+    <Compile Include="Translators\ITranslator.cs" />
+    <Compile Include="Translators\TranslatorBase.cs" />
+    <Compile Include="TypeExtensions\DateTimeExtension.cs" />
+    <Compile Include="TypeExtensions\EnumExtenstion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeExtensions\ICollectionExtension.cs" />
+    <Compile Include="TypeExtensions\IComparableExtension.cs" />
+    <Compile Include="TypeExtensions\IQueryableExtension.cs" />
+    <Compile Include="TypeExtensions\PathExtension.cs" />
+    <Compile Include="TypeExtensions\StringExtension.cs" />
+    <Compile Include="TypeExtensions\NumberExtension.cs" />
+    <Compile Include="ValueTextEntry.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SimpleTypes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

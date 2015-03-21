@@ -1,0 +1,206 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>超市入口管理后台</title>
+    <link href="~/Content/fromwangying/admin.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    @System.Web.Optimization.Styles.Render("~/css")
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
+    @RenderSection("styles", false)
+
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="hd clearfix">
+            <div class="logo"></div>
+            <div class="toptitle">
+                超市入口管理后台
+            </div>
+            <div class="loginInfo">
+                <span>@UserContext.Current.Name</span>,您好，欢迎使用<span class="line">|</span><a href="/Account/Logout" class="importMsg">退出</a>
+                <p>客服电话：4000600178</p>
+            </div>
+        </header>
+
+        <div class="main-container">
+            <div class="sidebar">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="/Home/Index">
+                            <i class="homeicon"></i>
+                            <span class="menu-text">后台首页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="skuicon"></i>
+                            <span class="menu-text">商品管理</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.SkuCategoryView))
+                            {
+                                <li><a href="/Category/Manage">商品类型管理</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.BrandView))
+                            {
+                                <li><a href="/Brand/List">品牌管理</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.GoodsView))
+                            {
+                                if (UserContext.Current.AccountType == AccountType.GeneralUser)
+                                {
+                                <li><a href="/Goods/Manage">商品管理</a></li>
+                                }
+                                else
+                                {
+                                <li><a href="/Goods/Manage">商品管理</a></li>
+                                <li class="lastline"><a href="/Goods/CommonManage">公共商品库</a></li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="ordericon"></i>
+                            <span class="menu-text">订单管理</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.OrderView))
+                            {
+                                <li><a href="/Order/Manage">订单管理</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.OrderStatView))
+                            {
+                                <li><a href="/Order/Statistics">订单统计</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.Cashback))
+                            {
+                                <li><a href="/Shop/CashbackList">商户返现</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.OrderStatView))
+                            {
+                                <li><a href="/Order/Summary">订单区域统计</a></li>      
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="shopicon"></i>
+                            <span class="menu-text">商户管理</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.ShopView))
+                            {
+                                <li><a href="/Shop/List">商户管理</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.ShopAccountView))
+                            {
+                                <li><a href="/Account/Shops">账号维护</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="customericon"></i>
+                            <span class="menu-text">会员管理</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.CustomerView))
+                            {
+                                <li><a href="/Customer/List">会员管理</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="settingsicon"></i>
+                            <span class="menu-text">系统设置</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.CommunityView))
+                            {
+                                <li><a href="/Community/List">楼宇库</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.AccountView))
+                            {
+                                <li><a href="/Account/Persons">内部账号管理</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.SuggestionView))
+                            {
+                                <li><a href="/Suggestion/SuggestionList">投诉管理</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.ActivityView))
+                            {
+                                <li><a href="/Activity/List">活动设置</a></li> 
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.RecommendShopView))
+                            {
+                                <li><a href="/RecommendShop/List">推荐商户管理</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="maintenanceicon"></i>
+                            <span class="menu-text">商户维护</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.ShopBilinView))
+                            {
+                                <li><a href="/Maintenance/List">商户数据维护</a></li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+                <div id="sidebar-collapse" class="sidebar-collapse">
+                    <i data-icon2="icon-double-angle-right" data-icon1="icon-double-angle-left" class="icon-double-angle-left"></i>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="page-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $("a[href='" + location.pathname + "']").addClass("cur");
+    </script>
+    @System.Web.Optimization.Scripts.Render("~/js")
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/date/WdatePicker.js"></script>
+    <script src="~/Scripts/views/base/se.ui.control.AceMenu.js"></script>
+    <script src="~/Scripts/Extension/jquery.validate.Extension.js"></script>
+    @RenderSection("scripts", false)
+    <script>
+        $(function () {
+            var menu = new se.ui.control.AceMenu();
+            menu.init();
+
+            var pathname = location.pathname;
+            if (pathname.indexOf("/Shop/Edit") > -1 || pathname.indexOf("/Shop/Detail") > -1) {
+                pathname = "/Account/Shops";
+            }
+            var currentMenuItem = $("a[href='" + pathname + "']").closest("li");
+            menu.select(currentMenuItem);
+        });
+    </script>
+</body>
+</html>

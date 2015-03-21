@@ -1,0 +1,49 @@
+﻿@{
+    bool isAdmin = Model;
+}
+<div class="modal fade" id="authSetModal">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">权限设置</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <ul class="list-group">
+                        @{
+                            var targetAccountType = isAdmin ? AccountType.AdminUser : AccountType.GeneralUser;
+                            var authorities = AuthorityHelper.GetAll();
+                            var groupedAuthorities = authorities.GroupBy(i => i.Name.Split('-')[0]);
+                            foreach (var item in groupedAuthorities)
+                            {
+                            <li class="list-group-item">
+                                <span class="col-md-2 text-right">@item.Key</span>
+                                @foreach (var subItem in item)
+                                {
+                                    if (targetAccountType.HasCandidateAuthority(subItem.Name))
+                                    {
+                                    <label class="checkbox-inline" style="margin-left: 2em;">
+                                        <input type="checkbox" value="@subItem.Id">@subItem.Name.Split('-')[1]</label>    
+                                    }
+                                }
+                            </li>
+                            }
+                        }
+                    </ul>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-save">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $("li.list-group-item:not(:has(:checkbox))").hide();
+    });
+</script>

@@ -1,0 +1,119 @@
+﻿/**
+    index  charset = utf8    
+    */
+
+body {
+    min-width:1000px ;
+    background:url(../images/bg.jpg)
+}
+.clear
+{
+    clear:both;
+}
+.marketing
+{
+  padding-top:20px;
+}
+.down-body
+{
+  padding-top:20px;
+  width:100%;
+}
+
+.wap
+{
+      width:970px; 
+      margin:0 auto;
+}
+.page-wap
+{ 
+}
+.iphone
+{    float:left;width:390px;
+}
+
+.iphone-img
+{ 
+    height:592px;
+    background:url(../images/phone.png) no-repeat;
+}
+    .iphone-img img
+    {   margin-left: 88px;
+        padding-top: 82px;
+    }
+.shop-title
+{ font-size:90px;
+  font-family:'微软雅黑';
+  color:#fff;
+  margin-top:56px;
+}
+.shop-body
+{
+    font-size:58px;
+    color:#d4d7d9;
+    font-family:'微软雅黑';
+}
+
+.downbox
+{
+    padding-bottom:20px;
+    width:560px;
+    float:left;
+}
+    .downbox .row
+    { 
+        padding-left:5%;
+    }
+.ituns-down, .Andriod-down
+{
+    width:238px; height:73px;
+    display:inline-block; text-indent:-2000px; 
+    float:left; margin-right:20px;
+    margin-top:62px;
+}
+.ituns-down
+{background:url(../images/2-nor.png);
+  /* 默认   */
+  /*灰色不可点background:url(../images/dis.png) no-repeat;*/
+}
+    .ituns-down:hover
+    {
+        /*background:url(../images/dis.png) no-repeat;*/ 
+        background:url(../images/2-hov.png) no-repeat;
+    }
+a.Andriod-down
+{
+    background: url(../images/1-nor.png) no-repeat; cursor:pointer;
+}
+    .Andriod-down:hover
+    { background:url(../images/1-hov.png) no-repeat;
+
+    }
+
+
+.footer 
+{
+    width:100%;
+    background:#fff;
+    margin-top:5%;
+}
+.footer-shop-logo
+{
+    width:100%;
+    text-align: center;
+}
+.footer-shop-logo-i
+{ display: inline-block;
+    margin-top: -44px;
+}
+.copyright
+{ 
+    text-align:center;
+    color:#666666;
+    line-height:60px;
+    padding:0px 0 48px ;
+    font-size:12px;
+}
+    .copyright p
+    { margin-top:0px;
+    }

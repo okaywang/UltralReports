@@ -1,0 +1,4 @@
+一：创建数据库
+	1.执行建表语句			   SqlServer.CreateTables.sql
+	2.执行创建省市区数据的语句 SqlServer.BasicData.ChinaArea.sql
+	3.附加BilinData.bak，并执行SqlServer.BasicData.BinlinDataImporting.sql将数据导入到数据库

@@ -1,0 +1,209 @@
+﻿@{
+    bool isAdmin = Model;
+}
+<div class="modal fade" id="authSetModal">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">权限设置</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    @if (isAdmin)
+                    {
+                        <ul class="list-group">
+                            <li class="list-group-item active">后台首页
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                            </li>
+                            <li class="list-group-item hide">后台首页
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.IndexShopStatistics)">查看</label>
+                            </li>
+                        </ul>
+                        <ul class="list-group">
+                            <li class="list-group-item active">商品管理
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                            </li>
+                            <li class="list-group-item hide">商品类型管理
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.SkuCategoryView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.SkuCategoryAdd)">添加</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.SkuCategoryUpdate)">编辑</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.SkuCategoryDelete)">删除</label>
+                            </li>
+                            <li class="list-group-item hide">品牌管理
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.BrandView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.BrandAdd)">添加</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.BrandUpdate)">编辑</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.BrandDelete)">删除</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.BrandBindTypes)">关联商品类型</label>
+                            </li>
+                            <li class="list-group-item hide">商品管理
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsAdd)">添加</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsUpdate)">编辑</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsDelete)">删除</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsPublish)">发布</label>
+                            </li>
+                        </ul>
+                        <ul class="list-group">
+                            <li class="list-group-item active">订单管理
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                            </li>
+                            <li class="list-group-item hide">订单管理
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.OrderView)">查看</label>
+                            </li>
+                            <li class="list-group-item hide">订单统计
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.OrderStatView)">查看</label>
+                            </li>
+                        </ul>
+                        <ul class="list-group">
+                            <li class="list-group-item active">商户管理
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                            </li>
+                            <li class="list-group-item hide">商户管理
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopDayang)">打烊</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopClose)">关店</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopAccountAuthSet)">权限设置</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopAccountResetPassword)">重置密码</label>
+                            </li>
+                            <li class="list-group-item hide">帐号维护
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopAccountView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopAccountIntegrate)">完善资料</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopAccountModifyPassword)">修改密码</label>
+                            </li>
+                        </ul>
+                        <ul class="list-group">
+                            <li class="list-group-item active">会员管理
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                            </li>
+                            <li class="list-group-item hide">会员管理
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.CustomerView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.CustomerReturn)">返现</label>
+                            </li>
+                        </ul>
+                        <ul class="list-group">
+                            <li class="list-group-item active">系统设置
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                            </li>
+                            <li class="list-group-item hide">楼宇库
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.CommunityView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.CommunityAdd)">添加</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.CommunityUpdate)">编辑</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.CommunityDelete)">删除</label>
+                            </li>
+                            <li class="list-group-item hide">内部帐号管理
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.AccountView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.AccountAdd)">添加</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.AccountUpdate)">编辑</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.AccountDelete)">删除</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.AccountAuthSet)">权限设置</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.AccountModifyPassword)">修改密码</label>
+                            </li>
+                            <li class="list-group-item hide">投诉管理
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.SuggestionView)">查看</label>
+                            </li>
+                            <li class="list-group-item hide">活动设置
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ActivityView)">查看</label>
+                            </li>
+                        </ul>
+                        <ul class="list-group">
+                            <li class="list-group-item active">商户维护
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                            </li>
+                            <li class="list-group-item hide">商户数据维护
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopBilinView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopBilinAgree)">合作</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopBilinReject)">暂不合作</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.ShopBilinCreateAccount)">开通帐号</label>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="list-group">
+                            <li class="list-group-item active">商品管理
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                            </li>
+                            <li class="list-group-item hide">商品管理
+                        <label class="checkbox-inline" style="margin-left: 2em;">
+                            <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsView)">查看</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsAdd)">添加</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsUpdate)">编辑</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsDelete)">删除</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@AuthorityHelper.GetId(AuthorityNames.GoodsPublish)">发布</label>
+                            </li>
+                        </ul>
+                    }
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-save">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#authSetModal .modal-body").on("click", ".active", function () {
+            var $icon = $(this).children(".glyphicon");
+            if ($icon.hasClass("glyphicon-chevron-right")) {
+                $icon.removeClass("glyphicon-chevron-right").addClass("glyphicon-chevron-down");
+                $(this).siblings().removeClass("hide");
+            } else {
+                $icon.removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-right");
+                $(this).siblings().addClass("hide");
+            }
+        });
+
+    });
+</script>

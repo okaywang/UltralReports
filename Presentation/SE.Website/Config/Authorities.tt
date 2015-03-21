@@ -1,0 +1,167 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml" #>
+<#@ output extension=".cs" #>
+<# 
+	var APPLICATION_NAME = "GroupAdministration"; 
+
+	IServiceProvider serviceProvider = (IServiceProvider)this.Host;
+	EnvDTE.DTE dte = (EnvDTE.DTE) serviceProvider.GetService(typeof(EnvDTE.DTE));
+
+	EnvDTE.SelectedItem selectedItem = null;
+	foreach(EnvDTE.SelectedItem item in dte.SelectedItems){
+		if(item.ProjectItem.FileNames[1] == this.Host.TemplateFile){
+			selectedItem = item;
+			break;
+		}
+	}
+	if(selectedItem == null){
+		Error("Can't find the TextTemplate file to transform.");
+	}
+
+	var ownerProject = selectedItem.ProjectItem.ContainingProject;
+	var PROJECT_NAMESPACE = ownerProject.Properties.Item("DefaultNamespace").Value;
+
+	XmlDocument doc = new XmlDocument();
+	doc.Load(this.Host.ResolvePath("Authorities.config"));
+	var authorityNodes = doc.SelectNodes("/configuration/authorities/authority");
+
+	
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using UR.Common.Types;
+namespace <#=PROJECT_NAMESPACE#>
+{
+	public sealed class AuthorityItem
+    {
+        public AuthorityItem(string name, AuthorityType authorityType)
+        {
+            this.Name = name;
+            this.AuthorityType = authorityType;
+        }
+
+        public string Name { get; private set; }
+        public AuthorityType AuthorityType { get; private set; }
+    }
+
+	public sealed class AuthorityNames
+	{
+		<#
+			for (int i = 0; i < authorityNodes.Count; i++)
+			{
+				var node = authorityNodes[i];
+		#>
+
+		public const string <#=node.Attributes["key"].Value#> = "<#=node.Attributes["name"].Value#>";		
+		<#
+			}
+		#>
+
+	}
+
+	public sealed class Authorities
+	{
+		<#
+			for (int i = 0; i < authorityNodes.Count; i++)
+			{
+				var node = authorityNodes[i];
+		#>
+
+		public AuthorityItem <#=node.Attributes["key"].Value#> = new AuthorityItem( AuthorityNames.<#=node.Attributes["key"].Value#>,(AuthorityType)<#=node.Attributes["authorityType"].Value#>);		
+		<#
+			}
+		#>
+
+	}
+
+	public static class DefaultAuthoritiesForAdmin
+    {
+        private static List<string> defaultAuthorities = new List<string>();
+        static DefaultAuthoritiesForAdmin()
+        {
+		<#
+			for (int i = 0; i < authorityNodes.Count; i++)
+			{
+				var node = authorityNodes[i];
+		 
+					var isDefaultAuthority =  node.Attributes["isDefaultAuthority"].Value;
+					var authorityType =  node.Attributes["authorityType"].Value;
+
+					if(isDefaultAuthority == "true" && (authorityType=="1" || authorityType=="3"))
+					{
+				#>
+				defaultAuthorities.Add(AuthorityNames.<#=node.Attributes["key"].Value#>);
+				<#	
+					} 
+			}
+		#>
+        }
+        public static List<string> DefaultAuthorities
+        {
+            get
+            {
+                return defaultAuthorities;
+            }
+        }
+    }
+
+	public static class DefaultAuthoritiesForShop
+    {
+        private static List<string> defaultAuthorities = new List<string>();
+        static DefaultAuthoritiesForShop()
+        {
+		<#
+			for (int i = 0; i < authorityNodes.Count; i++)
+			{
+				var node = authorityNodes[i];
+		 
+					var isDefaultAuthority =  node.Attributes["isDefaultAuthority"].Value;
+					var authorityType =  node.Attributes["authorityType"].Value;
+
+					if(isDefaultAuthority == "true" && (authorityType=="2" || authorityType=="3"))
+					{
+				#>
+				defaultAuthorities.Add(AuthorityNames.<#=node.Attributes["key"].Value#>);
+				<#	
+					} 
+			}
+		#>
+        }
+        public static List<string> DefaultAuthorities
+        {
+            get
+            {
+                return defaultAuthorities;
+            }
+        }
+    }
+	public class CreateAuthoritiesSqlFile
+    {
+        public static void Create()
+        {
+            string filename = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/SqlServer.Authorities.sql");
+            var sb = new System.Text.StringBuilder();
+			<#
+			for (int i = 0; i < authorityNodes.Count; i++)
+			{
+				var node = authorityNodes[i];
+					#>
+					sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( <#=node.Attributes["authorityType"].Value #>, N'<#=node.Attributes["name"].Value #>')");
+					<#
+			}
+		#>
+            
+
+            System.IO.File.WriteAllText(filename, sb.ToString());   
+        }
+    }
+}

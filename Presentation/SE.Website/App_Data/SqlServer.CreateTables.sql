@@ -1,0 +1,51 @@
+	Create database UltralReports
+	go
+	use UltralReports
+	 
+	--账号
+	CREATE TABLE [dbo].[Account](
+		[Id] [int] IDENTITY(1,1) primary key,
+		[LoginName] [nvarchar](50) NOT NULL unique,
+		[Password] [nvarchar](50) NOT NULL check(len(password)>=6),
+		[AccountType] [int] NOT NULL CHECK(AccountType in (1,2)),--1.For admin 2.For shop,		
+		
+		FADateTime datetime default(getdate()),
+		FAUser nvarchar(20),
+		LCDateTime datetime,
+		LCUser nvarchar(20)
+	) 
+	
+	--权限
+	create table Authority(
+		Id int IDENTITY(1,1) primary key,
+		AuthorityType int not null,
+		Name nvarchar(20) not null
+	)
+	
+	--用户权限
+	create table AccountAuthority(
+		Id int IDENTITY(1,1) primary key,
+		AccountId int not null references Account,
+		AuthorityId int not null references Authority,
+		Constraint UQ_Account_Authority unique(AccountId,AuthorityId)
+	) 
+
+	--异常日志
+	create table LogException(
+		Id int identity(1,1) primary key,
+		RequestInfo text,
+		UserName nvarchar(20),
+		Message nvarchar(200),
+		StackTrace text,
+		FADateTime datetime default(getdate())
+	)
+
+	--操作日志
+	create table LogOperation(
+		Id int identity(1,1) primary key,
+		RequestInfo text,
+		UserName nvarchar(20),
+		Message nvarchar(200),
+		FADateTime datetime default(getdate())
+	)
+
