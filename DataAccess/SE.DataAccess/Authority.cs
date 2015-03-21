@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UR.DataAccess
+namespace DataAccess
 {
     using System;
     using System.Collections.Generic;

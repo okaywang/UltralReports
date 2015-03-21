@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{95DBDC2E-7A6C-4D2B-ADB7-3DAB5D77E0EF}</ProjectGuid>
+    <ProjectGuid>{2D6E0A3B-600F-477B-9901-764BB45D6A33}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UR.BussinessLogic</RootNamespace>
-    <AssemblyName>UR.BussinessLogic</AssemblyName>
+    <RootNamespace>Common.Types</RootNamespace>
+    <AssemblyName>Common.Types</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,14 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,29 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountBussinessLogic.cs" />
-    <Compile Include="Base\BussinessLogicBase.cs" />
-    <Compile Include="LogExceptionBussinessLogic.cs" />
-    <Compile Include="LogOperationBussinessLogic.cs" />
+    <Compile Include="AccountType.cs" />
+    <Compile Include="GenderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DataAccess\SE.DataAccess\UR.DataAccess.csproj">
-      <Project>{3bbf0f25-42d4-4f9b-9fbc-f24a765bf7dc}</Project>
-      <Name>UR.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\SE.Common.Data\UR.Common.Types.csproj">
-      <Project>{2d6e0a3b-600f-477b-9901-764bb45d6a33}</Project>
-      <Name>UR.Common.Types</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\WebExpress\WebExpress.Core\WebExpress.Core.csproj">
       <Project>{c5637d1e-9a03-481e-876a-76b615d860ec}</Project>
       <Name>WebExpress.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

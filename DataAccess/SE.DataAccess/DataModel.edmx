@@ -192,7 +192,7 @@
             <End Role="AccountAuthority" EntitySet="AccountAuthorities" />
           </AssociationSet>
         </EntityContainer>
-        <EnumType Name="AccountType" a:ExternalTypeName="UR.Common.Types.AccountType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="AccountType" a:ExternalTypeName="Common.Types.AccountType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

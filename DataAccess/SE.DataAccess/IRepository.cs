@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UR.DataAccess
+namespace DataAccess
 {
     public interface IRepository<T> where T : class
     {

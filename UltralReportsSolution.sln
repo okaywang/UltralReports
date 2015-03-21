@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebExpress", "WebExpress", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BussinessLogic", "BussinessLogic", "{0A44C1FE-A235-4CA7-8291-474AAC6D9557}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UR.BussinessLogic", "BussinessLogic\SE.BussinessLogic\UR.BussinessLogic.csproj", "{95DBDC2E-7A6C-4D2B-ADB7-3DAB5D77E0EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessLogic", "BussinessLogic\SE.BussinessLogic\BussinessLogic.csproj", "{95DBDC2E-7A6C-4D2B-ADB7-3DAB5D77E0EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebExpress.Core", "WebExpress\WebExpress.Core\WebExpress.Core.csproj", "{C5637D1E-9A03-481E-876A-76B615D860EC}"
 EndProject
@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebExpress.Website", "WebEx
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{3E998069-D502-440D-8280-46A6D93F281F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UR.DataAccess", "DataAccess\SE.DataAccess\UR.DataAccess.csproj", "{3BBF0F25-42D4-4F9B-9FBC-F24A765BF7DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\SE.DataAccess\DataAccess.csproj", "{3BBF0F25-42D4-4F9B-9FBC-F24A765BF7DC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{9D6820D4-45D3-4371-84AA-B048BBEE018D}"
 	ProjectSection(SolutionItems) = preProject
@@ -30,9 +30,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{9D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Presentation\SE.Website\Website.csproj", "{1F8F632D-CC06-4265-90DB-64CBDDC0FCC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UR.Common.Types", "Common\SE.Common.Data\UR.Common.Types.csproj", "{2D6E0A3B-600F-477B-9901-764BB45D6A33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Types", "Common\SE.Common.Data\Common.Types.csproj", "{2D6E0A3B-600F-477B-9901-764BB45D6A33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UR.Common.Helpers", "Common\SE.Common.Helpers\UR.Common.Helpers.csproj", "{E4B10EAC-B2FB-4492-9105-E7615D50A6B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Helpers", "Common\SE.Common.Helpers\Common.Helpers.csproj", "{E4B10EAC-B2FB-4492-9105-E7615D50A6B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

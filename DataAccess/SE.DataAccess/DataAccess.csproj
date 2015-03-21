@@ -7,8 +7,8 @@
     <ProjectGuid>{3BBF0F25-42D4-4F9B-9FBC-F24A765BF7DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UR.DataAccess</RootNamespace>
-    <AssemblyName>UR.DataAccess</AssemblyName>
+    <RootNamespace>DataAccess</RootNamespace>
+    <AssemblyName>DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -110,9 +110,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\SE.Common.Data\UR.Common.Types.csproj">
+    <ProjectReference Include="..\..\Common\SE.Common.Data\Common.Types.csproj">
       <Project>{2d6e0a3b-600f-477b-9901-764bb45d6a33}</Project>
-      <Name>UR.Common.Types</Name>
+      <Name>Common.Types</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

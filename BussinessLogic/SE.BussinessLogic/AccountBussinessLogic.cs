@@ -1,4 +1,4 @@
-﻿using UR.DataAccess;
+﻿using DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebExpress.Core;
 
-namespace UR.BussinessLogic
+namespace BussinessLogic
 {
     public class AccountBussinessLogic : BussinessLogicBase<Account>
     {

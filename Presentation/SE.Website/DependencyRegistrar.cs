@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
-using System.Web;
-using UR.BussinessLogic;
-using UR.DataAccess;
+using System.Web; 
+using DataAccess;
+using BussinessLogic;
 
 namespace Website
 {

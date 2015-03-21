@@ -1,5 +1,5 @@
-﻿using UR.BussinessLogic;
-using UR.DataAccess;
+﻿using BussinessLogic;
+using DataAccess;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

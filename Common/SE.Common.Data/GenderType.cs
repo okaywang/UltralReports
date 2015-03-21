@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebExpress.Core;
 
-namespace UR.Common.Types
+namespace Common.Types
 {
     public enum GenderType
     {

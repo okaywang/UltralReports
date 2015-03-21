@@ -1,7 +1,6 @@
 ﻿
-using UR.BussinessLogic;
-using UR.Common.Types;
-using UR.DataAccess;
+using BussinessLogic; 
+using DataAccess;
 using Website.Filters;
 using Website.Models;
 using System;

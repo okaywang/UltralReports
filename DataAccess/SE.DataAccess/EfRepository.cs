@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UR.DataAccess
+namespace DataAccess
 {
     public class EfRepository<T> : IRepository<T> where T : class
     {

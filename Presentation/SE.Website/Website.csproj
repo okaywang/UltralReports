@@ -442,21 +442,21 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BussinessLogic\SE.BussinessLogic\UR.BussinessLogic.csproj">
+    <ProjectReference Include="..\..\BussinessLogic\SE.BussinessLogic\BussinessLogic.csproj">
       <Project>{95dbdc2e-7a6c-4d2b-adb7-3dab5d77e0ef}</Project>
-      <Name>UR.BussinessLogic</Name>
+      <Name>BussinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common\SE.Common.Helpers\UR.Common.Helpers.csproj">
+    <ProjectReference Include="..\..\Common\SE.Common.Helpers\Common.Helpers.csproj">
       <Project>{e4b10eac-b2fb-4492-9105-e7615d50a6b2}</Project>
-      <Name>UR.Common.Helpers</Name>
+      <Name>Common.Helpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\DataAccess\SE.DataAccess\UR.DataAccess.csproj">
+    <ProjectReference Include="..\..\DataAccess\SE.DataAccess\DataAccess.csproj">
       <Project>{3bbf0f25-42d4-4f9b-9fbc-f24a765bf7dc}</Project>
-      <Name>UR.DataAccess</Name>
+      <Name>DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common\SE.Common.Data\UR.Common.Types.csproj">
+    <ProjectReference Include="..\..\Common\SE.Common.Data\Common.Types.csproj">
       <Project>{2d6e0a3b-600f-477b-9901-764bb45d6a33}</Project>
-      <Name>UR.Common.Types</Name>
+      <Name>Common.Types</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WebExpress\WebExpress.Core\WebExpress.Core.csproj">
       <Project>{c5637d1e-9a03-481e-876a-76b615d860ec}</Project>

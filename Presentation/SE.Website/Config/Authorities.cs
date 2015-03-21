@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Common.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using UR.Common.Types;
+using System.Web; 
 namespace Website
 {
 	public sealed class AuthorityItem

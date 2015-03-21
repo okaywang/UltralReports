@@ -1,12 +1,11 @@
-﻿using UR.Common.Types;
-using UR.DataAccess;
+﻿using DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UR.BussinessLogic
+namespace BussinessLogic
 {
     public class LogOperationBussinessLogic : BussinessLogicBase<LogOperation>
     {

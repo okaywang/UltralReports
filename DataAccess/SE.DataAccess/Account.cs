@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UR.DataAccess
+namespace DataAccess
 {
     using System;
     using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace UR.DataAccess
         public int Id { get; set; }
         public string LoginName { get; set; }
         public string Password { get; set; }
-        public UR.Common.Types.AccountType AccountType { get; set; }
+        public Common.Types.AccountType AccountType { get; set; }
         public Nullable<System.DateTime> FADateTime { get; set; }
         public string FAUser { get; set; }
         public Nullable<System.DateTime> LCDateTime { get; set; }
