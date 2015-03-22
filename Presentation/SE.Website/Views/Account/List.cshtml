@@ -4,4 +4,37 @@
 
 <h2>List</h2>
 
-this is Account List
+<div class="search-result table-responsive" style="margin-top: 10px;">
+</div>
+
+@section scripts{
+    <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
+    <script>
+        var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+            url: '/Account/_List',
+            modules: {
+                shopModal: new se.ui.view.ShopModal(new se.ui.view.ShopModal.Settings({
+                    OnSelected: function (id, name) {
+                        $("#s_shop").val(name);
+                        $("#ShopId").val(id);
+                    }
+                }))
+            },
+            rowCommands: {
+                remove: function (model) {
+                    var container = $(this).closest(".table");
+                    se.helper.ajax.request({
+                        confirmMessage: "您确定删除 " + model.Name + " 吗？",
+                        container: container,
+                        url: "/Account/Delete",
+                        model: { id: model.Id },
+                        onSuccess: function () {
+                            viewInstance.refresh();
+                        }
+                    });
+                }
+            }
+        }));
+        viewInstance.init();
+    </script>
+}

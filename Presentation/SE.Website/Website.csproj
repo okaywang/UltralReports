@@ -426,7 +426,7 @@
     <Content Include="Views\Shared\404.cshtml" />
     <Content Include="Views\Shared\500.cshtml" />
     <Content Include="Views\Account\Persons.cshtml" />
-    <Content Include="Views\Account\_Persons.cshtml" />
+    <Content Include="Views\Account\_List.cshtml" />
     <Content Include="Views\Shared\Modules\_ChangePassword.cshtml" />
     <Content Include="Views\Shared\Modules\_EditName.cshtml" />
     <Content Include="Scripts\views\base\se.ui.view.ShopModal.js" />

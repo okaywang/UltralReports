@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Website.Models
 {
-    public class AccountModel
+    public class LoginModel
     {
         public string LoginName { get; set; }
 

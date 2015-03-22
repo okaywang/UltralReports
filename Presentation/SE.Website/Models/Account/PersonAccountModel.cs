@@ -11,7 +11,18 @@ using Website.Common;
 
 namespace Website.Models
 {
-    public class PersonAccountModel
+    public class AccountListItemModel
+    {
+        public int AccountId { get; set; }
+         
+        public string Name { get; set; }
+         
+        public string LoginName { get; set; }
+         
+        public string Department { get; set; }
+    }
+
+    public class AccountModel
     {
         public int PersonId { get; set; }
         public int AccountId { get; set; }

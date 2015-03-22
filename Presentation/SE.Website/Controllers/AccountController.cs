@@ -1,5 +1,5 @@
 ﻿
-using BussinessLogic; 
+using BussinessLogic;
 using DataAccess;
 using Website.Filters;
 using Website.Models;
@@ -31,6 +31,16 @@ namespace Website.Controllers
         {
             return View();
         }
+
+        public PartialViewResult _List(string criteria)
+        {
+            var model = new PagedModel<AccountListItemModel>();
+            model.Items.Add(new AccountListItemModel() { AccountId = 1, Department = "abc", LoginName = "asdf", Name = "11111" });
+            model.Items.Add(new AccountListItemModel() { AccountId = 2, Department = "22", LoginName = "222", Name = "2222" });
+            model.PagingResult = new WebExpress.Core.Paging.PagingResult(0, 5);
+            return PartialView(model);
+        }
+
         //#region 登录
 
         //public ActionResult Login(string returnUrl)
@@ -92,16 +102,16 @@ namespace Website.Controllers
 
         //#endregion
 
-        //#region 删除账号
+        #region 删除账号
         //[RequireAuthority(AuthorityNames.AccountDelete)]
-        //public JsonResult Delete(int accountId)
-        //{
-        //    var account = _accountBll.Get(accountId);
-        //    Guard.IsNotNull<DataNotFoundException>(account);
-        //    _accountBll.Delete(account);
-        //    return Json(new ResultModel(true));
-        //}
-        //#endregion
+        public JsonResult Delete(int id)
+        {
+            //var account = _accountBll.Get(accountId);
+            //Guard.IsNotNull<DataNotFoundException>(account);
+            //_accountBll.Delete(account);
+            return Json(new ResultModel(true));
+        }
+        #endregion
 
         //#region 重设密码
         //[HttpPost]
