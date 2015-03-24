@@ -220,18 +220,18 @@ namespace Website.Common
         }
     }
 
-    public class DisplayFormatAttribute : Attribute
-    {
-        private string _formatString;
-        public DisplayFormatAttribute(string formatString)
-        {
-            _formatString = formatString;
-        }
-        public string FormatString
-        {
-            get { return _formatString; }
-        }
-    }
+    //public class DisplayFormatAttribute : Attribute
+    //{
+    //    private string _formatString;
+    //    public DisplayFormatAttribute(string formatString)
+    //    {
+    //        _formatString = formatString;
+    //    }
+    //    public string FormatString
+    //    {
+    //        get { return _formatString; }
+    //    }
+    //}
 
     public static class RcExtenstion
     {
@@ -289,13 +289,13 @@ namespace Website.Common
 
         public static string GetFormatedString(this PropertyInfo item, object obj)
         {
-            var attr = item.GetCustomAttribute<DisplayFormatAttribute>();
+            var attr = item.GetCustomAttribute<System.ComponentModel.DataAnnotations.DisplayFormatAttribute>();
             var result = item.GetValue(obj);
             if (attr == null)
             {
                 return result == null ? string.Empty : result.ToString();
             }
-            return string.Format(attr.FormatString, result);
+            return string.Format(attr.DataFormatString, result);
         }
     }
 }

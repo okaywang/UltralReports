@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "List";
+﻿@model Website.Controllers.AccountListPageModel
+@{
+    ViewBag.Title = Model.Title;
 }
 
 <h2>List</h2>
@@ -15,7 +16,7 @@
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
-            url: '/Account/_List',
+            url: '@Model.RequestListUrl',
             modules: {
                 shopModal: new se.ui.view.ShopModal(new se.ui.view.ShopModal.Settings({
                     OnSelected: function (id, name) {

@@ -12,4 +12,41 @@ namespace Website.Models
 
         public IEnumerable<PropertyInfo> Properties { get; set; }
     }
+
+    public class ListPageModal
+    {
+        public string Title { get; set; }
+
+        public string RequestListUrl { get; set; }
+    }
+
+    public interface IListItem
+    {
+        string Serialize();
+    }
+
+    public interface IListItemCommands
+    {
+        IListItemCommand[] Commands { get; }
+    }
+
+    public interface IListItemCommand
+    {
+        string CommandName { get; }
+        string CommandText { get; }
+        string CommandAction { get; }
+    }
+
+    public class ListItemCommand : IListItemCommand
+    {
+        public ListItemCommand(string name, string text, string url)
+        {
+            this.CommandName = name;
+            this.CommandText = text;
+            this.CommandAction = url;
+        }
+        public string CommandName { get; private set; }
+        public string CommandText { get; private set; }
+        public string CommandAction { get; private set; }
+    }
 }

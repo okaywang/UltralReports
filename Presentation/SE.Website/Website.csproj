@@ -434,6 +434,7 @@
     <Content Include="Views\Shared\Modules\_AuthSet.cshtml" />
     <Content Include="Views\Account\List.cshtml" />
     <Content Include="Views\Shared\_Modal.cshtml" />
+    <Content Include="Views\Account\_CommonList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

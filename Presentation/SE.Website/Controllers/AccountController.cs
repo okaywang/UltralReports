@@ -14,6 +14,10 @@ using WebExpress.Website.Exceptions;
 
 namespace Website.Controllers
 {
+    public class AccountListPageModel : ListPageModal
+    {
+
+    }
     public class AccountController : Controller
     {
         //private ShopBussinessLogic _shopBll;
@@ -28,7 +32,10 @@ namespace Website.Controllers
 
         public ActionResult List()
         {
-            return View();
+            var model = new AccountListPageModel();
+            model.Title = "账号列表";
+            model.RequestListUrl = "/Account/_List";
+            return View(model);
         }
 
         public PartialViewResult _List(string criteria)
@@ -37,7 +44,7 @@ namespace Website.Controllers
             model.Items.Add(new AccountListItemModel() { AccountId = 1, Department = "abc", LoginName = "asdf", Name = "11111" });
             model.Items.Add(new AccountListItemModel() { AccountId = 2, Department = "22", LoginName = "222", Name = "2222" });
             model.PagingResult = new WebExpress.Core.Paging.PagingResult(0, 5);
-            return PartialView(model);
+            return PartialView("_CommonList", model);
         }
 
         //#region 登录
