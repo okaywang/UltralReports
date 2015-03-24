@@ -7,6 +7,10 @@
 <div class="search-result table-responsive" style="margin-top: 10px;">
 </div>
 
+<div class="module-update">
+    @Html.Partial("_Modal", new ModalModel { Title = "新增账号", Properties = typeof(AccountAddModel).GetProperties() })
+</div>
+
 @section scripts{
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>

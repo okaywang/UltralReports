@@ -164,6 +164,7 @@
     <Compile Include="Models\Account\AccountModel.cs" />
     <Compile Include="Models\Account\ChangePasswordModel.cs" />
     <Compile Include="Models\Account\PersonAccountModel.cs" />
+    <Compile Include="Models\Common\ModalModel.cs" />
     <Compile Include="Models\Common\PagedModel.cs" />
     <Compile Include="Models\Common\ResultModel.cs" />
     <Compile Include="Models\Common\ValueTextModel.cs" />
@@ -432,6 +433,7 @@
     <Content Include="Scripts\views\base\se.ui.view.ShopModal.js" />
     <Content Include="Views\Shared\Modules\_AuthSet.cshtml" />
     <Content Include="Views\Account\List.cshtml" />
+    <Content Include="Views\Shared\_Modal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />
@@ -484,7 +486,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2391</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

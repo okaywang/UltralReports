@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Website.Common;
 
 namespace Website.Models
 {
@@ -35,4 +37,40 @@ namespace Website.Models
 
     }
 
+
+    public class AccountAddModel
+    {
+        [Required]
+        [ControlType(typeof(NativeInputHidden))]
+        public int TenantId { get; set; }
+
+        [Required]
+        [ControlType(typeof(NativeInputHidden))]
+        public int ConstId { get; set; }
+
+        [Required]
+        [DisplayName("类型")]
+        [ControlType(typeof(NativeSelect), false)]
+        //[EnumControlSource(typeof(ShareCodeClassEnum))]
+        public int ClassId { get; set; }
+
+        [Required]
+        [DisplayName("编码")]
+        [ControlType(typeof(NativeInputText), false)]
+        public int Code { get; set; }
+
+        [Required]
+        [DisplayName("名称")]
+        public string CodeName { get; set; }
+
+        [Required]
+        [DisplayName("父级Id")]
+        [ControlType(typeof(NativeInputText))]
+        public int ParentId { get; set; }
+
+        [Required]
+        [DisplayName("排序")]
+        //[ControlType(typeof(NativeInputText), false)]
+        public int OrderId { get; set; }
+    }
 }
