@@ -207,6 +207,15 @@ namespace Website.Common
 
     #endregion
 
+    public class RequestUrlAttribute : Attribute
+    {
+        public RequestUrlAttribute(string requestUrl)
+        {
+            RequestUrl = requestUrl;
+        }
+        public string RequestUrl { get; private set; }
+    }
+
     public class DisplayTextAttribute : Attribute
     {
         private string _displayText;
@@ -252,6 +261,20 @@ namespace Website.Common
                 return attr2.DisplayText;
             }
             return prop.Name;
+        }
+
+        public static string GetRequestUrl(this MemberInfo prop)
+        {
+            if (prop == null)
+            {
+                return string.Empty;
+            }
+            var attr = prop.GetCustomAttribute<RequestUrlAttribute>();
+            if (attr == null)
+            {
+                return string.Empty;
+            }
+            return attr.RequestUrl;
         }
 
         //public static string GetDisplayName(this MemberInfo mi)

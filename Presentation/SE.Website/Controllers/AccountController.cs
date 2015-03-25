@@ -16,7 +16,7 @@ namespace Website.Controllers
 {
     public class AccountListPageModel : ListPageModal
     {
-
+        public string AddItemUrl { get; set; }
     }
     public class AccountController : Controller
     {
@@ -35,6 +35,7 @@ namespace Website.Controllers
             var model = new AccountListPageModel();
             model.Title = "账号列表";
             model.RequestListUrl = "/Account/_List";
+            model.AddItemUrl = "/Account/Add";
             return View(model);
         }
 
