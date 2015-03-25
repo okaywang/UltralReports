@@ -20,6 +20,26 @@ namespace BussinessLogic
             _accountAuthorityRepository = accountAuthorityRepository;
         }
 
+        /// <summary>
+        /// 账号查询
+        /// </summary>
+        public PagedList<Account> Search(AccountSearchCriteria criteria)
+        {
+            if (criteria.OrderByFields.Count == 0)
+            {
+                criteria.OrderByFields.Add(new OrderByField<Account>(i => i.Id, SortOrder.Descending));
+            }
+            if (criteria.PagingRequest == null)
+            {
+                criteria.PagingRequest = new PagingRequest(0, int.MaxValue);
+            }
+            var query = PrimaryRepository.Table;
+
+            query = query.OrderBy<Account>(criteria.OrderByFields);
+            var result = new PagedList<Account>(query, criteria.PagingRequest.PageIndex, criteria.PagingRequest.PageSize);
+            return result;
+        }
+
         public Account GetAccountByLoginName(string loginName)
         {
             var entity = PrimaryRepository.Table.FirstOrDefault(p => p.LoginName == loginName);

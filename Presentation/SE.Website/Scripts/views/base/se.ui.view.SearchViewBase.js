@@ -60,6 +60,22 @@ function SearchViewBaseClass(settings) {
             module.init();
         }
 
+        $(document).on("click", ".modal [command-name]", function () {
+            var url = $(this).attr("request-url");
+            var container = $(this).closest(".modal");
+            var model = $("form", container).serializeObject()
+            container.mask();
+            webExpress.utility.ajax.request(
+                url,
+                model,
+                function (data) {
+                    container.unmask();
+                },
+                function () {
+                    container.unmask();
+                });
+        });
+
         se.ui.control.Pager.enablePaging(settings.searchResultContainer, refresh);
     }
 
@@ -76,14 +92,14 @@ function SearchViewBaseClass(settings) {
         _criteria.PagingRequest.PageSize = se.ui.control.Pager.getPageSize() || settings.criteria.PagingRequest.PageSize;
         settings.searchResultContainer.mask("loading...");
         webExpress.utility.ajax.request(settings.url, _criteria,
-            function (data) { 
+            function (data) {
                 if (data.IsSuccess === false) {
                     settings.searchFeedback.text(data.Message);
                 }
                 else {
                     settings.searchResultHandler.call(settings, data);
                 }
-                 
+
                 settings.searchResultContainer.unmask();
                 settings.searchFeedback.text("");
             },

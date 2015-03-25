@@ -21,7 +21,7 @@ namespace Website.Controllers
     public class AccountController : Controller
     {
         //private ShopBussinessLogic _shopBll;
-        //private AccountBussinessLogic _accountBll;
+        private AccountBussinessLogic _bllAccount;
         //private PersonBussinessLogic _personBll;
         //public AccountController(ShopBussinessLogic shopBll, AccountBussinessLogic accountBll, PersonBussinessLogic personBll)
         //{
@@ -29,6 +29,11 @@ namespace Website.Controllers
         //    _accountBll = accountBll;
         //    _personBll = personBll;
         //}
+
+        public AccountController(AccountBussinessLogic bllAccount)
+        {
+            _bllAccount = bllAccount;
+        }
 
         public ActionResult List()
         {
@@ -39,12 +44,21 @@ namespace Website.Controllers
             return View(model);
         }
 
-        public PartialViewResult _List(string criteria)
+        public PartialViewResult _List(AccountSearchCriteria criteria)
         {
+            var accounts = _bllAccount.Search(criteria);
+
             var model = new PagedModel<AccountListItemModel>();
-            model.Items.Add(new AccountListItemModel() { AccountId = 1, Department = "abc", LoginName = "asdf", Name = "11111" });
-            model.Items.Add(new AccountListItemModel() { AccountId = 2, Department = "22", LoginName = "222", Name = "2222" });
-            model.PagingResult = new WebExpress.Core.Paging.PagingResult(0, 5);
+            foreach (var item in accounts)
+            {
+                model.Items.Add(new AccountListItemModel()
+                {
+                    AccountId = item.Id,
+                    Name = item.LoginName,
+                    LoginName = item.LoginName
+                });
+            }
+            model.PagingResult = accounts.PagingResult;
             return PartialView("_CommonList", model);
         }
 
@@ -271,38 +285,17 @@ namespace Website.Controllers
         //    message = null;
         //    return true;
         //}
-        //[RequireAuthority(AuthorityNames.AccountAdd)]
-        //public JsonResult AddPersonAccount(PersonAccountModel model)
-        //{
-        //    string message;
-        //    if (!Validate(model, out message))
-        //    {
-        //        return Json(new ResultModel(false, message));
-        //    }
-        //    var entity = model.Translate(model);
-        //    _personBll.Insert(entity);
-        //    #region 添加管理员默认权限
-        //    var account = entity.Account;
-        //    account.AccountAuthorities.Clear();
-        //    var allAuthorities = _accountBll.GetAllAuthorities();
-        //    var defaultAuthorities = DefaultAuthoritiesForAdmin.DefaultAuthorities;
-        //    for (int i = 0; i < defaultAuthorities.Count; i++)
-        //    {
-        //        var theAuthority = allAuthorities.FirstOrDefault(p => p.Name.Equals(defaultAuthorities[i]));
-        //        if (theAuthority != null)
-        //        {
-        //            account.AccountAuthorities.Add(new AccountAuthority()
-        //            {
-        //                Account = account,
-        //                Authority = theAuthority
-        //            });
-        //        }
-        //    }
-        //    _accountBll.Update(account);
-        //    #endregion
 
-        //    return Json(new ResultModel(true));
-        //}
+        //[RequireAuthority(AuthorityNames.AccountAdd)]
+        public JsonResult Add(AccountAddModel model)
+        {
+            var entity = new Account();
+            entity.LoginName = model.Name;
+            entity.Password = model.Password;
+            entity.AccountType = global::Common.Types.AccountType.GeneralUser;
+            _bllAccount.Insert(entity);
+            return Json(new ResultModel(true));
+        }
         //[RequireAuthority(AuthorityNames.AccountUpdate)]
         //public JsonResult UpdatePersonAccount(PersonAccountModel model)
         //{

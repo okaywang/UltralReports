@@ -65,6 +65,5 @@ namespace BussinessLogic
         {
             PrimaryRepository.Save();
         }
-
     }
 }
