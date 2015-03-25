@@ -127,9 +127,9 @@ namespace Website.Controllers
         //[RequireAuthority(AuthorityNames.AccountDelete)]
         public JsonResult Delete(int id)
         {
-            //var account = _accountBll.Get(accountId);
-            //Guard.IsNotNull<DataNotFoundException>(account);
-            //_accountBll.Delete(account);
+            var account = _bllAccount.Get(id);
+            //Guard.IsNotNull<DataNotFoundException>(account); 
+            _bllAccount.Delete(account);
             return Json(new ResultModel(true));
         }
         #endregion

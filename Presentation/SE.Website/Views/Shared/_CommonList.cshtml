@@ -18,25 +18,25 @@
             <tbody>
                 @foreach (var item in Model.Items)
                 {
-                    <tr data="AccountId:@item.AccountId">
+                    <tr model-field-entry="AccountId:@item.AccountId,LoginName:'@item.LoginName'">
                         @foreach (var prop in props)
-                        { 
+                        {
                             <td>
                                 @if (prop.PropertyType.Name == "IListItemCommand[]")
                                 {
                                     var commands = prop.GetValue(item) as IListItemCommand[];
                                     foreach (var cmd in commands)
                                     {
-                                    <a href="javascript:;" url="@cmd.CommandAction" command="@cmd.CommandName">@cmd.CommandText</a>
+                                        <a href="javascript:;" url="@cmd.CommandAction" command-name="@cmd.CommandName">@cmd.CommandText</a>
                                     }
                                 }
                                 else
                                 {
-                                    @prop.GetFormatedString(item)    
+                                    @prop.GetFormatedString(item)
                                 }
                             </td>
                         }
-                    </tr>    
+                    </tr>
                 }
             </tbody>
         </table>

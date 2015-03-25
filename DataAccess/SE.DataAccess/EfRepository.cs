@@ -53,7 +53,6 @@ namespace DataAccess
         public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
-
             _context.SaveChanges();
         }
 

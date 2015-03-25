@@ -70,9 +70,12 @@ function SearchViewBaseClass(settings) {
                 model,
                 function (data) {
                     container.unmask();
+                    container.modal("hide");
+                    _self.refresh();
                 },
                 function () {
                     container.unmask();
+                    container.modal("hide");
                 });
         });
 
