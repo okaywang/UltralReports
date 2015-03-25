@@ -13,11 +13,12 @@
 </div>
 
 <div class="module-add">
-    @Html.Partial("_Modal", new ModalModel { Title = "新增账号", Properties = typeof(AccountAddModel).GetProperties() })
+    @*@Html.Partial("_Modal", new ModalModel { Title = "新增账号", Properties = typeof(AccountAddModel).GetProperties() })*@
+    @Html.Partial("_Modal", new ModalModel<AccountAddModel> { Title = "新增账号" })
 </div>
 
 <div class="module-update">
-    @Html.Partial("_Modal", new ModalModel { Title = "新增账号", Properties = typeof(AccountAddModel).GetProperties() })
+    @*@Html.Partial("_Modal", new ModalModel { Title = "新增账号", Properties = typeof(AccountAddModel).GetProperties() })*@
 </div>
 
 @section scripts{
@@ -50,7 +51,7 @@
             viewCommands: {
                 add: function () {
                     $('.module-add .modal').modal("show");
-                    
+
                 }
             }
         }));

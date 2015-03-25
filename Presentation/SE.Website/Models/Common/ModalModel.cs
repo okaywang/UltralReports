@@ -13,6 +13,20 @@ namespace Website.Models
         public IEnumerable<PropertyInfo> Properties { get; set; }
     }
 
+    public class ModalModel<T> : IModalModel<T>
+    {
+        public string Title { get; set; }
+
+        public T DataModel { get { return default(T); } }
+    }
+
+    public interface IModalModel<out T>
+    {
+        string Title { get; set; }
+
+        T DataModel { get; }
+    }
+
     public class ListPageModal
     {
         public string Title { get; set; }

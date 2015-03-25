@@ -1,4 +1,4 @@
-﻿@model ModalModel
+﻿@model IModalModel<Object>
 <div class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,7 +9,9 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     @{
-                        foreach (var prop in @Model.Properties)
+                        var beanType = Model.GetType().GenericTypeArguments[0];
+                        var props = beanType.GetProperties();
+                        foreach (var prop in props)
                         {
                             var control = prop.GetControl();
                         <div class="form-group" @(control.IsVisible ? string.Empty : "style=display:none") >
@@ -24,7 +26,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button class="btn btn-primary command-save" type="button" request-url="">保存</button>
+                <button class="btn btn-primary command-save" type="button" request-url="@beanType.GetRequestUrl()">保存</button>
             </div>
         </div>
     </div>
