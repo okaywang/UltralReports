@@ -18,10 +18,22 @@
 </div>
 
 <div class="module-update">
-    @*@Html.Partial("_Modal", new ModalModel { Title = "新增账号", Properties = typeof(AccountAddModel).GetProperties() })*@
+    @Html.Partial("_Modal", new ModalModel<AccountUpdateModel> { Title = "编辑账号" })
 </div>
 
 @section scripts{
+    <script>
+
+        $(document).bind("keydown", function (e) {
+            if ((e.which || e.keyCode) == 116) {
+                e.preventDefault();
+                location.href = "B.aspx";
+            }
+        });
+
+    </script>
+
+
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
@@ -31,6 +43,10 @@
                 update: new se.ui.module.Dialog($(".module-update .modal"))
             },
             rowCommands: {
+                update: function (model) {
+                    viewInstance.modules.update.dialog.show();
+                    viewInstance.modules.update.bindModel(model);
+                },
                 remove: function (model) {
                     var container = $(this).closest(".table");
                     se.helper.ajax.request({

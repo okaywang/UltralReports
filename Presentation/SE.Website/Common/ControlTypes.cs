@@ -108,7 +108,7 @@ namespace Website.Common
         public override string Render()
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("<input class='form-control' type='text' name='{0}'", Name);
+            sb.AppendFormat("<input class='form-control' type='text' name='{0}' data-bind='value:{0}' ", Name);
             if (!_enabled)
             {
                 sb.Append(" disabled");
@@ -138,7 +138,7 @@ namespace Website.Common
 
         public override string Render()
         {
-            return string.Format("<input type='hidden' name='{0}'>", Name);
+            return string.Format("<input type='hidden' name='{0}' data-bind='value:{0}' />", Name);
         }
     }
 

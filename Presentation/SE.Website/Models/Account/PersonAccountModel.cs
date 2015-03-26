@@ -37,29 +37,10 @@ namespace Website.Models
             {
                 return new IListItemCommand[]
                 { 
-                    new ListItemCommand("edit", "编辑", "/AdminSys/Tenant/UpdateConstItem"), 
+                    new ListItemCommand("update", "编辑", "/AdminSys/Tenant/UpdateConstItem"), 
                     new ListItemCommand("remove","删除","/AdminSys/Tenant/RemoveConstItem") 
                 };
             }
         }
-    }
-
-    public class AccountModel
-    {
-        public int PersonId { get; set; }
-        public int AccountId { get; set; }
-
-        [Required]
-        public string Name { get; set; }
-
-        [Required]
-        public string LoginName { get; set; }
-
-        [Required]
-        public string Department { get; set; }
-
-        [RequiredIf("AccountId", 0)]
-        [MinLength(6)]
-        public string Password { get; set; }
     }
 }

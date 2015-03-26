@@ -53,4 +53,24 @@ namespace Website.Models
         [DisplayName("密码")]
         public string Password { get; set; }
     }
+
+    [RequestUrl("/Account/Update")]
+    public class AccountUpdateModel
+    {
+        [ControlType(typeof(NativeInputHidden))]
+        public int AccountId { get; set; }
+
+        [Required]
+        [DisplayName("姓名")]
+        public string Name { get; set; }
+
+        [Required]
+        [DisplayName("登录名")]
+        public string LoginName { get; set; }
+
+        [MinLength(6)]
+        [DisplayName("密码")]
+        //[ControlType(typeof(NativeInputText))]
+        public string Password { get; set; }
+    }
 }
