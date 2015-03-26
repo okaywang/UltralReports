@@ -27,12 +27,8 @@
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
             url: '@Model.RequestListUrl',
             modules: {
-                shopModal: new se.ui.view.ShopModal(new se.ui.view.ShopModal.Settings({
-                    OnSelected: function (id, name) {
-                        $("#s_shop").val(name);
-                        $("#ShopId").val(id);
-                    }
-                }))
+                add: new se.ui.module.Dialog($(".module-add .modal")),
+                update: new se.ui.module.Dialog($(".module-update .modal"))
             },
             rowCommands: {
                 remove: function (model) {
@@ -50,10 +46,13 @@
             },
             viewCommands: {
                 add: function () {
-                    $('.module-add .modal').modal("show");
+                    viewInstance.modules.add.dialog.show();
+                    viewInstance.modules.add.bindModel({});
                 }
             }
         }));
         viewInstance.init();
+        viewInstance.modules.add.on("saved", function () { viewInstance.refresh(); });
+        viewInstance.modules.update.on("saved", function () { viewInstance.refresh(); });
     </script>
 }

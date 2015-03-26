@@ -5,6 +5,8 @@ webExpress.ui.view = {};
 
 webExpress.ui.control = {};
 
+webExpress.ui.module = {};
+
 webExpress.config = {};
 webExpress.config.enums = {};
 

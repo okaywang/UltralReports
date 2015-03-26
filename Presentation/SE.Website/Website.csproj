@@ -385,6 +385,7 @@
     <Content Include="Scripts\views\ActivityList.js" />
     <Content Include="Scripts\views\base\se.ui.control.Dialog.js" />
     <Content Include="Scripts\views\base\se.ui.view.EditViewBase.js" />
+    <Content Include="Scripts\views\base\se.ui.module.Dialog.js" />
     <Content Include="Scripts\views\ControlBinders.js" />
     <Content Include="Scripts\views\ShopAccountList.js" />
     <Content Include="Scripts\views\ShopList.js" />

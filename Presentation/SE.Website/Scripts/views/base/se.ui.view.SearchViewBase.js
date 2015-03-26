@@ -60,25 +60,6 @@ function SearchViewBaseClass(settings) {
             module.init();
         }
 
-        $(document).on("click", ".modal [command-name]", function () {
-            var url = $(this).attr("request-url");
-            var container = $(this).closest(".modal");
-            var model = $("form", container).serializeObject()
-            container.mask();
-            webExpress.utility.ajax.request(
-                url,
-                model,
-                function (data) {
-                    container.unmask();
-                    container.modal("hide");
-                    _self.refresh();
-                },
-                function () {
-                    container.unmask();
-                    container.modal("hide");
-                });
-        });
-
         se.ui.control.Pager.enablePaging(settings.searchResultContainer, refresh);
     }
 

@@ -1,35 +1,39 @@
 ﻿(function () {
-    //se.ui.control.Dialog = DialogClass;
-    se.ui.control.dialog = {};
-    se.ui.control.dialog.factory = new DialogFactory();
+    se.ui.control.Dialog = DialogClass;
+    //se.ui.control.dialog = {};
+    //se.ui.control.dialog.factory = new DialogFactory();
     function DialogClass(container) {
         se.ui.control.Eventable.call(this);
-        var _container = container;
         var _self = this;
 
         function _init() {
+            _self.container = container;
+
             _self.show = show;
+
             _self.hide = hide;
+
             _self.save = save;
+
             init();
         }
 
         function init() {
-            _container.find(".btn-ok").click(function () {
-                var data = _container.find("form").serializeObject();
-                _self.fire("ok", [data]);
+            _self.container.find("[command-name]").click(function () {
+                var data = _self.container.find("form").serializeObject();
+                _self.fire("ok", [this, data]);
             });
-            _container.on('hidden.bs.modal', function (e) {
-                _container.find("form")[0].reset();
+            _self.container.on('hidden.bs.modal', function (e) {
+                _self.container.find("form")[0].reset();
             });
         }
 
         function show() {
-            _container.modal("show");
+            _self.container.modal("show");
         }
 
         function hide() {
-            _container.modal("hide");
+            _self.container.modal("hide");
         }
 
         function save(url, model) {

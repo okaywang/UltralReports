@@ -48,6 +48,8 @@ namespace Website.App_Start
                             .Include("~/Scripts/views/base/se.ui.control.Eventable.js")
                             .Include("~/Scripts/views/base/se.ui.control.Pager.js")
                             .Include("~/Scripts/views/base/se.ui.control.ChinaArea.js")
+                            .Include("~/Scripts/views/base/se.ui.control.Dialog.js")
+                            .Include("~/Scripts/views/base/se.ui.module.Dialog.js")
                             .Include("~/Scripts/views/base/se.ui.view.Module.js")
                             .Include("~/Scripts/views/base/se.ui.view.EditModule.js")
                             .Include("~/Scripts/views/base/se.ui.view.ShopModal.js")
