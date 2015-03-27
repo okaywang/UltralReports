@@ -21,7 +21,7 @@ namespace Website
             builder.RegisterGeneric(typeof(EfRepository<>)).InstancePerHttpRequest();
 
             builder.RegisterType<AccountBussinessLogic>().InstancePerHttpRequest();
-
+            builder.RegisterType<SmsBussinessLogic>().InstancePerHttpRequest();
         }
     }
 }

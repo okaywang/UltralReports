@@ -147,6 +147,7 @@
       <DependentUpon>Authorities.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Authentication\FormAuthenticationService.cs">
       <SubType>Code</SubType>
@@ -168,6 +169,7 @@
     <Compile Include="Models\Common\PagedModel.cs" />
     <Compile Include="Models\Common\ResultModel.cs" />
     <Compile Include="Models\Common\ValueTextModel.cs" />
+    <Compile Include="Models\Sms\GroupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -436,6 +438,7 @@
     <Content Include="Views\Account\List.cshtml" />
     <Content Include="Views\Shared\_Modal.cshtml" />
     <Content Include="Views\Shared\_CommonList.cshtml" />
+    <Content Include="Views\Sms\GroupIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

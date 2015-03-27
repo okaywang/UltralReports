@@ -1,39 +1,48 @@
-﻿using BussinessLogic;
-using DataAccess;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using Website.Common;
-
 
 namespace Website.Models
 {
-    public interface IListItemModel : IListItemCommands
+    public class SmsGroupModel
     {
-        string ToJson();
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 
-    public class AccountListItemModel : IListItemModel
+    [RequestUrl("/Sms/GroupAdd")]
+    public class SmsGroupAddModel
     {
-        [DisplayName("账号Id")]
-        public int AccountId { get; set; }
-
-        [DisplayName("姓名")]
+        [Required]
+        [DisplayName("名称")]
         public string Name { get; set; }
+    }
 
-        [DisplayName("登录名")]
-        public string LoginName { get; set; }
+    [RequestUrl("/Sms/GroupUpdate")]
+    public class SmsGroupUpdateModel
+    {
+        [ControlType(typeof(NativeInputHidden))]
+        public int Id { get; set; }
 
-        [DisplayName("创建时间")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime CreateDateTime { get; set; }
+        [Required]
+        [DisplayName("名称")]
+        public string Name { get; set; }
+    }
 
+    public class SmsGroupListItemModel : IListItemModel
+    {
+        [DisplayName("Id")]
+        public int Id { get; set; }
+
+        [DisplayName("名称")]
+        public string Name { get; set; }
+         
         [DisplayName("操作")]
         [JsonIgnore]
         public IListItemCommand[] Commands

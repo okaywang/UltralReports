@@ -5,7 +5,6 @@
             <tr>
                 <th>姓名</th>
                 <th>登录名</th>
-                <th>所属部门</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -17,7 +16,6 @@
                     var item = Model.Items[i];
                     <tr model-field-entry="Id:@item.AccountId">
                         <td model-field="Name">@item.Name</td>
-                        <td model-field="Department">@item.Department</td>
                         <td model-field="LoginName">@item.LoginName</td>
                         <td class="text-center">
                             <a href="javascript:;" command-name="remove">删除</a>

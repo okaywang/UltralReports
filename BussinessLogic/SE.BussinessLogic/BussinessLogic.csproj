@@ -52,6 +52,7 @@
     <Compile Include="LogExceptionBussinessLogic.cs" />
     <Compile Include="LogOperationBussinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmsBussinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataAccess\SE.DataAccess\DataAccess.csproj">

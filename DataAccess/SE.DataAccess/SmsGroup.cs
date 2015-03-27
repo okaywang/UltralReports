@@ -12,13 +12,16 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class LogException
+    public partial class SmsGroup
     {
+        public SmsGroup()
+        {
+            this.SmsRecipients = new HashSet<SmsRecipient>();
+        }
+    
         public int Id { get; set; }
-        public string RequestInfo { get; set; }
-        public string UserName { get; set; }
-        public string Message { get; set; }
-        public string StackTrace { get; set; }
-        public Nullable<System.DateTime> FADateTime { get; set; }
+        public string Name { get; set; }
+    
+        public virtual ICollection<SmsRecipient> SmsRecipients { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Website.Controllers
     {
         public string AddItemUrl { get; set; }
     }
+
     public class AccountController : Controller
     {
         //private ShopBussinessLogic _shopBll;

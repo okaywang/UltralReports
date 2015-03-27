@@ -50,61 +50,67 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
+      <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AccountAuthority.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
+      <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Authority.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.edmx</DependentUpon>
+      <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EfRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="LogException.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
+      <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LogOperation.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
+      <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmsGroup.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SmsRecipient.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UltralModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UltralModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UltralModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UltralModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UltralModel.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="DataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataModel.edmx</DependentUpon>
-      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
-    </None>
-    <None Include="DataModel.edmx.diagram">
-      <DependentUpon>DataModel.edmx</DependentUpon>
-    </None>
-    <None Include="DataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataModel.edmx</DependentUpon>
-      <LastGenOutput>DataModel.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
+    <EntityDeploy Include="UltralModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UltralModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="UltralModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UltralModel.edmx</DependentUpon>
+      <LastGenOutput>UltralModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="UltralModel.edmx.diagram">
+      <DependentUpon>UltralModel.edmx</DependentUpon>
+    </None>
+    <None Include="UltralModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UltralModel.edmx</DependentUpon>
+      <LastGenOutput>UltralModel.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

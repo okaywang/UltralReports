@@ -43,6 +43,10 @@
     </div>
     }
 }
-<div class="search-result-pagination">
-    @Html.Partial("_Pager", Model.PagingResult)
-</div>
+@if (Model.PagingResult != null)
+{
+    <div class="search-result-pagination">
+        @Html.Partial("_Pager", Model.PagingResult)
+    </div>    
+}
+

@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UltralReportsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="UltralReportsModelStoreContainer">
+          <EntitySet Name="Account" EntityType="UltralReportsModel.Store.Account" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AccountAuthority" EntityType="UltralReportsModel.Store.AccountAuthority" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Authority" EntityType="UltralReportsModel.Store.Authority" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LogException" EntityType="UltralReportsModel.Store.LogException" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LogOperation" EntityType="UltralReportsModel.Store.LogOperation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SmsGroup" EntityType="UltralReportsModel.Store.SmsGroup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SmsGroupRecipient" EntityType="UltralReportsModel.Store.SmsGroupRecipient" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SmsRecipient" EntityType="UltralReportsModel.Store.SmsRecipient" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__AccountAu__Accou__0F975522" Association="UltralReportsModel.Store.FK__AccountAu__Accou__0F975522">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountAuthority" EntitySet="AccountAuthority" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountAu__Autho__108B795B" Association="UltralReportsModel.Store.FK__AccountAu__Autho__108B795B">
+            <End Role="Authority" EntitySet="Authority" />
+            <End Role="AccountAuthority" EntitySet="AccountAuthority" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SmsGroupR__Group__286302EC" Association="UltralReportsModel.Store.FK__SmsGroupR__Group__286302EC">
+            <End Role="SmsGroup" EntitySet="SmsGroup" />
+            <End Role="SmsGroupRecipient" EntitySet="SmsGroupRecipient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SmsGroupR__Recip__29572725" Association="UltralReportsModel.Store.FK__SmsGroupR__Recip__29572725">
+            <End Role="SmsRecipient" EntitySet="SmsRecipient" />
+            <End Role="SmsGroupRecipient" EntitySet="SmsGroupRecipient" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LoginName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AccountType" Type="int" Nullable="false" />
+          <Property Name="FADateTime" Type="datetime" />
+          <Property Name="FAUser" Type="nvarchar" MaxLength="20" />
+          <Property Name="LCDateTime" Type="datetime" />
+          <Property Name="LCUser" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="AccountAuthority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="AuthorityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Authority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorityType" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="LogException">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RequestInfo" Type="text" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Message" Type="nvarchar" MaxLength="200" />
+          <Property Name="StackTrace" Type="text" />
+          <Property Name="FADateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LogOperation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RequestInfo" Type="text" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Message" Type="nvarchar" MaxLength="200" />
+          <Property Name="FADateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SmsGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SmsGroupRecipient">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="RecipientId" />
+          </Key>
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="RecipientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SmsRecipient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__AccountAu__Accou__0F975522">
+          <End Role="Account" Type="UltralReportsModel.Store.Account" Multiplicity="1" />
+          <End Role="AccountAuthority" Type="UltralReportsModel.Store.AccountAuthority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountAuthority">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AccountAu__Autho__108B795B">
+          <End Role="Authority" Type="UltralReportsModel.Store.Authority" Multiplicity="1" />
+          <End Role="AccountAuthority" Type="UltralReportsModel.Store.AccountAuthority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountAuthority">
+              <PropertyRef Name="AuthorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SmsGroupR__Group__286302EC">
+          <End Role="SmsGroup" Type="UltralReportsModel.Store.SmsGroup" Multiplicity="1" />
+          <End Role="SmsGroupRecipient" Type="UltralReportsModel.Store.SmsGroupRecipient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmsGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SmsGroupRecipient">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SmsGroupR__Recip__29572725">
+          <End Role="SmsRecipient" Type="UltralReportsModel.Store.SmsRecipient" Multiplicity="1" />
+          <End Role="SmsGroupRecipient" Type="UltralReportsModel.Store.SmsGroupRecipient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmsRecipient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SmsGroupRecipient">
+              <PropertyRef Name="RecipientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UltralReportsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="UltralReportsEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="UltralReportsModel.Account" />
+          <EntitySet Name="AccountAuthorities" EntityType="UltralReportsModel.AccountAuthority" />
+          <EntitySet Name="Authorities" EntityType="UltralReportsModel.Authority" />
+          <EntitySet Name="LogExceptions" EntityType="UltralReportsModel.LogException" />
+          <EntitySet Name="LogOperations" EntityType="UltralReportsModel.LogOperation" />
+          <EntitySet Name="SmsGroups" EntityType="UltralReportsModel.SmsGroup" />
+          <EntitySet Name="SmsRecipients" EntityType="UltralReportsModel.SmsRecipient" />
+          <AssociationSet Name="FK__AccountAu__Accou__0F975522" Association="UltralReportsModel.FK__AccountAu__Accou__0F975522">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountAuthority" EntitySet="AccountAuthorities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountAu__Autho__108B795B" Association="UltralReportsModel.FK__AccountAu__Autho__108B795B">
+            <End Role="Authority" EntitySet="Authorities" />
+            <End Role="AccountAuthority" EntitySet="AccountAuthorities" />
+          </AssociationSet>
+          <AssociationSet Name="SmsGroupRecipient" Association="UltralReportsModel.SmsGroupRecipient">
+            <End Role="SmsGroup" EntitySet="SmsGroups" />
+            <End Role="SmsRecipient" EntitySet="SmsRecipients" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AccountType" Type="UltralReportsModel.AccountType" Nullable="false" />
+          <Property Name="FADateTime" Type="DateTime" Precision="3" />
+          <Property Name="FAUser" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="LCDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LCUser" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="AccountAuthorities" Relationship="UltralReportsModel.FK__AccountAu__Accou__0F975522" FromRole="Account" ToRole="AccountAuthority" />
+        </EntityType>
+        <EntityType Name="AccountAuthority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="AuthorityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="UltralReportsModel.FK__AccountAu__Accou__0F975522" FromRole="AccountAuthority" ToRole="Account" />
+          <NavigationProperty Name="Authority" Relationship="UltralReportsModel.FK__AccountAu__Autho__108B795B" FromRole="AccountAuthority" ToRole="Authority" />
+        </EntityType>
+        <EntityType Name="Authority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorityType" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="AccountAuthorities" Relationship="UltralReportsModel.FK__AccountAu__Autho__108B795B" FromRole="Authority" ToRole="AccountAuthority" />
+        </EntityType>
+        <EntityType Name="LogException">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestInfo" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Message" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="StackTrace" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="FADateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="LogOperation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestInfo" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Message" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="FADateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SmsGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="SmsRecipients" Relationship="UltralReportsModel.SmsGroupRecipient" FromRole="SmsGroup" ToRole="SmsRecipient" />
+        </EntityType>
+        <EntityType Name="SmsRecipient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SmsGroups" Relationship="UltralReportsModel.SmsGroupRecipient" FromRole="SmsRecipient" ToRole="SmsGroup" />
+        </EntityType>
+        <EnumType Name="AccountType" a:ExternalTypeName="Common.Types.AccountType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <Association Name="FK__AccountAu__Accou__0F975522">
+          <End Role="Account" Type="UltralReportsModel.Account" Multiplicity="1" />
+          <End Role="AccountAuthority" Type="UltralReportsModel.AccountAuthority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountAuthority">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AccountAu__Autho__108B795B">
+          <End Role="Authority" Type="UltralReportsModel.Authority" Multiplicity="1" />
+          <End Role="AccountAuthority" Type="UltralReportsModel.AccountAuthority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountAuthority">
+              <PropertyRef Name="AuthorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SmsGroupRecipient">
+          <End Role="SmsGroup" Type="UltralReportsModel.SmsGroup" Multiplicity="*" />
+          <End Role="SmsRecipient" Type="UltralReportsModel.SmsRecipient" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UltralReportsModelStoreContainer" CdmEntityContainer="UltralReportsEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="UltralReportsModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="FADateTime" ColumnName="FADateTime" />
+                <ScalarProperty Name="FAUser" ColumnName="FAUser" />
+                <ScalarProperty Name="LCDateTime" ColumnName="LCDateTime" />
+                <ScalarProperty Name="LCUser" ColumnName="LCUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountAuthorities">
+            <EntityTypeMapping TypeName="UltralReportsModel.AccountAuthority">
+              <MappingFragment StoreEntitySet="AccountAuthority">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="AuthorityId" ColumnName="AuthorityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authorities">
+            <EntityTypeMapping TypeName="UltralReportsModel.Authority">
+              <MappingFragment StoreEntitySet="Authority">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AuthorityType" ColumnName="AuthorityType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogExceptions">
+            <EntityTypeMapping TypeName="UltralReportsModel.LogException">
+              <MappingFragment StoreEntitySet="LogException">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RequestInfo" ColumnName="RequestInfo" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="FADateTime" ColumnName="FADateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogOperations">
+            <EntityTypeMapping TypeName="UltralReportsModel.LogOperation">
+              <MappingFragment StoreEntitySet="LogOperation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RequestInfo" ColumnName="RequestInfo" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="FADateTime" ColumnName="FADateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SmsGroups">
+            <EntityTypeMapping TypeName="UltralReportsModel.SmsGroup">
+              <MappingFragment StoreEntitySet="SmsGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SmsRecipients">
+            <EntityTypeMapping TypeName="UltralReportsModel.SmsRecipient">
+              <MappingFragment StoreEntitySet="SmsRecipient">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SmsGroupRecipient" TypeName="UltralReportsModel.SmsGroupRecipient" StoreEntitySet="SmsGroupRecipient">
+            <EndProperty Name="SmsGroup">
+              <ScalarProperty Name="Id" ColumnName="GroupId" />
+            </EndProperty>
+            <EndProperty Name="SmsRecipient">
+              <ScalarProperty Name="Id" ColumnName="RecipientId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -49,3 +49,23 @@
 		FADateTime datetime default(getdate())
 	)
 
+	create table SmsRecipient
+	(
+		Id int IDENTITY(1,1) primary key,
+		Name nvarchar(50) not null,
+		PhoneNumber varchar(20) not null
+	)
+
+	create table SmsGroup
+	(
+		Id int IDENTITY(1,1) primary key,
+		Name nvarchar(50) not null
+	)
+
+	create table SmsGroupRecipient
+	(
+		GroupId int not null references SmsGroup,
+		RecipientId int not null references SmsRecipient,
+		Constraint PK_GroupId_RecipientId primary key(GroupId,RecipientId)
+	)
+

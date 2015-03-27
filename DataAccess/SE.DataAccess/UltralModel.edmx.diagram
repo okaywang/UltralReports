@@ -4,14 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="57a94b9013504e22aa4f18c29db1882a" Name="Diagram1">
+      <Diagram DiagramId="b3c00939135b4a12a34c912c9d28310f" Name="关系图1">
         <EntityTypeShape EntityType="UltralReportsModel.Account" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="UltralReportsModel.AccountAuthority" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="UltralReportsModel.Authority" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="UltralReportsModel.LogException" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UltralReportsModel.LogOperation" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UltralReportsModel.LogException" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UltralReportsModel.LogOperation" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UltralReportsModel.SmsGroup" Width="1.5" PointX="2.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UltralReportsModel.SmsRecipient" Width="1.5" PointX="5" PointY="4.875" IsExpanded="true" />
         <AssociationConnector Association="UltralReportsModel.FK__AccountAu__Accou__0F975522" ManuallyRouted="false" />
         <AssociationConnector Association="UltralReportsModel.FK__AccountAu__Autho__108B795B" ManuallyRouted="false" />
+        <AssociationConnector Association="UltralReportsModel.SmsGroupRecipient" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
