@@ -30,9 +30,10 @@ function SearchViewBaseClass(settings) {
                 return function () {
                     var tr = $(this).closest("tr");
                     var str = tr.attr("model-field-entry");
-                    var strNormalized = str.replace(/:(?=,)|:(?=$)/g, ":null");
-                    var entries = strNormalized.split(",");
-                    var model = webExpress.utility.string.getObject(entries);
+                    //var strNormalized = str.replace(/:(?=,)|:(?=$)/g, ":null");
+                    //var entries = strNormalized.split(",");
+                    //var model = webExpress.utility.string.getObject(entries);
+                    var model = JSON.parse(str);
 
                     var tds = $(this).closest("tr").find("td[model-field]");
                     for (var i = 0; i < tds.length; i++) {

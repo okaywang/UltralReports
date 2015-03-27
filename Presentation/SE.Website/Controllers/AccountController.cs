@@ -48,16 +48,19 @@ namespace Website.Controllers
         {
             var accounts = _bllAccount.Search(criteria);
 
-            var model = new PagedModel<AccountListItemModel>();
+            var items = new List<AccountListItemModel>();
             foreach (var item in accounts)
             {
-                model.Items.Add(new AccountListItemModel()
+                items.Add(new AccountListItemModel()
                 {
                     AccountId = item.Id,
                     Name = item.LoginName,
                     LoginName = item.LoginName
                 });
             }
+
+            var model = new PagedModel<AccountListItemModel>();
+            model.Items = items.ToArray();
             model.PagingResult = accounts.PagingResult;
             return PartialView("_CommonList", model);
         }

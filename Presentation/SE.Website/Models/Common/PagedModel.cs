@@ -7,14 +7,21 @@ using WebExpress.Core.Paging;
 
 namespace Website.Models
 {
-    public class PagedModel<T>
+    public interface IPagedModel<out T>
+    {
+        T[] Items { get; }
+
+        PagingResult PagingResult { get; set; }
+    }
+
+    public class PagedModel<T> : IPagedModel<T>
     {
         public PagedModel()
-        {
-            Items = new List<T>();
+        { 
         }
-        public List<T> Items { get; set; }
+        public T[] Items { get; set; }
         public PagingResult PagingResult { get; set; }
+
     }
 
     //public static class Ex

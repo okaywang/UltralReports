@@ -1,4 +1,4 @@
-﻿@model PagedModel<AccountListItemModel>
+﻿@model IPagedModel<IListItemModel>
 @{
     if (Model.Items.Any())
     {
@@ -18,7 +18,7 @@
             <tbody>
                 @foreach (var item in Model.Items)
                 {
-                    <tr model-field-entry="AccountId:@item.AccountId,LoginName:'@item.LoginName'">
+                    <tr model-field-entry="@item.ToJson()">
                         @foreach (var prop in props)
                         {
                             <td>
@@ -27,7 +27,7 @@
                                     var commands = prop.GetValue(item) as IListItemCommand[];
                                     foreach (var cmd in commands)
                                     {
-                                        <a href="javascript:;" url="@cmd.CommandAction" command-name="@cmd.CommandName">@cmd.CommandText</a>
+                                    <a href="javascript:;" url="@cmd.CommandAction" command-name="@cmd.CommandName">@cmd.CommandText</a>
                                     }
                                 }
                                 else

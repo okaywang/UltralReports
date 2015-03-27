@@ -22,18 +22,6 @@
 </div>
 
 @section scripts{
-    <script>
-
-        $(document).bind("keydown", function (e) {
-            if ((e.which || e.keyCode) == 116) {
-                e.preventDefault();
-                location.href = "B.aspx";
-            }
-        });
-
-    </script>
-
-
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
