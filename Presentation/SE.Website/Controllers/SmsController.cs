@@ -93,14 +93,19 @@ namespace Website.Controllers
             return Json(new ResultModel(true));
         }
 
-        public JsonResult GroupUpdate()
+        public JsonResult GroupUpdate(SmsGroupUpdateModel model)
         {
-            return null;
+            var entity = _bllSms.SmsGroupGet(model.Id);
+            entity.Name = model.Name;
+            _bllSms.SmsGroupUpdate(entity);
+            return Json(new ResultModel(true));
         }
 
-        public JsonResult GroupDelete()
+        public JsonResult GroupDelete(int id)
         {
-            return null;
+            var entity = _bllSms.SmsGroupGet(id);
+            _bllSms.SmsGroupDelete(entity);
+            return Json(new ResultModel(true));
         }
         #endregion
     }

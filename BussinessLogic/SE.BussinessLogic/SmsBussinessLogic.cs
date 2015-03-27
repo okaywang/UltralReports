@@ -19,6 +19,21 @@ namespace BussinessLogic
             _smsGroupRepository = smsGroupRepository;
         }
 
+        public SmsGroup SmsGroupGet(int id)
+        {
+            return _smsGroupRepository.Get(id);
+        }
+
+        public void SmsGroupUpdate(SmsGroup entity)
+        {
+            _smsGroupRepository.Update(entity);
+        }
+
+        public void SmsGroupDelete(SmsGroup entity)
+        {
+            _smsGroupRepository.Delete(entity);
+        }
+
         public SmsGroup Insert(SmsGroup entity)
         {
             return _smsGroupRepository.Insert(entity);
@@ -28,6 +43,6 @@ namespace BussinessLogic
         {
             return _smsGroupRepository.Table.ToList();
         }
-       
+
     }
 }
