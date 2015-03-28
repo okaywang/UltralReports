@@ -9,23 +9,32 @@ using Website.Common;
 
 namespace Website.Models
 {
-    public class SmsGroupModel
+    public class SmsRecipientListPageModel : ListPageModal
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
+        public string AddItemUrl { get; set; }
     }
 
-    [RequestUrl("/Sms/GroupAdd")]
-    public class SmsGroupAddModel
+    //public class SmsRecipientModel
+    //{
+    //    public int Id { get; set; }
+
+    //    public string Name { get; set; }
+    //}
+
+    [RequestUrl("/Sms/RecipientAdd")]
+    public class SmsRecipientAddModel
     {
         [Required]
         [DisplayName("名称")]
         public string Name { get; set; }
+
+        [Required]
+        [DisplayName("手机号码")]
+        public string PhoneNumber { get; set; }
     }
 
-    [RequestUrl("/Sms/GroupUpdate")]
-    public class SmsGroupUpdateModel
+    [RequestUrl("/Sms/RecipientUpdate")]
+    public class SmsRecipientUpdateModel
     {
         [ControlType(typeof(NativeInputHidden))]
         public int Id { get; set; }
@@ -33,15 +42,23 @@ namespace Website.Models
         [Required]
         [DisplayName("名称")]
         public string Name { get; set; }
+
+        [Required]
+        [DisplayName("手机号码")]
+        public string PhoneNumber { get; set; }
     }
 
-    public class SmsGroupListItemModel : IListItemModel
+    public class SmsRecipientListItemModel : IListItemModel
     {
         [DisplayName("Id")]
         public int Id { get; set; }
 
         [DisplayName("名称")]
         public string Name { get; set; }
+
+        [Required]
+        [DisplayName("手机号码")]
+        public string PhoneNumber { get; set; }
          
         [DisplayName("操作")]
         [JsonIgnore]

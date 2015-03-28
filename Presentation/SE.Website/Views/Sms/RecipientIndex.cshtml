@@ -1,9 +1,9 @@
-﻿@model SmsGroupListPageModel
+﻿@model SmsRecipientListPageModel
 @{
     ViewBag.Title = Model.Title;
 }
 
-<h2>List</h2>
+<h2>@Model.Title</h2>
 
 <div class="search-action" style="margin-top: 30px;">
     <button class="btn btn-default" command-name="add" command-url="@Model.AddItemUrl">新增</button>
@@ -13,11 +13,11 @@
 </div>
 
 <div class="module-add">
-    @Html.Partial("_Modal", new ModalModel<SmsGroupAddModel> { Title = "新增人员组" })
+    @Html.Partial("_Modal", new ModalModel<SmsRecipientAddModel> { Title = "新增短信接收人员" })
 </div>
 
 <div class="module-update">
-    @Html.Partial("_Modal", new ModalModel<SmsGroupUpdateModel> { Title = "编辑人员组" })
+    @Html.Partial("_Modal", new ModalModel<SmsRecipientUpdateModel> { Title = "编辑短信接收人员" })
 </div>
 
 @section scripts{
@@ -39,7 +39,7 @@
                     se.helper.ajax.request({
                         confirmMessage: "您确定删除 " + model.Name + " 吗？",
                         container: container,
-                        url: "/Sms/GroupDelete",
+                        url: "/Sms/RecipientDelete",
                         model: { Id: model.Id },
                         onSuccess: function () {
                             viewInstance.refresh();

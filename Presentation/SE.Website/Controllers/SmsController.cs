@@ -33,27 +33,54 @@ namespace Website.Controllers
         #region Recipient
         public ActionResult RecipientIndex()
         {
-            return null;
+            var model = new SmsRecipientListPageModel();
+            model.Title = "人员组列表";
+            model.RequestListUrl = "/Sms/RecipientList";
+            model.AddItemUrl = "/Sms/RecipientAdd";
+            return View(model);
         }
 
-        public ActionResult RecipientList()
+        public PartialViewResult RecipientList()
         {
-            return null;
+            var groups = _bllSms.GetAll();
+
+            var items = new List<SmsRecipientListItemModel>();
+            foreach (var item in groups)
+            {
+                items.Add(new SmsRecipientListItemModel()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    PhoneNumber = item.PhoneNumber
+                });
+            }
+
+            var model = new PagedModel<SmsRecipientListItemModel>();
+            model.Items = items.ToArray();
+            return PartialView("_CommonList", model);
         }
 
-        public JsonResult RecipientAdd()
+        public JsonResult RecipientAdd(SmsRecipientAddModel model)
         {
-            return null;
+            var entity = new SmsRecipient() { Name = model.Name, PhoneNumber = model.PhoneNumber };
+            _bllSms.Insert(entity);
+            return Json(new ResultModel(true));
         }
 
-        public JsonResult RecipientUpdate()
+        public JsonResult RecipientUpdate(SmsRecipientUpdateModel model)
         {
-            return null;
+            var entity = _bllSms.Get(model.Id);
+            entity.Name = model.Name;
+            entity.PhoneNumber = model.PhoneNumber;
+            _bllSms.Update(entity);
+            return Json(new ResultModel(true));
         }
 
-        public JsonResult RecipientDelete()
+        public JsonResult RecipientDelete(int id)
         {
-            return null;
+            var entity = _bllSms.Get(id);
+            _bllSms.Delete(entity);
+            return Json(new ResultModel(true));
         }
         #endregion
 
@@ -108,10 +135,5 @@ namespace Website.Controllers
             return Json(new ResultModel(true));
         }
         #endregion
-    }
-
-    public class SmsGroupListPageModel : ListPageModal
-    {
-        public string AddItemUrl { get; set; }
     }
 }

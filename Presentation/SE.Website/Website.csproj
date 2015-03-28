@@ -169,7 +169,8 @@
     <Compile Include="Models\Common\PagedModel.cs" />
     <Compile Include="Models\Common\ResultModel.cs" />
     <Compile Include="Models\Common\ValueTextModel.cs" />
-    <Compile Include="Models\Sms\GroupModel.cs" />
+    <Compile Include="Models\Sms\SmsRecipientModel.cs" />
+    <Compile Include="Models\Sms\SmsGroupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -439,6 +440,7 @@
     <Content Include="Views\Shared\_Modal.cshtml" />
     <Content Include="Views\Shared\_CommonList.cshtml" />
     <Content Include="Views\Sms\GroupIndex.cshtml" />
+    <Content Include="Views\Sms\RecipientIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

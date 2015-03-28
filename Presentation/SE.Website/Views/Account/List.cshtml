@@ -13,7 +13,6 @@
 </div>
 
 <div class="module-add">
-    @*@Html.Partial("_Modal", new ModalModel { Title = "新增账号", Properties = typeof(AccountAddModel).GetProperties() })*@
     @Html.Partial("_Modal", new ModalModel<AccountAddModel> { Title = "新增账号" })
 </div>
 
