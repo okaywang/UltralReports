@@ -1,14 +1,15 @@
 ﻿(function () {
     //se.ui.control.Dialog = DialogClass;
     se.ui.module.Dialog = DialogClass;
-    function DialogClass(container) {
+    se.ui.module.Dialog.Settings = DialogSettings;
+    function DialogClass(settings) {
         se.ui.control.Eventable.call(this);
         var _self = this;
 
         function _init() {
             _self.init = init;
 
-            _self.dialog = new se.ui.control.Dialog(container);
+            _self.dialog = new se.ui.control.Dialog(settings.container);
 
             _self.bindModel = bindModel;
         }
@@ -16,7 +17,7 @@
         function init() {
             _self.dialog.on("ok", function (sender, data) {
                 var url = $(sender).attr("request-url");
-                var model = $("form", _self.dialog.container).serializeObject();
+                var model = settings.getModel();
                 save(url, model);
             });
         }
@@ -51,5 +52,15 @@
         }
 
         _init();
+    }
+
+    function DialogSettings(settings) {
+        this.container = null;
+
+        this.getModel = function () {
+            return $("form", this.container).serializeObject();
+        }
+
+        $.extend(this, settings);
     }
 })();

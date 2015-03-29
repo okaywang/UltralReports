@@ -316,55 +316,51 @@ namespace Website.Controllers
         //}
         //#endregion
 
-        //#region 权限
+        #region 权限
         public JsonResult GetAuthorities(int accountId)
         {
             var authorities = _bllAccount.Get(accountId).AccountAuthorities.Select(i => i.AuthorityId).ToArray();
             return Json(authorities);
         }
-        //[RequireAuthority(AuthorityNames.AccountAuthSet)]
-        //public ActionResult UpdateAuthorities(int accountId, int[] authorityIds)
-        //{
-        //    ResultData result = new ResultData();
-        //    var account = _accountBll.Get(accountId);
-        //    if (account == null)
-        //    {
-        //        result.IsSuccess = false;
-        //        result.Message = "没有获取到该账号信息";
-        //        return Json(result);
-        //    }
-        //    #region 修改权限
-        //    var allAuthorities = _accountBll.GetAllAuthorities();
+        [RequireAuthority(AuthorityNames.SettingAccount)]
+        public ActionResult UpdateAuthorities(int accountId, int[] authorityIds)
+        { 
+            var account = _bllAccount.Get(accountId);
+            if (account == null)
+            { 
+                return Json(new ResultModel(false,"没有获取到该账号信息"));
+            }
+            #region 修改权限
+            var allAuthorities = _bllAccount.GetAllAuthorities();
 
-        //    foreach (var item in allAuthorities)
-        //    {
-        //        if (authorityIds.Contains(item.Id))
-        //        {
-        //            if (!account.AccountAuthorities.Any(p => p.AuthorityId == item.Id))
-        //            {
-        //                account.AccountAuthorities.Add(new AccountAuthority()
-        //                {
-        //                    Account = account,
-        //                    Authority = item
-        //                });
-        //            }
-        //        }
-        //        else
-        //        {
-        //            var accountAuthority = account.AccountAuthorities.FirstOrDefault(p => p.AuthorityId == item.Id);
-        //            if (accountAuthority != null)
-        //            {
-        //                _accountBll.DeleteAccountAuthority(accountAuthority);
-        //            }
-        //        }
-        //    }
+            foreach (var item in allAuthorities)
+            {
+                if (authorityIds.Contains(item.Id))
+                {
+                    if (!account.AccountAuthorities.Any(p => p.AuthorityId == item.Id))
+                    {
+                        account.AccountAuthorities.Add(new AccountAuthority()
+                        {
+                            Account = account,
+                            Authority = item
+                        });
+                    }
+                }
+                else
+                {
+                    var accountAuthority = account.AccountAuthorities.FirstOrDefault(p => p.AuthorityId == item.Id);
+                    if (accountAuthority != null)
+                    {
+                        _bllAccount.DeleteAccountAuthority(accountAuthority);
+                    }
+                }
+            }
 
-        //    _accountBll.Update(account);
-        //    #endregion
+            _bllAccount.Update(account);
+            #endregion
 
-        //    result.IsSuccess = true;
-        //    return Json(result);
-        //}
-        //#endregion
+            return Json(new ResultModel(true));
+        }
+        #endregion
     }
 }

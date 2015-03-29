@@ -10,6 +10,7 @@
             </div>
             <div class="modal-body">
                 <form>
+                    <input type="hidden" name="AccountId" id="AccountId" />
                     <ul class="list-group">
                         @{
                             var targetAccountType = isAdmin ? AccountType.AdminUser : AccountType.GeneralUser;
@@ -24,7 +25,7 @@
                                     if (targetAccountType.HasCandidateAuthority(subItem.Name))
                                     {
                                     <label class="checkbox-inline" style="margin-left: 2em;">
-                                        <input type="checkbox" value="@subItem.Id">@subItem.Name.Split('-')[1]</label>    
+                                        <input type="checkbox" name="authorityIds" value="@subItem.Id">@subItem.Name.Split('-')[1]</label>    
                                     }
                                 }
                             </li>
@@ -35,7 +36,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary btn-save">确定</button>
+                <button type="button" class="btn btn-primary btn-save" command-name="saveAuth" request-url="/Account/UpdateAuthorities">确定</button>
             </div>
         </div>
     </div>
@@ -44,6 +45,6 @@
 
 <script>
     $(function () {
-        $("li.list-group-item:not(:has(:checkbox))").hide();
+         
     });
 </script>

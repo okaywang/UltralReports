@@ -16,7 +16,7 @@
         }
 
         function fire(eventName, argsArray) {
-            var handlers = _events[eventName];
+            var handlers = _events[eventName] || [];
             for (var i = 0; i < handlers.length; i++) {
                 handlers[i].apply(this, argsArray);
             }

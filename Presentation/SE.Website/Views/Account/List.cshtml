@@ -29,22 +29,20 @@
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
             url: '@Model.RequestListUrl',
             modules: {
-                add: new se.ui.module.Dialog($(".module-add .modal")),
-                update: new se.ui.module.Dialog($(".module-update .modal")),
-                auth: new se.ui.module.Dialog($(".module-auth .modal"))
+                add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-add .modal") })),
+                update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-update .modal") })),
+                auth: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-auth .modal") }))
             },
             rowCommands: {
                 setAuthority: function (model) {
                     viewInstance.modules.auth.dialog.show();
-                    //viewInstance.modules.editAuth.activate();
-                    //viewInstance.modules.editAuth.bindModel(model);
-                    //var url = "/Account/GetAuthorities";
-                    //webExpress.utility.ajax.request(url, { accountId: model.AccountId }, function (result) {
-                    //    for (var i = 0; i < result.length; i++) {
-                    //        console.log(result[i]);
-                    //        //$(":checkbox[value=" + result[i] + "]").prop("checked", true);
-                    //    }
-                    //});
+                    $("#AccountId").val(model.AccountId);
+                    var url = "/Account/GetAuthorities";
+                    webExpress.utility.ajax.request(url, { accountId: model.AccountId }, function (result) {
+                        for (var i = 0; i < result.length; i++) {
+                            $(":checkbox[value=" + result[i] + "]").prop("checked", true);
+                        }
+                    });
                 },
                 update: function (model) {
                     viewInstance.modules.update.dialog.show();
