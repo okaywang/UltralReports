@@ -1,14 +1,14 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
-using System.Web.Routing; 
+using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using System.Text;
 using System.Web.Hosting;
 using System.IO;
 using Website.App_Start;
-using Website.Common; 
+using Website.Common;
 
 namespace Website
 {
@@ -24,7 +24,7 @@ namespace Website
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
-            AreaRegistration.RegisterAllAreas(); 
+            AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -35,7 +35,6 @@ namespace Website
             //BundleTable.EnableOptimizations = true;//发布时设置为true
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-
             string jsChina = HostingEnvironment.MapPath("~/Scripts/chinaArea.js");
             if (!File.Exists(jsChina))
             {
@@ -44,7 +43,7 @@ namespace Website
 
             AuthorityHelper.Init();
 
-           // CreateAuthoritiesSqlFile.Create();
+            // CreateAuthoritiesSqlFile.Create();
         }
 
         private void WriteChinaAreaScripts(string fullFileName)

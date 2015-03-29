@@ -36,6 +36,7 @@ namespace Website.Controllers
             _bllAccount = bllAccount;
         }
 
+        [RequireAuthority(AuthorityNames.SettingAccount)]
         public ActionResult List()
         {
             var model = new AccountListPageModel();
@@ -45,6 +46,7 @@ namespace Website.Controllers
             return View(model);
         }
 
+        [RequireAuthority(AuthorityNames.SettingAccount)]
         public PartialViewResult _List(AccountSearchCriteria criteria)
         {
             var accounts = _bllAccount.Search(criteria);
@@ -68,62 +70,62 @@ namespace Website.Controllers
 
         //#region 登录
 
-        //public ActionResult Login(string returnUrl)
-        //{
-        //    if (HttpContext.User.Identity.IsAuthenticated)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    return View();
-        //}
+        public ActionResult Login(string returnUrl)
+        {
+            //if (HttpContext.User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            return View();
+        }
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        ////[ValidateAntiForgeryToken]
-        //public ActionResult Login(AccountModel model)
-        //{
-        //    var captcha = Session["captcha"];
-        //    if (captcha == null || !captcha.ToString().Equals(model.Captcha, StringComparison.CurrentCultureIgnoreCase))
-        //    {
-        //        return Json(new ResultModel(false, "验证码错误"));
-        //    }
-        //    var entity = _accountBll.GetAccountByLoginName(model.LoginName);
-        //    if (entity == null)
-        //    {
-        //        return Json(new ResultModel(false, "用户名或密码错误"));
-        //    }
-        //    if (!entity.Password.Equals(model.Password))
-        //    {
-        //        return Json(new ResultModel(false, "密码错误"));
-        //    }
-        //    //if (entity.AccountType == AccountType.Shop)
-        //    //{
-        //    //    if (!entity.Shop.IsIntegral)
-        //    //    {
-        //    //        return Json(new ResultModel(false, "请先完善改店铺资料"));
-        //    //    }
-        //    //}
+        [HttpPost]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Login(LoginModel model)
+        {
+            var captcha = Session["captcha"];
+            if (captcha == null || !captcha.ToString().Equals(model.Captcha, StringComparison.CurrentCultureIgnoreCase))
+            {
+                return Json(new ResultModel(false, "验证码错误"));
+            }
+            var entity = _bllAccount.GetAccountByLoginName(model.LoginName);
+            if (entity == null)
+            {
+                return Json(new ResultModel(false, "用户名或密码错误"));
+            }
+            if (!entity.Password.Equals(model.Password))
+            {
+                return Json(new ResultModel(false, "密码错误"));
+            }
+            //if (entity.AccountType == AccountType.Shop)
+            //{
+            //    if (!entity.Shop.IsIntegral)
+            //    {
+            //        return Json(new ResultModel(false, "请先完善改店铺资料"));
+            //    }
+            //}
 
-        //    var _authenticationService = new FormAuthenticationService();
-        //    _authenticationService.SignIn(model.LoginName, model.RememberMe);
+            var _authenticationService = new FormAuthenticationService();
+            _authenticationService.SignIn(model.LoginName, model.RememberMe);
 
-        //    return Json(new ResultModel(true));
-        //}
-        ////验证码生成
-        //public FileContentResult CaptchaImage()
-        //{
-        //    var captcha = new LiteralCaptcha(60, 30, 4);
-        //    var bytes = captcha.Generate();
-        //    Session["captcha"] = captcha.Captcha;
-        //    return new FileContentResult(bytes, "image/jpeg"); ;
-        //}
+            return Json(new ResultModel(true));
+        }
+        //验证码生成
+        public FileContentResult CaptchaImage()
+        {
+            var captcha = new LiteralCaptcha(60, 30, 4);
+            var bytes = captcha.Generate();
+            Session["captcha"] = captcha.Captcha;
+            return new FileContentResult(bytes, "image/jpeg"); ;
+        }
 
-        //public ActionResult Logout()
-        //{
-        //    IAuthenticationService _authenticationService = new FormAuthenticationService();
-        //    _authenticationService.SignOut();
-        //    return RedirectToAction("Login", "Account");
-        //}
+        public ActionResult Logout()
+        {
+            IAuthenticationService _authenticationService = new FormAuthenticationService();
+            _authenticationService.SignOut();
+            return RedirectToAction("Login", "Account");
+        }
 
         //#endregion
 
@@ -315,11 +317,11 @@ namespace Website.Controllers
         //#endregion
 
         //#region 权限
-        //public ActionResult GetAuthorities(int accountId)
-        //{
-        //    var authorities = _accountBll.Get(accountId).AccountAuthorities.Select(i => i.AuthorityId).ToArray();
-        //    return Json(authorities);
-        //}
+        public JsonResult GetAuthorities(int accountId)
+        {
+            var authorities = _bllAccount.Get(accountId).AccountAuthorities.Select(i => i.AuthorityId).ToArray();
+            return Json(authorities);
+        }
         //[RequireAuthority(AuthorityNames.AccountAuthSet)]
         //public ActionResult UpdateAuthorities(int accountId, int[] authorityIds)
         //{

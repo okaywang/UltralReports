@@ -5,7 +5,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>超市入口管理后台</title>
+    <title>超限统计</title>
     <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
 
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
@@ -76,7 +76,7 @@
                             <i class="captchar"></i>
                         </span>
                         <input type="text" class="form-control" id="captcha" name="Captcha" maxlength="4" autocomplete="off" style="width: 40%" placeholder="验证码" data-placement="left" data-content="请输入验证码">
-                        <img src="@Url.Action("CaptchaImage")" alt="点击更换" id="captchaimg" style="height:46px;cursor:pointer;margin-left:30px;">
+                        <img src="@Url.Action("CaptchaImage")" alt="点击更换" class="captcha" style="height:46px;cursor:pointer;margin-left:30px;" />
                     </div>
                 </div>
 
@@ -100,7 +100,7 @@
 
     <div class="bs-docs-footer">
         <div class="container">
-            <p>&copy 超易有市网络科技（北京）有限公司</p>
+            <p>&copy xxxx网络科技（北京）有限公司</p>
         </div>
     </div>
 
@@ -108,8 +108,7 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
-
-            $("#captchaimg").click(function () {
+            $("img.captcha").click(function () {
                 $(this).attr("src", $(this).attr("src") + "?a=" + new Date().getTime());
             });
 

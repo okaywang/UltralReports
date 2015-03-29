@@ -38,7 +38,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using UR.Common.Types;
+using Common.Types;
 namespace <#=PROJECT_NAMESPACE#>
 {
 	public sealed class AuthorityItem

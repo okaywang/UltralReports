@@ -20,6 +20,9 @@
     @Html.Partial("_Modal", new ModalModel<AccountUpdateModel> { Title = "编辑账号" })
 </div>
 
+<div class="module-auth">
+    @Html.Partial("_AuthSet", true)
+</div>
 @section scripts{
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
@@ -27,9 +30,22 @@
             url: '@Model.RequestListUrl',
             modules: {
                 add: new se.ui.module.Dialog($(".module-add .modal")),
-                update: new se.ui.module.Dialog($(".module-update .modal"))
+                update: new se.ui.module.Dialog($(".module-update .modal")),
+                auth: new se.ui.module.Dialog($(".module-auth .modal"))
             },
             rowCommands: {
+                setAuthority: function (model) {
+                    viewInstance.modules.auth.dialog.show();
+                    //viewInstance.modules.editAuth.activate();
+                    //viewInstance.modules.editAuth.bindModel(model);
+                    //var url = "/Account/GetAuthorities";
+                    //webExpress.utility.ajax.request(url, { accountId: model.AccountId }, function (result) {
+                    //    for (var i = 0; i < result.length; i++) {
+                    //        console.log(result[i]);
+                    //        //$(":checkbox[value=" + result[i] + "]").prop("checked", true);
+                    //    }
+                    //});
+                },
                 update: function (model) {
                     viewInstance.modules.update.dialog.show();
                     viewInstance.modules.update.bindModel(model);

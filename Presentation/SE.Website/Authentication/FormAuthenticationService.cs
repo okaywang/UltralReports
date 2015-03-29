@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Security;
 using WebExpress.Core.Guards;
 
-namespace SE.Website.Filters
+namespace Website.Filters
 {
     public class FormAuthenticationService : IAuthenticationService
     {

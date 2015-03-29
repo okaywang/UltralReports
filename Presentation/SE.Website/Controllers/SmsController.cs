@@ -62,7 +62,17 @@ namespace Website.Controllers
 
         public JsonResult RecipientAdd(SmsRecipientAddModel model)
         {
-            var entity = new SmsRecipient() { Name = model.Name, PhoneNumber = model.PhoneNumber };
+            var entity = new SmsRecipient()
+            {
+                Name = model.Name,
+                PhoneNumber = model.PhoneNumber
+            };
+            foreach (var item in model.GroupIds)
+            {
+                var groupEntity = _bllSms.SmsGroupGet(item);
+                entity.SmsGroups.Add(groupEntity);
+            }
+
             _bllSms.Insert(entity);
             return Json(new ResultModel(true));
         }

@@ -31,6 +31,11 @@ namespace Website.Models
         [Required]
         [DisplayName("手机号码")]
         public string PhoneNumber { get; set; }
+
+        [Required]
+        [DisplayName("所属分组")]
+        [ControlType(typeof(NativeSelect))]
+        public int[] GroupIds { get; set; }
     }
 
     [RequestUrl("/Sms/RecipientUpdate")]

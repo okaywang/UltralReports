@@ -14,11 +14,9 @@
 </div>
 
 <div class="search-action">
-    @if (UserContext.Current.HasAuthority(AuthorityNames.AccountAdd))
-    {
-        <button type="button" class="btn btn-primary btn-sm" command-name="addAccount">添加员工</button>
-    }
-    
+    <button type="button" class="btn btn-primary btn-sm" command-name="addAccount">添加员工</button>
+
+
 </div>
 
 <div class="search-result table-responsive" style="margin-top: 20px;">
@@ -73,7 +71,7 @@
         </div>
     </div>
     <div class="search-widget-edit-auth">
-        @Html.Partial("_AuthSet",true)
+        @Html.Partial("_AuthSet", true)
     </div>
 </div>
 
@@ -133,7 +131,7 @@
                     addUrl: "/Account/UpdateAuthorities",
                     updateUrl: "/Account/UpdateAuthorities",
                     setTitle: function (title) {
-                        
+
                     },
                     getSaveModelId: function (model) {
                         return model.AccountId;
