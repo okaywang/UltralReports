@@ -9,6 +9,9 @@ using System.Web.Hosting;
 using System.IO;
 using Website.App_Start;
 using Website.Common;
+using Website.Models;
+using DataAccess;
+using AutoMapper;
 
 namespace Website
 {
@@ -42,9 +45,15 @@ namespace Website
             }
 
             AuthorityHelper.Init();
-
+            InitAutoMapper();
             // CreateAuthoritiesSqlFile.Create();
         }
+
+        private void InitAutoMapper()
+        {
+            Mapper.CreateMap<AccountAddModel, Account>();
+        }
+
 
         private void WriteChinaAreaScripts(string fullFileName)
         {

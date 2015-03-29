@@ -11,6 +11,8 @@ using System.Web.Mvc;
 using WebExpress.Core;
 using WebExpress.Core.Guards;
 using WebExpress.Website.Exceptions;
+using AutoMapper;
+using Common.Types;
 
 namespace Website.Controllers
 {
@@ -295,10 +297,11 @@ namespace Website.Controllers
         //[RequireAuthority(AuthorityNames.AccountAdd)]
         public JsonResult Add(AccountAddModel model)
         {
-            var entity = new Account();
-            entity.LoginName = model.Name;
-            entity.Password = model.Password;
-            entity.AccountType = global::Common.Types.AccountType.GeneralUser;
+            var entity = Mapper.Map<AccountAddModel, Account>(model);
+            //var entity = new Account();
+            //entity.LoginName = model.Name;
+            //entity.Password = model.Password;
+            entity.AccountType = AccountType.GeneralUser;
             _bllAccount.Insert(entity);
             return Json(new ResultModel(true));
         }
@@ -324,11 +327,11 @@ namespace Website.Controllers
         }
         [RequireAuthority(AuthorityNames.SettingAccount)]
         public ActionResult UpdateAuthorities(int accountId, int[] authorityIds)
-        { 
+        {
             var account = _bllAccount.Get(accountId);
             if (account == null)
-            { 
-                return Json(new ResultModel(false,"没有获取到该账号信息"));
+            {
+                return Json(new ResultModel(false, "没有获取到该账号信息"));
             }
             #region 修改权限
             var allAuthorities = _bllAccount.GetAllAuthorities();
