@@ -26,8 +26,8 @@
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
             url: '@Model.RequestListUrl',
             modules: {
-                add: new se.ui.module.Dialog($(".module-add .modal")),
-                update: new se.ui.module.Dialog($(".module-update .modal"))
+                add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-add .modal") })),
+                update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-update .modal") }))
             },
             rowCommands: {
                 update: function (model) {

@@ -147,6 +147,7 @@
       <DependentUpon>Authorities.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DutyController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Authentication\FormAuthenticationService.cs">
@@ -441,6 +442,7 @@
     <Content Include="Views\Shared\_CommonList.cshtml" />
     <Content Include="Views\Sms\GroupIndex.cshtml" />
     <Content Include="Views\Sms\RecipientIndex.cshtml" />
+    <Content Include="Views\Duty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />
