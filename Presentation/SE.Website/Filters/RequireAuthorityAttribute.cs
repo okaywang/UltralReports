@@ -22,7 +22,7 @@ namespace Website.Filters
             if (!hasAuthority)
             {
                 throw new HttpException((int)HttpStatusCode.Unauthorized, "Unauthorized");
-            }  
+            }   
             return hasAuthority;
         }
     }
