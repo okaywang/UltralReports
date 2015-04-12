@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Website.Common;
@@ -20,7 +21,7 @@ namespace Website.Filters
             var hasAuthority = UserContext.Current.HasAuthority(_authorityName);
             if (!hasAuthority)
             {
-                throw new Exception("没有权限进行此项操作！");
+                throw new HttpException((int)HttpStatusCode.Unauthorized, "Unauthorized");
             }
             return hasAuthority;
         }

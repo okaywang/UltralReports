@@ -55,48 +55,6 @@
                             } 
                         </ul>
                     </li>
-                    <li>
-                        <a class="dropdown-toggle" href="#">
-                            <i class="settingsicon"></i>
-                            <span class="menu-text">系统设置</span>
-                            <b class="arrow icon-angle-down"></b>
-                        </a>
-                        <ul class="submenu">
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SettingAccount))
-                            {
-                                <li><a href="/Account/List">账号管理</a></li>
-                            }
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SettingSms))
-                            {
-                                <li><a href="/Sms/GroupIndex">短信接收组管理</a></li>
-                            }
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SettingSms))
-                            {
-                                <li><a href="/Sms/RecipientIndex">短信接收人管理</a></li>
-                            }
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="dropdown-toggle" href="#">
-                            <i class="settingsicon"></i>
-                            <span class="menu-text">系统设置</span>
-                            <b class="arrow icon-angle-down"></b>
-                        </a>
-                        <ul class="submenu">
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SettingAccount))
-                            {
-                                <li><a href="/Account/List">账号管理</a></li>
-                            }
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SettingSms))
-                            {
-                                <li><a href="/Sms/GroupIndex">短信接收组管理</a></li>
-                            }
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SettingSms))
-                            {
-                                <li><a href="/Sms/RecipientIndex">短信接收人管理</a></li>
-                            }
-                        </ul>
-                    </li>
                 </ul>
                 <div id="sidebar-collapse" class="sidebar-collapse">
                     <i data-icon2="icon-double-angle-right" data-icon1="icon-double-angle-left" class="icon-double-angle-left"></i>
