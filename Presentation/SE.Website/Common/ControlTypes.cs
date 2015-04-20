@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
+using WebExpress.Core;
 
 namespace Website.Common
 {
@@ -72,7 +73,7 @@ namespace Website.Common
         public override string Render()
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("<select class='form-control' name='{0}'", Name);
+            sb.AppendFormat("<select class='form-control' name='{0}' data-bind='value:{0}'", Name);
             if (!_enabled)
             {
                 sb.Append(" disabled");
@@ -216,18 +217,18 @@ namespace Website.Common
         public string RequestUrl { get; private set; }
     }
 
-    public class DisplayTextAttribute : Attribute
-    {
-        private string _displayText;
-        public DisplayTextAttribute(string displayText)
-        {
-            _displayText = displayText;
-        }
-        public string DisplayText
-        {
-            get { return _displayText; }
-        }
-    }
+    //public class DisplayTextAttribute : Attribute
+    //{
+    //    private string _displayText;
+    //    public DisplayTextAttribute(string displayText)
+    //    {
+    //        _displayText = displayText;
+    //    }
+    //    public string DisplayText
+    //    {
+    //        get { return _displayText; }
+    //    }
+    //}
 
     //public class DisplayFormatAttribute : Attribute
     //{
@@ -300,7 +301,7 @@ namespace Website.Common
             }
             if (attr.ControlType == typeof(NativeSelect))
             {
-                var source = prop.GetCustomAttribute<EnumControlSourceAttribute>();
+                var source = prop.GetCustomAttributes().FirstOrDefault(i => typeof(IControlSource).IsAssignableFrom(i.GetType())) as IControlSource;
                 if (source != null)
                 {
                     var pairs = source.GetSource();
@@ -314,6 +315,11 @@ namespace Website.Common
         {
             var attr = item.GetCustomAttribute<System.ComponentModel.DataAnnotations.DisplayFormatAttribute>();
             var result = item.GetValue(obj);
+            if (result is Enum)
+            {
+                var prop = result.GetType().GetField(result.ToString());
+                return prop.GetDisplayName();
+            }
             if (attr == null)
             {
                 return result == null ? string.Empty : result.ToString();

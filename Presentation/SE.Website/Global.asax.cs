@@ -52,6 +52,10 @@ namespace Website
         private void InitAutoMapper()
         {
             Mapper.CreateMap<AccountAddModel, Account>();
+            Mapper.CreateMap<MonitorType, MonitorTypeListItemModel>();
+            Mapper.CreateMap<MonitorType, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
+            Mapper.CreateMap<Equipment, EquipmentListItemModel>().ForMember(i => i.MonitorTypeName, opt => opt.MapFrom(src => src.MonitorType.Name));
+            Mapper.CreateMap<EquipmentAddModel, Equipment>();
         }
 
 

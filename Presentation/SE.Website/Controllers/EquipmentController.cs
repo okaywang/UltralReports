@@ -1,4 +1,5 @@
-﻿using BussinessLogic;
+﻿using AutoMapper;
+using BussinessLogic;
 using DataAccess;
 using System;
 using System.Collections.Generic;
@@ -27,13 +28,54 @@ namespace Website.Controllers
         //
         // GET: /Equipment/
 
+        #region Equipment
         public ActionResult Index()
         {
-            return View();
+            var model = new EquipmentListPageModel();
+            model.Title = "设备列表";
+            model.RequestListUrl = "/Equipment/List";
+            model.AddItemUrl = "/Equipment/Add";
+            return View(model);
         }
 
+        public PartialViewResult List()
+        {
+            var entities = _bllEquipment.GetAll();
 
-        #region Group
+            var items = Mapper.Map<List<Equipment>, List<EquipmentListItemModel>>(entities);
+            var model = new PagedModel<EquipmentListItemModel>();
+            model.Items = items.ToArray();
+            return PartialView("_CommonList", model);
+        }
+
+        public JsonResult Add(EquipmentAddModel model)
+        {
+            var entity = Mapper.Map<EquipmentAddModel, Equipment>(model);
+            _bllEquipment.Insert(entity);
+            return Json(new ResultModel(true));
+        }
+
+        public JsonResult Update(EquipmentUpdateModel model)
+        {
+            var entity = _bllEquipment.Get(model.Id);
+            entity.MachineSet = model.MachineSet;
+            entity.MonitorTypeId = model.MonitorTypeId;
+            entity.Name = model.Name;
+            entity.Description = model.Description;
+            _bllEquipment.Update(entity);
+            return Json(new ResultModel(true));
+        }
+
+        public JsonResult Delete(int id)
+        {
+            var entity = _bllEquipment.Get(id);
+            _bllEquipment.Delete(entity);
+            return Json(new ResultModel(true));
+        }
+        #endregion
+
+
+        #region Monitor Type
         public ActionResult MonitorTypeIndex()
         {
             var model = new MonitorTypeListPageModel();
@@ -47,16 +89,7 @@ namespace Website.Controllers
         {
             var entities = _bllEquipment.MonitorTypeGetAll();
 
-            var items = new List<MonitorTypeListItemModel>();
-            foreach (var item in entities)
-            {
-                items.Add(new MonitorTypeListItemModel()
-                {
-                    Id = item.Id,
-                    Name = item.Name
-                });
-            }
-
+            var items = Mapper.Map<List<MonitorType>, List<MonitorTypeListItemModel>>(entities);
             var model = new PagedModel<MonitorTypeListItemModel>();
             model.Items = items.ToArray();
             return PartialView("_CommonList", model);

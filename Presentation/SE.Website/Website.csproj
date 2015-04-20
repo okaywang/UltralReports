@@ -452,6 +452,7 @@
     <Content Include="Views\Sms\RecipientIndex.cshtml" />
     <Content Include="Views\Duty\Index.cshtml" />
     <Content Include="Views\Equipment\MonitorTypeIndex.cshtml" />
+    <Content Include="Views\Equipment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />
