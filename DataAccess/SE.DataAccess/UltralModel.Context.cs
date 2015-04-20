@@ -34,5 +34,6 @@ namespace DataAccess
         public DbSet<SmsRecipient> SmsRecipients { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<MonitorType> MonitorType { get; set; }
+        public DbSet<Part> Part { get; set; }
     }
 }

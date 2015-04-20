@@ -12,20 +12,20 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipment
+    public partial class Part
     {
-        public Equipment()
-        {
-            this.Part = new HashSet<Part>();
-        }
-    
         public int Id { get; set; }
-        public Common.Types.MachineSetType MachineSet { get; set; }
-        public int MonitorTypeId { get; set; }
+        public int EquipmentId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string DataKey { get; set; }
+        public string Unit { get; set; }
+        public decimal L1 { get; set; }
+        public decimal L2 { get; set; }
+        public decimal L3 { get; set; }
+        public decimal H1 { get; set; }
+        public decimal H2 { get; set; }
+        public decimal H3 { get; set; }
     
-        public virtual MonitorType MonitorType { get; set; }
-        public virtual ICollection<Part> Part { get; set; }
+        public virtual Equipment Equipment { get; set; }
     }
 }

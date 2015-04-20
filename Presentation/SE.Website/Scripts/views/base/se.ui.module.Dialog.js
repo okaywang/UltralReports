@@ -7,6 +7,8 @@
         var _self = this;
 
         function _init() {
+            _self.viewModel = null;
+
             _self.init = init;
 
             _self.dialog = new se.ui.control.Dialog(settings.container);
@@ -20,6 +22,8 @@
                 var model = settings.getModel();
                 save(url, model);
             });
+
+            settings.initializer.call(_self);
         }
 
         function bindModel(model) {
@@ -27,13 +31,13 @@
             //    this.adaptModel(model);
             //}
 
-            var viewModel = kendo.observable(model);
+            _self.viewModel = kendo.observable(model);
 
-            //if (this.adaptViewModel) {
-            //    this.adaptViewModel(_self.viewModel);
-            //}
+            if (settings.viewModelSetter) {
+                settings.viewModelSetter(_self.viewModel);
+            }
 
-            kendo.bind($("form", _self.dialog.container), viewModel);
+            kendo.bind($("form", _self.dialog.container), _self.viewModel);
 
         }
 
@@ -60,6 +64,10 @@
         this.getModel = function () {
             return $("form", this.container).serializeObject();
         }
+
+        this.initializer = function () { };
+
+        this.viewModelSetter = null;
 
         $.extend(this, settings);
     }

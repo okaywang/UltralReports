@@ -72,6 +72,9 @@
     <Compile Include="MonitorType.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Part.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmsGroup.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>

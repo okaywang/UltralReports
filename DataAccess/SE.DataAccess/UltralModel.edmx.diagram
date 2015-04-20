@@ -18,6 +18,8 @@
         <EntityTypeShape EntityType="UltralReportsModel.Equipment" Width="1.5" PointX="3.8365415203555218" PointY="0.0066797286303153861" />
         <EntityTypeShape EntityType="UltralReportsModel.MonitorType" Width="1.5" PointX="0.19068244667289891" PointY="23.96388601882564" />
         <AssociationConnector Association="UltralReportsModel.FK__Equipment__Monit__32E0915F" />
+        <EntityTypeShape EntityType="UltralReportsModel.Part" Width="1.5" PointX="2.2146189260364597" PointY="7.5184183453761131" />
+        <AssociationConnector Association="UltralReportsModel.FK__Part__EquipmentI__3B75D760" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

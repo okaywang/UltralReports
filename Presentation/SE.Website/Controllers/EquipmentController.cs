@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using BussinessLogic;
+using Common.Types;
 using DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Website.Common;
 using Website.Models;
 
 namespace Website.Controllers
@@ -48,6 +50,13 @@ namespace Website.Controllers
             return PartialView("_CommonList", model);
         }
 
+        public JsonResult Get(MachineSetType machineSet)
+        {
+            var entities = _bllEquipment.Where(i => i.MachineSet == machineSet).ToList();
+            var pairs = Mapper.Map<List<Equipment>, NameValuePair[]>(entities);
+            return Json(pairs, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Add(EquipmentAddModel model)
         {
             var entity = Mapper.Map<EquipmentAddModel, Equipment>(model);
@@ -73,7 +82,6 @@ namespace Website.Controllers
             return Json(new ResultModel(true));
         }
         #endregion
-
 
         #region Monitor Type
         public ActionResult MonitorTypeIndex()
@@ -114,6 +122,49 @@ namespace Website.Controllers
         {
             var entity = _bllEquipment.MonitorTypeGet(id);
             _bllEquipment.MonitorTypeDelete(entity);
+            return Json(new ResultModel(true));
+        }
+        #endregion
+
+        #region Part
+        public ActionResult PartIndex()
+        {
+            var model = new PartListPageModel();
+            model.Title = "监控类型列表";
+            model.RequestListUrl = "/Equipment/PartList";
+            model.AddItemUrl = "/Equipment/PartAdd";
+            return View(model);
+        }
+
+        public PartialViewResult PartList()
+        {
+            var entities = _bllEquipment.PartGetAll();
+
+            var items = Mapper.Map<List<Part>, List<PartListItemModel>>(entities);
+            var model = new PagedModel<PartListItemModel>();
+            model.Items = items.ToArray();
+            return PartialView("_CommonList", model);
+        }
+
+        public JsonResult PartAdd(PartAddModel model)
+        {
+            var entity = Mapper.Map<PartAddModel, Part>(model);
+            _bllEquipment.PartAdd(entity);
+            return Json(new ResultModel(true));
+        }
+
+        public JsonResult PartUpdate(PartUpdateModel model)
+        {
+            var entity = _bllEquipment.PartGet(model.Id);
+            entity.Name = model.Name;
+            _bllEquipment.PartUpdate(entity);
+            return Json(new ResultModel(true));
+        }
+
+        public JsonResult PartDelete(int id)
+        {
+            var entity = _bllEquipment.PartGet(id);
+            _bllEquipment.PartDelete(entity);
             return Json(new ResultModel(true));
         }
         #endregion

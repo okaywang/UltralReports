@@ -84,6 +84,21 @@
 		[Description] nvarchar(200)
 	)
 
+	create table Part
+	(
+		Id int IDENTITY(1,1) primary key,
+		EquipmentId int not null references Equipment,
+		Name nvarchar(50) not null,
+		DataKey nvarchar(50) not null,
+		Unit nvarchar(5) not null,
+		L1 decimal(10,2) not null,
+		L2 decimal(10,2) not null,
+		L3 decimal(10,2) not null,
+		H1 decimal(10,2) not null,
+		H2 decimal(10,2) not null,
+		H3 decimal(10,2) not null
+	)
+
 	insert into MonitorType (Name) values ('ÎÂ¶È')
 	insert into MonitorType (Name) values ('×ªËÙ')
 

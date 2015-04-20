@@ -13,6 +13,7 @@
           <EntitySet Name="LogException" EntityType="UltralReportsModel.Store.LogException" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LogOperation" EntityType="UltralReportsModel.Store.LogOperation" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MonitorType" EntityType="UltralReportsModel.Store.MonitorType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Part" EntityType="UltralReportsModel.Store.Part" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SmsGroup" EntityType="UltralReportsModel.Store.SmsGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SmsGroupRecipient" EntityType="UltralReportsModel.Store.SmsGroupRecipient" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SmsRecipient" EntityType="UltralReportsModel.Store.SmsRecipient" store:Type="Tables" Schema="dbo" />
@@ -27,6 +28,10 @@
           <AssociationSet Name="FK__Equipment__Monit__32E0915F" Association="UltralReportsModel.Store.FK__Equipment__Monit__32E0915F">
             <End Role="MonitorType" EntitySet="MonitorType" />
             <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__EquipmentI__3B75D760" Association="UltralReportsModel.Store.FK__Part__EquipmentI__3B75D760">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Part" EntitySet="Part" />
           </AssociationSet>
           <AssociationSet Name="FK__SmsGroupR__Group__286302EC" Association="UltralReportsModel.Store.FK__SmsGroupR__Group__286302EC">
             <End Role="SmsGroup" EntitySet="SmsGroup" />
@@ -104,6 +109,22 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DataKey" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Unit" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="L1" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="L2" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="L3" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="H1" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="H2" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="H3" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="SmsGroup">
           <Key>
             <PropertyRef Name="Id" />
@@ -163,6 +184,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Part__EquipmentI__3B75D760">
+          <End Role="Equipment" Type="UltralReportsModel.Store.Equipment" Multiplicity="1" />
+          <End Role="Part" Type="UltralReportsModel.Store.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__SmsGroupR__Group__286302EC">
           <End Role="SmsGroup" Type="UltralReportsModel.Store.SmsGroup" Multiplicity="1" />
           <End Role="SmsGroupRecipient" Type="UltralReportsModel.Store.SmsGroupRecipient" Multiplicity="*" />
@@ -216,6 +249,11 @@
           <AssociationSet Name="FK__Equipment__Monit__32E0915F" Association="UltralReportsModel.FK__Equipment__Monit__32E0915F">
             <End Role="MonitorType" EntitySet="MonitorType" />
             <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <EntitySet Name="Part" EntityType="UltralReportsModel.Part" />
+          <AssociationSet Name="FK__Part__EquipmentI__3B75D760" Association="UltralReportsModel.FK__Part__EquipmentI__3B75D760">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Part" EntitySet="Part" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -328,6 +366,7 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MonitorType" Relationship="UltralReportsModel.FK__Equipment__Monit__32E0915F" FromRole="Equipment" ToRole="MonitorType" />
+          <NavigationProperty Name="Part" Relationship="UltralReportsModel.FK__Part__EquipmentI__3B75D760" FromRole="Equipment" ToRole="Part" />
         </EntityType>
         <EntityType Name="MonitorType">
           <Key>
@@ -350,6 +389,35 @@
           </ReferentialConstraint>
         </Association>
         <EnumType Name="MachineSetType" a:ExternalTypeName="Common.Types.MachineSetType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="EquipmentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DataKey" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="L1" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="L2" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="L3" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="H1" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="H2" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="H3" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Equipment" Relationship="UltralReportsModel.FK__Part__EquipmentI__3B75D760" FromRole="Part" ToRole="Equipment" />
+        </EntityType>
+        <Association Name="FK__Part__EquipmentI__3B75D760">
+          <End Type="UltralReportsModel.Equipment" Role="Equipment" Multiplicity="1" />
+          <End Type="UltralReportsModel.Part" Role="Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -451,6 +519,23 @@
             <EntityTypeMapping TypeName="UltralReportsModel.MonitorType">
               <MappingFragment StoreEntitySet="MonitorType">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Part">
+            <EntityTypeMapping TypeName="UltralReportsModel.Part">
+              <MappingFragment StoreEntitySet="Part">
+                <ScalarProperty Name="H3" ColumnName="H3" />
+                <ScalarProperty Name="H2" ColumnName="H2" />
+                <ScalarProperty Name="H1" ColumnName="H1" />
+                <ScalarProperty Name="L3" ColumnName="L3" />
+                <ScalarProperty Name="L2" ColumnName="L2" />
+                <ScalarProperty Name="L1" ColumnName="L1" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="DataKey" ColumnName="DataKey" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

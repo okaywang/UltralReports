@@ -177,7 +177,7 @@
     <Compile Include="Models\Common\PagedModel.cs" />
     <Compile Include="Models\Common\ResultModel.cs" />
     <Compile Include="Models\Common\ValueTextModel.cs" />
-    <Compile Include="Models\Equipment\SmsGroupModel.cs" />
+    <Compile Include="Models\Equipment\EquipmentModel.cs" />
     <Compile Include="Models\Sms\SmsRecipientModel.cs" />
     <Compile Include="Models\Sms\SmsGroupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -453,6 +453,8 @@
     <Content Include="Views\Duty\Index.cshtml" />
     <Content Include="Views\Equipment\MonitorTypeIndex.cshtml" />
     <Content Include="Views\Equipment\Index.cshtml" />
+    <Content Include="Views\Equipment\PartIndex.cshtml" />
+    <Content Include="Views\Equipment\_PartModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

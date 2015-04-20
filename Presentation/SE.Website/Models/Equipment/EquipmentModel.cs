@@ -168,4 +168,171 @@ namespace Website.Models
         }
     }
     #endregion
+
+    #region Part
+    public class PartListPageModel : ListPageModal
+    {
+        public string AddItemUrl { get; set; }
+    }
+
+    [RequestUrl("/Equipment/PartAdd")]
+    public class PartAddModel
+    {
+        [Required]
+        [DisplayName("机组")]
+        [ControlType(typeof(NativeSelect))]
+        [EnumControlSource(typeof(MachineSetType))]
+        public MachineSetType MachineSet { get; set; }
+
+        [Required]
+        [DisplayName("设备")]
+        [ControlType(typeof(NativeSelect))]
+        public int EquipmentId { get; set; }
+
+        [Required]
+        [DisplayName("名称")]
+        public string Name { get; set; }
+
+        [Required]
+        [DisplayName("测点名称")]
+        public string DataKey { get; set; }
+
+        [Required]
+        [DisplayName("单位")]
+        public string Unit { get; set; }
+
+        [Required]
+        [DisplayName("低1")]
+        public decimal L1 { get; set; }
+
+        [Required]
+        [DisplayName("低2")]
+        public decimal L2 { get; set; }
+
+        [Required]
+        [DisplayName("低3")]
+        public decimal L3 { get; set; }
+
+        [Required]
+        [DisplayName("高1")]
+        public decimal H1 { get; set; }
+
+        [Required]
+        [DisplayName("高2")]
+        public decimal H2 { get; set; }
+
+        [Required]
+        [DisplayName("高3")]
+        public decimal H3 { get; set; }
+    }
+
+    [RequestUrl("/Equipment/PartUpdate")]
+    public class PartUpdateModel
+    {
+        [ControlType(typeof(NativeInputHidden))]
+        public int Id { get; set; }
+
+        [Required]
+        [DisplayName("机组")]
+        [ControlType(typeof(NativeSelect))]
+        [EnumControlSource(typeof(MachineSetType))]
+        public MachineSetType MachineSet { get; set; }
+
+        [Required]
+        [DisplayName("设备")]
+        [ControlType(typeof(NativeSelect))]
+        public int EquipmentId { get; set; }
+
+        [Required]
+        [DisplayName("名称")]
+        public string Name { get; set; }
+
+        [Required]
+        [DisplayName("测点名称")]
+        public string DataKey { get; set; }
+
+        [Required]
+        [DisplayName("单位")]
+        public string Unit { get; set; }
+
+        [Required]
+        [DisplayName("低1")]
+        public decimal L1 { get; set; }
+
+        [Required]
+        [DisplayName("低2")]
+        public decimal L2 { get; set; }
+
+        [Required]
+        [DisplayName("低3")]
+        public decimal L3 { get; set; }
+
+        [Required]
+        [DisplayName("高1")]
+        public decimal H1 { get; set; }
+
+        [Required]
+        [DisplayName("高2")]
+        public decimal H2 { get; set; }
+
+        [Required]
+        [DisplayName("高3")]
+        public decimal H3 { get; set; }
+    }
+
+    public class PartListItemModel : IListItemModel
+    {
+        [DisplayName("Id")]
+        public int Id { get; set; }
+
+        [DisplayName("名称")]
+        public string Name { get; set; }
+
+        [DisplayName("设备")]
+        public int EquipmentId { get; set; }
+
+        [DisplayName("测点名称")]
+        public string DataKey { get; set; }
+
+        [DisplayName("单位")]
+        public string Unit { get; set; }
+
+        [DisplayName("低1")]
+        public decimal L1 { get; set; }
+
+        [DisplayName("低2")]
+        public decimal L2 { get; set; }
+
+        [DisplayName("低3")]
+        public decimal L3 { get; set; }
+
+        [DisplayName("高1")]
+        public decimal H1 { get; set; }
+
+        [DisplayName("高2")]
+        public decimal H2 { get; set; }
+
+        [DisplayName("高3")]
+        public decimal H3 { get; set; }
+
+        [DisplayName("操作")]
+        [JsonIgnore]
+        public IListItemCommand[] Commands
+        {
+            get
+            {
+                return new IListItemCommand[]
+                { 
+                    new ListItemCommand("update", "编辑", "/Equipment/PartUpdate"), 
+                    new ListItemCommand("remove","删除","/Equipment/PartRemove") 
+                };
+            }
+        }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+    }
+    #endregion
 }

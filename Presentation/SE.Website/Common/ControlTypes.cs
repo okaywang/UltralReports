@@ -57,12 +57,12 @@ namespace Website.Common
 
     public class NativeSelect : ControlBase
     {
-        private string _name; 
+        private string _name;
         private NameValuePair[] _pairs;
         public NativeSelect(string name)
-            : this(name, true) { }
-        public NativeSelect(string name, bool enabled)
-            : this(name, enabled, false, new NameValuePair[0]) { }
+            : this(name, true, false) { }
+        public NativeSelect(string name, bool enabled, bool required)
+            : this(name, enabled, required, new NameValuePair[0]) { }
         public NativeSelect(string name, bool enabled, bool required, NameValuePair[] pairs)
         {
             _name = name;
@@ -98,7 +98,7 @@ namespace Website.Common
 
     public class NativeInputText : ControlBase
     {
-        private string _name; 
+        private string _name;
 
         public NativeInputText(string name) : this(name, true) { }
         public NativeInputText(string name, bool enabled) : this(name, true, false) { }
@@ -130,7 +130,7 @@ namespace Website.Common
 
     public class NativeInputHidden : ControlBase
     {
-        private string _name; 
+        private string _name;
         public NativeInputHidden(string name) : this(name, true, false) { }
         public NativeInputHidden(string name, bool enabled, bool required)
         {
