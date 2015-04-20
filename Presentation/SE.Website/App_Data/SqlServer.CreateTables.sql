@@ -79,7 +79,7 @@
 	(
 		Id int IDENTITY(1,1) primary key,
 		MachineSet int not null check(MachineSet in (1,2)),
-		MonitorTypeId int references MonitorType,
+		MonitorTypeId int not null references MonitorType,
 		Name nvarchar(50) not null,
 		[Description] nvarchar(200)
 	)

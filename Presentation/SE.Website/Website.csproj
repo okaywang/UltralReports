@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DutyController.cs" />
+    <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Authentication\FormAuthenticationService.cs">
@@ -176,6 +177,7 @@
     <Compile Include="Models\Common\PagedModel.cs" />
     <Compile Include="Models\Common\ResultModel.cs" />
     <Compile Include="Models\Common\ValueTextModel.cs" />
+    <Compile Include="Models\Equipment\SmsGroupModel.cs" />
     <Compile Include="Models\Sms\SmsRecipientModel.cs" />
     <Compile Include="Models\Sms\SmsGroupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -449,6 +451,7 @@
     <Content Include="Views\Sms\GroupIndex.cshtml" />
     <Content Include="Views\Sms\RecipientIndex.cshtml" />
     <Content Include="Views\Duty\Index.cshtml" />
+    <Content Include="Views\Equipment\MonitorTypeIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

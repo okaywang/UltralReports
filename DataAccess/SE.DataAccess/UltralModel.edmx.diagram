@@ -15,6 +15,9 @@
         <AssociationConnector Association="UltralReportsModel.FK__AccountAu__Accou__0F975522" ManuallyRouted="false" />
         <AssociationConnector Association="UltralReportsModel.FK__AccountAu__Autho__108B795B" ManuallyRouted="false" />
         <AssociationConnector Association="UltralReportsModel.SmsGroupRecipient" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="UltralReportsModel.Equipment" Width="1.5" PointX="3.8365415203555218" PointY="0.0066797286303153861" />
+        <EntityTypeShape EntityType="UltralReportsModel.MonitorType" Width="1.5" PointX="0.19068244667289891" PointY="23.96388601882564" />
+        <AssociationConnector Association="UltralReportsModel.FK__Equipment__Monit__32E0915F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

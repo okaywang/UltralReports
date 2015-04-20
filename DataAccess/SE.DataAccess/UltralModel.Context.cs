@@ -32,5 +32,7 @@ namespace DataAccess
         public DbSet<LogOperation> LogOperations { get; set; }
         public DbSet<SmsGroup> SmsGroups { get; set; }
         public DbSet<SmsRecipient> SmsRecipients { get; set; }
+        public DbSet<Equipment> Equipment { get; set; }
+        public DbSet<MonitorType> MonitorType { get; set; }
     }
 }

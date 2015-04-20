@@ -4,13 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UltralReportsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UltralReportsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="UltralReportsModelStoreContainer">
           <EntitySet Name="Account" EntityType="UltralReportsModel.Store.Account" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="AccountAuthority" EntityType="UltralReportsModel.Store.AccountAuthority" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Authority" EntityType="UltralReportsModel.Store.Authority" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Equipment" EntityType="UltralReportsModel.Store.Equipment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LogException" EntityType="UltralReportsModel.Store.LogException" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LogOperation" EntityType="UltralReportsModel.Store.LogOperation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MonitorType" EntityType="UltralReportsModel.Store.MonitorType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SmsGroup" EntityType="UltralReportsModel.Store.SmsGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SmsGroupRecipient" EntityType="UltralReportsModel.Store.SmsGroupRecipient" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SmsRecipient" EntityType="UltralReportsModel.Store.SmsRecipient" store:Type="Tables" Schema="dbo" />
@@ -21,6 +23,10 @@
           <AssociationSet Name="FK__AccountAu__Autho__108B795B" Association="UltralReportsModel.Store.FK__AccountAu__Autho__108B795B">
             <End Role="Authority" EntitySet="Authority" />
             <End Role="AccountAuthority" EntitySet="AccountAuthority" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Monit__32E0915F" Association="UltralReportsModel.Store.FK__Equipment__Monit__32E0915F">
+            <End Role="MonitorType" EntitySet="MonitorType" />
+            <End Role="Equipment" EntitySet="Equipment" />
           </AssociationSet>
           <AssociationSet Name="FK__SmsGroupR__Group__286302EC" Association="UltralReportsModel.Store.FK__SmsGroupR__Group__286302EC">
             <End Role="SmsGroup" EntitySet="SmsGroup" />
@@ -60,6 +66,16 @@
           <Property Name="AuthorityType" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
         </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MachineSet" Type="int" Nullable="false" />
+          <Property Name="MonitorTypeId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="LogException">
           <Key>
             <PropertyRef Name="Id" />
@@ -80,6 +96,13 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="20" />
           <Property Name="Message" Type="nvarchar" MaxLength="200" />
           <Property Name="FADateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MonitorType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="SmsGroup">
           <Key>
@@ -128,6 +151,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Equipment__Monit__32E0915F">
+          <End Role="MonitorType" Type="UltralReportsModel.Store.MonitorType" Multiplicity="1" />
+          <End Role="Equipment" Type="UltralReportsModel.Store.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonitorType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="MonitorTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__SmsGroupR__Group__286302EC">
           <End Role="SmsGroup" Type="UltralReportsModel.Store.SmsGroup" Multiplicity="1" />
           <End Role="SmsGroupRecipient" Type="UltralReportsModel.Store.SmsGroupRecipient" Multiplicity="*" />
@@ -152,8 +187,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UltralReportsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -176,6 +210,12 @@
           <AssociationSet Name="SmsGroupRecipient" Association="UltralReportsModel.SmsGroupRecipient">
             <End Role="SmsGroup" EntitySet="SmsGroups" />
             <End Role="SmsRecipient" EntitySet="SmsRecipients" />
+          </AssociationSet>
+          <EntitySet Name="Equipment" EntityType="UltralReportsModel.Equipment" />
+          <EntitySet Name="MonitorType" EntityType="UltralReportsModel.MonitorType" />
+          <AssociationSet Name="FK__Equipment__Monit__32E0915F" Association="UltralReportsModel.FK__Equipment__Monit__32E0915F">
+            <End Role="MonitorType" EntitySet="MonitorType" />
+            <End Role="Equipment" EntitySet="Equipment" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -278,6 +318,38 @@
           <End Role="SmsGroup" Type="UltralReportsModel.SmsGroup" Multiplicity="*" />
           <End Role="SmsRecipient" Type="UltralReportsModel.SmsRecipient" Multiplicity="*" />
         </Association>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="UltralReportsModel.MachineSetType" Name="MachineSet" Nullable="false" />
+          <Property Type="Int32" Name="MonitorTypeId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MonitorType" Relationship="UltralReportsModel.FK__Equipment__Monit__32E0915F" FromRole="Equipment" ToRole="MonitorType" />
+        </EntityType>
+        <EntityType Name="MonitorType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipment" Relationship="UltralReportsModel.FK__Equipment__Monit__32E0915F" FromRole="MonitorType" ToRole="Equipment" />
+        </EntityType>
+        <Association Name="FK__Equipment__Monit__32E0915F">
+          <End Type="UltralReportsModel.MonitorType" Role="MonitorType" Multiplicity="1" />
+          <End Type="UltralReportsModel.Equipment" Role="Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonitorType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="MonitorTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="MachineSetType" a:ExternalTypeName="Common.Types.MachineSetType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -364,6 +436,25 @@
               <ScalarProperty Name="Id" ColumnName="RecipientId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="UltralReportsModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MonitorTypeId" ColumnName="MonitorTypeId" />
+                <ScalarProperty Name="MachineSet" ColumnName="MachineSet" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonitorType">
+            <EntityTypeMapping TypeName="UltralReportsModel.MonitorType">
+              <MappingFragment StoreEntitySet="MonitorType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

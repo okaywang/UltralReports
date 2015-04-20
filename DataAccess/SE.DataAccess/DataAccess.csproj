@@ -59,11 +59,17 @@
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EfRepository.cs" />
+    <Compile Include="Equipment.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IRepository.cs" />
     <Compile Include="LogException.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LogOperation.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorType.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

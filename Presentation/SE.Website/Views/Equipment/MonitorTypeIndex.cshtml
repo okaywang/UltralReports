@@ -1,0 +1,61 @@
+﻿@model MonitorTypeListPageModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>List</h2>
+
+<div class="search-action" style="margin-top: 30px;">
+    <button class="btn btn-default" command-name="add" command-url="@Model.AddItemUrl">新增</button>
+</div>
+
+<div class="search-result table-responsive" style="margin-top: 10px;">
+</div>
+
+<div class="module-add">
+    @Html.Partial("_Modal", new ModalModel<MonitorTypeAddModel> { Title = "新增监控类别" })
+</div>
+
+<div class="module-update">
+    @Html.Partial("_Modal", new ModalModel<MonitorTypeUpdateModel> { Title = "编辑监控类别" })
+</div>
+
+@section scripts{
+    <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
+    <script>
+        var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+            url: '@Model.RequestListUrl',
+            modules: {
+                add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-add .modal") })),
+                update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-update .modal") }))
+            },
+            rowCommands: {
+                update: function (model) {
+                    viewInstance.modules.update.dialog.show();
+                    viewInstance.modules.update.bindModel(model);
+                },
+                remove: function (model) {
+                    var container = $(this).closest(".table");
+                    se.helper.ajax.request({
+                        confirmMessage: "您确定删除 " + model.Name + " 吗？",
+                        container: container,
+                        url: "/Equipment/MonitorTypeDelete",
+                        model: { Id: model.Id },
+                        onSuccess: function () {
+                            viewInstance.refresh();
+                        }
+                    });
+                }
+            },
+            viewCommands: {
+                add: function () {
+                    viewInstance.modules.add.dialog.show();
+                    viewInstance.modules.add.bindModel({});
+                }
+            }
+        }));
+        viewInstance.init();
+        viewInstance.modules.add.on("saved", function () { viewInstance.refresh(); });
+        viewInstance.modules.update.on("saved", function () { viewInstance.refresh(); });
+    </script>
+}
