@@ -29,7 +29,7 @@
                 add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({
                     container: $(".module-add .modal"),
                     initializer: function () {
-                        var dom = $("[name=EquipmentId]");
+                        var dom = $("[name=EquipmentId]", this.dialog.container);
                         dom.attr("data-value-field", "Value");
                         dom.attr("data-text-field", "Name");
                         dom.attr("data-bind", dom.attr("data-bind") + ",source:Equipments");
@@ -37,20 +37,49 @@
                     viewModelSetter: function (vm) {
                         vm.bind("change", function (item) {
                             if (item.field == "MachineSet") {
-                                $.getJSON("/Equipment/Get", { MachineSet: vm.MachineSet }, function (data) {
-                                    vm.set("Equipments", data);
-                                });
-
+                                if (vm.MachineSet) {
+                                    $.getJSON("/Equipment/Get", { MachineSet: vm.MachineSet }, function (data) {
+                                        vm.set("Equipments", data);
+                                    });
+                                }
+                                else {
+                                    vm.set("Equipments", []);
+                                }
                             }
                         });
                     }
                 })),
-                update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-update .modal") }))
+                update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({
+                    container: $(".module-update .modal"),
+                    initializer: function () {
+                        var dom = $("[name=EquipmentId]", this.dialog.container);
+                        dom.attr("data-value-field", "Value");
+                        dom.attr("data-text-field", "Name");
+                        dom.attr("data-bind", dom.attr("data-bind") + ",source:Equipments");
+                    },
+                    viewModelSetter: function (vm) {
+                        vm.bind("change", function (item) {
+                            if (item.field == "MachineSet") {
+                                if (vm.MachineSet) {
+                                    $.getJSON("/Equipment/Get", { MachineSet: vm.MachineSet }, function (data) {
+                                        vm.set("Equipments", data);
+                                    });
+                                }
+                                else {
+                                    vm.set("Equipments", []);
+                                }
+                            }
+                        });
+                    }
+                }))
             },
             rowCommands: {
                 update: function (model) {
-                    viewInstance.modules.update.dialog.show();
-                    viewInstance.modules.update.bindModel(model);
+                    $.getJSON("/Equipment/Get", { MachineSet: model.MachineSet }, function (data) {
+                        model.Equipments = data;
+                        viewInstance.modules.update.dialog.show();
+                        viewInstance.modules.update.bindModel(model);
+                    });
                 },
                 remove: function (model) {
                     var container = $(this).closest(".table");

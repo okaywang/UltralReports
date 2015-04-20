@@ -288,7 +288,11 @@ namespace Website.Models
         [DisplayName("名称")]
         public string Name { get; set; }
 
+        public MachineSetType MachineSet { get; set; }
+
         [DisplayName("设备")]
+        public string EquipmentName { get; set; }
+
         public int EquipmentId { get; set; }
 
         [DisplayName("测点名称")]

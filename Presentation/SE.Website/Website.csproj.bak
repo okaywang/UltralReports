@@ -15,7 +15,7 @@
     <AssemblyName>Website</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>true</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -154,7 +154,6 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DutyController.cs" />
-    <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Authentication\FormAuthenticationService.cs">
@@ -177,7 +176,6 @@
     <Compile Include="Models\Common\PagedModel.cs" />
     <Compile Include="Models\Common\ResultModel.cs" />
     <Compile Include="Models\Common\ValueTextModel.cs" />
-    <Compile Include="Models\Equipment\EquipmentModel.cs" />
     <Compile Include="Models\Sms\SmsRecipientModel.cs" />
     <Compile Include="Models\Sms\SmsGroupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,9 +186,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
-    <Content Include="App_Data\SqlServer.CreateTables.sql">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="App_Data\SqlServer.CreateTables.sql" />
     <Content Include="Config\Authorities.sql.sql">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -453,10 +449,6 @@
     <Content Include="Views\Sms\GroupIndex.cshtml" />
     <Content Include="Views\Sms\RecipientIndex.cshtml" />
     <Content Include="Views\Duty\Index.cshtml" />
-    <Content Include="Views\Equipment\MonitorTypeIndex.cshtml" />
-    <Content Include="Views\Equipment\Index.cshtml" />
-    <Content Include="Views\Equipment\PartIndex.cshtml" />
-    <Content Include="Views\Equipment\_PartModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />
@@ -509,8 +501,8 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
-          <AutoAssignPort>False</AutoAssignPort>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2391</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2392/</IISUrl>

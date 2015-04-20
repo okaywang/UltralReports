@@ -52,8 +52,12 @@ namespace Website.Controllers
 
         public JsonResult Get(MachineSetType machineSet)
         {
-            var entities = _bllEquipment.Where(i => i.MachineSet == machineSet).ToList();
-            var pairs = Mapper.Map<List<Equipment>, NameValuePair[]>(entities);
+            var pairs = new NameValuePair[0];
+            if (Enum.IsDefined(typeof(MachineSetType), machineSet))
+            {
+                var entities = _bllEquipment.Where(i => i.MachineSet == machineSet).ToList();
+                pairs = Mapper.Map<List<Equipment>, NameValuePair[]>(entities);
+            }
             return Json(pairs, JsonRequestBehavior.AllowGet);
         }
 
