@@ -9,6 +9,15 @@ using Website.Models;
 
 namespace Website.Controllers
 {
+    public class CommaSeparatedModelBinder : DefaultModelBinder
+    {
+        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            var val = bindingContext.ValueProvider.GetValue("val");
+            return val.AttemptedValue.Split(',').Select(i => int.Parse(i)).ToArray();
+        }
+    }
+
     public class SmsController : Controller
     {
         private SmsBussinessLogic _bllSms;
@@ -24,6 +33,12 @@ namespace Website.Controllers
         {
             _bllSms = bllSms;
         }
+
+        public string Test([ModelBinder(typeof(CommaSeparatedModelBinder))]int[] ids)
+        {
+            return string.Join("___", ids);
+        }
+
 
         public ActionResult Index()
         {

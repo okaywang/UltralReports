@@ -69,3 +69,23 @@
 		Constraint PK_GroupId_RecipientId primary key(GroupId,RecipientId)
 	)
 
+	create table MonitorType
+	(
+		Id int IDENTITY(1,1) primary key,
+		Name nvarchar(50) not null
+	)
+
+	create table Equipment
+	(
+		Id int IDENTITY(1,1) primary key,
+		MachineSet int not null check(MachineSet in (1,2)),
+		MonitorTypeId int references MonitorType,
+		Name nvarchar(50) not null,
+		[Description] nvarchar(200)
+	)
+
+	insert into MonitorType (Name) values ('ÎÂ¶È')
+	insert into MonitorType (Name) values ('×ªËÙ')
+
+
+
