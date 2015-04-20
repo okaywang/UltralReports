@@ -32,16 +32,19 @@ namespace Website.Models
     [RequestUrl("/Equipment/Add")]
     public class EquipmentAddModel
     {
+        [Required]
         [DisplayName("机组")]
         [ControlType(typeof(NativeSelect))]
         [EnumControlSource(typeof(MachineSetType))]
         public MachineSetType MachineSet { get; set; }
 
+        [Required]
         [DisplayName("监控类型")]
         [ControlType(typeof(NativeSelect))]
         [MonitorTypeControlSourceAttribute]
         public int MonitorTypeId { get; set; }
 
+        [Required]
         [DisplayName("名称")]
         public string Name { get; set; }
 

@@ -41,6 +41,7 @@ namespace Website.Common
     {
         bool IsVisible { get; }
         bool IsEnabled { get; }
+        bool IsRequired { get; }
         string Name { get; }
         string Render();
     }
@@ -48,25 +49,26 @@ namespace Website.Common
     public abstract class ControlBase : IControl
     {
         public virtual bool IsVisible { get { return true; } }
-        public virtual bool IsEnabled { get { return true; } }
+        public virtual bool IsEnabled { get; protected set; }
+        public virtual bool IsRequired { get; protected set; }
         public abstract string Name { get; }
         public abstract string Render();
     }
 
     public class NativeSelect : ControlBase
     {
-        private string _name;
-        private bool _enabled;
+        private string _name; 
         private NameValuePair[] _pairs;
         public NativeSelect(string name)
             : this(name, true) { }
         public NativeSelect(string name, bool enabled)
-            : this(name, enabled, new NameValuePair[0]) { }
-        public NativeSelect(string name, bool enabled, NameValuePair[] pairs)
+            : this(name, enabled, false, new NameValuePair[0]) { }
+        public NativeSelect(string name, bool enabled, bool required, NameValuePair[] pairs)
         {
             _name = name;
             _pairs = pairs;
-            _enabled = enabled;
+            IsEnabled = enabled;
+            IsRequired = required;
         }
         public override string Name { get { return _name; } }
 
@@ -74,7 +76,7 @@ namespace Website.Common
         {
             var sb = new StringBuilder();
             sb.AppendFormat("<select class='form-control' name='{0}' data-bind='value:{0}'", Name);
-            if (!_enabled)
+            if (!IsEnabled)
             {
                 sb.Append(" disabled");
             }
@@ -86,7 +88,7 @@ namespace Website.Common
             }
             sb.Append("</select>");
 
-            if (!_enabled)
+            if (!IsEnabled)
             {
                 sb.AppendFormat("<input type='hidden' name='{0}'>", Name);
             }
@@ -96,26 +98,29 @@ namespace Website.Common
 
     public class NativeInputText : ControlBase
     {
-        private string _name;
-        private bool _enabled;
+        private string _name; 
+
         public NativeInputText(string name) : this(name, true) { }
-        public NativeInputText(string name, bool enabled)
+        public NativeInputText(string name, bool enabled) : this(name, true, false) { }
+        public NativeInputText(string name, bool enabled, bool required)
         {
             _name = name;
-            _enabled = enabled;
+            IsEnabled = enabled;
+            IsRequired = required;
         }
+
         public override string Name { get { return _name; } }
 
         public override string Render()
         {
             var sb = new StringBuilder();
             sb.AppendFormat("<input class='form-control' type='text' name='{0}' data-bind='value:{0}' ", Name);
-            if (!_enabled)
+            if (!IsEnabled)
             {
                 sb.Append(" disabled");
             }
             sb.Append(">");
-            if (!_enabled)
+            if (!IsEnabled)
             {
                 sb.AppendFormat("<input type='hidden' name='{0}'>", Name);
             }
@@ -125,13 +130,13 @@ namespace Website.Common
 
     public class NativeInputHidden : ControlBase
     {
-        private string _name;
-        private bool _enabled;
-        public NativeInputHidden(string name) : this(name, true) { }
-        public NativeInputHidden(string name, bool enabled)
+        private string _name; 
+        public NativeInputHidden(string name) : this(name, true, false) { }
+        public NativeInputHidden(string name, bool enabled, bool required)
         {
             _name = name;
-            _enabled = enabled;
+            IsEnabled = enabled;
+            IsRequired = required;
         }
         public override string Name { get { return _name; } }
 
@@ -295,9 +300,10 @@ namespace Website.Common
         public static IControl GetControl(this PropertyInfo prop)
         {
             var attr = prop.GetCustomAttribute<ControlTypeAttribute>();
+            var isRequired = prop.GetCustomAttribute<System.ComponentModel.DataAnnotations.RequiredAttribute>() != null;
             if (attr == null)
             {
-                return new NativeInputText(prop.Name, true);
+                return new NativeInputText(prop.Name, true, isRequired);
             }
             if (attr.ControlType == typeof(NativeSelect))
             {
@@ -305,10 +311,10 @@ namespace Website.Common
                 if (source != null)
                 {
                     var pairs = source.GetSource();
-                    return Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled, pairs) as IControl;
+                    return Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled, isRequired, pairs) as IControl;
                 }
             }
-            return Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled) as IControl;
+            return Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled, isRequired) as IControl;
         }
 
         public static string GetFormatedString(this PropertyInfo item, object obj)
