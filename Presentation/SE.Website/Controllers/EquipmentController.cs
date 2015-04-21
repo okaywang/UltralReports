@@ -160,7 +160,16 @@ namespace Website.Controllers
         public JsonResult PartUpdate(PartUpdateModel model)
         {
             var entity = _bllEquipment.PartGet(model.Id);
+            entity.EquipmentId = model.EquipmentId;
             entity.Name = model.Name;
+            entity.Unit = model.Unit;
+            entity.L1 = model.L1;
+            entity.L2 = model.L2;
+            entity.L3 = model.L3;
+            entity.H1 = model.H1;
+            entity.H2 = model.H2;
+            entity.H3 = model.H3;
+
             _bllEquipment.PartUpdate(entity);
             return Json(new ResultModel(true));
         }

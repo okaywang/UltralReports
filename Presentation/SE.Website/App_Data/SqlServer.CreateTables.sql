@@ -99,7 +99,7 @@ H2 decimal(10,2) not null,
 H3 decimal(10,2) not null
 )
 
-create table ad
+create table UltraRecord
 (
 Id int IDENTITY(1,1) primary key,
 PartId int not null references Part,
