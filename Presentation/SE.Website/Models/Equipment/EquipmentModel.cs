@@ -179,18 +179,18 @@ namespace Website.Models
     public class PartAddModel
     {
         [Required]
-        [DisplayName("机组")]
+        [DisplayName("机组号")]
         [ControlType(typeof(NativeSelect))]
         [EnumControlSource(typeof(MachineSetType))]
         public MachineSetType MachineSet { get; set; }
 
         [Required]
-        [DisplayName("设备")]
+        [DisplayName("设备名称")]
         [ControlType(typeof(NativeSelect))]
         public int EquipmentId { get; set; }
 
         [Required]
-        [DisplayName("名称")]
+        [DisplayName("部件名称")]
         public string Name { get; set; }
 
         [Required]
@@ -202,28 +202,28 @@ namespace Website.Models
         public string Unit { get; set; }
 
         [Required]
-        [DisplayName("低1")]
-        public decimal L1 { get; set; }
+        [DisplayName("高3限")]
+        public decimal H3 { get; set; }
 
         [Required]
-        [DisplayName("低2")]
-        public decimal L2 { get; set; }
-
-        [Required]
-        [DisplayName("低3")]
-        public decimal L3 { get; set; }
-
-        [Required]
-        [DisplayName("高1")]
-        public decimal H1 { get; set; }
-
-        [Required]
-        [DisplayName("高2")]
+        [DisplayName("高2限")]
         public decimal H2 { get; set; }
 
         [Required]
-        [DisplayName("高3")]
-        public decimal H3 { get; set; }
+        [DisplayName("高1限")]
+        public decimal H1 { get; set; }
+
+        [Required]
+        [DisplayName("低1限")]
+        public decimal L1 { get; set; }
+
+        [Required]
+        [DisplayName("低2限")]
+        public decimal L2 { get; set; }
+
+        [Required]
+        [DisplayName("低3限")]
+        public decimal L3 { get; set; }
     }
 
     [RequestUrl("/Equipment/PartUpdate")]
@@ -233,18 +233,18 @@ namespace Website.Models
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("机组")]
+        [DisplayName("机组号")]
         [ControlType(typeof(NativeSelect))]
         [EnumControlSource(typeof(MachineSetType))]
         public MachineSetType MachineSet { get; set; }
 
         [Required]
-        [DisplayName("设备")]
+        [DisplayName("设备名称")]
         [ControlType(typeof(NativeSelect))]
         public int EquipmentId { get; set; }
 
         [Required]
-        [DisplayName("名称")]
+        [DisplayName("部件名称")]
         public string Name { get; set; }
 
         [Required]
@@ -256,28 +256,28 @@ namespace Website.Models
         public string Unit { get; set; }
 
         [Required]
-        [DisplayName("低1")]
-        public decimal L1 { get; set; }
+        [DisplayName("高3限")]
+        public decimal H3 { get; set; }
 
         [Required]
-        [DisplayName("低2")]
-        public decimal L2 { get; set; }
-
-        [Required]
-        [DisplayName("低3")]
-        public decimal L3 { get; set; }
-
-        [Required]
-        [DisplayName("高1")]
-        public decimal H1 { get; set; }
-
-        [Required]
-        [DisplayName("高2")]
+        [DisplayName("高2限")]
         public decimal H2 { get; set; }
 
         [Required]
-        [DisplayName("高3")]
-        public decimal H3 { get; set; }
+        [DisplayName("高1限")]
+        public decimal H1 { get; set; }
+
+        [Required]
+        [DisplayName("低1限")]
+        public decimal L1 { get; set; }
+
+        [Required]
+        [DisplayName("低2限")]
+        public decimal L2 { get; set; }
+
+        [Required]
+        [DisplayName("低3限")]
+        public decimal L3 { get; set; }
     }
 
     public class PartListItemModel : IListItemModel
@@ -285,13 +285,14 @@ namespace Website.Models
         [DisplayName("Id")]
         public int Id { get; set; }
 
-        [DisplayName("名称")]
-        public string Name { get; set; }
-
+        [DisplayName("机组号")]
         public MachineSetType MachineSet { get; set; }
 
-        [DisplayName("设备")]
+        [DisplayName("设备名称")]
         public string EquipmentName { get; set; }
+
+        [DisplayName("部件名称")]
+        public string Name { get; set; }
 
         public int EquipmentId { get; set; }
 
@@ -301,6 +302,15 @@ namespace Website.Models
         [DisplayName("单位")]
         public string Unit { get; set; }
 
+        [DisplayName("高3")]
+        public decimal H3 { get; set; }
+
+        [DisplayName("高2")]
+        public decimal H2 { get; set; }
+
+        [DisplayName("高1")]
+        public decimal H1 { get; set; }
+
         [DisplayName("低1")]
         public decimal L1 { get; set; }
 
@@ -309,15 +319,6 @@ namespace Website.Models
 
         [DisplayName("低3")]
         public decimal L3 { get; set; }
-
-        [DisplayName("高1")]
-        public decimal H1 { get; set; }
-
-        [DisplayName("高2")]
-        public decimal H2 { get; set; }
-
-        [DisplayName("高3")]
-        public decimal H3 { get; set; }
 
         [DisplayName("操作")]
         [JsonIgnore]

@@ -15,26 +15,17 @@ namespace Website.Controllers
     public class EquipmentController : Controller
     {
         private EquipmentBussinessLogic _bllEquipment;
-        //private PersonBussinessLogic _personBll;
-        //public AccountController(ShopBussinessLogic shopBll, AccountBussinessLogic accountBll, PersonBussinessLogic personBll)
-        //{
-        //    _shopBll = shopBll;
-        //    _accountBll = accountBll;
-        //    _personBll = personBll;
-        //}
 
         public EquipmentController(EquipmentBussinessLogic bllEquipment)
         {
             _bllEquipment = bllEquipment;
         }
-        //
-        // GET: /Equipment/
 
         #region Equipment
         public ActionResult Index()
         {
             var model = new EquipmentListPageModel();
-            model.Title = "设备列表";
+            model.Title = "设备管理";
             model.RequestListUrl = "/Equipment/List";
             model.AddItemUrl = "/Equipment/Add";
             return View(model);
@@ -91,7 +82,7 @@ namespace Website.Controllers
         public ActionResult MonitorTypeIndex()
         {
             var model = new MonitorTypeListPageModel();
-            model.Title = "监控类型列表";
+            model.Title = "监控类型管理";
             model.RequestListUrl = "/Equipment/MonitorTypeList";
             model.AddItemUrl = "/Equipment/MonitorTypeAdd";
             return View(model);
@@ -134,7 +125,7 @@ namespace Website.Controllers
         public ActionResult PartIndex()
         {
             var model = new PartListPageModel();
-            model.Title = "监控类型列表";
+            model.Title = "监控类型管理";
             model.RequestListUrl = "/Equipment/PartList";
             model.AddItemUrl = "/Equipment/PartAdd";
             return View(model);
@@ -160,7 +151,16 @@ namespace Website.Controllers
         public JsonResult PartUpdate(PartUpdateModel model)
         {
             var entity = _bllEquipment.PartGet(model.Id);
+            entity.EquipmentId = model.EquipmentId;
             entity.Name = model.Name;
+            entity.Unit = model.Unit;
+            entity.L1 = model.L1;
+            entity.L2 = model.L2;
+            entity.L3 = model.L3;
+            entity.H1 = model.H1;
+            entity.H2 = model.H2;
+            entity.H3 = model.H3;
+
             _bllEquipment.PartUpdate(entity);
             return Json(new ResultModel(true));
         }

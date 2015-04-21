@@ -99,12 +99,26 @@ H2 decimal(10,2) not null,
 H3 decimal(10,2) not null
 )
 
-create table ad
+create table UltraRecord
 (
 Id int IDENTITY(1,1) primary key,
 PartId int not null references Part,
 BeginTime datetime not null,
 EndTime datetime not null,
+Duty int not null,
+UltraType varchar(2) not null check(UltraType in('L1','L2','L3','H1','H2','H3')),
+MinValue decimal(10,2) not null,
+MaxValue decimal(10,2) not null,
+AvgValue decimal(10,2) not null
+)
+
+create table UltraRecord
+(
+Id int IDENTITY(1,1) primary key,
+PartId int not null references Part,
+StartTime datetime not null,
+EndTime datetime,
+Flag bit,
 Duty int not null,
 UltraType varchar(2) not null check(UltraType in('L1','L2','L3','H1','H2','H3')),
 MinValue decimal(10,2) not null,

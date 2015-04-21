@@ -9,10 +9,10 @@ namespace Common.Types
 {
     public enum MachineSetType
     {
-        [DisplayText("机组1")]
+        [DisplayText("1号机组")]
         MachineSet1 = 1,
 
-        [DisplayText("机组2")]
-        MachineSe2 = 2
+        [DisplayText("2号机组")]
+        MachineSet2 = 2
     }
 }

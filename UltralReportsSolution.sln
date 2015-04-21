@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Types", "Common\SE.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Helpers", "Common\SE.Common.Helpers\Common.Helpers.csproj", "{E4B10EAC-B2FB-4492-9105-E7615D50A6B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplicationUltraTest", "Presentation\ConsoleApplicationUltraTest\ConsoleApplicationUltraTest.csproj", "{FFE31D1D-D61C-4952-ACA9-A4B7CA4682CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,12 +73,17 @@ Global
 		{E4B10EAC-B2FB-4492-9105-E7615D50A6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4B10EAC-B2FB-4492-9105-E7615D50A6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4B10EAC-B2FB-4492-9105-E7615D50A6B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFE31D1D-D61C-4952-ACA9-A4B7CA4682CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFE31D1D-D61C-4952-ACA9-A4B7CA4682CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFE31D1D-D61C-4952-ACA9-A4B7CA4682CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFE31D1D-D61C-4952-ACA9-A4B7CA4682CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1F8F632D-CC06-4265-90DB-64CBDDC0FCC3} = {3D7EDB80-6F09-4A56-AD98-28B6D7A030C4}
+		{FFE31D1D-D61C-4952-ACA9-A4B7CA4682CF} = {3D7EDB80-6F09-4A56-AD98-28B6D7A030C4}
 		{3BBF0F25-42D4-4F9B-9FBC-F24A765BF7DC} = {473A6187-EDBE-4073-AE4C-DF5CA3B97ACC}
 		{C5637D1E-9A03-481E-876A-76B615D860EC} = {4FF47D97-82F6-4205-9072-47D97F784634}
 		{963085FA-AE42-467D-826A-3D8F1ACAB95C} = {4FF47D97-82F6-4205-9072-47D97F784634}

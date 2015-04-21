@@ -1,21 +1,33 @@
-﻿@model EquipmentListPageModel
+﻿@model UltraSummaryListPageModel
 @{
     ViewBag.Title = Model.Title;
 }
 
-<div class="search-action" style="margin-top: 30px;">
-    <button class="btn btn-default" command-name="add" command-url="@Model.AddItemUrl">新增</button>
+<div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label class="control-label">设备名称</label>
+            <input type="text" name="EquipmentNamePart" class="form-control input-sm" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">值别</label>
+            <input type="text" name="Duty" class="form-control input-sm" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">机组</label>
+            <select name="MachineSet" class="form-control input-sm" >
+                <option value="">全部</option>
+                <option value="@((int)MachineSetType.MachineSet1)">@MachineSetType.MachineSet1.GetDisplayText()</option>
+                <option value="@((int)MachineSetType.MachineSet2)">@MachineSetType.MachineSet2.GetDisplayText()</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
+        </div>
+    </form>
 </div>
 
 <div class="search-result table-responsive" style="margin-top: 10px;">
-</div>
-
-<div class="module-add">
-    @Html.Partial("_Modal", new ModalModel<EquipmentAddModel> { Title = "新增设备" })
-</div>
-
-<div class="module-update">
-    @Html.Partial("_Modal", new ModalModel<EquipmentUpdateModel> { Title = "编辑设备" })
 </div>
 
 @section scripts{
@@ -37,7 +49,7 @@
                     se.helper.ajax.request({
                         confirmMessage: "您确定删除 " + model.Name + " 吗？",
                         container: container,
-                        url: "/Equipment/Delete",
+                        url: "/Sms/RecipientDelete",
                         model: { Id: model.Id },
                         onSuccess: function () {
                             viewInstance.refresh();
@@ -55,5 +67,13 @@
         viewInstance.init();
         viewInstance.modules.add.on("saved", function () { viewInstance.refresh(); });
         viewInstance.modules.update.on("saved", function () { viewInstance.refresh(); });
+
+
+        $(function () {
+            $(document).on("click", "tr", function () {
+                var url = "/UltraRecord/List";
+                window.open(url,"_blank");
+            });
+        });
     </script>
 }

@@ -6,34 +6,41 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>超市入口管理后台</title>
+    <title>超限统计-@ViewBag.Title</title>
     <link href="~/Content/fromwangying/admin.css" rel="stylesheet" />
     <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
     @System.Web.Optimization.Styles.Render("~/css")
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
     @RenderSection("styles", false)
-
     <script src="/Scripts/jquery-1.8.2.js"></script>
 </head>
 <body>
     <div class="container-fluid">
-        @*<header class="hd clearfix">
-            <div class="logo"></div>
-            <div class="toptitle">
-                超限统计
-            </div>
-            <div class="loginInfo">
-                <span>@UserContext.Current.Name</span>,您好，欢迎使用<span class="line">|</span><a href="/Account/Logout" class="importMsg">退出</a>
-                <p>客服电话：66666666</p>
-            </div>
-        </header>*@
-
+        <header class="hd clearfix">
+                <div class="logo"></div>
+                <div class="toptitle">
+                    超限统计
+                </div>
+                <div class="loginInfo">
+                    <span>@UserContext.Current.Name</span>,您好，欢迎使用<span class="line">|</span><a href="/Account/Logout" class="importMsg">退出</a>
+                    <p>客服电话：66666666</p>
+                </div>
+            </header>
         <div class="main-container">
-            @*<div class="sidebar">
+            <div class="sidebar">
                 <ul class="nav nav-list">
-                    
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="settingsicon"></i>
+                            <span class="menu-text">超限统计</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="/UltraRecord/SummaryIndex">常规超限统计</a></li>
+                            <li><a href="/UltraRecord/ProSummaryIndex">专业超限统计</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a class="dropdown-toggle" href="#">
                             <i class="settingsicon"></i>
@@ -52,29 +59,49 @@
                             @if (UserContext.Current.HasAuthority(AuthorityNames.SettingSms))
                             {
                                 <li><a href="/Sms/RecipientIndex">短信接收人管理</a></li>
-                            } 
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="settingsicon"></i>
+                            <span class="menu-text">常规超限配置</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="/Equipment/Index">设备管理</a></li>
+                            <li><a href="/Equipment/PartIndex">部件管理</a></li>
+                            <li><a href="/Equipment/MonitorTypeIndex">监控类别管理</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="settingsicon"></i>
+                            <span class="menu-text">专业超限配置</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="/Equipment/ProPartIndex">部件管理</a></li>
+                            <li><a href="/Equipment/MajorIndex">专业管理</a></li>
                         </ul>
                     </li>
                 </ul>
                 <div id="sidebar-collapse" class="sidebar-collapse">
                     <i data-icon2="icon-double-angle-right" data-icon1="icon-double-angle-left" class="icon-double-angle-left"></i>
                 </div>
-            </div>*@
+            </div>
             <div class="main-content">
                 <div class="page-content">
                     @RenderBody()
                 </div>
             </div>
         </div>
-
     </div>
     <script>
         $("a[href='" + location.pathname + "']").addClass("cur");
     </script>
     @System.Web.Optimization.Scripts.Render("~/js")
-
     <script src="~/Scripts/bootstrap.min.js"></script>
-
     <script src="~/Scripts/date/WdatePicker.js"></script>
     <script src="~/Scripts/views/base/se.ui.control.AceMenu.js"></script>
     <script src="~/Scripts/Extension/jquery.validate.Extension.js"></script>

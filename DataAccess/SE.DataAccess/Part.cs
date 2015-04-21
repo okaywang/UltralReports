@@ -14,6 +14,11 @@ namespace DataAccess
     
     public partial class Part
     {
+        public Part()
+        {
+            this.UltraRecord = new HashSet<UltraRecord>();
+        }
+    
         public int Id { get; set; }
         public int EquipmentId { get; set; }
         public string Name { get; set; }
@@ -27,5 +32,6 @@ namespace DataAccess
         public decimal H3 { get; set; }
     
         public virtual Equipment Equipment { get; set; }
+        public virtual ICollection<UltraRecord> UltraRecord { get; set; }
     }
 }

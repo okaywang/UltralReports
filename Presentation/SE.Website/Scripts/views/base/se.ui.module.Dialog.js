@@ -18,10 +18,15 @@
 
         function init() {
             _self.dialog.on("ok", function (sender, data) {
-                var url = $(sender).attr("request-url");
-                var model = settings.getModel();
-                save(url, model);
+                var isValid = $("form", _self.dialog.container).valid();
+                if (isValid) {
+                    var url = $(sender).attr("request-url");
+                    var model = settings.getModel();
+                    save(url, model);
+                }
             });
+
+            initValidation();
 
             settings.initializer.call(_self);
         }
@@ -39,6 +44,35 @@
 
             kendo.bind($("form", _self.dialog.container), _self.viewModel);
 
+        }
+
+        function initValidation() {
+            var options = {
+                //ignore: "input[type!='hidden']:hidden",
+                errorElement: "label",
+                errorPlacement: function (place, element) {
+                    var igroup = element.closest(".input-group");
+                    if (igroup.length > 0) {
+                        place.insertAfter(igroup);
+                    } else {
+                        place.insertAfter(element);
+                    }
+                },
+                rules: {}
+            };
+
+            //var options = { rules: {} };
+            var properties = $("[property-name]", _self.dialog.container);
+            for (var i = 0; i < properties.length; i++) {
+                var $property = $(properties[i]);
+                var strRule = $property.attr("validate-rule");
+                if (strRule) {
+                    var rules = webExpress.utility.string.getObject(strRule);
+                    var propName = $property.attr("property-name");
+                    options.rules[propName] = rules;
+                }
+            }
+            $("form", _self.dialog.container).validate(options);
         }
 
         function save(url, model) {
