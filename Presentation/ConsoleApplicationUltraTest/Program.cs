@@ -12,8 +12,13 @@ namespace ConsoleApplicationUltraTest
     {
         static void Main(string[] args)
         {
-            GenerateData_UltraRecord();
-
+            var context = new UltralReportsEntities();
+            var repository = new EfRepository<UltraRecord>(context);
+            var bll = new UltraReportBussinessLogic(repository);
+            var criteria = new UltraSummarySearchCriteria();
+            //criteria.Duty = 3;
+            //criteria.MachineSet = Common.Types.MachineSetType.MachineSet1;
+            var result = bll.SearchSummary(criteria);
             Console.WriteLine("abc");
         }
 

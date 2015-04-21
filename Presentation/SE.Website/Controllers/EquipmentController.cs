@@ -15,20 +15,11 @@ namespace Website.Controllers
     public class EquipmentController : Controller
     {
         private EquipmentBussinessLogic _bllEquipment;
-        //private PersonBussinessLogic _personBll;
-        //public AccountController(ShopBussinessLogic shopBll, AccountBussinessLogic accountBll, PersonBussinessLogic personBll)
-        //{
-        //    _shopBll = shopBll;
-        //    _accountBll = accountBll;
-        //    _personBll = personBll;
-        //}
 
         public EquipmentController(EquipmentBussinessLogic bllEquipment)
         {
             _bllEquipment = bllEquipment;
         }
-        //
-        // GET: /Equipment/
 
         #region Equipment
         public ActionResult Index()

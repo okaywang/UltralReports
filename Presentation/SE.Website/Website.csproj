@@ -156,6 +156,7 @@
     <Compile Include="Controllers\DutyController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
+    <Compile Include="Controllers\UltraRecordController.cs" />
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Authentication\FormAuthenticationService.cs">
       <SubType>Code</SubType>
@@ -180,6 +181,7 @@
     <Compile Include="Models\Equipment\EquipmentModel.cs" />
     <Compile Include="Models\Sms\SmsRecipientModel.cs" />
     <Compile Include="Models\Sms\SmsGroupModel.cs" />
+    <Compile Include="Models\UltraRecord\UltraRecordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -457,6 +459,7 @@
     <Content Include="Views\Equipment\Index.cshtml" />
     <Content Include="Views\Equipment\PartIndex.cshtml" />
     <Content Include="Views\Equipment\_PartModal.cshtml" />
+    <Content Include="Views\UltraRecord\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

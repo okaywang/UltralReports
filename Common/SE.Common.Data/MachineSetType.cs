@@ -13,6 +13,6 @@ namespace Common.Types
         MachineSet1 = 1,
 
         [DisplayText("机组2")]
-        MachineSe2 = 2
+        MachineSet2 = 2
     }
 }
