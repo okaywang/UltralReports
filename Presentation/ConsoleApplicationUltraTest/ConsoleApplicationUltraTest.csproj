@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{95DBDC2E-7A6C-4D2B-ADB7-3DAB5D77E0EF}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{FFE31D1D-D61C-4952-ACA9-A4B7CA4682CF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BussinessLogic</RootNamespace>
-    <AssemblyName>BussinessLogic</AssemblyName>
+    <RootNamespace>ConsoleApplicationUltraTest</RootNamespace>
+    <AssemblyName>ConsoleApplicationUltraTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,7 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
@@ -46,35 +49,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountBussinessLogic.cs" />
-    <Compile Include="Base\BussinessLogicBase.cs" />
-    <Compile Include="Entities\AccountSearchCriteria.cs" />
-    <Compile Include="LogExceptionBussinessLogic.cs" />
-    <Compile Include="LogOperationBussinessLogic.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SmsBussinessLogic.cs" />
-    <Compile Include="EquipmentBussinessLogic.cs" />
-    <Compile Include="UltraReportBussinessLogic.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\DataAccess\SE.DataAccess\DataAccess.csproj">
-      <Project>{3bbf0f25-42d4-4f9b-9fbc-f24a765bf7dc}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\SE.Common.Data\Common.Types.csproj">
-      <Project>{2d6e0a3b-600f-477b-9901-764bb45d6a33}</Project>
-      <Name>Common.Types</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WebExpress\WebExpress.Core\WebExpress.Core.csproj">
-      <Project>{c5637d1e-9a03-481e-876a-76b615d860ec}</Project>
-      <Name>WebExpress.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\BussinessLogic\SE.BussinessLogic\BussinessLogic.csproj">
+      <Project>{95dbdc2e-7a6c-4d2b-adb7-3dab5d77e0ef}</Project>
+      <Name>BussinessLogic %28BussinessLogic\BussinessLogic%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\SE.DataAccess\DataAccess.csproj">
+      <Project>{3bbf0f25-42d4-4f9b-9fbc-f24a765bf7dc}</Project>
+      <Name>DataAccess %28DataAccess\DataAccess%29</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

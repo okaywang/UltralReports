@@ -97,6 +97,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UltralModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="UltraRecord.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
