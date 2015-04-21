@@ -23,4 +23,17 @@ namespace BussinessLogic
 
         public int? MonitorTypeId { get; set; }
     }
+
+    public class UltraRecordSearchCriteria : SearchCriteria<UltraRecord>
+    {
+        public int PartId { get; set; }
+
+        public int? Duty { get; set; }
+
+        public DateTime? BeginTime { get; set; }
+
+        public DateTime? EndTime { get; set; }
+
+        public int? MonitorTypeId { get; set; }
+    }
 }

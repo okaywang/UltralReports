@@ -17,7 +17,7 @@ namespace BussinessLogic
 
         }
 
-        public PagedList<UltraRecord> Search(UltraSummarySearchCriteria criteria)
+        public PagedList<UltraRecord> Search(UltraRecordSearchCriteria criteria)
         {
             if (criteria.OrderByFields.Count == 0)
             {
@@ -40,14 +40,6 @@ namespace BussinessLogic
             if (criteria.MonitorTypeId.HasValue)
             {
                 query = query.Where(i => i.Part.Equipment.MonitorTypeId == criteria.MonitorTypeId.Value);
-            }
-            if (!string.IsNullOrEmpty(criteria.EquipmentNamePart))
-            {
-                query = query.Where(i => i.Part.Equipment.Name.Contains(criteria.EquipmentNamePart));
-            }
-            if (criteria.MachineSet.HasValue)
-            {
-                query = query.Where(i => i.Part.Equipment.MachineSet == criteria.MachineSet.Value);
             }
             if (criteria.Duty.HasValue)
             {

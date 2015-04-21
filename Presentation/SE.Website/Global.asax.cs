@@ -61,6 +61,7 @@ namespace Website
             Mapper.CreateMap<Equipment, NameValuePair>().ForMember(i => i.Value, opt => opt.MapFrom(src => src.Id));
             Mapper.CreateMap<PartAddModel, Part>();
             Mapper.CreateMap<UltraSummary, UltraSummaryListItemModel>().ForMember(dest => dest.RatedRange, opt => opt.MapFrom(src => string.Format("{0}-{1}", src.L3, src.H1)));
+            Mapper.CreateMap<UltraRecord, UltraRecordListItemModel>();
 
         }
 

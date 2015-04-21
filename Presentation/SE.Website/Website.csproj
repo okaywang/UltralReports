@@ -460,6 +460,7 @@
     <Content Include="Views\Equipment\PartIndex.cshtml" />
     <Content Include="Views\Equipment\_PartModal.cshtml" />
     <Content Include="Views\UltraRecord\Index.cshtml" />
+    <Content Include="Views\UltraRecord\SummaryIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

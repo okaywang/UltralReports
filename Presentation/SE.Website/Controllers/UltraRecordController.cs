@@ -21,6 +21,15 @@ namespace Website.Controllers
             _bllUltraRecord = bllUltraRecord;
         }
 
+        public ActionResult SummaryIndex()
+        {
+            var model = new UltraSummaryListPageModel();
+            model.Title = "超限统计列表";
+            model.RequestListUrl = "/UltraRecord/SummaryList";
+            //model.AddItemUrl = "/Equipment/Add";
+            return View(model);
+        }
+
         public ActionResult Index()
         {
             var model = new UltraRecordListPageModel();
@@ -30,7 +39,17 @@ namespace Website.Controllers
             return View(model);
         }
 
-        public ActionResult List(UltraSummarySearchCriteria criteria)
+        public ActionResult List(UltraRecordSearchCriteria criteria)
+        {
+            var entities = _bllUltraRecord.Search(criteria);
+            var items = Mapper.Map<List<UltraRecord>, UltraRecordListItemModel[]>(entities);
+            var model = new PagedModel<UltraRecordListItemModel>();
+            model.PagingResult = entities.PagingResult;
+            model.Items = items;
+            return PartialView("_CommonList", model);
+        }
+
+        public ActionResult SummaryList(UltraSummarySearchCriteria criteria)
         {
             var entities = _bllUltraRecord.SearchSummary(criteria);
             var items = Mapper.Map<List<UltraSummary>, UltraSummaryListItemModel[]>(entities);
@@ -38,6 +57,5 @@ namespace Website.Controllers
             model.Items = items;
             return PartialView("_CommonList", model);
         }
-
     }
 }
