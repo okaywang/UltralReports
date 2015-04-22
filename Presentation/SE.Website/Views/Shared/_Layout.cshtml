@@ -17,16 +17,16 @@
 </head>
 <body>
     <div class="container-fluid">
-        @*<header class="hd clearfix">
-                <div class="logo"></div>
-                <div class="toptitle">
-                    超限统计
-                </div>
-                <div class="loginInfo">
-                    <span>@UserContext.Current.Name</span>,您好，欢迎使用<span class="line">|</span><a href="/Account/Logout" class="importMsg">退出</a>
-                    <p>客服电话：66666666</p>
-                </div>
-            </header>
+        <header class="hd clearfix">
+            <div class="logo"></div>
+            <div class="toptitle">
+                超限统计
+            </div>
+            <div class="loginInfo">
+                <span>@UserContext.Current.Name</span>,您好，欢迎使用<span class="line">|</span><a href="/Account/Logout" class="importMsg">退出</a>
+                <p>客服电话：66666666</p>
+            </div>
+        </header>
         <div class="main-container">
             <div class="sidebar">
                 <ul class="nav nav-list">
@@ -48,18 +48,9 @@
                             <b class="arrow icon-angle-down"></b>
                         </a>
                         <ul class="submenu">
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SettingAccount))
-                            {
-                                <li><a href="/Account/List">账号管理</a></li>
-                            }
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SettingSms))
-                            {
-                                <li><a href="/Sms/GroupIndex">短信接收组管理</a></li>
-                            }
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SettingSms))
-                            {
-                                <li><a href="/Sms/RecipientIndex">短信接收人管理</a></li>
-                            }
+                            <li><a href="/Account/List">账号管理</a></li>
+                            <li><a href="/Sms/GroupIndex">短信接收组管理</a></li>
+                            <li><a href="/Sms/RecipientIndex">短信接收人管理</a></li>
                         </ul>
                     </li>
                     <li>
@@ -82,14 +73,14 @@
                         </a>
                         <ul class="submenu">
                             <li><a href="/Equipment/ProPartIndex">部件管理</a></li>
-                            <li><a href="/Equipment/MajorIndex">专业管理</a></li>
+                            <li><a href="/Major/Index">专业管理</a></li>
                         </ul>
                     </li>
                 </ul>
                 <div id="sidebar-collapse" class="sidebar-collapse">
                     <i data-icon2="icon-double-angle-right" data-icon1="icon-double-angle-left" class="icon-double-angle-left"></i>
                 </div>
-            </div>*@
+            </div>
             <div class="main-content">
                 <div class="page-content">
                     @RenderBody()

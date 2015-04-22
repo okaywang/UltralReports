@@ -52,9 +52,12 @@ namespace Website
 
         private void InitAutoMapper()
         {
+            Mapper.CreateMap<Account, AccountListItemModel>();
             Mapper.CreateMap<AccountAddModel, Account>();
             Mapper.CreateMap<MonitorType, MonitorTypeListItemModel>();
             Mapper.CreateMap<MonitorType, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
+            Mapper.CreateMap<Major, MajorListItemModel>();
+            Mapper.CreateMap<Major, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
             Mapper.CreateMap<Part, PartListItemModel>().ForMember(dest => dest.MachineSet, opt => opt.MapFrom(src => src.Equipment.MachineSet));
             Mapper.CreateMap<Equipment, EquipmentListItemModel>().ForMember(i => i.MonitorTypeName, opt => opt.MapFrom(src => src.MonitorType.Name));
             Mapper.CreateMap<EquipmentAddModel, Equipment>();

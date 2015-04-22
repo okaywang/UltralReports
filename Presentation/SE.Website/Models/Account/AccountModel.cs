@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BussinessLogic;
+using DataAccess;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -37,6 +40,16 @@ namespace Website.Models
 
     }
 
+    public class MajorControlSourceAttribute : Attribute, IControlSource
+    {
+        public NameValuePair[] GetSource()
+        {
+            var bll = System.Web.Mvc.DependencyResolver.Current.GetService(typeof(MajorBussinessLogic)) as MajorBussinessLogic;
+            var entities = bll.GetAll();
+            var items = AutoMapper.Mapper.Map<List<Major>, NameValuePair[]>(entities);
+            return items;
+        }
+    }
 
     [RequestUrl("/Account/Add")]
     public class AccountAddModel
@@ -52,13 +65,18 @@ namespace Website.Models
         [Required]
         [DisplayName("密码")]
         public string Password { get; set; }
+
+        [DisplayName("专业")]
+        [ControlType(typeof(NativeSelect))]
+        [MajorControlSourceAttribute]
+        public int? MajorId { get; set; }
     }
 
     [RequestUrl("/Account/Update")]
     public class AccountUpdateModel
     {
         [ControlType(typeof(NativeInputHidden))]
-        public int AccountId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DisplayName("姓名")]
@@ -72,5 +90,53 @@ namespace Website.Models
         [DisplayName("密码")]
         //[ControlType(typeof(NativeInputText))]
         public string Password { get; set; }
+
+        [DisplayName("专业")]
+        [ControlType(typeof(NativeSelect))]
+        [MajorControlSourceAttribute]
+        public int? MajorId { get; set; }
+    }
+
+    public class AccountListItemModel : IListItemModel
+    {
+        [DisplayName("账号Id")]
+        public int Id { get; set; }
+
+        [DisplayName("姓名")]
+        public string Name { get; set; }
+
+        [DisplayName("登录名")]
+        public string LoginName { get; set; }
+
+        public string Password { get; set; }
+
+        public int? MajorId { get; set; }
+
+        [DisplayName("专业")]
+        public string MajorName { get; set; }
+
+        [DisplayName("创建时间")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime CreateDateTime { get; set; }
+
+        [DisplayName("操作")]
+        [JsonIgnore]
+        public IListItemCommand[] Commands
+        {
+            get
+            {
+                return new IListItemCommand[]
+                { 
+                    new ListItemCommand("setAuthority", "设置权限", "/AdminSys/Tenant/UpdateConstItem"), 
+                    new ListItemCommand("update", "编辑", "/AdminSys/Tenant/UpdateConstItem"), 
+                    new ListItemCommand("remove","删除","/AdminSys/Tenant/RemoveConstItem") 
+                };
+            }
+        }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

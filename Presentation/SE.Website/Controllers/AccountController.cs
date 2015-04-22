@@ -53,19 +53,9 @@ namespace Website.Controllers
         {
             var accounts = _bllAccount.Search(criteria);
 
-            var items = new List<AccountListItemModel>();
-            foreach (var item in accounts)
-            {
-                items.Add(new AccountListItemModel()
-                {
-                    AccountId = item.Id,
-                    Name = item.LoginName,
-                    LoginName = item.LoginName
-                });
-            }
-
+            var items = Mapper.Map<PagedList<Account>, AccountListItemModel[]>(accounts);
             var model = new PagedModel<AccountListItemModel>();
-            model.Items = items.ToArray();
+            model.Items = items;
             model.PagingResult = accounts.PagingResult;
             return PartialView("_CommonList", model);
         }
@@ -298,25 +288,21 @@ namespace Website.Controllers
         public JsonResult Add(AccountAddModel model)
         {
             var entity = Mapper.Map<AccountAddModel, Account>(model);
-            //var entity = new Account();
-            //entity.LoginName = model.Name;
-            //entity.Password = model.Password;
             entity.AccountType = AccountType.GeneralUser;
             _bllAccount.Insert(entity);
             return Json(new ResultModel(true));
         }
         //[RequireAuthority(AuthorityNames.AccountUpdate)]
-        //public JsonResult UpdatePersonAccount(PersonAccountModel model)
-        //{
-        //    string message;
-        //    if (!Validate(model, out message))
-        //    {
-        //        return Json(new ResultModel(false, message));
-        //    }
-        //    var entity = model.Translate(model);
-        //    _personBll.Update(entity);
-        //    return Json(new ResultModel(true));
-        //}
+        public JsonResult Update(AccountUpdateModel model)
+        {
+            var entity = _bllAccount.Get(model.Id);
+            entity.Name = model.Name;
+            entity.LoginName = model.LoginName;
+            entity.MajorId = model.MajorId;
+            entity.Password = model.Password;
+            _bllAccount.Update(entity);
+            return Json(new ResultModel(true));
+        }
         //#endregion
 
         #region 权限

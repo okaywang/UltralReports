@@ -51,6 +51,7 @@
     <Compile Include="Entities\AccountSearchCriteria.cs" />
     <Compile Include="Entities\UltraRecordSearchCriteria.cs" />
     <Compile Include="Entities\UltraSummary.cs" />
+    <Compile Include="MajorBussinessLogic.cs" />
     <Compile Include="LogExceptionBussinessLogic.cs" />
     <Compile Include="LogOperationBussinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
