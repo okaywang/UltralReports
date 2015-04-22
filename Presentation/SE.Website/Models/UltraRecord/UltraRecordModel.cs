@@ -95,7 +95,7 @@ namespace Website.Models
         public int Duty { get; set; }
 
         [DisplayName("超限次数")]
-        [DisplayFormat(DataFormatString = "<a href='javascript:;' class='times'>{0}</a>")]
+        [DisplayFormat(DataFormatString = "<a href='javascript:;' class='times' command-name='detail'>{0}</a>")]
         public int Times { get; set; }
 
         [DisplayName("超限时长")]

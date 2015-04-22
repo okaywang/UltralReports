@@ -25,7 +25,7 @@ namespace Website.Controllers
         public ActionResult SummaryIndex()
         {
             var model = new UltraSummaryListPageModel();
-            model.Title = "超限统计列表";
+            model.Title = "超限统计汇总列表";
             model.RequestListUrl = "/UltraRecord/SummaryList";
             //model.AddItemUrl = "/Equipment/Add";
             return View(model);
@@ -34,9 +34,8 @@ namespace Website.Controllers
         public ActionResult Index()
         {
             var model = new UltraRecordListPageModel();
-            model.Title = "超限统计列表";
+            model.Title = "超限统计明细列表";
             model.RequestListUrl = "/UltraRecord/List";
-            //model.AddItemUrl = "/Equipment/Add";
             return View(model);
         }
 

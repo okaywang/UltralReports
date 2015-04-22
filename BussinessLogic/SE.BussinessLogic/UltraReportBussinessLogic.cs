@@ -52,6 +52,16 @@ namespace BussinessLogic
             return result;
         }
 
+        /// <summary>
+        /// In order to compare with SearchSummary method, this method will be implemented using native sql.
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
+        public PagedList<UltraSummary> SearchSummaryByNativeSql(UltraSummarySearchCriteria criteria)
+        {
+            throw new NotImplementedException();
+        }
+
         public PagedList<UltraSummary> SearchSummary(UltraSummarySearchCriteria criteria)
         {
             if (criteria.OrderByFields.Count == 0)

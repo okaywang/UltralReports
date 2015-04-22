@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label class="control-label">机组</label>
-            <select name="MachineSet" class="form-control input-sm" >
+            <select name="MachineSet" class="form-control input-sm">
                 <option value="">全部</option>
                 <option value="@((int)MachineSetType.MachineSet1)">@MachineSetType.MachineSet1.GetDisplayText()</option>
                 <option value="@((int)MachineSetType.MachineSet2)">@MachineSetType.MachineSet2.GetDisplayText()</option>
@@ -40,22 +40,12 @@
                 update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-update .modal") }))
             },
             rowCommands: {
-                update: function (model) {
-                    viewInstance.modules.update.dialog.show();
-                    viewInstance.modules.update.bindModel(model);
+                detail: function (model) {
+                    var criteria = $(".search-criteria form").serializeObject();
+                    var url = webExpress.utility.string.format("/UltraRecord/List?partId={0}&duty={1}&startTime={2}&endTime={3}", model.PartId, model.Duty, criteria.StartTime, criteria.EndTime);
+                    window.open(url, "_blank");
                 },
-                remove: function (model) {
-                    var container = $(this).closest(".table");
-                    se.helper.ajax.request({
-                        confirmMessage: "您确定删除 " + model.Name + " 吗？",
-                        container: container,
-                        url: "/Sms/RecipientDelete",
-                        model: { Id: model.Id },
-                        onSuccess: function () {
-                            viewInstance.refresh();
-                        }
-                    });
-                }
+
             },
             viewCommands: {
                 add: function () {
@@ -67,13 +57,5 @@
         viewInstance.init();
         viewInstance.modules.add.on("saved", function () { viewInstance.refresh(); });
         viewInstance.modules.update.on("saved", function () { viewInstance.refresh(); });
-
-
-        $(function () {
-            $(document).on("click", ".times", function () {
-                var url = "/UltraRecord/List";
-                window.open(url,"_blank");
-            });
-        });
     </script>
 }
