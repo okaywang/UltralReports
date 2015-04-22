@@ -27,7 +27,10 @@ namespace DataAccess
         public string FAUser { get; set; }
         public Nullable<System.DateTime> LCDateTime { get; set; }
         public string LCUser { get; set; }
+        public Nullable<int> MajorId { get; set; }
+        public string Name { get; set; }
     
         public virtual ICollection<AccountAuthority> AccountAuthorities { get; set; }
+        public virtual Major Major { get; set; }
     }
 }

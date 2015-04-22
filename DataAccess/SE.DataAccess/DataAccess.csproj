@@ -69,6 +69,9 @@
     <Compile Include="LogOperation.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Major.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MonitorType.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>

@@ -16,13 +16,16 @@ namespace DataAccess
     {
         public int Id { get; set; }
         public int PartId { get; set; }
-        public System.DateTime BeginTime { get; set; }
-        public System.DateTime EndTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
         public int Duty { get; set; }
         public string UltraType { get; set; }
         public decimal MinValue { get; set; }
         public decimal MaxValue { get; set; }
         public decimal AvgValue { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public bool Flag { get; set; }
+        public string Remarks { get; set; }
+        public bool HasRemarks { get; set; }
     
         public virtual Part Part { get; set; }
     }

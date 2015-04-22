@@ -30,9 +30,9 @@ namespace BussinessLogic
             }
             var query = PrimaryRepository.Table;
 
-            if (criteria.BeginTime.HasValue)
+            if (criteria.StartTime.HasValue)
             {
-                query = query.Where(i => i.BeginTime >= criteria.BeginTime.Value);
+                query = query.Where(i => i.StartTime >= criteria.StartTime.Value);
             }
             if (criteria.EndTime.HasValue)
             {
@@ -76,7 +76,7 @@ namespace BussinessLogic
 
             if (criteria.BeginTime.HasValue)
             {
-                query = query.Where(i => i.BeginTime >= criteria.BeginTime.Value);
+                query = query.Where(i => i.StartTime >= criteria.BeginTime.Value);
             }
             if (criteria.EndTime.HasValue)
             {
@@ -115,7 +115,7 @@ namespace BussinessLogic
                              L3 = gr.Max(i => i.Part.L3),
                              H1 = gr.Max(i => i.Part.H1),
                              Times = gr.Count(),
-                             Duration = gr.Sum(i => EntityFunctions.DiffMinutes(i.BeginTime, i.EndTime).Value)
+                             Duration = gr.Sum(i => EntityFunctions.DiffMinutes(i.StartTime, i.EndTime).Value)
                          };
 
             query2 = query2.OrderBy<UltraSummary>(criteria.OrderByFields);

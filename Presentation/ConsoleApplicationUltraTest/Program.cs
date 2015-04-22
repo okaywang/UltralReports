@@ -42,8 +42,8 @@ namespace ConsoleApplicationUltraTest
                 record.UltraType = types[rand.Next(types.Length)];
                 record.PartId = parts[rand.Next(parts.Length)];
                 record.Duty = duties[rand.Next(duties.Length)];
-                record.BeginTime = DateTime.Now.AddMinutes(rand.Next(24 * 60) * symbols[rand.Next(2)]);
-                record.EndTime = record.BeginTime.AddMinutes(rand.Next(1, 20));
+                record.StartTime = DateTime.Now.AddMinutes(rand.Next(24 * 60) * symbols[rand.Next(2)]);
+                record.EndTime = record.StartTime.AddMinutes(rand.Next(1, 20));
                 record.MinValue = rand.Next(500, 600);
                 record.MaxValue = record.MinValue + rand.Next(200);
                 record.AvgValue = (record.MinValue + record.MaxValue) / 2;

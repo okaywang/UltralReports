@@ -22,6 +22,9 @@
         <AssociationConnector Association="UltralReportsModel.FK__Part__EquipmentI__3B75D760" />
         <EntityTypeShape EntityType="UltralReportsModel.UltraRecord" Width="1.5" PointX="6.5266699206673859" PointY="21.421976263365696" />
         <AssociationConnector Association="UltralReportsModel.FK__UltraReco__PartI__403A8C7D" />
+        <EntityTypeShape EntityType="UltralReportsModel.Major" Width="1.5" PointX="8.50785155804262" PointY="0.92036391837539333" />
+        <AssociationConnector Association="UltralReportsModel.FK__Account__MajorId__07F6335A" />
+        <AssociationConnector Association="UltralReportsModel.FK__Part__MajorId__398D8EEE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

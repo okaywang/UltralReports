@@ -110,22 +110,23 @@ MajorId int references Major,
 PH decimal(10,2),
 PL decimal(10,2),
 )
- 
+
 create table UltraRecord
 (
 Id int IDENTITY(1,1) primary key,
 PartId int not null references Part,
 StartTime datetime not null,
 EndTime datetime,
-Flag as cast(CASE WHEN EndTime Is NULL then 0 else 1 end as bit),--是否完成，1是完成，0是未完成
+Flag as cast(CASE WHEN EndTime Is NULL then 0 else 1 end as bit) PERSISTED  not null,--是否完成，1是完成，0是未完成
 Duty int not null,
 UltraType varchar(2) not null check(UltraType in('L1','L2','L3','H1','H2','H3')),
 MinValue decimal(10,2) not null,
 MaxValue decimal(10,2) not null,
 AvgValue decimal(10,2) not null,
 Remarks nvarchar(200),
-HasRemarks as cast(case when Remarks is null then 0 else 1 end as bit)
+HasRemarks as cast(case when Remarks is null then 0 else 1 end as bit)  PERSISTED  not null
 )
+
 
 insert into MonitorType (Name) values ('温度')
 insert into MonitorType (Name) values ('转速')

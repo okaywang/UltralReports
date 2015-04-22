@@ -36,5 +36,6 @@ namespace DataAccess
         public DbSet<MonitorType> MonitorType { get; set; }
         public DbSet<Part> Part { get; set; }
         public DbSet<UltraRecord> UltraRecord { get; set; }
+        public DbSet<Major> Majors { get; set; }
     }
 }

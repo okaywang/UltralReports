@@ -30,8 +30,12 @@ namespace DataAccess
         public decimal H1 { get; set; }
         public decimal H2 { get; set; }
         public decimal H3 { get; set; }
+        public Nullable<int> MajorId { get; set; }
+        public Nullable<decimal> PH { get; set; }
+        public Nullable<decimal> PL { get; set; }
     
         public virtual Equipment Equipment { get; set; }
         public virtual ICollection<UltraRecord> UltraRecord { get; set; }
+        public virtual Major Major { get; set; }
     }
 }
