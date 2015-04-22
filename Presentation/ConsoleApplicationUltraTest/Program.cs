@@ -16,9 +16,11 @@ namespace ConsoleApplicationUltraTest
             var repository = new EfRepository<UltraRecord>(context);
             var bll = new UltraReportBussinessLogic(repository);
             var criteria = new UltraSummarySearchCriteria();
+            criteria.PagingRequest = new WebExpress.Core.PagingRequest() { PageIndex = 1, PageSize = 10 };
             //criteria.Duty = 3;
             //criteria.MachineSet = Common.Types.MachineSetType.MachineSet1;
             var result = bll.SearchSummary(criteria);
+
             Console.WriteLine("abc");
         }
 

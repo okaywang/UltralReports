@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -51,18 +52,17 @@ namespace BussinessLogic
             return result;
         }
 
-        public List<UltraSummary> SearchSummary(UltraSummarySearchCriteria criteria)
+        public PagedList<UltraSummary> SearchSummary(UltraSummarySearchCriteria criteria)
         {
             if (criteria.OrderByFields.Count == 0)
             {
-                criteria.OrderByFields.Add(new OrderByField<UltraRecord>(i => i.Id, SortOrder.Descending));
+                criteria.OrderByFields.Add(new OrderByField<UltraSummary>(i => i.EquipmentId, SortOrder.Descending));
             }
             if (criteria.PagingRequest == null)
             {
                 criteria.PagingRequest = new PagingRequest(0, int.MaxValue);
             }
             var query = PrimaryRepository.Table;
-
 
             if (criteria.BeginTime.HasValue)
             {
@@ -90,24 +90,27 @@ namespace BussinessLogic
             }
 
             var query2 = from r in query
-                         group r by new { r.Part.EquipmentId, r.Part, r.Duty } into gr
+                         group r by new { r.Part.EquipmentId, PartId = r.Part.Id, r.Duty } into gr
+                         //orderby gr.Key.EquipmentId
+                         //orderby gr.Key.PartId
+                         //orderby gr.Key.Duty
                          select new UltraSummary
                          {
                              Duty = gr.Key.Duty,
-                             PartId = gr.Key.Part.Id,
-                             PartName = gr.Key.Part.Name,
-                             EquipmentName = gr.Key.Part.Equipment.Name,
-                             MonitorTypeName = gr.Key.Part.Equipment.MonitorType.Name,
-                             L3 = gr.Key.Part.L3,
-                             H1 = gr.Key.Part.H1,
-                             Times = gr.Count()
+                             PartId = gr.Key.PartId,
+                             PartName = gr.Max(i => i.Part.Name),
+                             EquipmentId = gr.Key.EquipmentId,
+                             EquipmentName = gr.Max(i => i.Part.Equipment.Name),
+                             MonitorTypeName = gr.Max(i => i.Part.Equipment.MonitorType.Name),
+                             L3 = gr.Max(i => i.Part.L3),
+                             H1 = gr.Max(i => i.Part.H1),
+                             Times = gr.Count(),
+                             Duration = gr.Sum(i => EntityFunctions.DiffMinutes(i.BeginTime, i.EndTime).Value)
                          };
 
-
-
-            //query = query.OrderBy<UltraSummary>(criteria.OrderByFields);
-            //var result = new PagedList<UltraSummary>(query, criteria.PagingRequest.PageIndex, criteria.PagingRequest.PageSize);
-            return query2.ToList();
+            query2 = query2.OrderBy<UltraSummary>(criteria.OrderByFields);
+            var result = new PagedList<UltraSummary>(query2, criteria.PagingRequest.PageIndex, criteria.PagingRequest.PageSize);
+            return result;
         }
     }
 

@@ -9,7 +9,7 @@ using Common.Types;
 
 namespace BussinessLogic
 {
-    public class UltraSummarySearchCriteria : SearchCriteria<UltraRecord>
+    public class UltraSummarySearchCriteria : SearchCriteria<UltraSummary>
     {
         public MachineSetType? MachineSet { get; set; }
 

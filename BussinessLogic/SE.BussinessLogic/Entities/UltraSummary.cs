@@ -12,6 +12,8 @@ namespace BussinessLogic
 
         public string PartName { get; set; }
 
+        public int EquipmentId { get; set; }
+
         public string EquipmentName { get; set; }
 
         public string MonitorTypeName { get; set; }
