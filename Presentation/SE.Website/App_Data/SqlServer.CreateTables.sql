@@ -1,13 +1,22 @@
-	Create database UltralReports
+
+Create database UltralReportsTest2
 go
-use UltralReports
+use UltralReportsTest2
+
+Create table Major
+(
+	[Id] [int] IDENTITY(1,1) primary key,
+	Name nvarchar(50) not null
+)
 
 --账号
 CREATE TABLE [dbo].[Account](
 [Id] [int] IDENTITY(1,1) primary key,
+ MajorId int references Major,
+[Name] [nvarchar](20) NOT NULL,
 [LoginName] [nvarchar](50) NOT NULL unique,
-[Password] [nvarchar](50) NOT NULL check(len(password)>=6),
-[AccountType] [int] NOT NULL CHECK(AccountType in (1,2)),--1.For admin 2.For shop,
+[Password] [nvarchar](50) NOT NULL check(len(password)>=6), 
+[AccountType] [int] NOT NULL CHECK(AccountType in (1,2)),--1.admin 2.Other,
 
 FADateTime datetime default(getdate()),
 FAUser nvarchar(20),
@@ -96,38 +105,31 @@ L2 decimal(10,2) not null,
 L3 decimal(10,2) not null,
 H1 decimal(10,2) not null,
 H2 decimal(10,2) not null,
-H3 decimal(10,2) not null
+H3 decimal(10,2) not null,
+MajorId int references Major,
+PH decimal(10,2),
+PL decimal(10,2),
 )
-
-create table UltraRecord
-(
-Id int IDENTITY(1,1) primary key,
-PartId int not null references Part,
-BeginTime datetime not null,
-EndTime datetime not null,
-Duty int not null,
-UltraType varchar(2) not null check(UltraType in('L1','L2','L3','H1','H2','H3')),
-MinValue decimal(10,2) not null,
-MaxValue decimal(10,2) not null,
-AvgValue decimal(10,2) not null
-)
-
+ 
 create table UltraRecord
 (
 Id int IDENTITY(1,1) primary key,
 PartId int not null references Part,
 StartTime datetime not null,
 EndTime datetime,
-Flag bit,
+Flag as cast(CASE WHEN EndTime Is NULL then 0 else 1 end as bit),--是否完成，1是完成，0是未完成
 Duty int not null,
 UltraType varchar(2) not null check(UltraType in('L1','L2','L3','H1','H2','H3')),
 MinValue decimal(10,2) not null,
 MaxValue decimal(10,2) not null,
-AvgValue decimal(10,2) not null
+AvgValue decimal(10,2) not null,
+Remarks nvarchar(200),
+HasRemarks as cast(case when Remarks is null then 0 else 1 end as bit)
 )
 
 insert into MonitorType (Name) values ('温度')
 insert into MonitorType (Name) values ('转速')
+insert into [Account](Name,LoginName,[Password],[AccountType]) values('张大拿','admin','123456',1)
 
 
 
