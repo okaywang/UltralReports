@@ -464,6 +464,7 @@
     <Content Include="Views\UltraRecord\Index.cshtml" />
     <Content Include="Views\UltraRecord\SummaryIndex.cshtml" />
     <Content Include="Views\Major\Index.cshtml" />
+    <Content Include="Views\UltraRecord\ProSummaryIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

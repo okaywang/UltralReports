@@ -119,12 +119,13 @@ StartTime datetime not null,
 EndTime datetime,
 Flag as cast(CASE WHEN EndTime Is NULL then 0 else 1 end as bit) PERSISTED  not null,--是否完成，1是完成，0是未完成
 Duty int not null,
-UltraType varchar(2) not null check(UltraType in('L1','L2','L3','H1','H2','H3')),
+UltraType varchar(2) not null check(UltraType in('L1','L2','L3','H1','H2','H3','PH','PL')),
 MinValue decimal(10,2) not null,
 MaxValue decimal(10,2) not null,
 AvgValue decimal(10,2) not null,
 Remarks nvarchar(200),
-HasRemarks as cast(case when Remarks is null then 0 else 1 end as bit)  PERSISTED  not null
+HasRemarks as cast(case when Remarks is null then 0 else 1 end as bit)  PERSISTED  not null,
+IsProRecord as cast(case when UltraType='PH' or UltraType='PL' then 1 else 0 end as bit) PERSISTED  not null
 )
 
 

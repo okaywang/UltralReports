@@ -25,10 +25,40 @@ namespace Website.Controllers
         public ActionResult SummaryIndex()
         {
             var model = new UltraSummaryListPageModel();
-            model.Title = "超限统计汇总列表";
+            model.Title = "常规超限统计汇总列表";
             model.RequestListUrl = "/UltraRecord/SummaryList";
             //model.AddItemUrl = "/Equipment/Add";
             return View(model);
+        }
+
+        public ActionResult SummaryList(UltraSummarySearchCriteria criteria)
+        {
+            var entities = _bllUltraRecord.SearchSummary(criteria);
+            var items = Mapper.Map<PagedList<UltraSummary>, UltraSummaryListItemModel[]>(entities);
+            var model = new PagedModel<UltraSummaryListItemModel>();
+            model.Items = items;
+            model.PagingResult = entities.PagingResult;
+            return PartialView("_CommonList", model);
+        }
+
+        public ActionResult ProSummaryIndex()
+        {
+            var model = new ProUltraSummaryListPageModel();
+            model.Title = "专业超限统计汇总列表";
+            model.RequestListUrl = "/UltraRecord/ProSummaryList";
+            //model.AddItemUrl = "/Equipment/Add";
+            return View(model);
+        }
+
+        public ActionResult ProSummaryList(UltraSummarySearchCriteria criteria)
+        {
+            criteria.SearchProRecord = true;
+            var entities = _bllUltraRecord.SearchSummary(criteria);
+            var items = Mapper.Map<PagedList<UltraSummary>, ProUltraSummaryListItemModel[]>(entities);
+            var model = new PagedModel<ProUltraSummaryListItemModel>();
+            model.Items = items;
+            model.PagingResult = entities.PagingResult;
+            return PartialView("_CommonList", model);
         }
 
         public ActionResult Index()
@@ -46,16 +76,6 @@ namespace Website.Controllers
             var model = new PagedModel<UltraRecordListItemModel>();
             model.PagingResult = entities.PagingResult;
             model.Items = items;
-            return PartialView("_CommonList", model);
-        }
-
-        public ActionResult SummaryList(UltraSummarySearchCriteria criteria)
-        {
-            var entities = _bllUltraRecord.SearchSummary(criteria);
-            var items = Mapper.Map<PagedList<UltraSummary>, UltraSummaryListItemModel[]>(entities);
-            var model = new PagedModel<UltraSummaryListItemModel>();
-            model.Items = items;
-            model.PagingResult = entities.PagingResult;
             return PartialView("_CommonList", model);
         }
     }

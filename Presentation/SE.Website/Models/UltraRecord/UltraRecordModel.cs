@@ -17,6 +17,10 @@ namespace Website.Models
     {
         public string AddItemUrl { get; set; }
     }
+    public class ProUltraSummaryListPageModel : ListPageModal
+    {
+        public string AddItemUrl { get; set; }
+    }
 
     public class UltraRecordListPageModel : ListPageModal
     {
@@ -87,6 +91,45 @@ namespace Website.Models
         //public decimal L3 { get; set; }
 
         //public decimal H1 { get; set; }
+
+        [DisplayName("额定运行范围")]
+        public string RatedRange { get; set; }
+
+        [DisplayName("班值")]
+        public int Duty { get; set; }
+
+        [DisplayName("超限次数")]
+        [DisplayFormat(DataFormatString = "<a href='javascript:;' class='times' command-name='detail'>{0}</a>")]
+        public int Times { get; set; }
+
+        [DisplayName("超限时长")]
+        public int Duration { get; set; }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
+        public IListItemCommand[] Commands
+        {
+            get
+            {
+                return new ListItemCommand[0];
+            }
+        }
+    }
+    public class ProUltraSummaryListItemModel : IListItemModel
+    {
+        public int PartId { get; set; }
+
+        [DisplayName("部件设备名称")]
+        public string PartName { get; set; }
+
+        [DisplayName("所属专业")]
+        public string MajorName { get; set; }
+
+        [DisplayName("设备名称")]
+        public string EquipmentName { get; set; }
 
         [DisplayName("额定运行范围")]
         public string RatedRange { get; set; }

@@ -32,7 +32,7 @@ namespace ConsoleApplicationUltraTest
             var repository = new EfRepository<UltraRecord>(context);
             var bll = new UltraReportBussinessLogic(repository);
 
-            var types = new[] { "L1", "L2", "L3", "H1", "H2", "H3" };
+            var types = new[] { "L1", "L2", "L3", "H1", "H2", "H3","PH","PL" };
             var symbols = new[] { 1, -1 };
             var parts = new[] { 1, 2 };
             var duties = new[] { 1, 2, 3, 4, 5 };

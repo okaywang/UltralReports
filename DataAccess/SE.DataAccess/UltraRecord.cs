@@ -26,6 +26,7 @@ namespace DataAccess
         public bool Flag { get; set; }
         public string Remarks { get; set; }
         public bool HasRemarks { get; set; }
+        public bool IsProRecord { get; set; }
     
         public virtual Part Part { get; set; }
     }

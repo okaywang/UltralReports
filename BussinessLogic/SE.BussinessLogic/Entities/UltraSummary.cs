@@ -27,5 +27,9 @@ namespace BussinessLogic
         public int Times { get; set; }
 
         public int Duration { get; set; }
+
+        public string MajorName { get; set; }
+
+        public string Remarks { get; set; }
     }
 }
