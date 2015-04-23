@@ -29,7 +29,8 @@ namespace BussinessLogic
                 criteria.PagingRequest = new PagingRequest(0, int.MaxValue);
             }
             var query = PrimaryRepository.Table;
-
+            query = query.Where(i => i.PartId >= criteria.PartId);
+            query = query.Where(i => i.Duty >= criteria.Duty);
             if (criteria.StartTime.HasValue)
             {
                 query = query.Where(i => i.StartTime >= criteria.StartTime.Value);

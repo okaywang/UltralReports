@@ -27,14 +27,14 @@ namespace Website.Models
     {
         public int PartId { get; set; }
 
-        [DisplayName("部件设备名称")]
-        public string PartName { get; set; }
-
         [DisplayName("设备名称")]
         public string EquipmentName { get; set; }
 
         [DisplayName("监控类型")]
         public string MonitorTypeName { get; set; }
+
+        [DisplayName("部件设备名称")]
+        public string PartName { get; set; }
 
         [DisplayName("开始时间")]
         public DateTime BeginTime { get; set; }
@@ -75,14 +75,14 @@ namespace Website.Models
     {
         public int PartId { get; set; }
 
-        [DisplayName("设备名称")]
-        public string EquipmentName { get; set; }
+        [DisplayName("部件设备名称")]
+        public string PartName { get; set; }
 
         [DisplayName("监控类型")]
         public string MonitorTypeName { get; set; }
 
-        [DisplayName("部件设备名称")]
-        public string PartName { get; set; }
+        [DisplayName("设备名称")]
+        public string EquipmentName { get; set; }
 
         //public decimal L3 { get; set; }
 
