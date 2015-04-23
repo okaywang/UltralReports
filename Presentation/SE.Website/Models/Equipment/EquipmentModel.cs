@@ -340,4 +340,124 @@ namespace Website.Models
         }
     }
     #endregion
+
+    #region Pro Part
+    public class ProPartListPageModel : ListPageModal
+    {
+        public string AddItemUrl { get; set; }
+    }
+
+    [RequestUrl("/Equipment/ProPartAdd")]
+    public class ProPartAddModel
+    {
+        [Required]
+        [DisplayName("机组号")]
+        [ControlType(typeof(NativeSelect))]
+        [EnumControlSource(typeof(MachineSetType))]
+        public MachineSetType MachineSet { get; set; }
+
+        [Required]
+        [DisplayName("设备名称")]
+        [ControlType(typeof(NativeSelect))]
+        public int EquipmentId { get; set; }
+
+        [Required]
+        [DisplayName("部件")]
+        [ControlType(typeof(NativeSelect))]
+        public int PartId { get; set; }
+
+        [Required]
+        [DisplayName("专业")]
+        [ControlType(typeof(NativeSelect))]
+        [MajorControlSource]
+        public int MajorId { get; set; }
+
+        [Required]
+        [DisplayName("高限")]
+        public decimal PH { get; set; }
+
+        [Required]
+        [DisplayName("低限")]
+        public decimal PL { get; set; }
+
+
+    }
+
+    [RequestUrl("/Equipment/ProPartUpdate")]
+    public class ProPartUpdateModel
+    {
+        [Required]
+        [DisplayName("机组号")]
+        [ControlType(typeof(NativeSelect))]
+        [EnumControlSource(typeof(MachineSetType))]
+        public MachineSetType MachineSet { get; set; }
+
+        [Required]
+        [DisplayName("设备名称")]
+        [ControlType(typeof(NativeSelect))]
+        public int EquipmentId { get; set; }
+
+        [DisplayName("专业")]
+        [ControlType(typeof(NativeSelect))]
+        [MajorControlSource]
+        public int MajorId { get; set; }
+
+        [Required]
+        [DisplayName("部件")]
+        [ControlType(typeof(NativeSelect))]
+        public int PartId { get; set; }
+
+        [Required]
+        [DisplayName("高限")]
+        public decimal PH { get; set; }
+
+        [Required]
+        [DisplayName("低限")]
+        public decimal PL { get; set; }
+    }
+
+    public class ProPartListItemModel : IListItemModel
+    {
+        [DisplayName("Id")]
+        public int Id { get; set; }
+
+        [DisplayName("机组号")]
+        public MachineSetType MachineSet { get; set; }
+
+        [DisplayName("设备名称")]
+        public string EquipmentName { get; set; }
+
+        [DisplayName("部件名称")]
+        public string Name { get; set; }
+
+        public int EquipmentId { get; set; }
+
+        [Required]
+        [DisplayName("高限")]
+        public decimal PH { get; set; }
+
+        [Required]
+        [DisplayName("低限")]
+        public decimal PL { get; set; }
+
+        [DisplayName("操作")]
+        [JsonIgnore]
+        public IListItemCommand[] Commands
+        {
+            get
+            {
+                return new IListItemCommand[]
+                { 
+                    new ListItemCommand("update", "编辑", "/Equipment/PartUpdate"), 
+                    new ListItemCommand("remove","删除","/Equipment/PartRemove") 
+                };
+            }
+        }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+    }
+    #endregion
 }

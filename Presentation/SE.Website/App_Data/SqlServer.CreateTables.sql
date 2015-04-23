@@ -128,6 +128,24 @@ HasRemarks as cast(case when Remarks is null then 0 else 1 end as bit)  PERSISTE
 IsProRecord as cast(case when UltraType='PH' or UltraType='PL' then 1 else 0 end as bit) PERSISTED  not null
 )
 
+--班次
+create table Shift
+(
+	Id int IDENTITY(1,1) primary key,
+	ShiftType int not null,
+	StartTime time not null,
+	EndTime time not null
+)
+
+--排班
+create table Schedule
+(
+	Id int IDENTITY(1,1) primary key,
+	[Date] date not null,
+	ShiftType int not null,
+	Duty int not null
+)
+
 
 insert into MonitorType (Name) values ('温度')
 insert into MonitorType (Name) values ('转速')

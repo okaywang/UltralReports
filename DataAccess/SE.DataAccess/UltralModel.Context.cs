@@ -37,5 +37,6 @@ namespace DataAccess
         public DbSet<Part> Part { get; set; }
         public DbSet<UltraRecord> UltraRecord { get; set; }
         public DbSet<Major> Majors { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
     }
 }

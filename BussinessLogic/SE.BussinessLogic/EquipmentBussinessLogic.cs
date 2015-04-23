@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using WebExpress.Core;
@@ -45,7 +46,7 @@ namespace BussinessLogic
         public List<MonitorType> MonitorTypeGetAll()
         {
             return _monitorTypeRepository.Table.ToList();
-        } 
+        }
         #endregion
 
         #region Part
@@ -72,6 +73,18 @@ namespace BussinessLogic
         public List<Part> PartGetAll()
         {
             return _partRepository.Table.ToList();
+        }
+
+        public List<Part> PartWhere(Expression<Func<Part, bool>> predicate)
+        {
+            return _partRepository.Table.Where(predicate).ToList();
+        }
+        #endregion
+
+        #region Pro Part
+        public List<Part> ProPartGetAll()
+        {
+            return _partRepository.Table.Where(i => i.MajorId.HasValue).ToList();
         }
         #endregion
     }

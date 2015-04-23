@@ -122,6 +122,14 @@ namespace Website.Controllers
         #endregion
 
         #region Part
+        public JsonResult GetParts(int equipmentId)
+        {
+            var pairs = new NameValuePair[0];
+            var entities = _bllEquipment.PartWhere(i => i.EquipmentId == equipmentId);
+            pairs = Mapper.Map<List<Part>, NameValuePair[]>(entities);
+            return Json(pairs, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult PartIndex()
         {
             var model = new PartListPageModel();
@@ -169,6 +177,60 @@ namespace Website.Controllers
         {
             var entity = _bllEquipment.PartGet(id);
             _bllEquipment.PartDelete(entity);
+            return Json(new ResultModel(true));
+        }
+        #endregion
+
+        #region Pro Part
+        public ActionResult ProPartIndex()
+        {
+            var model = new PartListPageModel();
+            model.Title = "部件专业超限管理";
+            model.RequestListUrl = "/Equipment/ProPartList";
+            model.AddItemUrl = "/Equipment/ProPartAdd";
+            return View(model);
+        }
+
+        public PartialViewResult ProPartList()
+        {
+            var entities = _bllEquipment.ProPartGetAll();
+
+            var items = Mapper.Map<List<Part>, List<ProPartListItemModel>>(entities);
+            var model = new PagedModel<ProPartListItemModel>();
+            model.Items = items.ToArray();
+            return PartialView("_CommonList", model);
+        }
+
+        public JsonResult ProPartAdd(ProPartAddModel model)
+        {
+            var entity = _bllEquipment.PartGet(model.PartId);
+            entity.PH = model.PH;
+            entity.PL = model.PL;
+            entity.MajorId = model.MajorId;
+
+            _bllEquipment.PartUpdate(entity);
+            return Json(new ResultModel(true));
+        }
+
+        public JsonResult ProPartUpdate(ProPartUpdateModel model)
+        {
+            var entity = _bllEquipment.PartGet(model.PartId);
+            entity.PH = model.PH;
+            entity.PL = model.PL;
+            entity.MajorId = model.MajorId;
+
+            _bllEquipment.PartUpdate(entity);
+            return Json(new ResultModel(true));
+        }
+
+        public JsonResult ProPartDelete(int id)
+        {
+            var entity = _bllEquipment.PartGet(id);
+            entity.PH = null;
+            entity.PL = null;
+            entity.MajorId = null;
+
+            _bllEquipment.PartUpdate(entity);
             return Json(new ResultModel(true));
         }
         #endregion

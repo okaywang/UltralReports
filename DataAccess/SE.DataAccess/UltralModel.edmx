@@ -15,6 +15,7 @@
           <EntitySet Name="Major" EntityType="UltralReportsModel.Store.Major" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MonitorType" EntityType="UltralReportsModel.Store.MonitorType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Part" EntityType="UltralReportsModel.Store.Part" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Shift" EntityType="UltralReportsModel.Store.Shift" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SmsGroup" EntityType="UltralReportsModel.Store.SmsGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SmsGroupRecipient" EntityType="UltralReportsModel.Store.SmsGroupRecipient" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SmsRecipient" EntityType="UltralReportsModel.Store.SmsRecipient" store:Type="Tables" Schema="dbo" />
@@ -150,6 +151,15 @@
           <Property Name="MajorId" Type="int" />
           <Property Name="PH" Type="decimal" Precision="10" Scale="2" />
           <Property Name="PL" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ShiftType" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="time" Nullable="false" />
+          <Property Name="EndTime" Type="time" Nullable="false" />
         </EntityType>
         <EntityType Name="SmsGroup">
           <Key>
@@ -349,6 +359,7 @@
             <End Role="Major" EntitySet="Majors" />
             <End Role="Part" EntitySet="Part" />
           </AssociationSet>
+          <EntitySet Name="Shifts" EntityType="UltralReportsModel.Shift" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -584,6 +595,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ShiftType" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" Precision="7" />
+          <Property Type="Time" Name="EndTime" Nullable="false" Precision="7" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -734,6 +754,16 @@
             <EntityTypeMapping TypeName="UltralReportsModel.Major">
               <MappingFragment StoreEntitySet="Major">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shifts">
+            <EntityTypeMapping TypeName="UltralReportsModel.Shift">
+              <MappingFragment StoreEntitySet="Shift">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="ShiftType" ColumnName="ShiftType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

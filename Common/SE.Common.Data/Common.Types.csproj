@@ -43,6 +43,7 @@
     <Compile Include="GenderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MachineSetType.cs" />
+    <Compile Include="ShiftType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WebExpress\WebExpress.Core\WebExpress.Core.csproj">
