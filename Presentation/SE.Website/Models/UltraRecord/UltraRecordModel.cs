@@ -33,30 +33,22 @@ namespace Website.Models
 
     public class UltraRecordListPageModel : ListPageModal
     {
-        public string AddItemUrl { get; set; }
+        public string EquipmentName { get; set; }
+
+        public string PartName { get; set; }
+
+        public PagedModel<UltraRecordListItemModel> Records { get; set; }
     }
 
     public class UltraRecordListItemModel : IListItemModel
     {
         public int PartId { get; set; }
 
-        [DisplayName("设备名称")]
-        public string EquipmentName { get; set; }
-
-        [DisplayName("监控类型")]
-        public string MonitorTypeName { get; set; }
-
-        [DisplayName("部件设备名称")]
-        public string PartName { get; set; }
-
         [DisplayName("开始时间")]
         public DateTime BeginTime { get; set; }
 
         [DisplayName("结束时间")]
         public DateTime EndTime { get; set; }
-
-        [DisplayName("班值")]
-        public int Duty { get; set; }
 
         [DisplayName("超限时长")]
         public int Duration { get; set; }

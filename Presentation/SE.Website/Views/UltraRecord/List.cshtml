@@ -1,0 +1,9 @@
+﻿@model UltraRecordListPageModel
+
+<h2>@Model.Title</h2>
+<div>
+    @Model.EquipmentName @Model.PartName 超限记录详情
+</div>
+<div class="search-result table-responsive" style="margin-top: 10px;">
+    @Html.Partial("_CommonList", Model.Records)
+</div>

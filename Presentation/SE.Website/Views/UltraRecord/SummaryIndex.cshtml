@@ -51,34 +51,45 @@
         </div>
     </form>
 </div>
+
 <div class="search-result table-responsive" style="margin-top: 10px;">
 </div>
+
+<div class="module-detail"> 
+    <div class="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label class="modal-title">明细</label>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts{
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
             url: '@Model.RequestListUrl',
-            modules: {
-                add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-add .modal") })),
-                update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-update .modal") }))
-            },
             rowCommands: {
                 detail: function (model) {
                     var criteria = $(".search-criteria form").serializeObject();
                     var url = webExpress.utility.string.format("/UltraRecord/List?SearchProRecord=false&partId={0}&duty={1}&startTime={2}&endTime={3}", model.PartId, model.Duty, criteria.StartTime, criteria.EndTime);
-                    window.open(url, "_blank");
-                },
-
-            },
-            viewCommands: {
-                add: function () {
-                    viewInstance.modules.add.dialog.show();
-                    viewInstance.modules.add.bindModel({});
+                    $.get(url, "", function (data) {
+                        $(".module-detail .modal-body").html(data);
+                        $(".module-detail .modal").modal("show");
+                    });
                 }
             }
         }));
         viewInstance.init();
-        viewInstance.modules.add.on("saved", function () { viewInstance.refresh(); });
-        viewInstance.modules.update.on("saved", function () { viewInstance.refresh(); });
     </script>
 }

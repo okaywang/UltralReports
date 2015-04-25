@@ -77,22 +77,27 @@ namespace Website.Controllers
             return Json(new ResultModel(true));
         }
 
-        public ActionResult Index()
-        {
-            var model = new UltraRecordListPageModel();
-            model.Title = "超限统计明细列表";
-            model.RequestListUrl = "/UltraRecord/List";
-            return View(model);
-        }
+        //public ActionResult Index()
+        //{
+        //    var model = new UltraRecordListPageModel();
+        //    model.Title = "超限统计明细列表";
+        //    //model.RequestListUrl = "/UltraRecord/List";
+
+        //    return View(model);
+        //}
 
         public ActionResult List(UltraRecordSearchCriteria criteria)
         {
             var entities = _bllUltraRecord.Search(criteria);
             var items = Mapper.Map<List<UltraRecord>, UltraRecordListItemModel[]>(entities);
-            var model = new PagedModel<UltraRecordListItemModel>();
-            model.PagingResult = entities.PagingResult;
-            model.Items = items;
-            return PartialView("_CommonList", model);
+            var model = new UltraRecordListPageModel();
+            var part = _bllEquipment.PartGet(criteria.PartId.Value);
+            model.PartName = part.Name;
+            model.EquipmentName = part.Equipment.Name;
+            model.Records = new PagedModel<UltraRecordListItemModel>();
+            model.Records.PagingResult = entities.PagingResult;
+            model.Records.Items = items;
+            return PartialView(model);
         }
     }
 }

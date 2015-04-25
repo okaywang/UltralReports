@@ -462,7 +462,7 @@
     <Content Include="Views\Equipment\Index.cshtml" />
     <Content Include="Views\Equipment\PartIndex.cshtml" />
     <Content Include="Views\Equipment\_PartModal.cshtml" />
-    <Content Include="Views\UltraRecord\Index.cshtml" />
+    <Content Include="Views\UltraRecord\List.cshtml" />
     <Content Include="Views\UltraRecord\SummaryIndex.cshtml" />
     <Content Include="Views\Major\Index.cshtml" />
     <Content Include="Views\UltraRecord\ProUltraRecordIndex.cshtml" />
