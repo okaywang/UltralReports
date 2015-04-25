@@ -62,6 +62,15 @@ namespace Website.Controllers
             return PartialView("_CommonList", model);
         }
 
+        [HttpPost]
+        public JsonResult Reason(UltroReasonModel model)
+        {
+            var record = _bllUltraRecord.Get(model.Id);
+            record.Remarks = model.Reason;
+            _bllUltraRecord.Update(record);
+            return Json(new ResultModel(true));
+        }
+
         public ActionResult Index()
         {
             var model = new UltraRecordListPageModel();

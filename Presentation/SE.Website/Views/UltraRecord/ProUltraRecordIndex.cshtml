@@ -38,32 +38,25 @@
 <div class="search-result table-responsive" style="margin-top: 10px;">
 </div>
 
+<div class="module-fill">
+    @Html.Partial("_Modal", new ModalModel<UltroReasonModel> { Title = "新增监控类别" })
+</div>
 @section scripts{
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
             url: '@Model.RequestListUrl',
             modules: {
-                add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-add .modal") })),
-                update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-update .modal") }))
+                fill: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-fill .modal") })),
             },
             rowCommands: {
-                detail: function (model) {
-                    var criteria = $(".search-criteria form").serializeObject();
-                    var url = webExpress.utility.string.format("/UltraRecord/List?SearchProRecord=true&partId={0}&duty={1}&startTime={2}&endTime={3}", model.PartId, model.Duty, criteria.StartTime, criteria.EndTime);
-                    window.open(url, "_blank");
-                },
-
-            },
-            viewCommands: {
-                add: function () {
-                    viewInstance.modules.add.dialog.show();
-                    viewInstance.modules.add.bindModel({});
+                fill: function (model) {
+                    viewInstance.modules.fill.dialog.show();
+                    viewInstance.modules.fill.bindModel(model);
                 }
             }
         }));
         viewInstance.init();
-        viewInstance.modules.add.on("saved", function () { viewInstance.refresh(); });
-        viewInstance.modules.update.on("saved", function () { viewInstance.refresh(); });
+        viewInstance.modules.fill.on("saved", function () { viewInstance.refresh(); });
     </script>
 }

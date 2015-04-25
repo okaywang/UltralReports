@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using Website.Common;
 
@@ -118,9 +119,36 @@ namespace Website.Models
             }
         }
     }
+
+
+
+    public class MyValueConvertor : IValueConvertor
+    {
+        public object Convert(object value)
+        {
+            if (value == null || value.ToString() == "")
+            {
+                return "<button class='btn btn-primary btn-sm' command-name='fill' type='button'>填报</button>";
+            }
+            return value;
+        }
+    }
+
+
+    [RequestUrl("/UltraRecord/Reason")]
+    public class UltroReasonModel
+    {
+        [ControlType(typeof(NativeInputHidden))]
+        public int Id { get; set; }
+
+        [Required]
+        [DisplayName("原因")]
+        public string Reason { get; set; }
+    }
+
     public class ProUltraRecordListItemModel : IListItemModel
     {
-        public int PartId { get; set; }
+        public int Id { get; set; }
 
         [DisplayName("设备名称")]
         public string EquipmentName { get; set; }
@@ -137,7 +165,6 @@ namespace Website.Models
         [DisplayName("结束时间")]
         public DateTime EndTime { get; set; }
 
-
         [DisplayName("所属专业")]
         public string MajorName { get; set; }
 
@@ -148,6 +175,7 @@ namespace Website.Models
         public decimal MaxValue { get; set; }
 
         [DisplayName("超限原因")]
+        [ValueConvertor(typeof(MyValueConvertor))]
         public string Remarks { get; set; }
 
         public string ToJson()

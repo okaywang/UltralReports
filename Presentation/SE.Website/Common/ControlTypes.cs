@@ -247,7 +247,25 @@ namespace Website.Common
     //        get { return _formatString; }
     //    }
     //}
+    public class ValueConvertorAttribute : Attribute, IValueConvertor
+    {
+        private Type _convertType;
+        public ValueConvertorAttribute(Type convertType)
+        {
+            _convertType = convertType;
+        }
 
+        public object Convert(object value)
+        {
+            var convertor = System.Activator.CreateInstance(_convertType) as IValueConvertor;
+            return convertor.Convert(value);
+        }
+    }
+
+    public interface IValueConvertor
+    {
+        object Convert(object value);
+    }
     public static class RcExtenstion
     {
         public static string GetDisplayName(this MemberInfo prop)
@@ -319,18 +337,23 @@ namespace Website.Common
 
         public static string GetFormatedString(this PropertyInfo item, object obj)
         {
-            var attr = item.GetCustomAttribute<System.ComponentModel.DataAnnotations.DisplayFormatAttribute>();
             var result = item.GetValue(obj);
             if (result is Enum)
             {
                 var prop = result.GetType().GetField(result.ToString());
                 return prop.GetDisplayName();
             }
-            if (attr == null)
+            var convertor = item.GetCustomAttribute<ValueConvertorAttribute>();
+            if (convertor !=null)
             {
-                return result == null ? string.Empty : result.ToString();
+                result = (convertor as IValueConvertor).Convert(result);
             }
-            return string.Format(attr.DataFormatString, result);
+            var attr = item.GetCustomAttribute<System.ComponentModel.DataAnnotations.DisplayFormatAttribute>();
+            if (attr != null)
+            {
+                return string.Format(attr.DataFormatString, result);
+            }
+            return result == null ? string.Empty : result.ToString();
         }
     }
 }
