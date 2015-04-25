@@ -122,18 +122,27 @@ namespace Website.Models
 
 
 
-    public class MyValueConvertor : IValueConvertor
+    public class RemarksValueConvertor : IValueConvertor
     {
-        public object Convert(object value)
+        public object Convert(object obj)
         {
-            if (value == null || value.ToString() == "")
+            var model = obj as ProUltraRecordListItemModel;
+            if (model.Remarks == null || model.Remarks.ToString() == "")
             {
                 return "<button class='btn btn-primary btn-sm' command-name='fill' type='button'>填报</button>";
             }
-            return value;
+            return model.Remarks;
         }
     }
 
+    public class ExtremeValueConvertor : IValueConvertor
+    {
+        public object Convert(object obj)
+        {
+            var model = obj as ProUltraRecordListItemModel;
+            return model.UltraType == "PH" ? model.MaxValue : model.MinValue;
+        }
+    }
 
     [RequestUrl("/UltraRecord/Reason")]
     public class UltroReasonModel
@@ -168,14 +177,16 @@ namespace Website.Models
         [DisplayName("所属专业")]
         public string MajorName { get; set; }
 
-        [DisplayName("最小值")]
         public decimal MinValue { get; set; }
 
-        [DisplayName("最大值")]
         public decimal MaxValue { get; set; }
 
+        [DisplayName("超限最大幅值")]
+        [ValueConvertor(typeof(ExtremeValueConvertor))]
+        public decimal ExtremeValue { get; set; }
+
         [DisplayName("超限原因")]
-        [ValueConvertor(typeof(MyValueConvertor))]
+        [ValueConvertor(typeof(RemarksValueConvertor))]
         public string Remarks { get; set; }
 
         public string ToJson()

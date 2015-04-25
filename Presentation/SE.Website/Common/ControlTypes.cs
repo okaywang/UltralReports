@@ -346,7 +346,7 @@ namespace Website.Common
             var convertor = item.GetCustomAttribute<ValueConvertorAttribute>();
             if (convertor !=null)
             {
-                result = (convertor as IValueConvertor).Convert(result);
+                result = (convertor as IValueConvertor).Convert(obj);
             }
             var attr = item.GetCustomAttribute<System.ComponentModel.DataAnnotations.DisplayFormatAttribute>();
             if (attr != null)
