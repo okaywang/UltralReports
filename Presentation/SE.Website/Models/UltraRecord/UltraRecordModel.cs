@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using WebExpress.Core;
 using Website.Common;
 
 namespace Website.Models
@@ -16,11 +17,18 @@ namespace Website.Models
     #region Ultra
     public class UltraSummaryListPageModel : ListPageModal
     {
+        public UltraSummaryListPageModel()
+        {
+            MonitorTypes = new NameValuePair[0];
+        }
+        public NameValuePair[] MonitorTypes { get; set; }
         public string AddItemUrl { get; set; }
     }
     public class ProUltraRecordListPageModel : ListPageModal
     {
         public string AddItemUrl { get; set; }
+
+        public NameValuePair[] Majors { get; set; }
     }
 
     public class UltraRecordListPageModel : ListPageModal

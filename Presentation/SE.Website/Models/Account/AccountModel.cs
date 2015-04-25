@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WebExpress.Core;
 using Website.Common;
 
 namespace Website.Models

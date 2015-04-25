@@ -34,6 +34,8 @@ namespace BussinessLogic
 
         public int? Duty { get; set; }
 
+        public int? MajorId { get; set; }
+
         public DateTime? StartTime { get; set; }
 
         public DateTime? EndTime { get; set; }

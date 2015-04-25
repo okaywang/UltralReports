@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 using WebExpress.Core;
 
 namespace WebExpress.Core
-{
+{ 
+
+    public static class EnumHelper
+    {
+        public static void Each<T>(Action<T> action)
+        {
+            var values = Enum.GetValues(typeof(T));
+            foreach (var item in values)
+            {
+                action((T)item);
+            }
+        }
+    }
     public static class EnumExtenstion
     {
         public static string GetDisplayText(this Enum item)

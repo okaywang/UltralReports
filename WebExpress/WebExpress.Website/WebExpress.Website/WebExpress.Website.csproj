@@ -87,6 +87,7 @@
     <Compile Include="Exceptions\PageNotFoundException.cs" />
     <Compile Include="Exceptions\DataNotExpectedException.cs" />
     <Compile Include="Filters\ExceptionResolverFilter.cs" />
+    <Compile Include="HtmlHelper.cs" />
     <Compile Include="ModelBinders\Class1.cs" />
     <Compile Include="ModelBinders\TrimModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

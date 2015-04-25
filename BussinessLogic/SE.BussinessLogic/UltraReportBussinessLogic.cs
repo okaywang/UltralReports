@@ -39,6 +39,10 @@ namespace BussinessLogic
             {
                 query = query.Where(i => i.Duty >= criteria.Duty);
             }
+            if (criteria.MajorId.HasValue)
+            {
+                query = query.Where(i => i.Part.MajorId >= criteria.MajorId.Value);
+            }
  
             if (criteria.StartTime.HasValue)
             {

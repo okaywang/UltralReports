@@ -16,10 +16,14 @@ namespace Website.Controllers
     public class UltraRecordController : Controller
     {
         private UltraReportBussinessLogic _bllUltraRecord;
+        private EquipmentBussinessLogic _bllEquipment;
+        private MajorBussinessLogic _bllMajor;
 
-        public UltraRecordController(UltraReportBussinessLogic bllUltraRecord)
+        public UltraRecordController(UltraReportBussinessLogic bllUltraRecord, EquipmentBussinessLogic bllEquipment, MajorBussinessLogic bllMajor)
         {
             _bllUltraRecord = bllUltraRecord;
+            _bllEquipment = bllEquipment;
+            _bllMajor = bllMajor;
         }
 
         public ActionResult SummaryIndex()
@@ -27,7 +31,8 @@ namespace Website.Controllers
             var model = new UltraSummaryListPageModel();
             model.Title = "常规超限统计汇总列表";
             model.RequestListUrl = "/UltraRecord/SummaryList";
-            //model.AddItemUrl = "/Equipment/Add";
+            var types = _bllEquipment.MonitorTypeGetAll();
+            model.MonitorTypes = Mapper.Map<List<MonitorType>, NameValuePair[]>(types);
             return View(model);
         }
 
@@ -47,7 +52,8 @@ namespace Website.Controllers
             model.Title = "专业超限统计查询";
             model.RequestListUrl = "/UltraRecord/ProUltraRecordList";
 
-            //model.AddItemUrl = "/Equipment/Add";
+            var majors = _bllMajor.GetAll();
+            model.Majors = Mapper.Map<List<Major>, NameValuePair[]>(majors);
             return View(model);
         }
 

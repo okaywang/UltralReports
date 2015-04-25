@@ -205,12 +205,6 @@ namespace Website.Common
         }
     }
 
-    public class NameValuePair
-    {
-        public string Name { get; set; }
-        public string Value { get; set; }
-    }
-
     #endregion
 
     public class RequestUrlAttribute : Attribute

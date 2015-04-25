@@ -1,8 +1,8 @@
-﻿@model UltraSummaryListPageModel
+﻿@using WebExpress.Website
+@model UltraSummaryListPageModel
 @{
     ViewBag.Title = Model.Title;
 }
-
 <div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
     <form class="form-inline" role="form">
         <div class="form-group">
@@ -18,15 +18,32 @@
             <input type="text" name="EquipmentNamePart" class="form-control input-sm" />
         </div>
         <div class="form-group">
+            <label class="control-label">监控类别</label>
+            <select name="MonitorTypeId" class="form-control input-sm">
+                <option value="">全部</option>
+                @foreach (var item in Model.MonitorTypes)
+                {
+                    @Html.Raw(Html.Option(item))
+                }
+            </select>
+        </div>
+        <div class="form-group">
             <label class="control-label">值别</label>
-            <input type="text" name="Duty" class="form-control input-sm" />
+            <select name="Duty" class="form-control input-sm">
+                <option value="">全部</option>
+                @Html.Raw(Html.Option(DutyType.Duty1))
+                @Html.Raw(Html.Option(DutyType.Duty2))
+                @Html.Raw(Html.Option(DutyType.Duty3))
+                @Html.Raw(Html.Option(DutyType.Duty4))
+                @Html.Raw(Html.Option(DutyType.Duty5))
+            </select>
         </div>
         <div class="form-group">
             <label class="control-label">机组</label>
             <select name="MachineSet" class="form-control input-sm">
                 <option value="">全部</option>
-                <option value="@((int)MachineSetType.MachineSet1)">@MachineSetType.MachineSet1.GetDisplayText()</option>
-                <option value="@((int)MachineSetType.MachineSet2)">@MachineSetType.MachineSet2.GetDisplayText()</option>
+                @Html.Raw(Html.Option(MachineSetType.MachineSet1))
+                @Html.Raw(Html.Option(MachineSetType.MachineSet2))
             </select>
         </div>
         <div class="form-group">
@@ -34,10 +51,8 @@
         </div>
     </form>
 </div>
-
 <div class="search-result table-responsive" style="margin-top: 10px;">
 </div>
-
 @section scripts{
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
