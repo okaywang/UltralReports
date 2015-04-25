@@ -46,6 +46,7 @@ namespace Website.Controllers
             var model = new ProUltraRecordListPageModel();
             model.Title = "专业超限统计查询";
             model.RequestListUrl = "/UltraRecord/ProUltraRecordList";
+
             //model.AddItemUrl = "/Equipment/Add";
             return View(model);
         }

@@ -30,7 +30,7 @@ namespace BussinessLogic
             }
             var query = PrimaryRepository.Table;
             query = query.Where(i => i.Flag == true);
-            query = query.Where(i => i.IsProRecord == criteria.SearchProRecord);
+            query = query.Where(i => i.IsProRecord == criteria.SearchProRecord); 
             if (criteria.PartId.HasValue)
             {
                 query = query.Where(i => i.PartId >= criteria.PartId.Value);
@@ -39,6 +39,7 @@ namespace BussinessLogic
             {
                 query = query.Where(i => i.Duty >= criteria.Duty);
             }
+ 
             if (criteria.StartTime.HasValue)
             {
                 query = query.Where(i => i.StartTime >= criteria.StartTime.Value);

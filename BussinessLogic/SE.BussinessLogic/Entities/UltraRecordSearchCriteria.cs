@@ -29,8 +29,8 @@ namespace BussinessLogic
     public class UltraRecordSearchCriteria : SearchCriteria<UltraRecord>
     {
         public bool SearchProRecord { get; set; }
-
-        public int? PartId { get; set; }
+         
+        public int? PartId { get; set; } 
 
         public int? Duty { get; set; }
 

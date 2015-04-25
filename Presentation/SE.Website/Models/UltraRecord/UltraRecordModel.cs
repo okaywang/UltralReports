@@ -127,7 +127,7 @@ namespace Website.Models
 
         [DisplayName("部件名称")]
         public string PartName { get; set; }
-        
+
         [DisplayName("超限类别")]
         public string UltraType { get; set; }
 
@@ -136,6 +136,7 @@ namespace Website.Models
 
         [DisplayName("结束时间")]
         public DateTime EndTime { get; set; }
+
 
         [DisplayName("所属专业")]
         public string MajorName { get; set; }
@@ -148,7 +149,7 @@ namespace Website.Models
 
         [DisplayName("超限原因")]
         public string Remarks { get; set; }
-        
+
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);

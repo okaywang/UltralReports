@@ -12,42 +12,42 @@
 namespace DataAccess
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
-    
-public partial class UltraRecord
-{
 
-    public int Id { get; set; }
+    public partial class UltraRecord
+    {
 
-    public int PartId { get; set; }
+        public int Id { get; set; }
 
-    public Nullable<System.DateTime> EndTime { get; set; }
+        public int PartId { get; set; }
 
-    public int Duty { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
 
-    public string UltraType { get; set; }
+        public int Duty { get; set; }
 
-    public decimal MinValue { get; set; }
+        public string UltraType { get; set; }
 
-    public decimal MaxValue { get; set; }
+        public decimal MinValue { get; set; }
 
-    public decimal AvgValue { get; set; }
+        public decimal MaxValue { get; set; }
 
-    public System.DateTime StartTime { get; set; }
+        public decimal AvgValue { get; set; }
 
-    public bool Flag { get; set; }
+        public System.DateTime StartTime { get; set; }
 
-    public string Remarks { get; set; }
+        public bool Flag { get; set; }
 
-    public bool HasRemarks { get; set; }
+        public string Remarks { get; set; }
 
-    public bool IsProRecord { get; set; }
+        public bool HasRemarks { get; set; }
+
+        public bool IsProRecord { get; set; }
 
 
 
-    public virtual Part Part { get; set; }
+        public virtual Part Part { get; set; }
 
-}
+    }
 
 }

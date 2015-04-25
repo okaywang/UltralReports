@@ -3,7 +3,7 @@
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
-    <edmx:StorageModels>
+    <edmx:StorageModels> 
     <Schema Namespace="UltralReportsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
@@ -99,7 +99,7 @@
           <Property Name="MajorId" Type="int" />
           <Property Name="PH" Type="decimal" Precision="10" Scale="2" />
           <Property Name="PL" Type="decimal" Precision="10" Scale="2" />
-        </EntityType>
+        </EntityType> 
         <EntityType Name="Schedule">
           <Key>
             <PropertyRef Name="Id" />
@@ -108,15 +108,15 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="ShiftType" Type="int" Nullable="false" />
           <Property Name="Duty" Type="int" Nullable="false" />
-        </EntityType>
+        </EntityType> 
         <EntityType Name="Shift">
           <Key>
             <PropertyRef Name="Id" />
-          </Key>
+          </Key> 
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ShiftType" Type="int" Nullable="false" />
           <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
-          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" /> 
         </EntityType>
         <EntityType Name="SmsGroup">
           <Key>
@@ -155,9 +155,9 @@
           <Property Name="MinValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="MaxValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="AvgValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="200" /> 
           <Property Name="HasRemarks" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="IsProRecord" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IsProRecord" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" /> 
         </EntityType>
         <Association Name="FK__Account__MajorId__07F6335A">
           <End Role="Major" Type="Self.Major" Multiplicity="0..1" />
@@ -254,10 +254,10 @@
               <PropertyRef Name="RecipientId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
+        </Association> 
         <Association Name="FK__UltraReco__PartI__3E52440B">
           <End Role="Part" Type="Self.Part" Multiplicity="1" />
-          <End Role="UltraRecord" Type="Self.UltraRecord" Multiplicity="*" />
+          <End Role="UltraRecord" Type="Self.UltraRecord" Multiplicity="*" /> 
           <ReferentialConstraint>
             <Principal Role="Part">
               <PropertyRef Name="Id" />
@@ -369,8 +369,8 @@
             <End Role="Major" EntitySet="Majors" />
             <End Role="Part" EntitySet="Part" />
           </AssociationSet>
-          <EntitySet Name="Shifts" EntityType="UltralReportsModel.Shift" />
-          <EntitySet Name="Schedules" EntityType="UltralReportsModel.Schedule" />
+          <EntitySet Name="Shifts" EntityType="UltralReportsModel.Shift" /> 
+          <EntitySet Name="Schedules" EntityType="UltralReportsModel.Schedule" /> 
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -614,7 +614,7 @@
           <Property Type="Int32" Name="ShiftType" Nullable="false" />
           <Property Type="Time" Name="StartTime" Nullable="false" Precision="7" />
           <Property Type="Time" Name="EndTime" Nullable="false" Precision="7" />
-        </EntityType>
+        </EntityType> 
         <EntityType Name="Schedule">
           <Key>
             <PropertyRef Name="Id" />
@@ -623,7 +623,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ShiftType" Type="Int32" Nullable="false" />
           <Property Name="Duty" Type="Int32" Nullable="false" />
-        </EntityType>
+        </EntityType> 
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -787,7 +787,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
-          </EntitySetMapping>
+          </EntitySetMapping> 
           <EntitySetMapping Name="Schedules">
             <EntityTypeMapping TypeName="UltralReportsModel.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
@@ -797,7 +797,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
-          </EntitySetMapping>
+          </EntitySetMapping> 
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
