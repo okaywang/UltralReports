@@ -15,20 +15,16 @@ namespace DataAccess
 using System;
     using System.Collections.Generic;
     
-public partial class AccountAuthority
+public partial class Shift
 {
 
     public int Id { get; set; }
 
-    public int AccountId { get; set; }
+    public int ShiftType { get; set; }
 
-    public int AuthorityId { get; set; }
+    public System.TimeSpan StartTime { get; set; }
 
-
-
-    public virtual Account Account { get; set; }
-
-    public virtual Authority Authority { get; set; }
+    public System.TimeSpan EndTime { get; set; }
 
 }
 

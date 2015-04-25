@@ -11,6 +11,8 @@ namespace BussinessLogic
 {
     public class UltraSummarySearchCriteria : SearchCriteria<UltraSummary>
     {
+        public bool SearchProRecord { get; set; }
+
         public MachineSetType? MachineSet { get; set; }
 
         public int? Duty { get; set; }
@@ -26,7 +28,9 @@ namespace BussinessLogic
 
     public class UltraRecordSearchCriteria : SearchCriteria<UltraRecord>
     {
-        public int PartId { get; set; }
+        public bool SearchProRecord { get; set; }
+
+        public int? PartId { get; set; }
 
         public int? Duty { get; set; }
 

@@ -158,6 +158,7 @@
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="Controllers\UltraRecordController.cs" />
+    <Compile Include="Controllers\ShiftController.cs" />
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Authentication\FormAuthenticationService.cs">
       <SubType>Code</SubType>
@@ -464,6 +465,9 @@
     <Content Include="Views\UltraRecord\Index.cshtml" />
     <Content Include="Views\UltraRecord\SummaryIndex.cshtml" />
     <Content Include="Views\Major\Index.cshtml" />
+    <Content Include="Views\UltraRecord\ProUltraRecordIndex.cshtml" />
+    <Content Include="Views\Equipment\ProPartIndex.cshtml" />
+    <Content Include="Views\Shift\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

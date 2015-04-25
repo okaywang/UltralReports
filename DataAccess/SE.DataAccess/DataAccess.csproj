@@ -79,6 +79,12 @@
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shift.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SmsGroup.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>

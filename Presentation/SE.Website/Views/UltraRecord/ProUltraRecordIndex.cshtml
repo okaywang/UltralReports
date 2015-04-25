@@ -1,4 +1,4 @@
-﻿@model UltraSummaryListPageModel
+﻿@model ProUltraRecordListPageModel
 @{
     ViewBag.Title = Model.Title;
 }
@@ -50,7 +50,7 @@
             rowCommands: {
                 detail: function (model) {
                     var criteria = $(".search-criteria form").serializeObject();
-                    var url = webExpress.utility.string.format("/UltraRecord/List?SearchProRecord=false&partId={0}&duty={1}&startTime={2}&endTime={3}", model.PartId, model.Duty, criteria.StartTime, criteria.EndTime);
+                    var url = webExpress.utility.string.format("/UltraRecord/List?SearchProRecord=true&partId={0}&duty={1}&startTime={2}&endTime={3}", model.PartId, model.Duty, criteria.StartTime, criteria.EndTime);
                     window.open(url, "_blank");
                 },
 

@@ -54,18 +54,28 @@ namespace Website
         {
             Mapper.CreateMap<Account, AccountListItemModel>();
             Mapper.CreateMap<AccountAddModel, Account>();
+
             Mapper.CreateMap<MonitorType, MonitorTypeListItemModel>();
             Mapper.CreateMap<MonitorType, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
+
             Mapper.CreateMap<Major, MajorListItemModel>();
             Mapper.CreateMap<Major, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
+
             Mapper.CreateMap<Part, PartListItemModel>().ForMember(dest => dest.MachineSet, opt => opt.MapFrom(src => src.Equipment.MachineSet));
+            Mapper.CreateMap<PartAddModel, Part>();
+            Mapper.CreateMap<Part, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
+
+            Mapper.CreateMap<Part, ProPartListItemModel>().ForMember(dest => dest.MachineSet, opt => opt.MapFrom(src => src.Equipment.MachineSet));
+            Mapper.CreateMap<ProPartAddModel, Part>();
+
             Mapper.CreateMap<Equipment, EquipmentListItemModel>().ForMember(i => i.MonitorTypeName, opt => opt.MapFrom(src => src.MonitorType.Name));
             Mapper.CreateMap<EquipmentAddModel, Equipment>();
             Mapper.CreateMap<Equipment, NameValuePair>().ForMember(i => i.Value, opt => opt.MapFrom(src => src.Id));
-            Mapper.CreateMap<PartAddModel, Part>();
+
             Mapper.CreateMap<UltraSummary, UltraSummaryListItemModel>().ForMember(dest => dest.RatedRange, opt => opt.MapFrom(src => string.Format("{0}-{1}", src.L3, src.H1)));
             Mapper.CreateMap<UltraRecord, UltraRecordListItemModel>();
-
+            Mapper.CreateMap<UltraRecord, ProUltraRecordListItemModel>().ForMember(dest => dest.EquipmentName, opt => opt.MapFrom(src => src.Part.Equipment.Name))
+                .ForMember(dest => dest.MajorName, opt => opt.MapFrom(src => src.Part.Major.Name));
         }
 
 

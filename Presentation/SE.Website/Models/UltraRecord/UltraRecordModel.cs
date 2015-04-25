@@ -12,8 +12,12 @@ using Website.Common;
 
 namespace Website.Models
 {
-    #region Equipment
+    #region Ultra
     public class UltraSummaryListPageModel : ListPageModal
+    {
+        public string AddItemUrl { get; set; }
+    }
+    public class ProUltraRecordListPageModel : ListPageModal
     {
         public string AddItemUrl { get; set; }
     }
@@ -27,14 +31,14 @@ namespace Website.Models
     {
         public int PartId { get; set; }
 
-        [DisplayName("部件设备名称")]
-        public string PartName { get; set; }
-
         [DisplayName("设备名称")]
         public string EquipmentName { get; set; }
 
         [DisplayName("监控类型")]
         public string MonitorTypeName { get; set; }
+
+        [DisplayName("部件设备名称")]
+        public string PartName { get; set; }
 
         [DisplayName("开始时间")]
         public DateTime BeginTime { get; set; }
@@ -75,14 +79,14 @@ namespace Website.Models
     {
         public int PartId { get; set; }
 
-        [DisplayName("设备名称")]
-        public string EquipmentName { get; set; }
+        [DisplayName("部件设备名称")]
+        public string PartName { get; set; }
 
         [DisplayName("监控类型")]
         public string MonitorTypeName { get; set; }
 
-        [DisplayName("部件设备名称")]
-        public string PartName { get; set; }
+        [DisplayName("设备名称")]
+        public string EquipmentName { get; set; }
 
         //public decimal L3 { get; set; }
 
@@ -101,6 +105,50 @@ namespace Website.Models
         [DisplayName("超限时长")]
         public int Duration { get; set; }
 
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
+        public IListItemCommand[] Commands
+        {
+            get
+            {
+                return new ListItemCommand[0];
+            }
+        }
+    }
+    public class ProUltraRecordListItemModel : IListItemModel
+    {
+        public int PartId { get; set; }
+
+        [DisplayName("设备名称")]
+        public string EquipmentName { get; set; }
+
+        [DisplayName("部件名称")]
+        public string PartName { get; set; }
+        
+        [DisplayName("超限类别")]
+        public string UltraType { get; set; }
+
+        [DisplayName("开始时间")]
+        public DateTime StartTime { get; set; }
+
+        [DisplayName("结束时间")]
+        public DateTime EndTime { get; set; }
+
+        [DisplayName("所属专业")]
+        public string MajorName { get; set; }
+
+        [DisplayName("最小值")]
+        public decimal MinValue { get; set; }
+
+        [DisplayName("最大值")]
+        public decimal MaxValue { get; set; }
+
+        [DisplayName("超限原因")]
+        public string Remarks { get; set; }
+        
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);
