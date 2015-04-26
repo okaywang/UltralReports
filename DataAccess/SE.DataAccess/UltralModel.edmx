@@ -99,7 +99,9 @@
           <Property Name="MajorId" Type="int" />
           <Property Name="PH" Type="decimal" Precision="10" Scale="2" />
           <Property Name="PL" Type="decimal" Precision="10" Scale="2" />
-        </EntityType> 
+          <Property Name="SendSms" Type="bit" Nullable="false" />
+          <Property Name="UltraNum" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Schedule">
           <Key>
             <PropertyRef Name="Id" />
@@ -108,15 +110,15 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="ShiftType" Type="int" Nullable="false" />
           <Property Name="Duty" Type="int" Nullable="false" />
-        </EntityType> 
+        </EntityType>
         <EntityType Name="Shift">
           <Key>
             <PropertyRef Name="Id" />
-          </Key> 
+          </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ShiftType" Type="int" Nullable="false" />
           <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
-          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" /> 
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="SmsGroup">
           <Key>
@@ -155,9 +157,9 @@
           <Property Name="MinValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="MaxValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="AvgValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Remarks" Type="nvarchar" MaxLength="200" /> 
+          <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
           <Property Name="HasRemarks" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="IsProRecord" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" /> 
+          <Property Name="IsProRecord" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <Association Name="FK__Account__MajorId__07F6335A">
           <End Role="Major" Type="Self.Major" Multiplicity="0..1" />
@@ -207,7 +209,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Part__EquipmentI__38996AB5">
+        <Association Name="FK__Part__EquipmentI__52593CB8">
           <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
           <End Role="Part" Type="Self.Part" Multiplicity="*" />
           <ReferentialConstraint>
@@ -219,7 +221,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Part__MajorId__398D8EEE">
+        <Association Name="FK__Part__MajorId__534D60F1">
           <End Role="Major" Type="Self.Major" Multiplicity="0..1" />
           <End Role="Part" Type="Self.Part" Multiplicity="*" />
           <ReferentialConstraint>
@@ -254,10 +256,10 @@
               <PropertyRef Name="RecipientId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association> 
+        </Association>
         <Association Name="FK__UltraReco__PartI__3E52440B">
           <End Role="Part" Type="Self.Part" Multiplicity="1" />
-          <End Role="UltraRecord" Type="Self.UltraRecord" Multiplicity="*" /> 
+          <End Role="UltraRecord" Type="Self.UltraRecord" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Part">
               <PropertyRef Name="Id" />
@@ -299,11 +301,11 @@
             <End Role="MonitorType" EntitySet="MonitorType" />
             <End Role="Equipment" EntitySet="Equipment" />
           </AssociationSet>
-          <AssociationSet Name="FK__Part__EquipmentI__38996AB5" Association="Self.FK__Part__EquipmentI__38996AB5">
+          <AssociationSet Name="FK__Part__EquipmentI__52593CB8" Association="Self.FK__Part__EquipmentI__52593CB8">
             <End Role="Equipment" EntitySet="Equipment" />
             <End Role="Part" EntitySet="Part" />
           </AssociationSet>
-          <AssociationSet Name="FK__Part__MajorId__398D8EEE" Association="Self.FK__Part__MajorId__398D8EEE">
+          <AssociationSet Name="FK__Part__MajorId__534D60F1" Association="Self.FK__Part__MajorId__534D60F1">
             <End Role="Major" EntitySet="Major" />
             <End Role="Part" EntitySet="Part" />
           </AssociationSet>
@@ -529,6 +531,8 @@
           <Property Type="Decimal" Name="PH" Precision="10" Scale="2" />
           <Property Type="Decimal" Name="PL" Precision="10" Scale="2" />
           <NavigationProperty Name="Major" Relationship="UltralReportsModel.FK__Part__MajorId__398D8EEE" FromRole="Part" ToRole="Major" />
+          <Property Name="SendSms" Type="Boolean" Nullable="false" />
+          <Property Name="UltraNum" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK__Part__EquipmentI__3B75D760">
           <End Type="UltralReportsModel.Equipment" Role="Equipment" Multiplicity="1" />
@@ -734,6 +738,8 @@
           <EntitySetMapping Name="Part">
             <EntityTypeMapping TypeName="UltralReportsModel.Part">
               <MappingFragment StoreEntitySet="Part">
+                <ScalarProperty Name="UltraNum" ColumnName="UltraNum" />
+                <ScalarProperty Name="SendSms" ColumnName="SendSms" />
                 <ScalarProperty Name="PL" ColumnName="PL" />
                 <ScalarProperty Name="PH" ColumnName="PH" />
                 <ScalarProperty Name="MajorId" ColumnName="MajorId" />

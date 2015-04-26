@@ -12,20 +12,20 @@
 namespace DataAccess
 {
 
-    using System;
+using System;
     using System.Collections.Generic;
+    
+public partial class Shift
+{
 
-    public partial class Shift
-    {
+    public int Id { get; set; }
 
-        public int Id { get; set; }
+    public int ShiftType { get; set; }
 
-        public int ShiftType { get; set; }
+    public System.TimeSpan StartTime { get; set; }
 
-        public System.TimeSpan StartTime { get; set; }
+    public System.TimeSpan EndTime { get; set; }
 
-        public System.TimeSpan EndTime { get; set; }
-
-    }
+}
 
 }

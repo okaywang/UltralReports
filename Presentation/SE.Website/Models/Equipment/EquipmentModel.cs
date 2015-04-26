@@ -175,7 +175,23 @@ namespace Website.Models
     {
         public string AddItemUrl { get; set; }
     }
-
+    public class SimpleSourceAttribute : Attribute, IControlSource
+    {
+        private List<NameValuePair> _pairs = new List<NameValuePair>();
+        public SimpleSourceAttribute(params string[] items)
+        {
+            foreach (var item in items)
+            {
+                var elements = item.Split('-');
+                var nv = new NameValuePair(elements[0], elements[1]);
+                _pairs.Add(nv);
+            }
+        }
+        public NameValuePair[] GetSource()
+        {
+            return _pairs.ToArray();
+        }
+    }
     [RequestUrl("/Equipment/PartAdd")]
     public class PartAddModel
     {
@@ -225,6 +241,16 @@ namespace Website.Models
         [Required]
         [DisplayName("低3限")]
         public decimal L3 { get; set; }
+
+        [Required]
+        [DisplayName("是否发短信")]
+        [ControlType(typeof(NativeRadios))]
+        [SimpleSourceAttribute("发送-true", "不发送-false")]
+        public bool SendSms { get; set; }
+
+        [Required]
+        [DisplayName("短信超限次数")]
+        public int UltraNum { get; set; }
     }
 
     [RequestUrl("/Equipment/PartUpdate")]
@@ -279,6 +305,16 @@ namespace Website.Models
         [Required]
         [DisplayName("低3限")]
         public decimal L3 { get; set; }
+
+        [Required]
+        [DisplayName("是否发短信")]
+        [ControlType(typeof(NativeRadios))]
+        [SimpleSourceAttribute("发送-true", "不发送-false")]
+        public bool SendSms { get; set; }
+
+        [Required]
+        [DisplayName("短信超限次数")]
+        public int UltraNum { get; set; }
     }
 
     public class PartListItemModel : IListItemModel
@@ -320,6 +356,10 @@ namespace Website.Models
 
         [DisplayName("低3")]
         public decimal L3 { get; set; }
+         
+        public bool SendSms { get; set; }
+         
+        public int UltraNum { get; set; }
 
         [DisplayName("操作")]
         [JsonIgnore]

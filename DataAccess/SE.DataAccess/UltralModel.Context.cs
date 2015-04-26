@@ -22,7 +22,8 @@ public partial class UltralReportsEntities : DbContext
 {
     public UltralReportsEntities()
         : base("name=UltralReportsEntities")
-    { 
+    {
+
     }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)

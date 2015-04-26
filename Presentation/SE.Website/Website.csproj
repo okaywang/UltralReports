@@ -142,6 +142,7 @@
   <ItemGroup>
     <Compile Include="ChinaAreaScriptWriter.cs" />
     <Compile Include="Common\AuthorityHelper.cs" />
+    <Compile Include="Common\Controls.cs" />
     <Compile Include="Common\ControlTypes.cs" />
     <Compile Include="Common\ContainOneElementAttribute.cs" />
     <Compile Include="Common\RequiredIfAttribute.cs" />

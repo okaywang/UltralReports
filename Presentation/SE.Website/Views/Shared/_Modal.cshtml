@@ -11,15 +11,16 @@
                     @{
                         var beanType = Model.GetType().GenericTypeArguments[0];
                         var props = beanType.GetProperties();
+                        var className = props.Max(i => i.Name.Length) > 5 ? "col-md-3" : "col-md-2";
                         foreach (var prop in props)
                         {
                             var control = prop.GetControl();
-                        <div class="form-group" property-name="@control.Name" @(control.IsRequired ? "validate-rule=required:true" : string.Empty) @(control.IsVisible ? string.Empty : "style=display:none") >
-                            <label class="control-label col-md-2">@prop.GetDisplayName()</label>
-                            <div class="col-md-5">
-                                @Html.Raw(control.Render())
+                            <div class="form-group" property-name="@control.Name" @(control.IsRequired ? "validate-rule=required:true" : string.Empty) @(control.IsVisible ? string.Empty : "style=display:none")>
+                                <label class="control-label @className">@prop.GetDisplayName()</label>
+                                <div class="col-md-5">
+                                    @Html.Raw(control.Render())
+                                </div>
                             </div>
-                        </div>                            
                         }
                     }
                 </form>

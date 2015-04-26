@@ -152,6 +152,7 @@ namespace Website.Models
 
         [Required]
         [DisplayName("原因")]
+        [ControlType(typeof(NativeTextarea))]
         public string Reason { get; set; }
     }
 

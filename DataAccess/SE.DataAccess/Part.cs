@@ -54,6 +54,10 @@ public partial class Part
 
     public Nullable<decimal> PL { get; set; }
 
+    public bool SendSms { get; set; }
+
+    public int UltraNum { get; set; }
+
 
 
     public virtual Equipment Equipment { get; set; }

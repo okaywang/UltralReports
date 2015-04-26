@@ -11,22 +11,21 @@
                     <div class="form-group">
                         <label class="control-label col-md-2">机组</label>
                         <div class="col-md-5">
-                            @Html.Raw(new NativeSelect("MachineSet", true, false, new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource()).Render())
+                            @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource() }.Render())
                         </div>
                     </div>
-
                     @{
                         var beanType = Model.GetType().GenericTypeArguments[0];
                         var props = beanType.GetProperties();
                         foreach (var prop in props)
                         {
                             var control = prop.GetControl();
-                        <div class="form-group" @(control.IsRequired ? "validate-rule='required'" : string.Empty) @(control.IsVisible ? string.Empty : "style=display:none") >
-                            <label class="control-label col-md-2">@prop.GetDisplayName()</label>
-                            <div class="col-md-5">
-                                @Html.Raw(control.Render())
+                            <div class="form-group" @(control.IsRequired ? "validate-rule='required'" : string.Empty) @(control.IsVisible ? string.Empty : "style=display:none")>
+                                <label class="control-label col-md-2">@prop.GetDisplayName()</label>
+                                <div class="col-md-5">
+                                    @Html.Raw(control.Render())
+                                </div>
                             </div>
-                        </div>                            
                         }
                     }
                 </form>

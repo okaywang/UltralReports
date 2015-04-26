@@ -80,8 +80,12 @@
             webExpress.utility.ajax.request(url, model,
                 function (data) {
                     _self.dialog.container.unmask();
-                    _self.dialog.hide();
-                    _self.fire("saved", [data]);
+                    if (data.IsSuccess) {
+                        _self.dialog.hide();
+                        _self.fire("saved", [data]);
+                    } else {
+                        bootbox.alert(data.Message);
+                    }
                 },
                 function () {
                     _self.dialog.container.unmask();

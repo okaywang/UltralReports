@@ -169,6 +169,8 @@ namespace Website.Controllers
             entity.H1 = model.H1;
             entity.H2 = model.H2;
             entity.H3 = model.H3;
+            entity.SendSms = model.SendSms;
+            entity.UltraNum = model.UltraNum;
 
             _bllEquipment.PartUpdate(entity);
             return Json(new ResultModel(true));

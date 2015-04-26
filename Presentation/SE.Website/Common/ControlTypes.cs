@@ -9,158 +9,13 @@ using WebExpress.Core;
 
 namespace Website.Common
 {
-    public static class ControlTypes
+    public class RequestUrlAttribute : Attribute
     {
-        //native input
-        public const string NativeInputText = "nativeInputText";
-        public const string NativeInputDate = "nativeInputDate";
-        public const string NativeInputPassword = "nativeInputPassword";
-        public const string NativeInputRadio = "nativeInputRadio";
-        public const string NativeInputCheckbox = "nativeInputCheckbox";
-        public const string NativeInputFile = "nativeInputFile";
-
-        //native select
-        public const string NativeSelect = "nativeSelect";
-        public const string NativeSelectMultiple = "nativeSelectMultiple";
-
-        //select2
-        public const string Select2 = "select2";
-        public const string Select2Multiple = "select2Multiple";
-
-        public const string ChinaAreas = "chinaAreas";
-
-        public const string ListItems = "listItems";
-
-        public const string SingleItem = "singleItem";
-        //public const string SimpleTextbox = "SimpleTextbox";
-    }
-
-    #region ControlType
-
-    public interface IControl
-    {
-        bool IsVisible { get; }
-        bool IsEnabled { get; }
-        bool IsRequired { get; }
-        string Name { get; }
-        string Render();
-    }
-
-    public abstract class ControlBase : IControl
-    {
-        public virtual bool IsVisible { get { return true; } }
-        public virtual bool IsEnabled { get; protected set; }
-        public virtual bool IsRequired { get; protected set; }
-        public abstract string Name { get; }
-        public abstract string Render();
-    }
-
-    public class NativeSelect : ControlBase
-    {
-        private string _name;
-        private NameValuePair[] _pairs;
-        public NativeSelect(string name)
-            : this(name, true, false) { }
-        public NativeSelect(string name, bool enabled, bool required)
-            : this(name, enabled, required, new NameValuePair[0]) { }
-        public NativeSelect(string name, bool enabled, bool required, NameValuePair[] pairs)
+        public RequestUrlAttribute(string requestUrl)
         {
-            _name = name;
-            _pairs = pairs;
-            IsEnabled = enabled;
-            IsRequired = required;
+            RequestUrl = requestUrl;
         }
-        public override string Name { get { return _name; } }
-
-        public override string Render()
-        {
-            var sb = new StringBuilder();
-            sb.AppendFormat("<select class='form-control' name='{0}' data-bind='value:{0}'", Name);
-            if (!IsEnabled)
-            {
-                sb.Append(" disabled");
-            }
-            sb.Append(">");
-            sb.Append("<option value=''>未选</option>");
-            foreach (var pair in _pairs)
-            {
-                sb.AppendFormat("<option value='{0}'>{1}</option>", pair.Value, pair.Name);
-            }
-            sb.Append("</select>");
-
-            if (!IsEnabled)
-            {
-                sb.AppendFormat("<input type='hidden' name='{0}'>", Name);
-            }
-            return sb.ToString();
-        }
-    }
-
-    public class NativeInputText : ControlBase
-    {
-        private string _name;
-
-        public NativeInputText(string name) : this(name, true) { }
-        public NativeInputText(string name, bool enabled) : this(name, true, false) { }
-        public NativeInputText(string name, bool enabled, bool required)
-        {
-            _name = name;
-            IsEnabled = enabled;
-            IsRequired = required;
-        }
-
-        public override string Name { get { return _name; } }
-
-        public override string Render()
-        {
-            var sb = new StringBuilder();
-            sb.AppendFormat("<input class='form-control' type='text' name='{0}' data-bind='value:{0}' ", Name);
-            if (!IsEnabled)
-            {
-                sb.Append(" disabled");
-            }
-            sb.Append(">");
-            if (!IsEnabled)
-            {
-                sb.AppendFormat("<input type='hidden' name='{0}'>", Name);
-            }
-            return sb.ToString();
-        }
-    }
-
-    public class NativeInputHidden : ControlBase
-    {
-        private string _name;
-        public NativeInputHidden(string name) : this(name, true, false) { }
-        public NativeInputHidden(string name, bool enabled, bool required)
-        {
-            _name = name;
-            IsEnabled = enabled;
-            IsRequired = required;
-        }
-        public override string Name { get { return _name; } }
-
-        public override bool IsVisible { get { return false; } }
-
-        public override string Render()
-        {
-            return string.Format("<input type='hidden' name='{0}' data-bind='value:{0}' />", Name);
-        }
-    }
-
-    public class StatisticControl : ControlBase
-    {
-        private string _name;
-        public StatisticControl(string name)
-        {
-            _name = name;
-        }
-        public override string Name { get { return _name; } }
-
-        public override string Render()
-        {
-            return string.Format("<p class='form-control-static' name='{0}'></p>", Name);
-        }
+        public string RequestUrl { get; private set; }
     }
 
     public class ControlTypeAttribute : Attribute
@@ -203,17 +58,6 @@ namespace Website.Common
             }
             return pairs.ToArray();
         }
-    }
-
-    #endregion
-
-    public class RequestUrlAttribute : Attribute
-    {
-        public RequestUrlAttribute(string requestUrl)
-        {
-            RequestUrl = requestUrl;
-        }
-        public string RequestUrl { get; private set; }
     }
 
     //public class DisplayTextAttribute : Attribute
@@ -317,13 +161,15 @@ namespace Website.Common
             {
                 return new NativeInputText(prop.Name, true, isRequired);
             }
-            if (attr.ControlType == typeof(NativeSelect))
+            if (typeof(ISourceControl).IsAssignableFrom(typeof(NativeSelect)))
             {
                 var source = prop.GetCustomAttributes().FirstOrDefault(i => typeof(IControlSource).IsAssignableFrom(i.GetType())) as IControlSource;
                 if (source != null)
                 {
                     var pairs = source.GetSource();
-                    return Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled, isRequired, pairs) as IControl;
+                    var instance = Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled, isRequired) as ISourceControl;
+                    instance.Source = pairs;
+                    return instance as IControl;
                 }
             }
             return Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled, isRequired) as IControl;
@@ -338,7 +184,7 @@ namespace Website.Common
                 return prop.GetDisplayName();
             }
             var convertor = item.GetCustomAttribute<ValueConvertorAttribute>();
-            if (convertor !=null)
+            if (convertor != null)
             {
                 result = (convertor as IValueConvertor).Convert(obj);
             }
