@@ -102,6 +102,16 @@
           <Property Name="SendSms" Type="bit" Nullable="false" />
           <Property Name="UltraNum" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PartSms">
+          <Key>
+            <PropertyRef Name="PartId" />
+          </Key>
+          <Property Name="PartId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="HRecover" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="LRecover" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="Schedule">
           <Key>
             <PropertyRef Name="Id" />
@@ -233,6 +243,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PartSms__GroupId__60A75C0F">
+          <End Role="SmsGroup" Type="Self.SmsGroup" Multiplicity="1" />
+          <End Role="PartSms" Type="Self.PartSms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmsGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartSms">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PartSms__PartId__5FB337D6">
+          <End Role="Part" Type="Self.Part" Multiplicity="1" />
+          <End Role="PartSms" Type="Self.PartSms" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartSms">
+              <PropertyRef Name="PartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__SmsGroupR__Group__29572725">
           <End Role="SmsGroup" Type="Self.SmsGroup" Multiplicity="1" />
           <End Role="SmsGroupRecipient" Type="Self.SmsGroupRecipient" Multiplicity="*" />
@@ -279,6 +313,7 @@
           <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonitorType" EntityType="Self.MonitorType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Part" EntityType="Self.Part" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartSms" EntityType="Self.PartSms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SmsGroup" EntityType="Self.SmsGroup" Schema="dbo" store:Type="Tables" />
@@ -308,6 +343,14 @@
           <AssociationSet Name="FK__Part__MajorId__534D60F1" Association="Self.FK__Part__MajorId__534D60F1">
             <End Role="Major" EntitySet="Major" />
             <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PartSms__GroupId__60A75C0F" Association="Self.FK__PartSms__GroupId__60A75C0F">
+            <End Role="SmsGroup" EntitySet="SmsGroup" />
+            <End Role="PartSms" EntitySet="PartSms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PartSms__PartId__5FB337D6" Association="Self.FK__PartSms__PartId__5FB337D6">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="PartSms" EntitySet="PartSms" />
           </AssociationSet>
           <AssociationSet Name="FK__SmsGroupR__Group__29572725" Association="Self.FK__SmsGroupR__Group__29572725">
             <End Role="SmsGroup" EntitySet="SmsGroup" />
@@ -372,7 +415,16 @@
             <End Role="Part" EntitySet="Part" />
           </AssociationSet>
           <EntitySet Name="Shifts" EntityType="UltralReportsModel.Shift" /> 
-          <EntitySet Name="Schedules" EntityType="UltralReportsModel.Schedule" /> 
+          <EntitySet Name="Schedules" EntityType="UltralReportsModel.Schedule" />
+          <EntitySet Name="PartSms1" EntityType="UltralReportsModel.PartSms" />
+          <AssociationSet Name="FK__PartSms__PartId__5FB337D6" Association="UltralReportsModel.FK__PartSms__PartId__5FB337D6">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="PartSm" EntitySet="PartSms1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PartSms__GroupId__60A75C0F" Association="UltralReportsModel.FK__PartSms__GroupId__60A75C0F">
+            <End Role="SmsGroup" EntitySet="SmsGroups" />
+            <End Role="PartSm" EntitySet="PartSms1" />
+          </AssociationSet> 
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -438,6 +490,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="SmsRecipients" Relationship="UltralReportsModel.SmsGroupRecipient" FromRole="SmsGroup" ToRole="SmsRecipient" />
+          <NavigationProperty Name="PartSms" Relationship="UltralReportsModel.FK__PartSms__GroupId__60A75C0F" FromRole="SmsGroup" ToRole="PartSm" />
         </EntityType>
         <EntityType Name="SmsRecipient">
           <Key>
@@ -533,6 +586,7 @@
           <NavigationProperty Name="Major" Relationship="UltralReportsModel.FK__Part__MajorId__398D8EEE" FromRole="Part" ToRole="Major" />
           <Property Name="SendSms" Type="Boolean" Nullable="false" />
           <Property Name="UltraNum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PartSm" Relationship="UltralReportsModel.FK__PartSms__PartId__5FB337D6" FromRole="Part" ToRole="PartSm" />
         </EntityType>
         <Association Name="FK__Part__EquipmentI__3B75D760">
           <End Type="UltralReportsModel.Equipment" Role="Equipment" Multiplicity="1" />
@@ -627,7 +681,43 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ShiftType" Type="Int32" Nullable="false" />
           <Property Name="Duty" Type="Int32" Nullable="false" />
-        </EntityType> 
+        </EntityType>
+        <EntityType Name="PartSms">
+          <Key>
+            <PropertyRef Name="PartId" />
+          </Key>
+          <Property Name="PartId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="HRecover" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="LRecover" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Part" Relationship="UltralReportsModel.FK__PartSms__PartId__5FB337D6" FromRole="PartSm" ToRole="Part" />
+          <NavigationProperty Name="SmsGroup" Relationship="UltralReportsModel.FK__PartSms__GroupId__60A75C0F" FromRole="PartSm" ToRole="SmsGroup" />
+        </EntityType>
+        <Association Name="FK__PartSms__PartId__5FB337D6">
+          <End Type="UltralReportsModel.Part" Role="Part" Multiplicity="1" />
+          <End Type="UltralReportsModel.PartSms" Role="PartSm" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartSm">
+              <PropertyRef Name="PartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PartSms__GroupId__60A75C0F">
+          <End Type="UltralReportsModel.SmsGroup" Role="SmsGroup" Multiplicity="1" />
+          <End Type="UltralReportsModel.PartSms" Role="PartSm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmsGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartSm">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association> 
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -801,6 +891,17 @@
                 <ScalarProperty Name="ShiftType" ColumnName="ShiftType" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartSms1">
+            <EntityTypeMapping TypeName="UltralReportsModel.PartSms">
+              <MappingFragment StoreEntitySet="PartSms">
+                <ScalarProperty Name="LRecover" ColumnName="LRecover" />
+                <ScalarProperty Name="HRecover" ColumnName="HRecover" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="PartId" ColumnName="PartId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping> 

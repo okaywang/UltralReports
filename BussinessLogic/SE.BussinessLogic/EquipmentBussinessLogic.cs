@@ -12,14 +12,16 @@ namespace BussinessLogic
 {
     public class EquipmentBussinessLogic : BussinessLogicBase<Equipment>
     {
-        private EfRepository<Equipment> _equipmentRepository;
+        private EfRepository<PartSms> _partSmsRepository;
         private EfRepository<MonitorType> _monitorTypeRepository;
         private EfRepository<Part> _partRepository;
-        public EquipmentBussinessLogic(EfRepository<Equipment> equipmentRepository, EfRepository<MonitorType> monitorTypeRepository, EfRepository<Part> partRepository)
+        public EquipmentBussinessLogic(EfRepository<Equipment> equipmentRepository, EfRepository<MonitorType> monitorTypeRepository,
+            EfRepository<Part> partRepository, EfRepository<PartSms> partSmsRepository)
             : base(equipmentRepository)
         {
             _monitorTypeRepository = monitorTypeRepository;
             _partRepository = partRepository;
+            _partSmsRepository = partSmsRepository;
         }
 
         #region Monitor Type
@@ -79,6 +81,20 @@ namespace BussinessLogic
         {
             return _partRepository.Table.Where(predicate).ToList();
         }
+
+        public PartSms PartSmsGet(int partId)
+        {
+            return _partSmsRepository.Get(partId);
+        }
+        public PartSms PartSmsInsert(PartSms entity)
+        {
+            return _partSmsRepository.Insert(entity);
+        }
+        public void PartSmsUpdate(PartSms entity)
+        {
+            _partSmsRepository.Update(entity);
+        }
+
         #endregion
 
         #region Pro Part

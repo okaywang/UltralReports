@@ -30,6 +30,17 @@ namespace Website.Models
         }
     }
 
+    public class GroupControlSourceAttribute : Attribute, IControlSource
+    {
+        public NameValuePair[] GetSource()
+        {
+            var bll = System.Web.Mvc.DependencyResolver.Current.GetService(typeof(SmsBussinessLogic)) as SmsBussinessLogic;
+            var entities = bll.SmsGroupGetAll();
+            var items = AutoMapper.Mapper.Map<List<SmsGroup>, NameValuePair[]>(entities);
+            return items;
+        }
+    }
+
     [RequestUrl("/Equipment/Add")]
     public class EquipmentAddModel
     {
@@ -317,6 +328,30 @@ namespace Website.Models
         public int UltraNum { get; set; }
     }
 
+    [RequestUrl("/Equipment/PartSmsEdit")]
+    public class PartSmsEditModel
+    {
+        [ControlType(typeof(NativeInputHidden))]
+        public int PartId { get; set; }
+
+        [Required]
+        [DisplayName("短信接收组")]
+        [ControlType(typeof(NativeSelect))]
+        [GroupControlSourceAttribute]
+        public int GroupId { get; set; }
+
+        [Required]
+        [DisplayName("短信内容")]
+        public string Content { get; set; }
+
+        [Required]
+        [DisplayName("恢复上限")]
+        public decimal HRecover { get; set; }
+
+        [Required]
+        [DisplayName("恢复下限")]
+        public decimal LRecover { get; set; }
+    }
     public class PartListItemModel : IListItemModel
     {
         [DisplayName("Id")]
@@ -370,7 +405,8 @@ namespace Website.Models
                 return new IListItemCommand[]
                 { 
                     new ListItemCommand("update", "编辑", "/Equipment/PartUpdate"), 
-                    new ListItemCommand("remove","删除","/Equipment/PartRemove") 
+                    new ListItemCommand("remove","删除","/Equipment/PartRemove") , 
+                    new ListItemCommand("sms", "短信设置", "/Equipment/PartSms")
                 };
             }
         }

@@ -66,6 +66,8 @@ public partial class Part
 
     public virtual Major Major { get; set; }
 
+    public virtual PartSms PartSm { get; set; }
+
 }
 
 }

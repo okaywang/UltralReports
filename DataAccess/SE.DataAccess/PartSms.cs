@@ -15,28 +15,24 @@ namespace DataAccess
 using System;
     using System.Collections.Generic;
     
-public partial class SmsGroup
+public partial class PartSms
 {
 
-    public SmsGroup()
-    {
+    public int PartId { get; set; }
 
-        this.SmsRecipients = new HashSet<SmsRecipient>();
+    public int GroupId { get; set; }
 
-        this.PartSms = new HashSet<PartSms>();
+    public string Content { get; set; }
 
-    }
+    public decimal HRecover { get; set; }
 
-
-    public int Id { get; set; }
-
-    public string Name { get; set; }
+    public decimal LRecover { get; set; }
 
 
 
-    public virtual ICollection<SmsRecipient> SmsRecipients { get; set; }
+    public virtual Part Part { get; set; }
 
-    public virtual ICollection<PartSms> PartSms { get; set; }
+    public virtual SmsGroup SmsGroup { get; set; }
 
 }
 

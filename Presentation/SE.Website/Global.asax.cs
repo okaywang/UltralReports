@@ -53,6 +53,8 @@ namespace Website
 
         private void InitAutoMapper()
         {
+            Mapper.CreateMap<SmsGroup, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
+
             Mapper.CreateMap<Account, AccountListItemModel>();
             Mapper.CreateMap<AccountAddModel, Account>();
 
@@ -77,6 +79,9 @@ namespace Website
             Mapper.CreateMap<UltraRecord, UltraRecordListItemModel>();
             Mapper.CreateMap<UltraRecord, ProUltraRecordListItemModel>().ForMember(dest => dest.EquipmentName, opt => opt.MapFrom(src => src.Part.Equipment.Name))
                 .ForMember(dest => dest.MajorName, opt => opt.MapFrom(src => src.Part.Major.Name));
+
+            Mapper.CreateMap<PartSmsEditModel, PartSms>();
+            Mapper.CreateMap<PartSms, PartSmsEditModel>();
         }
 
 

@@ -182,6 +182,33 @@ namespace Website.Controllers
             _bllEquipment.PartDelete(entity);
             return Json(new ResultModel(true));
         }
+
+        public JsonResult PartSmsGet(int id)
+        {
+            var sms = _bllEquipment.PartSmsGet(id);
+            var model = Mapper.Map<PartSms, PartSmsEditModel>(sms);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult PartSmsEdit(PartSmsEditModel model)
+        {
+            var sms = _bllEquipment.PartSmsGet(model.PartId);
+            if (sms == null)
+            {
+                var entity = Mapper.Map<PartSmsEditModel, PartSms>(model);
+                _bllEquipment.PartSmsInsert(entity);
+            }
+            else
+            {
+                sms.GroupId = model.GroupId;
+                sms.Content = model.Content;
+                sms.HRecover = model.HRecover;
+                sms.LRecover = model.LRecover;
+                _bllEquipment.PartSmsUpdate(sms);
+            }
+            return Json(new ResultModel(true));
+        }
         #endregion
 
         #region Pro Part

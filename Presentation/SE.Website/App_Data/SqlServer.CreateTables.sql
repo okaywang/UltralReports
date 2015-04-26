@@ -129,7 +129,14 @@ Remarks nvarchar(200),
 HasRemarks as cast(case when Remarks is null then 0 else 1 end as bit)  PERSISTED  not null,
 IsProRecord as cast(case when UltraType='PH' or UltraType='PL' then 1 else 0 end as bit) PERSISTED  not null
 )
-
+create table PartSms
+(
+	PartId int primary key references Part,
+	GroupId int not null references SmsGroup,
+	Content nvarchar(300) not null,
+	HRecover decimal(10,2) not null,
+	LRecover decimal(10,2) not null
+)
 --班次
 create table Shift
 (

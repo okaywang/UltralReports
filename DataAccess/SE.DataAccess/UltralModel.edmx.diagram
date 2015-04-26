@@ -27,6 +27,9 @@
         <AssociationConnector Association="UltralReportsModel.FK__Part__MajorId__398D8EEE" />
         <EntityTypeShape EntityType="UltralReportsModel.Shift" Width="1.5" PointX="4.3778860608012815" PointY="21.402155707311888" />
         <EntityTypeShape EntityType="UltralReportsModel.Schedule" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="UltralReportsModel.PartSms" Width="1.5" PointX="5" PointY="7.5" />
+        <AssociationConnector Association="UltralReportsModel.FK__PartSms__PartId__5FB337D6" />
+        <AssociationConnector Association="UltralReportsModel.FK__PartSms__GroupId__60A75C0F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
