@@ -30,6 +30,8 @@
         <EntityTypeShape EntityType="UltralReportsModel.PartSms" Width="1.5" PointX="5" PointY="7.5" />
         <AssociationConnector Association="UltralReportsModel.FK__PartSms__PartId__5FB337D6" />
         <AssociationConnector Association="UltralReportsModel.FK__PartSms__GroupId__60A75C0F" />
+        <EntityTypeShape EntityType="UltralReportsModel.Duty" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="UltralReportsModel.DutyTime" Width="1.5" PointX="9.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -15,6 +15,7 @@
           <Property Name="LoginName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AccountType" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="FADateTime" Type="datetime" />
           <Property Name="FAUser" Type="nvarchar" MaxLength="20" />
           <Property Name="LCDateTime" Type="datetime" />
@@ -35,6 +36,23 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AuthorityType" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Duty">
+          <Key>
+            <PropertyRef Name="DayId" />
+            <PropertyRef Name="TimeId" />
+          </Key>
+          <Property Name="DayId" Type="int" Nullable="false" />
+          <Property Name="TimeId" Type="int" Nullable="false" />
+          <Property Name="DutyValue" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DutyTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
@@ -307,6 +325,8 @@
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountAuthority" EntityType="Self.AccountAuthority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Authority" EntityType="Self.Authority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Duty" EntityType="Self.Duty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DutyTime" EntityType="Self.DutyTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogException" EntityType="Self.LogException" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogOperation" EntityType="Self.LogOperation" Schema="dbo" store:Type="Tables" />
@@ -424,7 +444,9 @@
           <AssociationSet Name="FK__PartSms__GroupId__60A75C0F" Association="UltralReportsModel.FK__PartSms__GroupId__60A75C0F">
             <End Role="SmsGroup" EntitySet="SmsGroups" />
             <End Role="PartSm" EntitySet="PartSms1" />
-          </AssociationSet> 
+          </AssociationSet>
+          <EntitySet Name="Duties" EntityType="UltralReportsModel.Duty" />
+          <EntitySet Name="DutyTimes" EntityType="UltralReportsModel.DutyTime" /> 
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -442,6 +464,7 @@
           <Property Type="Int32" Name="MajorId" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Major" Relationship="UltralReportsModel.FK__Account__MajorId__07F6335A" FromRole="Account" ToRole="Major" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AccountAuthority">
           <Key>
@@ -717,7 +740,26 @@
               <PropertyRef Name="GroupId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association> 
+        </Association>
+        <EntityType Name="Duty">
+          <Key>
+            <PropertyRef Name="DayId" />
+            <PropertyRef Name="TimeId" />
+          </Key>
+          <Property Name="DayId" Type="Int32" Nullable="false" />
+          <Property Name="TimeId" Type="Int32" Nullable="false" />
+          <Property Name="DutyValue" Type="UltralReportsModel.DutyType" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DutyTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="UltralReportsModel.DutyTimeType" Nullable="false" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+        </EntityType>
+        <EnumType Name="DutyTimeType" a:ExternalTypeName="Common.Types.DutyTimeType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="DutyType" a:ExternalTypeName="Common.Types.DutyType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" /> 
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -727,6 +769,7 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="UltralReportsModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MajorId" ColumnName="MajorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -902,6 +945,24 @@
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="PartId" ColumnName="PartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Duties">
+            <EntityTypeMapping TypeName="UltralReportsModel.Duty">
+              <MappingFragment StoreEntitySet="Duty">
+                <ScalarProperty Name="DutyValue" ColumnName="DutyValue" />
+                <ScalarProperty Name="TimeId" ColumnName="TimeId" />
+                <ScalarProperty Name="DayId" ColumnName="DayId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DutyTimes">
+            <EntityTypeMapping TypeName="UltralReportsModel.DutyTime">
+              <MappingFragment StoreEntitySet="DutyTime">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping> 

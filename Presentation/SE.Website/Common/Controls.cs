@@ -71,6 +71,8 @@ namespace Website.Common
         }
         public override string Name { get { return _name; } }
 
+        public string SelectedValue { get; set; }
+
         public NameValuePair[] Source { get; set; }
 
         public override string Render()
@@ -82,12 +84,12 @@ namespace Website.Common
                 sb.Append(" disabled");
             }
             sb.Append(">");
-            sb.Append("<option value=''>未选</option>");
+            sb.Append("<option value=''> </option>");
             if (Source != null)
             {
                 foreach (var pair in Source)
                 {
-                    sb.AppendFormat("<option value='{0}'>{1}</option>", pair.Value, pair.Name);
+                    sb.AppendFormat("<option value='{0}' {1}>{2}</option>", pair.Value, this.SelectedValue == pair.Value ? "selected='selected'" : "", pair.Name);
                 }
             }
             sb.Append("</select>");
@@ -123,7 +125,7 @@ namespace Website.Common
             {
                 foreach (var pair in Source)
                 {
-                    sb.AppendFormat("<input type='radio' name='{0}' data-bind='checked:{0}' value='{1}' ", Name,pair.Value);
+                    sb.AppendFormat("<input type='radio' name='{0}' data-bind='checked:{0}' value='{1}' ", Name, pair.Value);
                     if (!IsEnabled)
                     {
                         sb.Append(" disabled");

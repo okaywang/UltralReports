@@ -14,6 +14,7 @@ using DataAccess;
 using AutoMapper;
 using BussinessLogic;
 using WebExpress.Core;
+using Website.Controllers;
 
 namespace Website
 {
@@ -82,6 +83,9 @@ namespace Website
 
             Mapper.CreateMap<PartSmsEditModel, PartSms>();
             Mapper.CreateMap<PartSms, PartSmsEditModel>();
+
+            Mapper.CreateMap<DutyTime, DutyTimeModel>();
+            Mapper.CreateMap<Duty, DutyModel>();
         }
 
 

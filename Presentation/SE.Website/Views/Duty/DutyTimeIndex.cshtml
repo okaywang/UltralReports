@@ -1,0 +1,166 @@
+﻿@model DutyIndexModel
+@{
+    ViewBag.Title = "DutyTimeIndex";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        时间设置
+    </div>
+    <div class="panel-body">
+        <div class="dutyTime">
+            <form class="form-horizontal" role="form">
+                @foreach (var item in Model.DutyTimes)
+                {
+                    <div class="form-group" id="@((int)item.Id)">
+                        <label class="col-md-1 control-label">@item.Id.GetDisplayText()</label>
+                        <div class="col-md-7">
+                            <span class="col-md-2">
+                                <select name="Hour" class="form-control">
+                                    @for (int i = 1; i <= 24; i++)
+                                    {
+                                        <option @(item.StartTime.Hours == i ? "selected='selected'" : "")>@i.ToString("D2")</option>
+                                    }
+                                </select>
+                            </span>
+                            <span class="col-md-2">
+                                <select name="Minute" class="form-control col-md-4">
+                                    @for (int i = 0; i < 60; i++)
+                                    {
+                                        <option @(item.StartTime.Minutes == i ? "selected='selected'" : "")>@i.ToString("D2")</option>
+                                    }
+                                </select>
+                            </span>
+                            <span class="col-md-1">
+                                -
+                            </span>
+                            <span class="col-md-2">
+                                <select name="Hour" class="form-control col-md-4">
+                                    @for (int i = 0; i < 24; i++)
+                                    {
+                                        <option @(item.EndTime.Hours == i ? "selected='selected'" : "")>@i.ToString("D2")</option>
+                                    }
+                                </select>
+                            </span>
+                            <span class="col-md-2">
+                                <select name="Minute" class="form-control col-md-4">
+                                    @for (int i = 0; i < 60; i++)
+                                    {
+                                        <option @(item.EndTime.Minutes == i ? "selected='selected'" : "")>@i.ToString("D2")</option>
+                                    }
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                }
+            </form>
+        </div>
+        <div>
+            <button class="btn btn-primary" type="button" id="dutyTime">保存</button>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        班次设置
+    </div>
+    <div class="panel-body">
+        <div class="duty">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-4">
+                        <span class="col-md-4 text-center">
+                            @DutyTimeType.NightShift.GetDisplayText()
+                        </span>
+                        <span class="col-md-4 text-center">
+                            @DutyTimeType.DayShift.GetDisplayText()
+                        </span>
+                        <span class="col-md-4 text-center">
+                            @DutyTimeType.MiddleShift.GetDisplayText()
+                        </span>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+                @for (int i = 0; i < Model.Duties.Length; i += 3)
+                {
+                    <div class="form-group" id="@((int)Model.Duties[i].DayId)">
+                        <label class="col-md-1 control-label">第@(Model.Duties[i].DayId)天</label>
+                        <div class="col-md-4">
+                            <span class="col-md-4">
+                                @Html.Raw(new NativeSelect("test1", true, false) { Source = new EnumControlSourceAttribute(typeof(DutyType)).GetSource(), SelectedValue = ((int)Model.Duties[i].DutyValue).ToString() }.Render())
+                            </span>
+                            <span class="col-md-4">
+                                @Html.Raw(new NativeSelect("test2", true, false) { Source = new EnumControlSourceAttribute(typeof(DutyType)).GetSource(), SelectedValue = ((int)Model.Duties[i + 1].DutyValue).ToString() }.Render())
+                            </span>
+                            <span class="col-md-4">
+                                @Html.Raw(new NativeSelect("test3", true, false) { Source = new EnumControlSourceAttribute(typeof(DutyType)).GetSource(), SelectedValue = ((int)Model.Duties[i + 2].DutyValue).ToString() }.Render())
+                            </span>
+                        </div>
+                    </div>
+                }
+            </form>
+        </div>
+        <div>
+            <button class="btn btn-primary" type="button" id="duty" request-url="/Account/Add">保存</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#dutyTime").click(function () {
+            var items = $(".dutyTime .form-group").map(function (index, item) {
+                var obj = {};
+                var times = $(item).find("select").map(function (index1, item1) {
+                    return $(item1).val();
+                });
+                obj.Id = $(item).attr("id");
+                obj.StartTime = webExpress.utility.string.format("{0}:{1}", times[0], times[1]);
+                obj.EndTime = webExpress.utility.string.format("{0}:{1}", times[2], times[3]);
+                return obj;
+            }).get();
+            $.ajax({
+                url: "/Duty/DutyTimeUpdate",
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify(items),
+                success: function (response) {
+                    if (response.IsSuccess) {
+                        bootbox.alert("保存成功");
+                    }
+                    else {
+                        bootbox.alert("保存失败," + response.Message);
+                    }
+                }
+            });
+        });
+
+        $("#duty").click(function () {
+            var items = $(".duty .form-group:gt(0)").map(function (index, item) {
+                var items1 = $(item).find("select").map(function (index1, item1) {
+                    var obj = {};
+                    obj.DayId = $(item).attr("id");
+                    obj.TimeId = index1 + 1;
+                    obj.DutyValue = $(item1).val();
+                    return obj;
+                }).get();
+               
+                return items1;
+            }).get();
+            $.ajax({
+                url: "/Duty/DutyUpdate",
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify(items),
+                success: function (response) {
+                    if (response.IsSuccess) {
+                        bootbox.alert("保存成功");
+                    }
+                    else {
+                        bootbox.alert("保存失败," + response.Message);
+                    }
+                }
+            });
+        });
+    });
+</script>

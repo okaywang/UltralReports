@@ -55,6 +55,7 @@
     <Compile Include="LogExceptionBussinessLogic.cs" />
     <Compile Include="LogOperationBussinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DutyBussinessLogic.cs" />
     <Compile Include="SmsBussinessLogic.cs" />
     <Compile Include="EquipmentBussinessLogic.cs" />
     <Compile Include="UltraReportBussinessLogic.cs" />

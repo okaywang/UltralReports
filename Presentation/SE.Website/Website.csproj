@@ -181,6 +181,7 @@
     <Compile Include="Models\Common\PagedModel.cs" />
     <Compile Include="Models\Common\ResultModel.cs" />
     <Compile Include="Models\Common\ValueTextModel.cs" />
+    <Compile Include="Models\Duty\DutyModel.cs" />
     <Compile Include="Models\Equipment\EquipmentModel.cs" />
     <Compile Include="Models\Sms\SmsRecipientModel.cs" />
     <Compile Include="Models\Sms\SmsGroupModel.cs" />
@@ -469,6 +470,7 @@
     <Content Include="Views\UltraRecord\ProUltraRecordIndex.cshtml" />
     <Content Include="Views\Equipment\ProPartIndex.cshtml" />
     <Content Include="Views\Shift\Index.cshtml" />
+    <Content Include="Views\Duty\DutyTimeIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

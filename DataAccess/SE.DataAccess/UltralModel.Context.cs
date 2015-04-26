@@ -62,6 +62,10 @@ public partial class UltralReportsEntities : DbContext
 
     public DbSet<PartSms> PartSms1 { get; set; }
 
+    public DbSet<Duty> Duties { get; set; }
+
+    public DbSet<DutyTime> DutyTimes { get; set; }
+
 }
 
 }

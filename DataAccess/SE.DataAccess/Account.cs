@@ -46,6 +46,8 @@ public partial class Account
 
     public string Name { get; set; }
 
+    public string PhoneNumber { get; set; }
+
 
 
     public virtual ICollection<AccountAuthority> AccountAuthorities { get; set; }

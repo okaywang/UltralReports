@@ -26,6 +26,11 @@ namespace DataAccess
             return _context.Set<T>().Find(id);
         }
 
+        public T Get(params object[] keyValues)
+        {
+            return _context.Set<T>().Find(keyValues);
+        }
+
         public T Insert(T entity)
         {
             _context.Set<T>().Add(entity);
@@ -41,6 +46,11 @@ namespace DataAccess
         }
 
         public void Update(T entity)
+        {
+            Save();
+        }
+
+        public void Update(IEnumerable<T> entities)
         {
             Save();
         }

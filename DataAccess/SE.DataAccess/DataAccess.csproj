@@ -58,6 +58,12 @@
     <Compile Include="Authority.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Duty.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DutyTime.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EfRepository.cs" />
     <Compile Include="Equipment.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>

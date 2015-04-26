@@ -31,6 +31,11 @@ namespace BussinessLogic
             return PrimaryRepository.Get(id);
         }
 
+        public T Get(params object[] keyValues)
+        {
+            return PrimaryRepository.Get(keyValues);
+        }
+
         public IQueryable<T> Where(Expression<Func<T, bool>> predicate)
         {
             return PrimaryRepository.Table.Where(predicate);
@@ -54,6 +59,11 @@ namespace BussinessLogic
         public virtual void Update(T entity)
         {
             PrimaryRepository.Update(entity);
+        }
+
+        public virtual void Update(IEnumerable<T> entities)
+        {
+            PrimaryRepository.Update(entities);
         }
 
         public void Delete(T entity)

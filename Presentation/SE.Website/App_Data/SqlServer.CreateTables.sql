@@ -17,6 +17,7 @@ CREATE TABLE [dbo].[Account](
 [LoginName] [nvarchar](50) NOT NULL unique,
 [Password] [nvarchar](50) NOT NULL check(len(password)>=6), 
 [AccountType] [int] NOT NULL CHECK(AccountType in (1,2)),--1.admin 2.Other,
+PhoneNumber nvarchar(20) not null,
 
 FADateTime datetime default(getdate()),
 FAUser nvarchar(20),
@@ -160,5 +161,35 @@ insert into MonitorType (Name) values ('温度')
 insert into MonitorType (Name) values ('转速')
 insert into [Account](Name,LoginName,[Password],[AccountType]) values('张大拿','admin','123456',1)
 
-
+insert into duty
+select 1,1,3 union
+select 1,2,1 union
+select 1,3,5 union
+select 2,1,4 union
+select 2,2,1 union
+select 2,3,5 union
+select 3,1,4 union
+select 3,2,2 union
+select 3,3,1 union
+select 4,1,5 union
+select 4,2,2 union
+select 4,3,1 union
+select 5,1,5 union
+select 5,2,3 union
+select 5,3,2 union
+select 6,1,1 union
+select 6,2,3 union
+select 6,3,2 union
+select 7,1,1 union
+select 7,2,4 union
+select 7,3,3 union
+select 8,1,2 union
+select 8,2,4 union
+select 8,3,3 union
+select 9,1,2 union
+select 9,2,5 union
+select 9,3,4 union
+select 10,1,3 union
+select 10,2,5 union
+select 10,3,4  
 

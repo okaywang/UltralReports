@@ -25,6 +25,7 @@ namespace Website
             builder.RegisterType<EquipmentBussinessLogic>().InstancePerHttpRequest();
             builder.RegisterType<UltraReportBussinessLogic>().InstancePerHttpRequest();
             builder.RegisterType<MajorBussinessLogic>().InstancePerHttpRequest();
+            builder.RegisterType<DutyBussinessLogic>().InstancePerHttpRequest();
         }
     }
 }

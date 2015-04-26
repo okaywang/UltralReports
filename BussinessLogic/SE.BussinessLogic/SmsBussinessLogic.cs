@@ -11,7 +11,6 @@ namespace BussinessLogic
 {
     public class SmsBussinessLogic : BussinessLogicBase<SmsRecipient>
     {
-        private EfRepository<SmsRecipient> _smsRecipientRepository;
         private EfRepository<SmsGroup> _smsGroupRepository;
         public SmsBussinessLogic(EfRepository<SmsRecipient> smsRecipientRepository, EfRepository<SmsGroup> smsGroupRepository)
             : base(smsRecipientRepository)

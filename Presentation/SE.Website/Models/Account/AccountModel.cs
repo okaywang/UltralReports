@@ -66,6 +66,10 @@ namespace Website.Models
         [Required]
         [DisplayName("密码")]
         public string Password { get; set; }
+         
+        [Required]
+        [DisplayName("手机号码")]
+        public string PhoneNumber { get; set; }
 
         [DisplayName("专业")]
         [ControlType(typeof(NativeSelect))]
@@ -92,6 +96,10 @@ namespace Website.Models
         //[ControlType(typeof(NativeInputText))]
         public string Password { get; set; }
 
+        [Required]
+        [DisplayName("手机号码")]
+        public string PhoneNumber { get; set; }
+
         [DisplayName("专业")]
         [ControlType(typeof(NativeSelect))]
         [MajorControlSourceAttribute]
@@ -108,6 +116,9 @@ namespace Website.Models
 
         [DisplayName("登录名")]
         public string LoginName { get; set; }
+        
+        [DisplayName("手机号码")]
+        public string PhoneNumber { get; set; }
 
         public string Password { get; set; }
 

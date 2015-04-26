@@ -7,15 +7,15 @@ using WebExpress.Core;
 
 namespace Common.Types
 {
-    public enum ShiftType
+    public enum DutyTimeType
     {
+        [DisplayText("夜班")]
+        NightShift = 1,
+
         [DisplayText("白班")]
-        DayShift = 1,
+        DayShift = 2,
 
         [DisplayText("中班")]
-        MiddleShift = 2,
-
-        [DisplayText("夜班")]
-        NightShift = 3
+        MiddleShift = 3
     }
 }
