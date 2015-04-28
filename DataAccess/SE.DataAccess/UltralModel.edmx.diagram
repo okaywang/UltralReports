@@ -10,11 +10,8 @@
         <EntityTypeShape EntityType="UltralReportsModel.Authority" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="UltralReportsModel.LogException" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="UltralReportsModel.LogOperation" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UltralReportsModel.SmsGroup" Width="1.5" PointX="2.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="UltralReportsModel.SmsRecipient" Width="1.5" PointX="5" PointY="4.875" IsExpanded="true" />
         <AssociationConnector Association="UltralReportsModel.FK__AccountAu__Accou__0F975522" ManuallyRouted="false" />
         <AssociationConnector Association="UltralReportsModel.FK__AccountAu__Autho__108B795B" ManuallyRouted="false" />
-        <AssociationConnector Association="UltralReportsModel.SmsGroupRecipient" ManuallyRouted="false" />
         <EntityTypeShape EntityType="UltralReportsModel.Equipment" Width="1.5" PointX="3.8365415203555218" PointY="0.0066797286303153861" />
         <EntityTypeShape EntityType="UltralReportsModel.MonitorType" Width="1.5" PointX="0.19068244667289891" PointY="23.96388601882564" />
         <AssociationConnector Association="UltralReportsModel.FK__Equipment__Monit__32E0915F" />
@@ -25,13 +22,15 @@
         <EntityTypeShape EntityType="UltralReportsModel.Major" Width="1.5" PointX="8.50785155804262" PointY="0.92036391837539333" />
         <AssociationConnector Association="UltralReportsModel.FK__Account__MajorId__07F6335A" />
         <AssociationConnector Association="UltralReportsModel.FK__Part__MajorId__398D8EEE" />
-        <EntityTypeShape EntityType="UltralReportsModel.Shift" Width="1.5" PointX="4.3778860608012815" PointY="21.402155707311888" />
-        <EntityTypeShape EntityType="UltralReportsModel.Schedule" Width="1.5" PointX="7.375" PointY="3.75" />
         <EntityTypeShape EntityType="UltralReportsModel.PartSms" Width="1.5" PointX="5" PointY="7.5" />
         <AssociationConnector Association="UltralReportsModel.FK__PartSms__PartId__5FB337D6" />
-        <AssociationConnector Association="UltralReportsModel.FK__PartSms__GroupId__60A75C0F" />
         <EntityTypeShape EntityType="UltralReportsModel.Duty" Width="1.5" PointX="7.375" PointY="6.75" />
         <EntityTypeShape EntityType="UltralReportsModel.DutyTime" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="UltralReportsModel.SmsGroup" Width="1.5" PointX="5.5744492754221184" PointY="6.29010883266577" />
+        <AssociationConnector Association="UltralReportsModel.FK__PartSms__GroupId__46E78A0C" />
+        <EntityTypeShape EntityType="UltralReportsModel.SmsGroupAccount" Width="1.5" PointX="3.3696021453335891" PointY="23.864495020296655" />
+        <AssociationConnector Association="UltralReportsModel.FK__SmsGroupA__Accou__60A75C0F" />
+        <AssociationConnector Association="UltralReportsModel.FK__SmsGroupA__Group__5FB337D6" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

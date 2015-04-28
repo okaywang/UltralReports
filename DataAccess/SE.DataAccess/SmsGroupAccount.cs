@@ -12,18 +12,13 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class SmsGroup
+    public partial class SmsGroupAccount
     {
-        public SmsGroup()
-        {
-            this.PartSms = new HashSet<PartSms>();
-            this.SmsGroupAccounts = new HashSet<SmsGroupAccount>();
-        }
+        public int GroupId { get; set; }
+        public int AccountId { get; set; }
+        public System.DateTime FADateTime { get; set; }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-    
-        public virtual ICollection<PartSms> PartSms { get; set; }
-        public virtual ICollection<SmsGroupAccount> SmsGroupAccounts { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual SmsGroup SmsGroup { get; set; }
     }
 }

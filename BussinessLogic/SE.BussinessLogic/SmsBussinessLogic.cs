@@ -9,11 +9,11 @@ using WebExpress.Core;
 
 namespace BussinessLogic
 {
-    public class SmsBussinessLogic : BussinessLogicBase<SmsRecipient>
+    public class SmsBussinessLogic : BussinessLogicBase<SmsGroupAccount>
     {
         private EfRepository<SmsGroup> _smsGroupRepository;
-        public SmsBussinessLogic(EfRepository<SmsRecipient> smsRecipientRepository, EfRepository<SmsGroup> smsGroupRepository)
-            : base(smsRecipientRepository)
+        public SmsBussinessLogic(EfRepository<SmsGroupAccount> repository,EfRepository<SmsGroup> smsGroupRepository)
+            : base(repository)
         {
             _smsGroupRepository = smsGroupRepository;
         }

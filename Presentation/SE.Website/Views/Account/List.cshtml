@@ -29,11 +29,22 @@
             modules: {
                 add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-add .modal") })),
                 update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-update .modal") })),
-                auth: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-auth .modal") }))
+                auth: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-auth .modal") })),
+                group: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-group .modal") }))
             },
             rowCommands: {
                 setAuthority: function (model) {
                     viewInstance.modules.auth.dialog.show();
+                    $("#AccountId").val(model.AccountId);
+                    var url = "/Account/GetAuthorities";
+                    webExpress.utility.ajax.request(url, { accountId: model.AccountId }, function (result) {
+                        for (var i = 0; i < result.length; i++) {
+                            $(":checkbox[value=" + result[i] + "]").prop("checked", true);
+                        }
+                    });
+                },
+                setGroup: function (model) {
+                    viewInstance.modules.group.dialog.show();
                     $("#AccountId").val(model.AccountId);
                     var url = "/Account/GetAuthorities";
                     webExpress.utility.ajax.request(url, { accountId: model.AccountId }, function (result) {

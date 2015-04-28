@@ -58,6 +58,7 @@ namespace Website
 
             Mapper.CreateMap<Account, AccountListItemModel>();
             Mapper.CreateMap<AccountAddModel, Account>();
+            Mapper.CreateMap<Account, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
 
             Mapper.CreateMap<MonitorType, MonitorTypeListItemModel>();
             Mapper.CreateMap<MonitorType, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));

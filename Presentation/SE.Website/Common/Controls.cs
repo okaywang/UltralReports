@@ -78,7 +78,7 @@ namespace Website.Common
         public override string Render()
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("<select class='form-control' name='{0}' data-bind='value:{0}'", Name);
+            sb.AppendFormat("<select class='form-control' name='{0}' data-value-field='Value' data-text-field='Name' data-bind='value:{0},source:{0}s'", Name);
             if (!IsEnabled)
             {
                 sb.Append(" disabled");

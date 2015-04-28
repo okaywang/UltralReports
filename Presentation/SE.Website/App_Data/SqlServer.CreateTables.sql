@@ -79,6 +79,14 @@ RecipientId int not null references SmsRecipient,
 Constraint PK_GroupId_RecipientId primary key(GroupId,RecipientId)
 )
 
+create table SmsGroupAccount
+ (
+	GroupId int not null references SmsGroup,
+	AccountId int not null references Account,
+	FADateTime datetime default(getdate()),
+	Constraint PK_GroupId_AccountId primary key(GroupId,AccountId)
+ )
+
 create table MonitorType
 (
 Id int IDENTITY(1,1) primary key,
@@ -138,23 +146,23 @@ create table PartSms
 	HRecover decimal(10,2) not null,
 	LRecover decimal(10,2) not null
 )
---班次
-create table Shift
+
+
+create table DutyTime
 (
-	Id int IDENTITY(1,1) primary key,
-	ShiftType int not null,
-	StartTime time not null,
-	EndTime time not null
+	Id int primary key,
+	StartTime time(7) not null,
+	EndTime time(7) not null 
 )
 
---排班
-create table Schedule
+create table Duty
 (
-	Id int IDENTITY(1,1) primary key,
-	[Date] date not null,
-	ShiftType int not null,
-	Duty int not null
+	DayId int,
+	TimeId int,
+	DutyValue int not null,
+	CONSTRAINT PK_Duty_DayId_TimeId PRIMARY KEY (DayId,TimeId)
 )
+
 
 
 insert into MonitorType (Name) values ('温度')

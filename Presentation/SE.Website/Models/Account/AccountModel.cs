@@ -140,6 +140,7 @@ namespace Website.Models
                 return new IListItemCommand[]
                 { 
                     new ListItemCommand("setAuthority", "设置权限", "/AdminSys/Tenant/UpdateConstItem"), 
+                    new ListItemCommand("setGroup", "设置分组", "/AdminSys/Tenant/UpdateConstItem"), 
                     new ListItemCommand("update", "编辑", "/AdminSys/Tenant/UpdateConstItem"), 
                     new ListItemCommand("remove","删除","/AdminSys/Tenant/RemoveConstItem") 
                 };
