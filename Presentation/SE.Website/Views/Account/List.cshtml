@@ -63,7 +63,7 @@
                         confirmMessage: "您确定删除 " + model.Name + " 吗？",
                         container: container,
                         url: "/Account/Delete",
-                        model: { Id: model.AccountId },
+                        model: { Id: model.Id },
                         onSuccess: function () {
                             viewInstance.refresh();
                         }

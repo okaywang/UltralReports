@@ -23,6 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\SE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{9D6820D4-45D3-4371-84AA-B048BBEE018D}"
 	ProjectSection(SolutionItems) = preProject
+		QA.txt = QA.txt
 		Document\发布步骤.txt = Document\发布步骤.txt
 		C:\Users\guojun.wang\Documents\Tencent Files\402725796\FileRecv\超限统计前台展示界面确认v1.0.xlsx = C:\Users\guojun.wang\Documents\Tencent Files\402725796\FileRecv\超限统计前台展示界面确认v1.0.xlsx
 	EndProjectSection

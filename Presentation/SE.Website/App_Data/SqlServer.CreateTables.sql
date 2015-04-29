@@ -169,6 +169,10 @@ insert into MonitorType (Name) values ('温度')
 insert into MonitorType (Name) values ('转速')
 insert into [Account](Name,LoginName,[Password],[AccountType]) values('张大拿','admin','123456',1)
 
+insert into dutytime values(1,'01:00','08:00')
+insert into dutytime values(2,'08:00','17:00')
+insert into dutytime values(3,'17:00','01:00')
+
 insert into duty
 select 1,1,3 union
 select 1,2,1 union

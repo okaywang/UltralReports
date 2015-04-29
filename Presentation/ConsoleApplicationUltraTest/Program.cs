@@ -32,9 +32,9 @@ namespace ConsoleApplicationUltraTest
             var repository = new EfRepository<UltraRecord>(context);
             var bll = new UltraReportBussinessLogic(repository);
 
-            var types = new[] { "L1", "L2", "L3", "H1", "H2", "H3","PH","PL" };
+            var types = new[] { "L1", "L2", "L3", "H1", "H2", "H3", "PH", "PL" };
             var symbols = new[] { 1, -1 };
-            var parts = new[] { 1, 2 };
+            var parts = new[] { 2, 3 };
             var duties = new[] { 1, 2, 3, 4, 5 };
             var rand = new Random();
             var records = new List<UltraRecord>();
@@ -54,7 +54,15 @@ namespace ConsoleApplicationUltraTest
                 record.AvgValue = (record.MinValue + record.MaxValue) / 2;
                 records.Add(record);
             }
-            bll.InsertRange(records);
+            try
+            {
+                bll.InsertRange(records);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

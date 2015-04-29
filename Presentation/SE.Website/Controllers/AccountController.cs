@@ -128,7 +128,7 @@ namespace Website.Controllers
             var account = _bllAccount.Get(id);
             //Guard.IsNotNull<DataNotFoundException>(account); 
             _bllAccount.Delete(account);
-            return Json(new ResultModel(true));
+            return Json(new ResultModel(true), JsonRequestBehavior.AllowGet);
         }
         #endregion
 

@@ -73,12 +73,21 @@ namespace Website.Common
 
         public string SelectedValue { get; set; }
 
+        //public bool BindSource { get; set; }
+
         public NameValuePair[] Source { get; set; }
 
         public override string Render()
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("<select class='form-control' name='{0}' data-value-field='Value' data-text-field='Name' data-bind='value:{0},source:{0}s'", Name);
+            if (Source == null)
+            {
+                sb.AppendFormat("<select class='form-control' name='{0}' data-value-field='Value' data-text-field='Name' data-bind='value:{0},source:{0}s'", Name);
+            }
+            else
+            {
+                sb.AppendFormat("<select class='form-control' name='{0}' data-bind='value:{0}'", Name);
+            }
             if (!IsEnabled)
             {
                 sb.Append(" disabled");

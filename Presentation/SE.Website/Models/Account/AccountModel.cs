@@ -127,9 +127,9 @@ namespace Website.Models
         [DisplayName("专业")]
         public string MajorName { get; set; }
 
-        [DisplayName("创建时间")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime CreateDateTime { get; set; }
+        //[DisplayName("创建时间")]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        //public DateTime CreateDateTime { get; set; }
 
         [DisplayName("操作")]
         [JsonIgnore]
@@ -139,8 +139,8 @@ namespace Website.Models
             {
                 return new IListItemCommand[]
                 { 
-                    new ListItemCommand("setAuthority", "设置权限", "/AdminSys/Tenant/UpdateConstItem"), 
-                    new ListItemCommand("setGroup", "设置分组", "/AdminSys/Tenant/UpdateConstItem"), 
+                    //new ListItemCommand("setAuthority", "设置权限", "/AdminSys/Tenant/UpdateConstItem"), 
+                    //new ListItemCommand("setGroup", "设置分组", "/AdminSys/Tenant/UpdateConstItem"), 
                     new ListItemCommand("update", "编辑", "/AdminSys/Tenant/UpdateConstItem"), 
                     new ListItemCommand("remove","删除","/AdminSys/Tenant/RemoveConstItem") 
                 };

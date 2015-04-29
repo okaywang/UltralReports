@@ -342,6 +342,7 @@ namespace Website.Models
 
         [Required]
         [DisplayName("短信内容")]
+        [ControlType(typeof(NativeTextarea))]
         public string Content { get; set; }
 
         [Required]

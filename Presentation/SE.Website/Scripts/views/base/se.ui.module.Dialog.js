@@ -51,12 +51,14 @@
                 //ignore: "input[type!='hidden']:hidden",
                 errorElement: "label",
                 errorPlacement: function (place, element) {
-                    var igroup = element.closest(".input-group");
-                    if (igroup.length > 0) {
-                        place.insertAfter(igroup);
-                    } else {
-                        place.insertAfter(element);
-                    }
+                    place.insertAfter(element.parent());
+
+                    //var igroup = element.closest(".input-group");
+                    //if (igroup.length > 0) {
+                    //    place.insertAfter(igroup);
+                    //} else {
+                    //    place.insertAfter(element);
+                    //}
                 },
                 rules: {}
             };

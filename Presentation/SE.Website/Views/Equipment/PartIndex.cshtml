@@ -25,21 +25,18 @@
                 add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({
                     container: $(".module-add .modal"),
                     initializer: function () {
-                        var dom = $("[name=EquipmentId]", this.dialog.container);
-                        dom.attr("data-value-field", "Value");
-                        dom.attr("data-text-field", "Name");
-                        dom.attr("data-bind", dom.attr("data-bind") + ",source:Equipments");
+
                     },
                     viewModelSetter: function (vm) {
                         vm.bind("change", function (item) {
                             if (item.field == "MachineSet") {
                                 if (vm.MachineSet) {
                                     $.getJSON("/Equipment/Get", { MachineSet: vm.MachineSet }, function (data) {
-                                        vm.set("Equipments", data);
+                                        vm.set("EquipmentIds", data);
                                     });
                                 }
                                 else {
-                                    vm.set("Equipments", []);
+                                    vm.set("EquipmentIds", []);
                                 }
                             }
                         });
@@ -51,21 +48,18 @@
                 update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({
                     container: $(".module-update .modal"),
                     initializer: function () {
-                        var dom = $("[name=EquipmentId]", this.dialog.container);
-                        dom.attr("data-value-field", "Value");
-                        dom.attr("data-text-field", "Name");
-                        dom.attr("data-bind", dom.attr("data-bind") + ",source:Equipments");
+
                     },
                     viewModelSetter: function (vm) {
                         vm.bind("change", function (item) {
                             if (item.field == "MachineSet") {
                                 if (vm.MachineSet) {
                                     $.getJSON("/Equipment/Get", { MachineSet: vm.MachineSet }, function (data) {
-                                        vm.set("Equipments", data);
+                                        vm.set("EquipmentIds", data);
                                     });
                                 }
                                 else {
-                                    vm.set("Equipments", []);
+                                    vm.set("EquipmentIds", []);
                                 }
                             }
                         });
@@ -75,7 +69,7 @@
             rowCommands: {
                 update: function (model) {
                     $.getJSON("/Equipment/Get", { MachineSet: model.MachineSet }, function (data) {
-                        model.Equipments = data;
+                        model.EquipmentIds = data;
                         viewInstance.modules.update.dialog.show();
                         viewInstance.modules.update.bindModel(model);
                     });
@@ -103,7 +97,7 @@
             viewCommands: {
                 add: function (model) {
                     viewInstance.modules.add.dialog.show();
-                    viewInstance.modules.add.bindModel({ Equipments: [] });
+                    viewInstance.modules.add.bindModel({ EquipmentIds: [] });
                 }
             }
         }));
