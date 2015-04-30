@@ -40,27 +40,37 @@ namespace Website.Models
         public PagedModel<UltraRecordListItemModel> Records { get; set; }
     }
 
+    public class DurationValueConvertor : IValueConvertor
+    {
+        public object Convert(object obj)
+        {
+            var model = obj as UltraRecordListItemModel;
+            return model.Duration = model.EndTime.Subtract(model.StartTime).Minutes;
+        }
+    }
+
     public class UltraRecordListItemModel : IListItemModel
     {
         public int PartId { get; set; }
 
         [DisplayName("开始时间")]
-        public DateTime BeginTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [DisplayName("结束时间")]
         public DateTime EndTime { get; set; }
 
-        [DisplayName("超限时长")]
+        [DisplayName("超限时长(分钟)")]
+        [ValueConvertor(typeof( DurationValueConvertor))]
         public int Duration { get; set; }
 
         [DisplayName("最小值")]
-        public decimal MinValue { get; set; }
+        public decimal? MinValue { get; set; }
 
         [DisplayName("最大值")]
-        public decimal MaxValue { get; set; }
+        public decimal? MaxValue { get; set; }
 
         [DisplayName("平均值")]
-        public decimal AvgValue { get; set; }
+        public decimal? AvgValue { get; set; }
 
         public string ToJson()
         {

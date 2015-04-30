@@ -19,14 +19,14 @@ namespace DataAccess
         public Nullable<System.DateTime> EndTime { get; set; }
         public int Duty { get; set; }
         public string UltraType { get; set; }
-        public decimal MinValue { get; set; }
-        public decimal MaxValue { get; set; }
-        public decimal AvgValue { get; set; }
+        public Nullable<decimal> MinValue { get; set; }
+        public Nullable<decimal> MaxValue { get; set; }
+        public Nullable<decimal> AvgValue { get; set; }
         public System.DateTime StartTime { get; set; }
-        public bool Flag { get; set; }
+        public Nullable<bool> Flag { get; set; }
         public string Remarks { get; set; }
-        public bool HasRemarks { get; set; }
-        public bool IsProRecord { get; set; }
+        public Nullable<bool> HasRemarks { get; set; }
+        public Nullable<bool> IsProRecord { get; set; }
     
         public virtual Part Part { get; set; }
     }

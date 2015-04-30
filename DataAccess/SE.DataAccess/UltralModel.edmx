@@ -215,15 +215,15 @@
           <Property Name="PartId" Type="int" Nullable="false" />
           <Property Name="StartTime" Type="datetime" Nullable="false" />
           <Property Name="EndTime" Type="datetime" />
-          <Property Name="Flag" Type="bit" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="Flag" Type="bit" StoreGeneratedPattern="Computed" />
           <Property Name="Duty" Type="int" Nullable="false" />
           <Property Name="UltraType" Type="varchar" Nullable="false" MaxLength="2" />
-          <Property Name="MinValue" Type="decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="MaxValue" Type="decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="AvgValue" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="MinValue" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MaxValue" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AvgValue" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
-          <Property Name="HasRemarks" Type="bit" Nullable="false" StoreGeneratedPattern="Computed" />
-          <Property Name="IsProRecord" Type="bit" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="HasRemarks" Type="bit" StoreGeneratedPattern="Computed" />
+          <Property Name="IsProRecord" Type="bit" StoreGeneratedPattern="Computed" />
         </EntityType>
         <Association Name="FK__Account__MajorId__07F6335A">
           <End Role="Major" Type="UltralReportsModel.Store.Major" Multiplicity="0..1" />
@@ -585,15 +585,15 @@
           <Property Type="DateTime" Name="EndTime" Precision="3" />
           <Property Type="Int32" Name="Duty" Nullable="false" />
           <Property Type="String" Name="UltraType" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="MinValue" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="MaxValue" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="AvgValue" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="MinValue" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="MaxValue" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="AvgValue" Precision="10" Scale="2" />
           <NavigationProperty Name="Part" Relationship="UltralReportsModel.FK__UltraReco__PartI__403A8C7D" FromRole="UltraRecord" ToRole="Part" />
           <Property Type="DateTime" Name="StartTime" Nullable="false" Precision="3" />
-          <Property Type="Boolean" Name="Flag" annotation:StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Type="Boolean" Name="Flag" annotation:StoreGeneratedPattern="Computed" />
           <Property Type="String" Name="Remarks" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="HasRemarks" annotation:StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Type="Boolean" Name="IsProRecord" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Boolean" Name="HasRemarks" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Boolean" Name="IsProRecord" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <Association Name="FK__UltraReco__PartI__403A8C7D">
           <End Type="UltralReportsModel.Part" Role="Part" Multiplicity="1" />

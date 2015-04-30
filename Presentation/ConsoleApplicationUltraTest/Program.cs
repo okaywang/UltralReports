@@ -49,9 +49,18 @@ namespace ConsoleApplicationUltraTest
                 {
                     record.EndTime = record.StartTime.AddMinutes(rand.Next(1, 20));
                 }
-                record.MinValue = rand.Next(500, 600);
-                record.MaxValue = record.MinValue + rand.Next(200);
-                record.AvgValue = (record.MinValue + record.MaxValue) / 2;
+                if (rand.Next(10) > 5)
+                {
+                    record.MinValue = rand.Next(500, 600);
+                }
+                if (rand.Next(10) > 5)
+                {
+                    record.MaxValue = record.MinValue + rand.Next(200);
+                }
+                if (rand.Next(10) > 5)
+                {
+                    record.AvgValue = (record.MinValue + record.MaxValue) / 2;
+                }
                 records.Add(record);
             }
             try
