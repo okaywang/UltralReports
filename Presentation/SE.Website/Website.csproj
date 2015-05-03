@@ -242,7 +242,6 @@
     <Content Include="Content\jQuery-File-Upload\js\jquery.ui.widget.js" />
     <Content Include="Content\mycss\icons.css" />
     <Content Include="Content\mycss\page.css" />
-    <Content Include="Content\mycss\validation.css" />
     <Content Include="Content\select2-bootstrap.css" />
     <Content Include="Content\select2.css" />
     <Content Include="Content\select2.png" />
