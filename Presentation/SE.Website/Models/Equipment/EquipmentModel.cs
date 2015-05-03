@@ -343,6 +343,7 @@ namespace Website.Models
         [Required]
         [DisplayName("短信内容")]
         [ControlType(typeof(NativeTextarea))]
+        [HelpText("{Equipment}代表设备，{Part}代表部件")]
         public string Content { get; set; }
 
         [Required]

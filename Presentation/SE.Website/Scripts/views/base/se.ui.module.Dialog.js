@@ -51,7 +51,9 @@
                 //ignore: "input[type!='hidden']:hidden",
                 errorElement: "label",
                 errorPlacement: function (place, element) {
-                    place.insertAfter(element.parent());
+                    var container = element.closest(".form-group").find(".validate-info");
+                    container.html(place);
+                    //place.insertAfter(element.parent());
 
                     //var igroup = element.closest(".input-group");
                     //if (igroup.length > 0) {

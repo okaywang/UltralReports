@@ -18,6 +18,15 @@ namespace Website.Common
         public string RequestUrl { get; private set; }
     }
 
+    public class HelpTextAttribute : Attribute
+    {
+        public HelpTextAttribute(string help)
+        {
+            this.HelpText = help;
+        }
+        public string HelpText { get; private set; }
+    }
+
     public class ControlTypeAttribute : Attribute
     {
         private Type _controlType;
@@ -155,6 +164,7 @@ namespace Website.Common
 
         public static IControl GetControl(this PropertyInfo prop)
         {
+            ControlBase control = null;
             var attr = prop.GetCustomAttribute<ControlTypeAttribute>();
             var isRequired = prop.GetCustomAttribute<System.ComponentModel.DataAnnotations.RequiredAttribute>() != null;
             if (attr == null)
@@ -169,10 +179,20 @@ namespace Website.Common
                     var pairs = source.GetSource();
                     var instance = Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled, isRequired) as ISourceControl;
                     instance.Source = pairs;
-                    return instance as IControl;
+                    control = instance as ControlBase;
                 }
             }
-            return Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled, isRequired) as IControl;
+            if (control == null)
+            {
+                control = Activator.CreateInstance(attr.ControlType, prop.Name, attr.Enabled, isRequired) as ControlBase;
+            }
+
+            var attrHelp = prop.GetCustomAttribute<HelpTextAttribute>();
+            if (attrHelp != null)
+            {
+                control.HelpText = attrHelp.HelpText;
+            }
+            return control;
         }
 
         public static string GetFormatedString(this PropertyInfo item, object obj)

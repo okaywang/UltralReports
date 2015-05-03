@@ -43,6 +43,7 @@ namespace Website.Common
         bool IsEnabled { get; }
         bool IsRequired { get; }
         string Name { get; }
+        string HelpText { get; }
         string Render();
     }
 
@@ -51,6 +52,7 @@ namespace Website.Common
         public virtual bool IsVisible { get { return true; } }
         public virtual bool IsEnabled { get; protected set; }
         public virtual bool IsRequired { get; protected set; }
+        public virtual string HelpText { get; set; }
         public abstract string Name { get; }
         public abstract string Render();
     }
