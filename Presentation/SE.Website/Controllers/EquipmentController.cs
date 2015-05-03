@@ -13,6 +13,7 @@ using Website.Models;
 
 namespace Website.Controllers
 {
+    [Authorize]
     public class EquipmentController : Controller
     {
         private EquipmentBussinessLogic _bllEquipment;

@@ -18,7 +18,6 @@ namespace Website.Filters
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            return true;
             var hasAuthority = UserContext.Current.HasAuthority(_authorityName);
             if (!hasAuthority)
             {

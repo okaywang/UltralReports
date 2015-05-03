@@ -18,7 +18,7 @@ namespace Website.Controllers
             return val.AttemptedValue.Split(',').Select(i => int.Parse(i)).ToArray();
         }
     }
-
+    [Authorize]
     public class SmsController : Controller
     {
         private SmsBussinessLogic _bllSms;

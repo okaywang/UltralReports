@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BussinessLogic; 
+using BussinessLogic;
 
 namespace Website.Common
 {
@@ -33,7 +33,8 @@ namespace Website.Common
                     {
                         Id = account.Id,
                         Name = account.LoginName,
-                        AccountType = account.AccountType
+                        AccountType = account.AccountType,
+                        MajorId = account.MajorId
                     };
 
                     if (userContext.AccountType == AccountType.GeneralUser)
@@ -60,6 +61,8 @@ namespace Website.Common
         public int Id { get; set; }
 
         public AccountType AccountType { get; set; }
+
+        public int? MajorId { get; set; }
 
         public string Name { get; set; }
 

@@ -11,6 +11,7 @@ using AutoMapper;
 
 namespace Website.Controllers
 {
+    [Authorize]
     public class DutyController : Controller
     {
         private DutyBussinessLogic _bllDuty;

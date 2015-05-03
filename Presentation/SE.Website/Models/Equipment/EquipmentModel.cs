@@ -392,9 +392,9 @@ namespace Website.Models
 
         [DisplayName("低3")]
         public decimal L3 { get; set; }
-         
+
         public bool SendSms { get; set; }
-         
+
         public int UltraNum { get; set; }
 
         [DisplayName("操作")]
@@ -475,15 +475,15 @@ namespace Website.Models
         [ControlType(typeof(NativeSelect))]
         public int EquipmentId { get; set; }
 
-        [DisplayName("专业")]
-        [ControlType(typeof(NativeSelect))]
-        [MajorControlSource]
-        public int MajorId { get; set; }
-
         [Required]
         [DisplayName("部件")]
         [ControlType(typeof(NativeSelect))]
         public int PartId { get; set; }
+
+        [DisplayName("专业")]
+        [ControlType(typeof(NativeSelect))]
+        [MajorControlSource]
+        public int MajorId { get; set; }
 
         [Required]
         [DisplayName("高限")]
@@ -509,6 +509,11 @@ namespace Website.Models
         public string Name { get; set; }
 
         public int EquipmentId { get; set; }
+
+        [DisplayName("专业")]
+        public string MajorName { get; set; }
+
+        public int? MajorId { get; set; }
 
         [Required]
         [DisplayName("高限")]

@@ -12,6 +12,7 @@ using Website.Models;
 
 namespace Website.Controllers
 {
+    [Authorize]
     public class MajorController : Controller
     {
         private MajorBussinessLogic _bllMajor;

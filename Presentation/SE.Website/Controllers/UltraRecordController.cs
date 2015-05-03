@@ -13,6 +13,7 @@ using Website.Models;
 
 namespace Website.Controllers
 {
+    [Authorize]
     public class UltraRecordController : Controller
     {
         private UltraReportBussinessLogic _bllUltraRecord;
@@ -71,7 +72,12 @@ namespace Website.Controllers
         [HttpPost]
         public JsonResult Reason(UltroReasonModel model)
         {
+            //UserContext.Current.MajorId 
             var record = _bllUltraRecord.Get(model.Id);
+            if (!UserContext.Current.MajorId.HasValue || UserContext.Current.MajorId != record.Part.MajorId)
+            {
+                return Json(new ResultModel(false, "对不起，您无权限填报！"));
+            }
             record.Remarks = model.Reason;
             _bllUltraRecord.Update(record);
             return Json(new ResultModel(true));

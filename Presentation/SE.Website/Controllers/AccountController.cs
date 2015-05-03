@@ -20,7 +20,7 @@ namespace Website.Controllers
     {
         public string AddItemUrl { get; set; }
     }
-
+    [Authorize]
     public class AccountController : Controller
     {
         //private ShopBussinessLogic _shopBll;
@@ -38,7 +38,7 @@ namespace Website.Controllers
             _bllAccount = bllAccount;
         }
 
-        [RequireAuthority(AuthorityNames.SettingAccount)]
+        //[RequireAuthority(AuthorityNames.SettingAccount)]
         public ActionResult List()
         {
             var model = new AccountListPageModel();
@@ -48,7 +48,7 @@ namespace Website.Controllers
             return View(model);
         }
 
-        [RequireAuthority(AuthorityNames.SettingAccount)]
+       // [RequireAuthority(AuthorityNames.SettingAccount)]
         public PartialViewResult _List(AccountSearchCriteria criteria)
         {
             var accounts = _bllAccount.Search(criteria);
@@ -62,6 +62,7 @@ namespace Website.Controllers
 
         //#region 登录
 
+        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             //if (HttpContext.User.Identity.IsAuthenticated)
@@ -104,6 +105,7 @@ namespace Website.Controllers
             return Json(new ResultModel(true));
         }
         //验证码生成
+        [AllowAnonymous]
         public FileContentResult CaptchaImage()
         {
             var captcha = new LiteralCaptcha(60, 30, 4);
@@ -292,6 +294,7 @@ namespace Website.Controllers
             _bllAccount.Insert(entity);
             return Json(new ResultModel(true));
         }
+
         //[RequireAuthority(AuthorityNames.AccountUpdate)]
         public JsonResult Update(AccountUpdateModel model)
         {
@@ -311,7 +314,8 @@ namespace Website.Controllers
             var authorities = _bllAccount.Get(accountId).AccountAuthorities.Select(i => i.AuthorityId).ToArray();
             return Json(authorities);
         }
-        [RequireAuthority(AuthorityNames.SettingAccount)]
+
+        //[RequireAuthority(AuthorityNames.SettingAccount)]
         public ActionResult UpdateAuthorities(int accountId, int[] authorityIds)
         {
             var account = _bllAccount.Get(accountId);

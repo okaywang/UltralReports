@@ -22,30 +22,32 @@
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
         function initializer() {
-            var dom = $("[name=EquipmentId]", this.dialog.container);
-            dom.attr("data-value-field", "Value");
-            dom.attr("data-text-field", "Name");
-            dom.attr("data-bind", dom.attr("data-bind") + ",source:Equipments");
+            //var dom = $("[name=EquipmentId]", this.dialog.container);
+            //dom.attr("data-value-field", "Value");
+            //dom.attr("data-text-field", "Name");
+            //dom.attr("data-bind", dom.attr("data-bind") + ",source:Equipments");
 
-            var domPart = $("[name=PartId]", this.dialog.container);
-            domPart.attr("data-value-field", "Value");
-            domPart.attr("data-text-field", "Name");
-            domPart.attr("data-bind", dom.attr("data-bind") + ",source:Parts");
+            //var domPart = $("[name=PartId]", this.dialog.container);
+            //domPart.attr("data-value-field", "Value");
+            //domPart.attr("data-text-field", "Name");
+            //domPart.attr("data-bind", dom.attr("data-bind") + ",source:Parts");
         }
         function viewModelSetter(vm) {
             vm.bind("change", function (item) {
                 if (item.field == "MachineSet") {
                     if (vm.MachineSet) {
                         $.getJSON("/Equipment/Get", { MachineSet: vm.MachineSet }, function (data) {
-                            vm.set("Equipments", data);
+                            vm.set("EquipmentIds", data);
+                            vm.set("EquipmentId", data[0].Value);
                         });
                     }
                     else {
-                        vm.set("Equipments", []);
+                        vm.set("EquipmentIds", []);
+                        vm.set("EquipmentId", "");
                     }
                 } else if (item.field == "EquipmentId") {
                     $.getJSON("/Equipment/GetParts", { EquipmentId: vm.EquipmentId }, function (data) {
-                        vm.set("Parts", data);
+                        vm.set("PartIds", data);
                     });
                 }
             });
@@ -66,10 +68,14 @@
             },
             rowCommands: {
                 update: function (model) {
-                    $.getJSON("/Equipment/Get", { MachineSet: model.MachineSet }, function (data) {
-                        model.Equipments = data;
-                        viewInstance.modules.update.dialog.show();
-                        viewInstance.modules.update.bindModel(model);
+                    $.getJSON("/Equipment/Get", { MachineSet: model.MachineSet }, function (dataEquipments) {
+                        model.EquipmentIds = dataEquipments;
+                        $.getJSON("/Equipment/GetParts", { EquipmentId: model.EquipmentId }, function (data) {
+                            model.PartIds = data;
+                            model.PartId = model.Id;
+                            viewInstance.modules.update.dialog.show();
+                            viewInstance.modules.update.bindModel(model);
+                        });
                     });
                 },
                 remove: function (model) {
@@ -88,12 +94,12 @@
             viewCommands: {
                 add: function () {
                     viewInstance.modules.add.dialog.show();
-                    viewInstance.modules.add.bindModel({ Equipments: [], Parts: [] });
+                    viewInstance.modules.add.bindModel({ EquipmentIds: [], PartIds: [] });
                 }
             }
         }));
-            viewInstance.init();
-            viewInstance.modules.add.on("saved", function () { viewInstance.refresh(); });
-            viewInstance.modules.update.on("saved", function () { viewInstance.refresh(); });
+        viewInstance.init();
+        viewInstance.modules.add.on("saved", function () { viewInstance.refresh(); });
+        viewInstance.modules.update.on("saved", function () { viewInstance.refresh(); });
     </script>
 }
