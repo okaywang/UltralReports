@@ -27,6 +27,17 @@ namespace SmsUtility
             }
         }
 
+        public async void SendSmsAsync(string[] phoneNumbers, string message)
+        {
+            Task.Run(() =>
+            {
+                foreach (var item in phoneNumbers)
+                {
+                    SendSms(item, message);
+                }
+            });
+        }
+
         public void SendSms(string phoneNumber, string message)
         {
             _mre.WaitOne();

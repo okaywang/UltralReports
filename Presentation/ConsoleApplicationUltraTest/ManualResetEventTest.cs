@@ -31,18 +31,21 @@ namespace ConsoleApplicationUltraTest
             }
         }
 
-        public void SendSmsAysc(string[] phoneNumbers, string message)
+        public async Task SendSmsAysc(string[] phoneNumbers, string message)
         {
-            foreach (var item in phoneNumbers)
-            {
-                SendSms(item, message);
-            }
+            await Task.Run(() =>
+         {
+             foreach (var item in phoneNumbers)
+             {
+                 SendSms(item, message);
+             }
+         });
         }
 
         public void SendSms(string phoneNumber, string message)
         {
             //System.Threading.Thread.Sleep(3000);
-            _mre.WaitOne(5000);
+            _mre.WaitOne(3000);
             _serialPort.WriteLine(string.Format("{0}:{1}:{2}", phoneNumber, "0", message));
             Console.WriteLine(DateTime.Now.ToString("mm:hh:ss \t") + "sended to port");
             _mre.Reset();
