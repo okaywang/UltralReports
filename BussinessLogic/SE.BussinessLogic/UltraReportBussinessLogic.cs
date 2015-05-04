@@ -89,9 +89,9 @@ namespace BussinessLogic
             var query = PrimaryRepository.Table;
             query = query.Where(i => i.Flag == true);
             query = query.Where(i=>i.IsProRecord == criteria.SearchProRecord);
-            if (criteria.BeginTime.HasValue)
+            if (criteria.StartTime.HasValue)
             {
-                query = query.Where(i => i.StartTime >= criteria.BeginTime.Value);
+                query = query.Where(i => i.StartTime >= criteria.StartTime.Value);
             }
             if (criteria.EndTime.HasValue)
             {

@@ -203,6 +203,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Authorities.sql.tt</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-timepicker.css" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
@@ -317,7 +318,9 @@
     <Content Include="Content\i\img-x.psd" />
     <Content Include="Content\i\sprite-icon.psd" />
     <Content Include="ConnectionStrings.config" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\chinaArea.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\views\base\se.ui.control.AceMenu.js" />
     <Content Include="Scripts\Extension\jquery.validate.Extension.js" />
     <Content Include="Scripts\highcharts.js" />
