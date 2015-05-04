@@ -17,7 +17,7 @@ namespace SmsUtility
         /// <summary>
         /// SerialPort对象
         /// </summary>
-        public TextBox m_Textbox;
+        //public TextBox m_Textbox;
         private SerialPort fSerialPort;
         /// <summary>
         /// 是否发送成功
@@ -188,13 +188,13 @@ namespace SmsUtility
                 if (1 == SearchStrInStream2(bufSucess, buf[i], ref iSearchSucess))
                 {
                     fBool_Succeed = true;                  //发送成功
-                    MessageBox.Show("Sucess");
+                    //MessageBox.Show("Sucess");
                 }
 
                 if (1 == SearchStrInStream2(bufFail, buf[i], ref iSearchFail))
                 {
                     fBool_Succeed = false;                  //发送成功
-                    MessageBox.Show("Fail");
+                    //MessageBox.Show("Fail");
                 }
 
                 //处理接收短信的部分，通过包头包围将短信内容分析出来，如果用户不需接收，不用关注
@@ -208,10 +208,10 @@ namespace SmsUtility
                         builder.Remove(0, builder.Length);
                         builder.Append(Encoding.GetEncoding("GBK").GetString(bufSms));
 
-                        m_Textbox.Invoke(new EventHandler(delegate
-                        {
-                            m_Textbox.Text = m_Textbox.Text + builder.ToString();
-                        }));
+                        //m_Textbox.Invoke(new EventHandler(delegate
+                        //{
+                        //    m_Textbox.Text = m_Textbox.Text + builder.ToString();
+                        //}));
                         WriteSmsData("RcvSms.txt", builder.ToString());
                         //将数据写入到文件
                     }
@@ -220,10 +220,10 @@ namespace SmsUtility
                 {
                     bHeadFinded = true;                  //发送成功
                     ibufSms = 0;
-                    m_Textbox.Invoke(new EventHandler(delegate
-                    {
-                        m_Textbox.Text = "找到包头\r\n";
-                    }));
+                    //m_Textbox.Invoke(new EventHandler(delegate
+                    //{
+                    //    m_Textbox.Text = "找到包头\r\n";
+                    //}));
                 }
             }
 

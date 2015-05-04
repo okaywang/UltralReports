@@ -12,6 +12,12 @@ namespace ConsoleApplicationUltraTest
     {
         static void Main(string[] args)
         {
+
+            
+
+            Console.Read();
+            return;
+
             //var context = new UltralReportsEntities();
             //var repository = new EfRepository<UltraRecord>(context);
             //var bll = new UltraReportBussinessLogic(repository);
