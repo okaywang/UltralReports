@@ -20,6 +20,7 @@
                         foreach (var prop in props)
                         {
                             var control = prop.GetControl();
+                            
                             <div class="form-group" @(control.IsRequired ? "validate-rule='required'" : string.Empty) @(control.IsVisible ? string.Empty : "style=display:none")>
                                 <label class="control-label col-md-2">@prop.GetDisplayName()</label>
                                 <div class="col-md-5">

@@ -64,9 +64,11 @@ namespace Website.Models
         public string LoginName { get; set; }
 
         [Required]
+        [MinLength(6)]
         [DisplayName("密码")]
+        [ControlType(typeof(NativeInputPassword))]
         public string Password { get; set; }
-         
+
         [Required]
         [DisplayName("手机号码")]
         public string PhoneNumber { get; set; }
@@ -91,9 +93,10 @@ namespace Website.Models
         [DisplayName("登录名")]
         public string LoginName { get; set; }
 
+        [Required]
         [MinLength(6)]
         [DisplayName("密码")]
-        //[ControlType(typeof(NativeInputText))]
+        [ControlType(typeof(NativeInputPassword))]
         public string Password { get; set; }
 
         [Required]
@@ -116,7 +119,7 @@ namespace Website.Models
 
         [DisplayName("登录名")]
         public string LoginName { get; set; }
-        
+
         [DisplayName("手机号码")]
         public string PhoneNumber { get; set; }
 

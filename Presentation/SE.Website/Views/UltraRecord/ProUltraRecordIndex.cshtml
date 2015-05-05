@@ -8,11 +8,21 @@
     <form class="form-inline" role="form">
         <div class="form-group">
             <label class="control-label">开始时间</label>
-            <input type="text" control-type="NativeInputDate" name="EquipmentNamePart1" class="form-control input-sm" />
+            <div class="input-group date">
+                <input type="text" name="StartTime" class="form-control input-sm datetime" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label">结束时间</label>
-            <input type="text" name="EquipmentNamePart2" class="form-control input-sm" />
+            <div class="input-group date">
+                <input type="text" name="EndTime" class="form-control input-sm datetime" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label">设备名称</label>
@@ -59,6 +69,8 @@
     @Html.Partial("_Modal", new ModalModel<UltroReasonModel> { Title = "新增监控类别" })
 </div>
 @section scripts{
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
@@ -75,5 +87,11 @@
         }));
         viewInstance.init();
         viewInstance.modules.fill.on("saved", function () { viewInstance.refresh(); });
+
+        $(function () {
+            $(".date .form-control").datetimepicker({
+                format: 'YYYY-MM-DD HH:mm'
+            });
+        });
     </script>
 }

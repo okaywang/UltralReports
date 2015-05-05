@@ -53,13 +53,8 @@ namespace ConsoleApplicationUltraTest
 
         static void Main(string[] args)
         {
-            var sms = new SmsDevice("COM1");
-
-            var phones = new[] { "13488886666", "13411112222", "13966667777" };
-            var msg = "广大市民请注意，明天有大暴雨，请注意出行！";
-            sms.SendSms(phones, msg);
-
-
+            TimeSpan timeSpan = new TimeSpan(2, 14, 18);
+            Console.WriteLine(timeSpan.ToString());     // Displays "02:14:18".
 
             return;
 
@@ -75,6 +70,15 @@ namespace ConsoleApplicationUltraTest
             GenerateData_UltraRecord();
 
             Console.WriteLine("abc");
+        }
+
+        private static void SendSmsTest()
+        {
+            var sms = new SmsDevice("COM1");
+
+            var phones = new[] { "13488886666", "13411112222", "13966667777" };
+            var msg = "广大市民请注意，明天有大暴雨，请注意出行！";
+            sms.SendSms(phones, msg);
         }
 
         private async static void TTTTTTTTTTT()

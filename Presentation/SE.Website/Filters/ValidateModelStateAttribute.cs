@@ -7,7 +7,6 @@ using System.Web.Mvc;
 
 namespace Website.Filters
 {
-
     public class ValidateModelStateAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)

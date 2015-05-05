@@ -44,6 +44,7 @@ namespace Website.Common
         bool IsRequired { get; }
         string Name { get; }
         string HelpText { get; }
+        string ValidationRules { get; }
         string Render();
     }
 
@@ -52,6 +53,7 @@ namespace Website.Common
         public virtual bool IsVisible { get { return true; } }
         public virtual bool IsEnabled { get; protected set; }
         public virtual bool IsRequired { get; protected set; }
+        public virtual string ValidationRules { get; set; }
         public virtual string HelpText { get; set; }
         public abstract string Name { get; }
         public abstract string Render();
@@ -237,6 +239,25 @@ namespace Website.Common
             return string.Format("<input type='hidden' name='{0}' data-bind='value:{0}' />", Name);
         }
     }
+
+    public class NativeInputPassword : ControlBase
+    {
+        private string _name;
+        public NativeInputPassword(string name) : this(name, true, false) { }
+        public NativeInputPassword(string name, bool enabled, bool required)
+        {
+            _name = name;
+            IsEnabled = enabled;
+            IsRequired = required;
+        }
+        public override string Name { get { return _name; } }
+
+        public override string Render()
+        {
+            return string.Format("<input type='password' class='form-control' name='{0}' data-bind='value:{0}' />", Name);
+        }
+    }
+
 
     public class StatisticControl : ControlBase
     {

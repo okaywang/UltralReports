@@ -45,7 +45,7 @@ create table LogException(
 Id int identity(1,1) primary key,
 RequestInfo text,
 UserName nvarchar(20),
-Message nvarchar(200),
+Message nvarchar(500),
 StackTrace text,
 FADateTime datetime default(getdate())
 )

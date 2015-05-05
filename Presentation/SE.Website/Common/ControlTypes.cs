@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
 using WebExpress.Core;
 
 namespace Website.Common
@@ -113,6 +115,25 @@ namespace Website.Common
     {
         object Convert(object value);
     }
+
+    public class ValidationAttributeAdapter
+    {
+        private static Dictionary<Type, Func<object, string>> s_handlers = new Dictionary<Type, Func<object, string>> 
+        {
+            {typeof(RequiredAttribute),(o)=>"required:true"},
+            {typeof(MinLengthAttribute),(o)=>string.Format("minlength:{0}", (o as MinLengthAttribute).Length)}
+        };
+
+        public ValidationAttributeAdapter()
+        {
+        }
+
+        public static string Adapter(ValidationAttribute va)
+        {
+            return s_handlers[va.GetType()].Invoke(va);
+        }
+    }
+
     public static class RcExtenstion
     {
         public static string GetDisplayName(this MemberInfo prop)
@@ -169,7 +190,7 @@ namespace Website.Common
             var isRequired = prop.GetCustomAttribute<System.ComponentModel.DataAnnotations.RequiredAttribute>() != null;
             if (attr == null)
             {
-                return new NativeInputText(prop.Name, true, isRequired);
+                control = new NativeInputText(prop.Name, true, isRequired);
             }
             if (typeof(ISourceControl).IsAssignableFrom(typeof(NativeSelect)))
             {
@@ -192,6 +213,12 @@ namespace Website.Common
             {
                 control.HelpText = attrHelp.HelpText;
             }
+            var validations = prop.GetCustomAttributes(typeof(ValidationAttribute), true);
+            if (validations.Any())
+            {
+                control.ValidationRules = string.Join(",", validations.Select(i => ValidationAttributeAdapter.Adapter(i as ValidationAttribute)));
+            }
+
             return control;
         }
 

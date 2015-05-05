@@ -15,21 +15,22 @@
                         foreach (var prop in props)
                         {
                             var control = prop.GetControl();
-                            <div class="form-group" property-name="@control.Name" @(control.IsRequired ? "validate-rule=required:true" : string.Empty) @(control.IsVisible ? string.Empty : "style=display:none")>
-                                <label class="control-label col-md-@gridCount">@prop.GetDisplayName()</label>
-                                <div class="col-md-5">
-                                    @Html.Raw(control.Render())
-                                </div>
-                                @if (!string.IsNullOrEmpty(control.HelpText))
-                                {
-                                    <div style="clear:both;padding-left:15px;" class="col-md-offset-@gridCount">
-                                        <p class="help-block">@control.HelpText</p>
-                                    </div>
-                                }
-                                <div style="clear:both;padding-left:15px;" class="col-md-offset-@gridCount">
-                                    <div class="validate-info"></div>
-                                </div>
+                            
+                        <div class="form-group" property-name="@control.Name" @(string.IsNullOrEmpty(control.ValidationRules) ? string.Empty : string.Format("validate-rule={0}", control.ValidationRules)) @(control.IsVisible ? string.Empty : "style=display:none")>
+                            <label class="control-label col-md-@gridCount">@prop.GetDisplayName()</label>
+                            <div class="col-md-5">
+                                @Html.Raw(control.Render())
                             </div>
+                            @if (!string.IsNullOrEmpty(control.HelpText))
+                            {
+                                <div style="clear:both;padding-left:15px;" class="col-md-offset-@gridCount">
+                                    <p class="help-block">@control.HelpText</p>
+                                </div>
+                            }
+                            <div style="clear:both;padding-left:15px;" class="col-md-offset-@gridCount">
+                                <div class="validate-info"></div>
+                            </div>
+                        </div>
                         }
                     }
                 </form>
