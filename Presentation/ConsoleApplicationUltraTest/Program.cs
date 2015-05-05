@@ -1,5 +1,6 @@
 ﻿using BussinessLogic;
 using DataAccess;
+using SmsUtility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,13 +51,16 @@ namespace ConsoleApplicationUltraTest
             Console.WriteLine("退出异步方法");
         }
 
-        static  void Main(string[] args)
+        static void Main(string[] args)
         {
+            var sms = new SmsDevice("COM1");
 
-            Console.WriteLine(11);
-            TTTTTTTTTTT();
-            Console.WriteLine(33);
-            Console.Read();
+            var phones = new[] { "13488886666", "13411112222", "13966667777" };
+            var msg = "广大市民请注意，明天有大暴雨，请注意出行！";
+            sms.SendSms(phones, msg);
+
+
+
             return;
 
             //var context = new UltralReportsEntities();
@@ -78,7 +82,7 @@ namespace ConsoleApplicationUltraTest
             var device = new MockDeviceTest();
             Console.WriteLine(100);
             await device.SendSmsAysc(new string[] { "aa", "bb", "cc" }, "bad");
-            Console.WriteLine(200); 
+            Console.WriteLine(200);
         }
 
         private static void GenerateData_UltraRecord()

@@ -74,6 +74,10 @@
       <Project>{c5637d1e-9a03-481e-876a-76b615d860ec}</Project>
       <Name>WebExpress.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SmsUtility\SmsUtility.csproj">
+      <Project>{f7856aa8-6fb8-4423-a270-9c850d053c62}</Project>
+      <Name>SmsUtility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
