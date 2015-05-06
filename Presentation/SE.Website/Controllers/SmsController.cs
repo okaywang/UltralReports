@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebExpress.Core;
+using Website.Filters;
 using Website.Models;
 
 namespace Website.Controllers
@@ -19,6 +20,7 @@ namespace Website.Controllers
         }
     }
     [Authorize]
+    [RequireAuthority(AuthorityNames.SmsGroupSetting)]
     public class SmsController : Controller
     {
         private SmsBussinessLogic _bllSms;
@@ -168,7 +170,7 @@ namespace Website.Controllers
             _bllSms.Delete(entity);
             return Json(new ResultModel(true));
         }
-        
+
         public JsonResult UnassociatedAccounts(int groupId)
         {
             var entities = _bllAccount.Where(i => i.SmsGroupAccounts.All(p => p.GroupId != groupId)).ToList();

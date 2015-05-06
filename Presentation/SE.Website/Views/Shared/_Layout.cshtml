@@ -36,8 +36,14 @@
                             <b class="arrow icon-angle-down"></b>
                         </a>
                         <ul class="submenu">
-                            <li><a href="/UltraRecord/SummaryIndex">常规超限统计</a></li>
-                            <li><a href="/UltraRecord/ProUltraRecordIndex">专业超限统计</a></li>
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.NormalUltraReport))
+                            {
+                                <li><a href="/UltraRecord/SummaryIndex">常规超限统计</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.ProUltraReport))
+                            {
+                                <li><a href="/UltraRecord/ProUltraRecordIndex">专业超限统计</a></li>
+                            }
                         </ul>
                     </li>
                     <li>
@@ -47,9 +53,20 @@
                             <b class="arrow icon-angle-down"></b>
                         </a>
                         <ul class="submenu">
-                            <li><a href="/Account/List">账号管理</a></li>
-                            <li><a href="/Duty/DutyTimeIndex">班次设置</a></li>
-                            <li><a href="/Sms/GroupIndex">短信接收组管理</a></li>
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.AccountSetting))
+                            {
+                                <li><a href="/Account/Index">账号管理</a></li>
+                            }
+
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.DutySetting))
+                            {
+                                <li><a href="/Duty/DutyTimeIndex">班次设置</a></li>
+                            }
+
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.SmsGroupSetting))
+                            {
+                                <li><a href="/Sms/GroupIndex">短信接收组管理</a></li>
+                            }
                         </ul>
                     </li>
                     <li>
@@ -59,9 +76,19 @@
                             <b class="arrow icon-angle-down"></b>
                         </a>
                         <ul class="submenu">
-                            <li><a href="/Equipment/Index">设备管理</a></li>
-                            <li><a href="/Equipment/PartIndex">部件管理</a></li>
-                            <li><a href="/Equipment/MonitorTypeIndex">监控类别管理</a></li>
+
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.EquipmentSetting))
+                            {
+                                <li><a href="/Equipment/Index">设备管理</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.NormalPartSetting))
+                            {
+                                <li><a href="/Equipment/PartIndex">部件管理</a></li>
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.MonitorSetting))
+                            {
+                                <li><a href="/Equipment/MonitorTypeIndex">监控类别管理</a></li>
+                            }
                         </ul>
                     </li>
                     <li>
@@ -71,8 +98,14 @@
                             <b class="arrow icon-angle-down"></b>
                         </a>
                         <ul class="submenu">
-                            <li><a href="/Equipment/ProPartIndex">部件管理</a></li>
-                            <li><a href="/Major/Index">专业管理</a></li>
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.ProPartSetting))
+                            {
+                                <li><a href="/Equipment/ProPartIndex">部件管理</a></li> 
+                            }
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.MajorSetting))
+                            {
+                                <li><a href="/Major/Index">专业管理</a></li>
+                            }
                         </ul>
                     </li>
                 </ul>

@@ -16,7 +16,7 @@ using Common.Types;
 
 namespace Website.Controllers
 {
-    [Authorize]
+    [RequireAuthority(AuthorityNames.AccountSetting)]
     public class AccountController : Controller
     {
         //private ShopBussinessLogic _shopBll;
@@ -35,7 +35,7 @@ namespace Website.Controllers
         }
 
         //[RequireAuthority(AuthorityNames.SettingAccount)]
-        public ActionResult List()
+        public ActionResult Index()
         {
             var model = new AccountListPageModel();
             model.Title = "账号列表";
@@ -44,7 +44,7 @@ namespace Website.Controllers
             return View(model);
         }
 
-       // [RequireAuthority(AuthorityNames.SettingAccount)]
+        // [RequireAuthority(AuthorityNames.SettingAccount)]
         public PartialViewResult _List(AccountSearchCriteria criteria)
         {
             var accounts = _bllAccount.Search(criteria);
@@ -110,6 +110,7 @@ namespace Website.Controllers
             return new FileContentResult(bytes, "image/jpeg"); ;
         }
 
+        [AllowAnonymous]
         public ActionResult Logout()
         {
             IAuthenticationService _authenticationService = new FormAuthenticationService();
@@ -320,7 +321,7 @@ namespace Website.Controllers
                 return Json(new ResultModel(false, "没有获取到该账号信息"));
             }
             #region 修改权限
-            var allAuthorities = _bllAccount.GetAllAuthorities();
+            var allAuthorities = _bllAccount.GetAllAuthorities().Where(i => i.Name != AuthorityNames.AccountSetting);
 
             foreach (var item in allAuthorities)
             {

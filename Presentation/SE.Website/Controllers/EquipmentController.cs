@@ -9,11 +9,12 @@ using System.Web;
 using System.Web.Mvc;
 using WebExpress.Core;
 using Website.Common;
+using Website.Filters;
 using Website.Models;
 
 namespace Website.Controllers
-{
-    [Authorize]
+{ 
+    [RequireAuthority(AuthorityNames.EquipmentSetting)]
     public class EquipmentController : Controller
     {
         private EquipmentBussinessLogic _bllEquipment;

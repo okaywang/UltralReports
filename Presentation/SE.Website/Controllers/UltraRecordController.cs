@@ -9,11 +9,11 @@ using System.Web;
 using System.Web.Mvc;
 using WebExpress.Core;
 using Website.Common;
+using Website.Filters;
 using Website.Models;
 
 namespace Website.Controllers
 {
-    [Authorize]
     public class UltraRecordController : Controller
     {
         private UltraReportBussinessLogic _bllUltraRecord;
@@ -27,6 +27,7 @@ namespace Website.Controllers
             _bllMajor = bllMajor;
         }
 
+        [RequireAuthority(AuthorityNames.NormalUltraReport)]
         public ActionResult SummaryIndex()
         {
             var model = new UltraSummaryListPageModel();
@@ -37,6 +38,7 @@ namespace Website.Controllers
             return View(model);
         }
 
+        [RequireAuthority(AuthorityNames.NormalUltraReport)]
         public ActionResult SummaryList(UltraSummarySearchCriteria criteria)
         {
             var entities = _bllUltraRecord.SearchSummary(criteria);
@@ -47,51 +49,7 @@ namespace Website.Controllers
             return PartialView("_CommonList", model);
         }
 
-        public ActionResult ProUltraRecordIndex()
-        {
-            var model = new ProUltraRecordListPageModel();
-            model.Title = "专业超限统计查询";
-            model.RequestListUrl = "/UltraRecord/ProUltraRecordList";
-
-            var majors = _bllMajor.GetAll();
-            model.Majors = Mapper.Map<List<Major>, NameValuePair[]>(majors);
-            return View(model);
-        }
-
-        public ActionResult ProUltraRecordList(UltraRecordSearchCriteria criteria)
-        {
-            criteria.SearchProRecord = true;
-            var entities = _bllUltraRecord.Search(criteria);
-            var items = Mapper.Map<PagedList<UltraRecord>, ProUltraRecordListItemModel[]>(entities);
-            var model = new PagedModel<ProUltraRecordListItemModel>();
-            model.Items = items;
-            model.PagingResult = entities.PagingResult;
-            return PartialView("_CommonList", model);
-        }
-
-        [HttpPost]
-        public JsonResult Reason(UltroReasonModel model)
-        {
-            //UserContext.Current.MajorId 
-            var record = _bllUltraRecord.Get(model.Id);
-            if (!UserContext.Current.MajorId.HasValue || UserContext.Current.MajorId != record.Part.MajorId)
-            {
-                return Json(new ResultModel(false, "对不起，您无权限填报！"));
-            }
-            record.Remarks = model.Reason;
-            _bllUltraRecord.Update(record);
-            return Json(new ResultModel(true));
-        }
-
-        //public ActionResult Index()
-        //{
-        //    var model = new UltraRecordListPageModel();
-        //    model.Title = "超限统计明细列表";
-        //    //model.RequestListUrl = "/UltraRecord/List";
-
-        //    return View(model);
-        //}
-
+        [RequireAuthority(AuthorityNames.NormalUltraReport)]
         public ActionResult List(UltraRecordSearchCriteria criteria)
         {
             var entities = _bllUltraRecord.Search(criteria);
@@ -104,6 +62,45 @@ namespace Website.Controllers
             model.Records.PagingResult = entities.PagingResult;
             model.Records.Items = items;
             return PartialView(model);
+        }
+
+        [RequireAuthority(AuthorityNames.ProUltraReport)]
+        public ActionResult ProUltraRecordIndex()
+        {
+            var model = new ProUltraRecordListPageModel();
+            model.Title = "专业超限统计查询";
+            model.RequestListUrl = "/UltraRecord/ProUltraRecordList";
+
+            var majors = _bllMajor.GetAll();
+            model.Majors = Mapper.Map<List<Major>, NameValuePair[]>(majors);
+            return View(model);
+        }
+
+        [RequireAuthority(AuthorityNames.ProUltraReport)]
+        public ActionResult ProUltraRecordList(UltraRecordSearchCriteria criteria)
+        {
+            criteria.SearchProRecord = true;
+            var entities = _bllUltraRecord.Search(criteria);
+            var items = Mapper.Map<PagedList<UltraRecord>, ProUltraRecordListItemModel[]>(entities);
+            var model = new PagedModel<ProUltraRecordListItemModel>();
+            model.Items = items;
+            model.PagingResult = entities.PagingResult;
+            return PartialView("_CommonList", model);
+        }
+
+        [HttpPost]
+        [RequireAuthority(AuthorityNames.ProUltraReport)]
+        public JsonResult Reason(UltroReasonModel model)
+        {
+            //UserContext.Current.MajorId 
+            var record = _bllUltraRecord.Get(model.Id);
+            if (!UserContext.Current.MajorId.HasValue || UserContext.Current.MajorId != record.Part.MajorId)
+            {
+                return Json(new ResultModel(false, "对不起，您无权限填报！"));
+            }
+            record.Remarks = model.Reason;
+            _bllUltraRecord.Update(record);
+            return Json(new ResultModel(true));
         }
     }
 }

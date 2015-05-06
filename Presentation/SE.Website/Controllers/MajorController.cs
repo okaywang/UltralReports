@@ -8,11 +8,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Website.Common;
+using Website.Filters;
 using Website.Models;
 
 namespace Website.Controllers
 {
-    [Authorize]
+    [RequireAuthority(AuthorityNames.MajorSetting)]
     public class MajorController : Controller
     {
         private MajorBussinessLogic _bllMajor;

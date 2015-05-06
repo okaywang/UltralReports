@@ -38,7 +38,7 @@ namespace Website
 		
 		public const string ProPartSetting = "专业超限配置-部件管理";		
 		
-		public const string ProMajorSetting = "专业超限配置-专业";		
+		public const string MajorSetting = "专业超限配置-专业";		
 		
 	}
 
@@ -63,7 +63,7 @@ namespace Website
 		
 		public AuthorityItem ProPartSetting = new AuthorityItem( AuthorityNames.ProPartSetting,(AuthorityType)2);		
 		
-		public AuthorityItem ProMajorSetting = new AuthorityItem( AuthorityNames.ProMajorSetting,(AuthorityType)2);		
+		public AuthorityItem MajorSetting = new AuthorityItem( AuthorityNames.MajorSetting,(AuthorityType)2);		
 		
 	}
 

@@ -8,10 +8,11 @@ using BussinessLogic;
 using DataAccess;
 using Website.Models;
 using AutoMapper;
+using Website.Filters;
 
 namespace Website.Controllers
 {
-    [Authorize]
+    [RequireAuthority(AuthorityNames.DutySetting)]
     public class DutyController : Controller
     {
         private DutyBussinessLogic _bllDuty;
