@@ -342,6 +342,7 @@
     <Content Include="Content\font\fontawesome-webfont.ttf" />
     <Content Include="Content\font\fontawesome-webfont.woff" />
     <Content Include="Content\font\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\pub.pubxml" />
     <None Include="Properties\PublishProfiles\release.pubxml" />
     <None Include="Properties\PublishProfiles\SEWebsite.pubxml" />
     <None Include="Scripts\jquery-2.0.2.intellisense.js" />

@@ -1,7 +1,7 @@
 
-Create database UltralReportsTest2
+Create database UltralReports
 go
-use UltralReportsTest2
+use UltralReports
 
 Create table Major
 (
@@ -167,7 +167,7 @@ create table Duty
 
 insert into MonitorType (Name) values ('温度')
 insert into MonitorType (Name) values ('转速')
-insert into [Account](Name,LoginName,[Password],[AccountType]) values('张大拿','admin','123456',1)
+insert into [Account](Name,LoginName,[Password],[AccountType],phoneNumber) values('张大拿','admin','123456',1,'13499990000')
 
 insert into dutytime values(1,'01:00','08:00')
 insert into dutytime values(2,'08:00','17:00')
