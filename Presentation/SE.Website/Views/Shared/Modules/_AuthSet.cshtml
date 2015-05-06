@@ -13,8 +13,8 @@
                     <input type="hidden" name="AccountId" id="AccountId" />
                     <ul class="list-group">
                         @{
-                            var targetAccountType = isAdmin ? AccountType.AdminUser : AccountType.GeneralUser;
-                            var authorities = AuthorityHelper.GetAll();
+                            //var targetAccountType = isAdmin ? AccountType.AdminUser : AccountType.GeneralUser;
+                            var authorities = AuthorityHelper.GetAll().Where(i => i.AuthorityType != (int)AuthorityType.Administration);
                             var groupedAuthorities = authorities.GroupBy(i => i.Name.Split('-')[0]);
                             foreach (var item in groupedAuthorities)
                             {
@@ -22,11 +22,11 @@
                                 <span class="col-md-2 text-right">@item.Key</span>
                                 @foreach (var subItem in item)
                                 {
-                                    if (targetAccountType.HasCandidateAuthority(subItem.Name))
-                                    {
+                                    //if (targetAccountType.HasCandidateAuthority(subItem.Name))
+                                    //{
                                     <label class="checkbox-inline" style="margin-left: 2em;">
                                         <input type="checkbox" name="authorityIds" value="@subItem.Id">@subItem.Name.Split('-')[1]</label>    
-                                    }
+                                    //}
                                 }
                             </li>
                             }
@@ -45,6 +45,6 @@
 
 <script>
     $(function () {
-         
+
     });
 </script>

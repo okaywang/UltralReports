@@ -16,10 +16,6 @@ using Common.Types;
 
 namespace Website.Controllers
 {
-    public class AccountListPageModel : ListPageModal
-    {
-        public string AddItemUrl { get; set; }
-    }
     [Authorize]
     public class AccountController : Controller
     {

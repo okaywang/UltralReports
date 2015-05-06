@@ -20,26 +20,50 @@ namespace Website
 	public sealed class AuthorityNames
 	{
 		
-		public const string SettingAccount = "系统设置-账号管理";		
+		public const string AccountSetting = "系统设置-账号管理";		
 		
-		public const string SettingSms = "系统设置-短信设置";		
+		public const string DutySetting = "系统设置-班次设置";		
 		
-		public const string Report1 = "超限统计-统计1";		
+		public const string SmsGroupSetting = "系统设置-短信接受组管理";		
 		
-		public const string Report2 = "超限统计-统计2";		
+		public const string NormalUltraReport = "超限统计-常规超限统计";		
+		
+		public const string ProUltraReport = "超限统计-专业超限统计";		
+		
+		public const string EquipmentSetting = "常规超限配置-设备管理";		
+		
+		public const string NormalPartSetting = "常规超限配置-部件管理";		
+		
+		public const string MonitorSetting = "常规超限配置-监控类别管理";		
+		
+		public const string ProPartSetting = "专业超限配置-部件管理";		
+		
+		public const string ProMajorSetting = "专业超限配置-专业";		
 		
 	}
 
 	public sealed class Authorities
 	{
 		
-		public AuthorityItem SettingAccount = new AuthorityItem( AuthorityNames.SettingAccount,(AuthorityType)1);		
+		public AuthorityItem AccountSetting = new AuthorityItem( AuthorityNames.AccountSetting,(AuthorityType)1);		
 		
-		public AuthorityItem SettingSms = new AuthorityItem( AuthorityNames.SettingSms,(AuthorityType)1);		
+		public AuthorityItem DutySetting = new AuthorityItem( AuthorityNames.DutySetting,(AuthorityType)2);		
 		
-		public AuthorityItem Report1 = new AuthorityItem( AuthorityNames.Report1,(AuthorityType)1);		
+		public AuthorityItem SmsGroupSetting = new AuthorityItem( AuthorityNames.SmsGroupSetting,(AuthorityType)2);		
 		
-		public AuthorityItem Report2 = new AuthorityItem( AuthorityNames.Report2,(AuthorityType)1);		
+		public AuthorityItem NormalUltraReport = new AuthorityItem( AuthorityNames.NormalUltraReport,(AuthorityType)2);		
+		
+		public AuthorityItem ProUltraReport = new AuthorityItem( AuthorityNames.ProUltraReport,(AuthorityType)2);		
+		
+		public AuthorityItem EquipmentSetting = new AuthorityItem( AuthorityNames.EquipmentSetting,(AuthorityType)2);		
+		
+		public AuthorityItem NormalPartSetting = new AuthorityItem( AuthorityNames.NormalPartSetting,(AuthorityType)2);		
+		
+		public AuthorityItem MonitorSetting = new AuthorityItem( AuthorityNames.MonitorSetting,(AuthorityType)2);		
+		
+		public AuthorityItem ProPartSetting = new AuthorityItem( AuthorityNames.ProPartSetting,(AuthorityType)2);		
+		
+		public AuthorityItem ProMajorSetting = new AuthorityItem( AuthorityNames.ProMajorSetting,(AuthorityType)2);		
 		
 	}
 
@@ -48,11 +72,7 @@ namespace Website
         private static List<string> defaultAuthorities = new List<string>();
         static DefaultAuthoritiesForAdmin()
         {
-						defaultAuthorities.Add(AuthorityNames.SettingAccount);
-								defaultAuthorities.Add(AuthorityNames.SettingSms);
-								defaultAuthorities.Add(AuthorityNames.Report1);
-								defaultAuthorities.Add(AuthorityNames.Report2);
-				        }
+		        }
         public static List<string> DefaultAuthorities
         {
             get
@@ -83,9 +103,15 @@ namespace Website
             string filename = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/SqlServer.Authorities.sql");
             var sb = new System.Text.StringBuilder();
 								sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 1, N'系统设置-账号管理')");
-										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 1, N'系统设置-短信设置')");
-										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 1, N'超限统计-统计1')");
-										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 1, N'超限统计-统计2')");
+										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 2, N'系统设置-班次设置')");
+										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 2, N'系统设置-短信接受组管理')");
+										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 2, N'超限统计-常规超限统计')");
+										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 2, N'超限统计-专业超限统计')");
+										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 2, N'常规超限配置-设备管理')");
+										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 2, N'常规超限配置-部件管理')");
+										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 2, N'常规超限配置-监控类别管理')");
+										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 2, N'专业超限配置-部件管理')");
+										sb.AppendLine("INSERT INTO dbo.Authority( AuthorityType, Name ) VALUES  ( 2, N'专业超限配置-专业')");
 					            
 
             System.IO.File.WriteAllText(filename, sb.ToString());   

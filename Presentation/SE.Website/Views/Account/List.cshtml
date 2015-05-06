@@ -1,4 +1,4 @@
-﻿@model Website.Controllers.AccountListPageModel
+﻿@model AccountListPageModel
 @{
     ViewBag.Title = Model.Title;
 }
@@ -35,24 +35,24 @@
             rowCommands: {
                 setAuthority: function (model) {
                     viewInstance.modules.auth.dialog.show();
-                    $("#AccountId").val(model.AccountId);
+                    $("#AccountId").val(model.Id);
                     var url = "/Account/GetAuthorities";
-                    webExpress.utility.ajax.request(url, { accountId: model.AccountId }, function (result) {
+                    webExpress.utility.ajax.request(url, { accountId: model.Id }, function (result) {
                         for (var i = 0; i < result.length; i++) {
                             $(":checkbox[value=" + result[i] + "]").prop("checked", true);
                         }
                     });
                 },
-                setGroup: function (model) {
-                    viewInstance.modules.group.dialog.show();
-                    $("#AccountId").val(model.AccountId);
-                    var url = "/Account/GetAuthorities";
-                    webExpress.utility.ajax.request(url, { accountId: model.AccountId }, function (result) {
-                        for (var i = 0; i < result.length; i++) {
-                            $(":checkbox[value=" + result[i] + "]").prop("checked", true);
-                        }
-                    });
-                },
+                //setGroup: function (model) {
+                //    viewInstance.modules.group.dialog.show();
+                //    $("#AccountId").val(model.AccountId);
+                //    var url = "/Account/GetAuthorities";
+                //    webExpress.utility.ajax.request(url, { accountId: model.Id }, function (result) {
+                //        for (var i = 0; i < result.length; i++) {
+                //            $(":checkbox[value=" + result[i] + "]").prop("checked", true);
+                //        }
+                //    });
+                //},
                 update: function (model) {
                     viewInstance.modules.update.dialog.show();
                     viewInstance.modules.update.bindModel(model);

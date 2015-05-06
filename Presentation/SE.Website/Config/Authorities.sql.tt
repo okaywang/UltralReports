@@ -43,19 +43,19 @@ for (int i = 0; i < authorityNodes.Count; i++)
 <#
 }
 #>
-insert into Account(LoginName,Password,AccountType) values('admin','123456',1)
+--insert into Account(LoginName,Password,AccountType) values('admin','123456',1)
 <#		 
 for (int i = 0; i < authorityNodes.Count; i++)
 {
 	var node = authorityNodes[i];
 #>
 	<#
-		if(node.Attributes["authorityType"].Value == "1" || node.Attributes["authorityType"].Value == "3")
-		{
+		//if(node.Attributes["authorityType"].Value == "1" || node.Attributes["authorityType"].Value == "3")
+		//{
 	#>
 	insert into AccountAuthority(AccountId,AuthorityId) select Account.Id AccountId,Authority.Id from Account,Authority where Account.LoginName='admin' and Authority.Name=N'<#=node.Attributes["name"].Value #>'
 	<#
-		}
+		//}
 	#>
 <#
 }
