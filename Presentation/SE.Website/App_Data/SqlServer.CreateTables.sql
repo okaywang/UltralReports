@@ -58,26 +58,13 @@ UserName nvarchar(20),
 Message nvarchar(200),
 FADateTime datetime default(getdate())
 )
-
-create table SmsRecipient
-(
-Id int IDENTITY(1,1) primary key,
-Name nvarchar(50) not null,
-PhoneNumber varchar(20) not null
-)
-
+ 
 create table SmsGroup
 (
 Id int IDENTITY(1,1) primary key,
 Name nvarchar(50) not null
 )
-
-create table SmsGroupRecipient
-(
-GroupId int not null references SmsGroup,
-RecipientId int not null references SmsRecipient,
-Constraint PK_GroupId_RecipientId primary key(GroupId,RecipientId)
-)
+ 
 
 create table SmsGroupAccount
  (
@@ -169,8 +156,8 @@ insert into MonitorType (Name) values ('温度')
 insert into MonitorType (Name) values ('转速')
 insert into [Account](Name,LoginName,[Password],[AccountType],phoneNumber) values('张大拿','admin','123456',1,'13499990000')
 
-insert into dutytime values(1,'01:00','08:00')
-insert into dutytime values(2,'08:00','17:00')
+insert into dutytime values(1,'01:00','08:30')
+insert into dutytime values(2,'08:30','17:00')
 insert into dutytime values(3,'17:00','01:00')
 
 insert into duty

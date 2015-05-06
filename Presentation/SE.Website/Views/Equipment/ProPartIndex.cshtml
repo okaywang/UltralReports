@@ -37,8 +37,9 @@
                 if (item.field == "MachineSet") {
                     if (vm.MachineSet) {
                         $.getJSON("/Equipment/Get", { MachineSet: vm.MachineSet }, function (data) {
+                            data.unshift({ Value: "", Name: "" });
                             vm.set("EquipmentIds", data);
-                            vm.set("EquipmentId", data[0].Value);
+                            vm.set("EquipmentId", "");
                         });
                     }
                     else {
@@ -46,9 +47,17 @@
                         vm.set("EquipmentId", "");
                     }
                 } else if (item.field == "EquipmentId") {
-                    $.getJSON("/Equipment/GetParts", { EquipmentId: vm.EquipmentId }, function (data) {
-                        vm.set("PartIds", data);
-                    });
+                    if (vm.EquipmentId) {
+                        $.getJSON("/Equipment/GetParts", { EquipmentId: vm.EquipmentId }, function (data) {
+                            data.unshift({ Value: "", Name: "" }); 
+                            vm.set("PartIds", data);
+                            vm.set("PartId", "");
+                        });
+                    }
+                    else {
+                        vm.set("PartIds", []);
+                        vm.set("PartId", "");
+                    }
                 }
             });
         }

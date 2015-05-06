@@ -293,15 +293,7 @@
 .sidebar .settingsicon {
     background: url(/content/i/MenuIcons/settings.png) no-repeat;
 }
-
-.sidebar .shopicon {
-    background: url(/content/i/MenuIcons/shop.png) no-repeat;
-}
-
-.sidebar .skuicon {
-    background: url(/content/i/MenuIcons/sku.png) no-repeat;
-}
-
+  
 
 input.error, select.error, textarea.error {
     border: 1px solid red;

@@ -17,7 +17,6 @@ namespace Website
     {
         private string GetExceptionMessage(Exception ex)
         {
-            return ex.Message;
             if (ex.InnerException != null)
             {
                 return ex.Message + "\n\rInnerException\n\r" + GetExceptionMessage(ex.InnerException);

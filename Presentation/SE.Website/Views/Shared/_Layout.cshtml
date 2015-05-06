@@ -48,30 +48,7 @@
                     </li>
                     <li>
                         <a class="dropdown-toggle" href="#">
-                            <i class="maintenanceicon"></i>
-                            <span class="menu-text">系统设置</span>
-                            <b class="arrow icon-angle-down"></b>
-                        </a>
-                        <ul class="submenu">
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.AccountSetting))
-                            {
-                                <li><a href="/Account/Index">账号管理</a></li>
-                            }
-
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.DutySetting))
-                            {
-                                <li><a href="/Duty/DutyTimeIndex">班次设置</a></li>
-                            }
-
-                            @if (UserContext.Current.HasAuthority(AuthorityNames.SmsGroupSetting))
-                            {
-                                <li><a href="/Sms/GroupIndex">短信接收组管理</a></li>
-                            }
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="dropdown-toggle" href="#">
-                            <i class="settingsicon"></i>
+                            <i style="background:url(/content/i/MenuIcons/1.png) no-repeat"></i>
                             <span class="menu-text">常规超限配置</span>
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -93,7 +70,7 @@
                     </li>
                     <li>
                         <a class="dropdown-toggle" href="#">
-                            <i class="settingsicon"></i>
+                            <i style="background:url(/content/i/MenuIcons/2.png) no-repeat"></i>
                             <span class="menu-text">专业超限配置</span>
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -105,6 +82,29 @@
                             @if (UserContext.Current.HasAuthority(AuthorityNames.MajorSetting))
                             {
                                 <li><a href="/Major/Index">专业管理</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="maintenanceicon"></i>
+                            <span class="menu-text">系统设置</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.AccountSetting))
+                            {
+                                <li><a href="/Account/Index">账号管理</a></li>
+                            }
+
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.DutySetting))
+                            {
+                                <li><a href="/Duty/DutyTimeIndex">班次设置</a></li>
+                            }
+
+                            @if (UserContext.Current.HasAuthority(AuthorityNames.SmsGroupSetting))
+                            {
+                                <li><a href="/Sms/GroupIndex">短信接收组管理</a></li>
                             }
                         </ul>
                     </li>
