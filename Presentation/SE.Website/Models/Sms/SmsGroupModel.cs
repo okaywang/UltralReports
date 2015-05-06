@@ -72,7 +72,7 @@ namespace Website.Models
         public object Convert(object obj)
         {
             var model = obj as SmsGroupListItemModel;
-            var result = string.Join(",", model.Recipients.Select(i => string.Format("<span value={0} command-name='removeRecipient'>{1}</span>", i.Value, i.Name)));
+            var result = string.Join("", model.Recipients.Select(i => string.Format("<span value={0} class='label label-default'>{1}<span class='glyphicon glyphicon-remove remove' command-name='removeRecipient'></span></span>", i.Value, i.Name)));
             return result;
         }
     }
