@@ -1,4 +1,4 @@
-﻿
+﻿using WebExpress.Website;
 using Website.Models;
 using System;
 using System.Collections.Generic;
@@ -34,23 +34,12 @@ namespace Website
                 UserName = UserContext.Current.Name,
                 StackTrace = filterContext.Exception.StackTrace,
                 Message = exMsg,
-                RequestInfo = HttpContext.Current.Request.UserAgent.ToString()
+                RequestInfo = HttpContext.Current.Request.ToRaw()
             };
 
             bll.Insert(model);
 
-            try
-            {
-                filterContext.HttpContext.Request.InputStream.Seek(0, SeekOrigin.Begin);
-                var stream = new StreamReader(filterContext.HttpContext.Request.InputStream);
-                var rr = stream.ReadToEnd();
 
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
             if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
                 var result = new ResultModel(false, filterContext.Exception.Message);

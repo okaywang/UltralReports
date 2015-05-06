@@ -82,6 +82,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="DynamicScript\EnumTypeScriptWriter.cs" />
     <Compile Include="DynamicScript\IDynamicScriptWriter.cs" />
+    <Compile Include="HttpRequestExtensions.cs" />
     <Compile Include="Exceptions\AuthorizationException.cs" />
     <Compile Include="Exceptions\DataNotFoundException.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
