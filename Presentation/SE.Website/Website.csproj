@@ -231,12 +231,12 @@
     <Content Include="Content\images\prompt.png" />
     <Content Include="Content\i\captcha.png" />
     <Content Include="Content\i\logo.png" />
+    <Content Include="Content\i\MenuIcons\1.png" />
+    <Content Include="Content\i\MenuIcons\2.png" />
     <Content Include="Content\i\MenuIcons\custoemr.png" />
     <Content Include="Content\i\MenuIcons\maintenance.png" />
     <Content Include="Content\i\MenuIcons\order.png" />
     <Content Include="Content\i\MenuIcons\settings.png" />
-    <Content Include="Content\i\MenuIcons\shop.png" />
-    <Content Include="Content\i\MenuIcons\sku.png" />
     <Content Include="Content\i\MenuIcons\home.png" />
     <Content Include="Content\jQuery-File-Upload\css\jquery.fileupload-ui.css" />
     <Content Include="Content\jQuery-File-Upload\js\jquery.fileupload.js" />
