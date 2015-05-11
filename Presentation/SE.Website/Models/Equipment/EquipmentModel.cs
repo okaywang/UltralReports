@@ -229,13 +229,11 @@ namespace Website.Models
         [DisplayName("单位")]
         public string Unit { get; set; }
 
-        [Required]
         [DisplayName("高3限")]
-        public decimal H3 { get; set; }
+        public decimal? H3 { get; set; }
 
-        [Required]
         [DisplayName("高2限")]
-        public decimal H2 { get; set; }
+        public decimal? H2 { get; set; }
 
         [Required]
         [DisplayName("高1限")]
@@ -245,13 +243,11 @@ namespace Website.Models
         [DisplayName("低1限")]
         public decimal L1 { get; set; }
 
-        [Required]
         [DisplayName("低2限")]
-        public decimal L2 { get; set; }
+        public decimal? L2 { get; set; }
 
-        [Required]
         [DisplayName("低3限")]
-        public decimal L3 { get; set; }
+        public decimal? L3 { get; set; }
 
         [Required]
         [DisplayName("是否发短信")]
@@ -293,13 +289,11 @@ namespace Website.Models
         [DisplayName("单位")]
         public string Unit { get; set; }
 
-        [Required]
         [DisplayName("高3限")]
-        public decimal H3 { get; set; }
+        public decimal? H3 { get; set; }
 
-        [Required]
         [DisplayName("高2限")]
-        public decimal H2 { get; set; }
+        public decimal? H2 { get; set; }
 
         [Required]
         [DisplayName("高1限")]
@@ -309,13 +303,11 @@ namespace Website.Models
         [DisplayName("低1限")]
         public decimal L1 { get; set; }
 
-        [Required]
         [DisplayName("低2限")]
-        public decimal L2 { get; set; }
+        public decimal? L2 { get; set; }
 
-        [Required]
         [DisplayName("低3限")]
-        public decimal L3 { get; set; }
+        public decimal? L3 { get; set; }
 
         [Required]
         [DisplayName("是否发短信")]

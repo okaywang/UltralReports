@@ -199,6 +199,9 @@
     <Content Include="App_Data\SqlServer.CreateTables.sql">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\SqlServer.Changes.sql">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Config\Authorities.sql.sql">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

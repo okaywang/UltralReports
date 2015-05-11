@@ -46,7 +46,7 @@ namespace Website.Models
         {
             var model = obj as UltraRecordListItemModel;
             var span = model.EndTime.Subtract(model.StartTime);
-            return model.Duration = span.Days * 60 + span.Minutes;
+            return string.Format("{0}分{1}秒", span.Days * 60 + span.Minutes, span.Seconds);
         }
     }
 
@@ -64,9 +64,9 @@ namespace Website.Models
         [ValueConvertor(typeof(UltraTypeValueConvertor))]
         public string UltraType { get; set; }
 
-        [DisplayName("超限时长(分钟)")]
+        [DisplayName("超限时长")]
         [ValueConvertor(typeof(DurationValueConvertor))]
-        public int Duration { get; set; }
+        public string Duration { get; set; }
 
         [DisplayName("最小值")]
         public decimal? MinValue { get; set; }
