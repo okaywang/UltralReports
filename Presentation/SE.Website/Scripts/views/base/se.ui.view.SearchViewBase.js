@@ -2,22 +2,30 @@
 se.ui.view.SearchViewBase.Settings = SearchViewBaseSettings;
 
 function SearchViewBaseClass(settings) {
-    var _criteria = settings.criteria;
+    //var _criteria = settings.criteria;
     var _self = this;
     function _init() {
         _self.init = init;
+
+        _self.criteria = settings.criteria;
 
         _self.search = search;
 
         _self.refresh = refresh;
 
         _self.modules = settings.modules;
+
+        _self.pager = null;
     }
 
     function init() {
-        se.ui.control.Pager.setPageSize(settings.criteria.PagingRequest.PageSize);
+        _self.pager = new se.ui.control.Pager(settings.searchResultContainer, refresh);
+        _self.pager.init();
+        _self.pager.setPageSize(settings.criteria.PagingRequest.PageSize);
 
-        $(search);
+        $(function () {
+            search.call(_self);
+        });
 
         settings.searchButton.click(function () {
             search();
@@ -61,22 +69,23 @@ function SearchViewBaseClass(settings) {
             module.init();
         }
 
-        se.ui.control.Pager.enablePaging(settings.searchResultContainer, refresh);
+
+        //se.ui.control.Pager.enablePaging(settings.searchResultContainer, refresh);
     }
 
     function search() {
         var model = settings.getCriteriaModel();
-        $.extend(_criteria, model);
-        refresh(0);
+        $.extend(_self.criteria, model);
+        this.refresh(0);
     }
 
     function refresh(pageIndex) {
         if (pageIndex !== undefined) {
-            _criteria.PagingRequest.PageIndex = pageIndex;
+            _self.criteria.PagingRequest.PageIndex = pageIndex;
         }
-        _criteria.PagingRequest.PageSize = se.ui.control.Pager.getPageSize() || settings.criteria.PagingRequest.PageSize;
+        _self.criteria.PagingRequest.PageSize = _self.pager.getPageSize() || settings.criteria.PagingRequest.PageSize;
         settings.searchResultContainer.mask("loading...");
-        webExpress.utility.ajax.request(settings.url, _criteria,
+        webExpress.utility.ajax.request(settings.url, _self.criteria,
             function (data) {
                 if (data.IsSuccess === false) {
                     settings.searchFeedback.text(data.Message);

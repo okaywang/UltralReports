@@ -164,12 +164,12 @@ namespace Website.Models
         private static Dictionary<string, string> _dict = new Dictionary<string, string>();
         static UltraTypeValueConvertor()
         {
-            _dict.Add("H1", "高1限");
-            _dict.Add("H2", "高2限");
-            _dict.Add("H3", "高2限");
-            _dict.Add("L1", "低1限");
-            _dict.Add("L2", "低2限");
-            _dict.Add("L3", "低3限");
+            _dict.Add("H1", "超高一");
+            _dict.Add("H2", "超高二");
+            _dict.Add("H3", "超高三");
+            _dict.Add("L1", "超低一");
+            _dict.Add("L2", "超低二");
+            _dict.Add("L3", "超低三");
             _dict.Add("PH", "专业超高限");
             _dict.Add("PL", "专业超低限");
         }

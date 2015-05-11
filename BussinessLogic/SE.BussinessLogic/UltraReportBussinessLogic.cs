@@ -30,20 +30,20 @@ namespace BussinessLogic
             }
             var query = PrimaryRepository.Table;
             query = query.Where(i => i.Flag == true);
-            query = query.Where(i => i.IsProRecord == criteria.SearchProRecord); 
+            query = query.Where(i => i.IsProRecord == criteria.SearchProRecord);
             if (criteria.PartId.HasValue)
             {
-                query = query.Where(i => i.PartId >= criteria.PartId.Value);
+                query = query.Where(i => i.PartId == criteria.PartId.Value);
             }
             if (criteria.Duty.HasValue)
             {
-                query = query.Where(i => i.Duty >= criteria.Duty);
+                query = query.Where(i => i.Duty == criteria.Duty.Value);
             }
             if (criteria.MajorId.HasValue)
             {
-                query = query.Where(i => i.Part.MajorId >= criteria.MajorId.Value);
+                query = query.Where(i => i.Part.MajorId == criteria.MajorId.Value);
             }
- 
+
             if (criteria.StartTime.HasValue)
             {
                 query = query.Where(i => i.StartTime >= criteria.StartTime.Value);
@@ -55,10 +55,6 @@ namespace BussinessLogic
             if (criteria.MonitorTypeId.HasValue)
             {
                 query = query.Where(i => i.Part.Equipment.MonitorTypeId == criteria.MonitorTypeId.Value);
-            }
-            if (criteria.Duty.HasValue)
-            {
-                query = query.Where(i => i.Duty == criteria.Duty.Value);
             }
 
             query = query.OrderBy<UltraRecord>(criteria.OrderByFields);
@@ -88,7 +84,7 @@ namespace BussinessLogic
             }
             var query = PrimaryRepository.Table;
             query = query.Where(i => i.Flag == true);
-            query = query.Where(i=>i.IsProRecord == criteria.SearchProRecord);
+            query = query.Where(i => i.IsProRecord == criteria.SearchProRecord);
             if (criteria.StartTime.HasValue)
             {
                 query = query.Where(i => i.StartTime >= criteria.StartTime.Value);

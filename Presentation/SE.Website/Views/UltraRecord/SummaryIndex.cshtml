@@ -70,7 +70,7 @@
 
 <div class="module-detail">
     <div class="modal" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <label class="modal-title">明细</label>
@@ -91,31 +91,39 @@
     <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
+
         var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
             url: '@Model.RequestListUrl',
             rowCommands: {
                 detail: function (model) {
-                    var criteria = $(".search-criteria form").serializeObject();
-                    var url = webExpress.utility.string.format("/UltraRecord/List?SearchProRecord=false&partId={0}&duty={1}&startTime={2}&endTime={3}", model.PartId, model.Duty, criteria.StartTime, criteria.EndTime);
-                    $.get(url, "", function (data) {
-                        var title = webExpress.utility.string.format("<b>设备：</b>{0} <b>部件：</b>{1} 超限记录详情", model.EquipmentName, model.PartName);
-                        $(".module-detail .modal-title").html(title);
-                        $(".module-detail .modal-body").html(data);
-                        $(".module-detail .modal").modal("show");
-                          
-                        
-                    });
+                    subView.criteria.PartId = model.PartId;
+                    subView.criteria.Duty = model.Duty;
+                    subView.search();
+                    var title = webExpress.utility.string.format("<b>设备：</b>{0} <b>部件：</b>{1} 超限记录详情", model.EquipmentName, model.PartName);
+                    $(".module-detail .modal-title").html(title);
+                    $(".module-detail .modal").modal("show");
                 }
             }
         }));
         viewInstance.init();
 
+        var subView = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+            url: "/UltraRecord/List",
+            searchResultContainer: $(".module-detail .modal-body"),
+            getCriteriaModel: function () {
+                var criteria = $(".search-criteria form").serializeObject();
+                criteria.SearchProRecord = false;
+                delete criteria.Duty;
+                return criteria;
+            }
+        }));
+
+        subView.init();
+
         $(function () {
             $(".date .form-control").datetimepicker({
                 format: 'YYYY-MM-DD HH:mm'
             });
-
-            //se.ui.control.Pager.enablePaging(".modal", viewInstance.refresh);
         });
     </script>
 }
