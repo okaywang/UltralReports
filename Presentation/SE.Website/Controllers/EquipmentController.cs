@@ -13,7 +13,7 @@ using Website.Filters;
 using Website.Models;
 
 namespace Website.Controllers
-{ 
+{
     [RequireAuthority(AuthorityNames.EquipmentSetting)]
     public class EquipmentController : Controller
     {
@@ -165,6 +165,7 @@ namespace Website.Controllers
             entity.EquipmentId = model.EquipmentId;
             entity.Name = model.Name;
             entity.Unit = model.Unit;
+            entity.DataKey = model.DataKey;
             entity.L1 = model.L1;
             entity.L2 = model.L2;
             entity.L3 = model.L3;

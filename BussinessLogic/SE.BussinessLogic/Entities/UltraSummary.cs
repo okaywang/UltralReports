@@ -18,7 +18,7 @@ namespace BussinessLogic
 
         public string MonitorTypeName { get; set; }
 
-        public decimal L3 { get; set; }
+        public decimal L1 { get; set; }
 
         public decimal H1 { get; set; }
 

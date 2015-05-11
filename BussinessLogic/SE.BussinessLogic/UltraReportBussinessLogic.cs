@@ -127,7 +127,7 @@ namespace BussinessLogic
                              EquipmentId = gr.Key.EquipmentId,
                              EquipmentName = gr.Max(i => i.Part.Equipment.Name),
                              MonitorTypeName = gr.Max(i => i.Part.Equipment.MonitorType.Name),
-                             L3 = gr.Max(i => i.Part.L3),
+                             L1 = gr.Max(i => i.Part.L1),
                              H1 = gr.Max(i => i.Part.H1),
                              Times = gr.Count(),
                              Duration = gr.Sum(i => EntityFunctions.DiffMinutes(i.StartTime, i.EndTime).Value),
