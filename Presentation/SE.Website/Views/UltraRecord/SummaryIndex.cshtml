@@ -108,6 +108,7 @@
         viewInstance.init();
 
         var subView = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+            container: $(".module-detail"),
             url: "/UltraRecord/List",
             searchResultContainer: $(".module-detail .modal-body"),
             getCriteriaModel: function () {

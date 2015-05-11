@@ -10,7 +10,7 @@ thead th {
     text-align: center;
 }
  
-.widget-title, .modal-header, .table th, div.dataTables_wrapper .ui-widget-header {
+.table th{
 	background-color: #efefef;
 	background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#fdfdfd), to(#eaeaea));
 	background-image: -webkit-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);

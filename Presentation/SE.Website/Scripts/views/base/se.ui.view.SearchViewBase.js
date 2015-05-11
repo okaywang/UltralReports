@@ -76,7 +76,7 @@ function SearchViewBaseClass(settings) {
     function search() {
         var model = settings.getCriteriaModel();
         $.extend(_self.criteria, model);
-        this.refresh(0);
+        _self.refresh(0);
     }
 
     function refresh(pageIndex) {
@@ -107,13 +107,14 @@ function SearchViewBaseClass(settings) {
 }
 
 function SearchViewBaseSettings(settings) {
+    this.container = settings.container || document;
     this.url = "";
     this.viewCommands = {};
     this.rowCommands = {};
     this.modules = {};
-    this.searchButton = $(".btn[role='search']");
-    this.searchFeedback = $(".search-feedback");
-    this.searchResultContainer = $(".search-result");
+    this.searchButton = $(".btn[role='search']", this.container);
+    this.searchFeedback = $(".search-feedback", this.container);
+    this.searchResultContainer = $(".search-result", this.container);
     this.searchResultHandler = function (data) {
         this.searchResultContainer.html(data);
     }
