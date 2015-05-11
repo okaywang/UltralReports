@@ -61,6 +61,7 @@ namespace Website.Models
         public DateTime EndTime { get; set; }
 
         [DisplayName("超限类型")]
+        [ValueConvertor(typeof(UltraTypeValueConvertor))]
         public string UltraType { get; set; }
 
         [DisplayName("超限时长(分钟)")]
@@ -158,6 +159,28 @@ namespace Website.Models
         }
     }
 
+    public class UltraTypeValueConvertor : IValueConvertor
+    {
+        private static Dictionary<string, string> _dict = new Dictionary<string, string>();
+        static UltraTypeValueConvertor()
+        {
+            _dict.Add("H1", "高1限");
+            _dict.Add("H2", "高2限");
+            _dict.Add("H3", "高2限");
+            _dict.Add("L1", "低1限");
+            _dict.Add("L2", "低2限");
+            _dict.Add("L3", "低3限");
+            _dict.Add("PH", "专业超高限");
+            _dict.Add("PL", "专业超低限");
+        }
+
+        public object Convert(object obj)
+        {
+            var model = obj as dynamic;
+            return _dict[model.UltraType];
+        }
+    }
+
     [RequestUrl("/UltraRecord/Reason")]
     public class UltroReasonModel
     {
@@ -181,6 +204,7 @@ namespace Website.Models
         public string PartName { get; set; }
 
         [DisplayName("超限类别")]
+        [ValueConvertor(typeof(UltraTypeValueConvertor))]
         public string UltraType { get; set; }
 
         [DisplayName("开始时间")]
