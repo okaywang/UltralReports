@@ -234,6 +234,7 @@
     <Content Include="Content\images\prompt.png" />
     <Content Include="Content\i\captcha.png" />
     <Content Include="Content\i\logo.gif" />
+    <Content Include="Content\i\logo.png" />
     <Content Include="Content\i\MenuIcons\1.png" />
     <Content Include="Content\i\MenuIcons\2.png" />
     <Content Include="Content\i\MenuIcons\custoemr.png" />
