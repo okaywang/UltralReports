@@ -255,7 +255,7 @@ namespace Website.Models
         [SimpleSourceAttribute("发送-true", "不发送-false")]
         public bool SendSms { get; set; }
 
-        [Required]
+        //[Required]
         [DisplayName("短信超限次数")]
         public int UltraNum { get; set; }
     }
@@ -315,7 +315,7 @@ namespace Website.Models
         [SimpleSourceAttribute("发送-true", "不发送-false")]
         public bool SendSms { get; set; }
 
-        [Required]
+        //[Required]
         [DisplayName("短信超限次数")]
         public int UltraNum { get; set; }
     }

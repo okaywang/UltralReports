@@ -52,11 +52,7 @@ namespace ConsoleApplicationUltraTest
         }
 
         static void Main(string[] args)
-        {
-            TimeSpan timeSpan = new TimeSpan(2, 14, 18);
-            Console.WriteLine(timeSpan.ToString());     // Displays "02:14:18".
-
-            return;
+        { 
 
             //var context = new UltralReportsEntities();
             //var repository = new EfRepository<UltraRecord>(context);
@@ -97,7 +93,7 @@ namespace ConsoleApplicationUltraTest
 
             var types = new[] { "L1", "L2", "L3", "H1", "H2", "H3", "PH", "PL" };
             var symbols = new[] { 1, -1 };
-            var parts = new[] { 2, 3 };
+            var parts = new[] { 4, 5 };
             var duties = new[] { 1, 2, 3, 4, 5 };
             var rand = new Random();
             var records = new List<UltraRecord>();

@@ -138,6 +138,7 @@ namespace Website.Common
             {
                 foreach (var pair in Source)
                 {
+                    sb.Append("<label>");
                     sb.AppendFormat("<input type='radio' name='{0}' data-bind='checked:{0}' value='{1}' ", Name, pair.Value);
                     if (!IsEnabled)
                     {
@@ -145,6 +146,7 @@ namespace Website.Common
                     }
                     sb.Append("/>");
                     sb.Append(pair.Name);
+                    sb.Append("</label>");
                 }
             }
 

@@ -45,7 +45,11 @@ namespace Website.Models
         public object Convert(object obj)
         {
             var model = obj as UltraRecordListItemModel;
-            var span = model.EndTime.Subtract(model.StartTime);
+            if (model.StartTime > model.EndTime || String.IsNullOrEmpty(model.EndTime.ToString()) || model.EndTime == DateTime.MinValue)
+            {
+                return "超限未结束";
+            }
+            var span = (DateTime.Parse(model.EndTime.ToString())).Subtract(model.StartTime);
             return string.Format("{0}分{1}秒", span.Days * 60 + span.Minutes, span.Seconds);
         }
     }
@@ -58,7 +62,7 @@ namespace Website.Models
         public DateTime StartTime { get; set; }
 
         [DisplayName("结束时间")]
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
 
         [DisplayName("超限类型")]
         [ValueConvertor(typeof(UltraTypeValueConvertor))]
@@ -95,14 +99,14 @@ namespace Website.Models
     {
         public int PartId { get; set; }
 
-        [DisplayName("部件设备名称")]
+        [DisplayName("设备名称")]
+        public string EquipmentName { get; set; }
+
+        [DisplayName("部件名称")]
         public string PartName { get; set; }
 
         [DisplayName("监控类型")]
         public string MonitorTypeName { get; set; }
-
-        [DisplayName("设备名称")]
-        public string EquipmentName { get; set; }
 
         //public decimal L3 { get; set; }
 
@@ -211,7 +215,7 @@ namespace Website.Models
         public DateTime StartTime { get; set; }
 
         [DisplayName("结束时间")]
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
 
         [DisplayName("所属专业")]
         public string MajorName { get; set; }

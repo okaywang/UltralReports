@@ -29,7 +29,7 @@ namespace BussinessLogic
                 criteria.PagingRequest = new PagingRequest(0, int.MaxValue);
             }
             var query = PrimaryRepository.Table;
-            query = query.Where(i => i.Flag == true);
+            //query = query.Where(i => i.Flag == true);
             query = query.Where(i => i.IsProRecord == criteria.SearchProRecord);
             if (criteria.PartId.HasValue)
             {
@@ -83,7 +83,7 @@ namespace BussinessLogic
                 criteria.PagingRequest = new PagingRequest(0, int.MaxValue);
             }
             var query = PrimaryRepository.Table;
-            query = query.Where(i => i.Flag == true);
+            //query = query.Where(i => i.Flag == true);
             query = query.Where(i => i.IsProRecord == criteria.SearchProRecord);
             if (criteria.StartTime.HasValue)
             {
@@ -126,7 +126,8 @@ namespace BussinessLogic
                              L1 = gr.Max(i => i.Part.L1),
                              H1 = gr.Max(i => i.Part.H1),
                              Times = gr.Count(),
-                             Duration = gr.Sum(i => EntityFunctions.DiffMinutes(i.StartTime, i.EndTime).Value),
+                             //Duration = gr.Sum(i => EntityFunctions.DiffMinutes(i.StartTime, ((i.EndTime < i.StartTime || i.EndTime == DateTime.MinValue) ? i.StartTime : i.EndTime)).Value),
+                             Duration = gr.Sum(i => EntityFunctions.DiffMinutes(i.StartTime, ((i.EndTime < i.StartTime || String.IsNullOrEmpty(i.EndTime.ToString()) || i.EndTime == DateTime.MinValue) ? i.StartTime : i.EndTime)).Value),
                              MajorName = gr.Max(i => i.Part.Major.Name),
                              Remarks = gr.Max(i => i.Remarks)
                          };

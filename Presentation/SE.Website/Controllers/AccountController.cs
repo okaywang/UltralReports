@@ -300,6 +300,7 @@ namespace Website.Controllers
             entity.LoginName = model.LoginName;
             entity.MajorId = model.MajorId;
             entity.Password = model.Password;
+            entity.PhoneNumber = model.PhoneNumber;
             _bllAccount.Update(entity);
             return Json(new ResultModel(true));
         }

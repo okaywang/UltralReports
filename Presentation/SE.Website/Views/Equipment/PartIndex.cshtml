@@ -24,9 +24,6 @@
             modules: {
                 add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({
                     container: $(".module-add .modal"),
-                    initializer: function () {
-
-                    },
                     viewModelSetter: function (vm) {
                         vm.bind("change", function (item) {
                             if (item.field == "MachineSet") {
@@ -37,6 +34,12 @@
                                 }
                                 else {
                                     vm.set("EquipmentIds", []);
+                                }
+                            } else if (item.field == "SendSms") {
+                                if (vm.SendSms == "true") {
+                                    $("[property-name='UltraNum']", $(".module-add .modal")).attr("validate-rule", "required:true");
+                                } else {
+                                    $("[property-name='UltraNum']", $(".module-add .modal")).removeAttr("validate-rule");
                                 }
                             }
                         });
