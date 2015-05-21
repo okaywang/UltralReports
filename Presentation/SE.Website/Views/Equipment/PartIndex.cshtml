@@ -99,6 +99,7 @@
             },
             viewCommands: {
                 add: function (model) {
+                    $("[property-name='UltraNum']", $(".module-add .modal")).removeAttr("validate-rule");
                     viewInstance.modules.add.dialog.show();
                     viewInstance.modules.add.bindModel({ SendSms: false, EquipmentIds: [] });
                 }

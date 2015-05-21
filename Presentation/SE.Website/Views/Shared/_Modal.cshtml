@@ -15,8 +15,8 @@
                         foreach (var prop in props)
                         {
                             var control = prop.GetControl();
-                            
-                        <div class="form-group" property-name="@control.Name" @(string.IsNullOrEmpty(control.ValidationRules) ? string.Empty : string.Format("validate-rule={0}", control.ValidationRules)) @(control.IsVisible ? string.Empty : "style=display:none")>
+                            var validateRule = string.IsNullOrEmpty(control.ValidationRules) ? string.Empty : string.Format("validate-rule={0}", control.ValidationRules);
+                        <div class="form-group" property-name="@control.Name" @Html.Raw(validateRule) @(control.IsVisible ? string.Empty : "style=display:none")>
                             <label class="control-label col-md-@gridCount">@prop.GetDisplayName()</label>
                             <div class="col-md-5">
                                 @Html.Raw(control.Render())

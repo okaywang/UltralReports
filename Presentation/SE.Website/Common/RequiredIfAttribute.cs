@@ -6,15 +6,18 @@ using System.Web;
 
 namespace Website.Common
 {
-    public class RequiredIfAttribute : RequiredAttribute
+    public class RequiredIfAttribute : ValidationAttribute
     {
         private String PropertyName { get; set; }
         private Object DesiredValue { get; set; }
 
-        public RequiredIfAttribute(String propertyName, Object desiredvalue)
+        public string JsRequiredExpression { get; set; }
+
+        public RequiredIfAttribute(String propertyName, Object desiredvalue, string jsExpression)
         {
             PropertyName = propertyName;
             DesiredValue = desiredvalue;
+            JsRequiredExpression = jsExpression;
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext context)

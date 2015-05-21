@@ -121,6 +121,7 @@ namespace Website.Common
         private static Dictionary<Type, Func<object, string>> s_handlers = new Dictionary<Type, Func<object, string>> 
         {
             {typeof(RequiredAttribute),(o)=>"required:true"},
+            {typeof(RequiredIfAttribute),(o )=>string.Format("required:'{0}'" ,(o as RequiredIfAttribute).JsRequiredExpression)},
             {typeof(MinLengthAttribute),(o)=>string.Format("minlength:{0}", (o as MinLengthAttribute).Length)}
         };
 
