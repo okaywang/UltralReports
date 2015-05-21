@@ -64,6 +64,12 @@
                                 else {
                                     vm.set("EquipmentIds", []);
                                 }
+                            } else if (item.field == "SendSms") {
+                                if (vm.SendSms == "true") {
+                                    $("[property-name='UltraNum']", $(".module-update .modal")).attr("validate-rule", "required:true");
+                                } else {
+                                    $("[property-name='UltraNum']", $(".module-update .modal")).removeAttr("validate-rule");
+                                }
                             }
                         });
                     }

@@ -179,7 +179,7 @@
           <Property Name="PH" Type="decimal" Precision="10" Scale="2" />
           <Property Name="PL" Type="decimal" Precision="10" Scale="2" />
           <Property Name="SendSms" Type="bit" Nullable="false" />
-          <Property Name="UltraNum" Type="int" Nullable="false" />
+          <Property Name="UltraNum" Type="int" />
         </EntityType>
         <EntityType Name="PartSms">
           <Key>
@@ -561,7 +561,7 @@
           <Property Type="Decimal" Name="PL" Precision="10" Scale="2" />
           <NavigationProperty Name="Major" Relationship="UltralReportsModel.FK__Part__MajorId__398D8EEE" FromRole="Part" ToRole="Major" />
           <Property Name="SendSms" Type="Boolean" Nullable="false" />
-          <Property Name="UltraNum" Type="Int32" Nullable="false" />
+          <Property Name="UltraNum" Type="Int32" />
           <NavigationProperty Name="PartSm" Relationship="UltralReportsModel.FK__PartSms__PartId__5FB337D6" FromRole="Part" ToRole="PartSm" />
         </EntityType>
         <Association Name="FK__Part__EquipmentI__3B75D760">

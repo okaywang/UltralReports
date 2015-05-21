@@ -4,9 +4,9 @@
 }
 @section styles{
     <style>
-        
+        .form-horizontal { width: 880px; min-width: 880px; }
     </style>
-    }
+}
 <div class="panel panel-default">
     <div class="panel-heading">
         时间设置
@@ -18,7 +18,7 @@
                 {
                     <div class="form-group" id="@((int)item.Id)">
                         <label class="col-md-1 control-label">@item.Id.GetDisplayText()</label>
-                        <div class="col-md-7">
+                        <div class="col-md-11">
                             <span class="col-md-2">
                                 <select name="Hour" class="form-control">
                                     @for (int i = 1; i <= 24; i++)
@@ -35,8 +35,7 @@
                                     }
                                 </select>
                             </span>
-                            <span class="col-md-1 text-center">
-                                -
+                            <span class="col-md-1 text-center">-
                             </span>
                             <span class="col-md-2">
                                 <select name="Hour" class="form-control col-md-4">
@@ -78,31 +77,31 @@
                     </p>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-1 col-md-4">
-                        <span class="col-md-4 text-center">
+                    <div class="col-md-offset-1 col-md-10">
+                        <span class="col-md-2 text-center">
                             @DutyTimeType.NightShift.GetDisplayText()
                         </span>
-                        <span class="col-md-4 text-center">
+                        <span class="col-md-2 text-center">
                             @DutyTimeType.DayShift.GetDisplayText()
                         </span>
-                        <span class="col-md-4 text-center">
+                        <span class="col-md-2 text-center">
                             @DutyTimeType.MiddleShift.GetDisplayText()
                         </span>
                     </div>
                 </div>
-                <div style="clear:both"></div>
+                <div style="clear: both"></div>
                 @for (int i = 0; i < Model.Duties.Length; i += 3)
                 {
                     <div class="form-group" id="@((int)Model.Duties[i].DayId)">
                         <label class="col-md-1 control-label">第@(Model.Duties[i].DayId)天</label>
-                        <div class="col-md-4">
-                            <span class="col-md-4">
+                        <div class="col-md-10">
+                            <span class="col-md-2">
                                 @Html.Raw(new NativeSelect("test1", true, false) { Source = new EnumControlSourceAttribute(typeof(DutyType)).GetSource(), SelectedValue = ((int)Model.Duties[i].DutyValue).ToString() }.Render())
                             </span>
-                            <span class="col-md-4">
+                            <span class="col-md-2">
                                 @Html.Raw(new NativeSelect("test2", true, false) { Source = new EnumControlSourceAttribute(typeof(DutyType)).GetSource(), SelectedValue = ((int)Model.Duties[i + 1].DutyValue).ToString() }.Render())
                             </span>
-                            <span class="col-md-4">
+                            <span class="col-md-2">
                                 @Html.Raw(new NativeSelect("test3", true, false) { Source = new EnumControlSourceAttribute(typeof(DutyType)).GetSource(), SelectedValue = ((int)Model.Duties[i + 2].DutyValue).ToString() }.Render())
                             </span>
                         </div>
@@ -153,7 +152,7 @@
                     obj.DutyValue = $(item1).val();
                     return obj;
                 }).get();
-               
+
                 return items1;
             }).get();
             $.ajax({

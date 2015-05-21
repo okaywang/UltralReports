@@ -34,7 +34,7 @@ namespace DataAccess
         public Nullable<decimal> PH { get; set; }
         public Nullable<decimal> PL { get; set; }
         public bool SendSms { get; set; }
-        public int UltraNum { get; set; }
+        public Nullable<int> UltraNum { get; set; }
     
         public virtual Equipment Equipment { get; set; }
         public virtual ICollection<UltraRecord> UltraRecord { get; set; }

@@ -27,8 +27,10 @@ namespace Website.Common
             Object proprtyvalue = type.GetProperty(PropertyName).GetValue(instance, null);
             if (proprtyvalue.ToString() == DesiredValue.ToString())
             {
-                ValidationResult result = base.IsValid(value, context);
-                return result;
+                if (value == null)
+                {
+                    return new ValidationResult(context.DisplayName + " 不能为空");
+                }
             }
             return ValidationResult.Success;
         }

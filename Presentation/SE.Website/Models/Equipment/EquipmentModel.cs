@@ -255,10 +255,10 @@ namespace Website.Models
         [SimpleSourceAttribute("发送-true", "不发送-false")]
         public bool SendSms { get; set; }
 
-        [RequiredIf("SendSms", true, ":radio[value=true]:first:checked")]
+        [RequiredIf("SendSms", true, ":radio:eq(0):checked")]
         //[RequiredIf("SendSms", true, ".module-add")]
         [DisplayName("短信超限次数")]
-        public int UltraNum { get; set; }
+        public int? UltraNum { get; set; }
     }
 
     [RequestUrl("/Equipment/PartUpdate")]
@@ -318,7 +318,8 @@ namespace Website.Models
 
         //[Required]
         [DisplayName("短信超限次数")]
-        public int UltraNum { get; set; }
+        [RequiredIf("SendSms", true, ":radio:eq(2):checked")]
+        public int? UltraNum { get; set; }
     }
 
     [RequestUrl("/Equipment/PartSmsEdit")]
@@ -370,10 +371,10 @@ namespace Website.Models
         public string Unit { get; set; }
 
         [DisplayName("高3")]
-        public decimal H3 { get; set; }
+        public decimal? H3 { get; set; }
 
         [DisplayName("高2")]
-        public decimal H2 { get; set; }
+        public decimal? H2 { get; set; }
 
         [DisplayName("高1")]
         public decimal H1 { get; set; }
@@ -382,14 +383,14 @@ namespace Website.Models
         public decimal L1 { get; set; }
 
         [DisplayName("低2")]
-        public decimal L2 { get; set; }
+        public decimal? L2 { get; set; }
 
         [DisplayName("低3")]
-        public decimal L3 { get; set; }
+        public decimal? L3 { get; set; }
 
         public bool SendSms { get; set; }
 
-        public int UltraNum { get; set; }
+        public int? UltraNum { get; set; }
 
         [DisplayName("操作")]
         [JsonIgnore]
