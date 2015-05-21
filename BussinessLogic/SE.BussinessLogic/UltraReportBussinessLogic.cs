@@ -31,6 +31,10 @@ namespace BussinessLogic
             var query = PrimaryRepository.Table;
             //query = query.Where(i => i.Flag == true);
             query = query.Where(i => i.IsProRecord == criteria.SearchProRecord);
+            if (criteria.MachineSet.HasValue)
+            {
+                query = query.Where(i => i.Part.Equipment.MachineSet == criteria.MachineSet.Value);
+            }
             if (criteria.PartId.HasValue)
             {
                 query = query.Where(i => i.PartId == criteria.PartId.Value);
@@ -96,6 +100,10 @@ namespace BussinessLogic
             if (criteria.MonitorTypeId.HasValue)
             {
                 query = query.Where(i => i.Part.Equipment.MonitorTypeId == criteria.MonitorTypeId.Value);
+            }
+            if (criteria.EquipmentId.HasValue)
+            {
+                query = query.Where(i => i.Part.Equipment.Id == criteria.EquipmentId.Value);
             }
             if (!string.IsNullOrEmpty(criteria.EquipmentNamePart))
             {

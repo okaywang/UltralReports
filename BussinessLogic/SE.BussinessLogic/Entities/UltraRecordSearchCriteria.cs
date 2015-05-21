@@ -21,6 +21,8 @@ namespace BussinessLogic
 
         public DateTime? EndTime { get; set; }
 
+        public int? EquipmentId { get; set; }
+
         public string EquipmentNamePart { get; set; }
 
         public int? MonitorTypeId { get; set; }
@@ -28,6 +30,8 @@ namespace BussinessLogic
 
     public class UltraRecordSearchCriteria : SearchCriteria<UltraRecord>
     {
+        public MachineSetType? MachineSet { get; set; }
+
         public bool SearchProRecord { get; set; }
          
         public int? PartId { get; set; } 

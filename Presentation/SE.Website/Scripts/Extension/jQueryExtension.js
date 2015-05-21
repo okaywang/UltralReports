@@ -24,4 +24,28 @@ $.fn.serializeObject = function () {
     return result;
 };
 
+$.fn.cascade = function (options) {
+    var target = options.target;
+    $(this).change(function () {
+        var sourceValue = $(this).val();
+        if (sourceValue) {
+            var data = {};
+            data[$(this).attr("name")] = sourceValue;
+            $.getJSON(options.url, data, function (response) {
+                setCascaedValue(response);
+            });
+        }
+        else {
+            setCascaedValue([]);
+        }
+    });
 
+    function setCascaedValue(pairs) {
+        var options = "<option value=''>全部</option>";
+        for (var i = 0; i < pairs.length; i++) {
+            var item = pairs[i];
+            options += "<option value=" + item.Value + ">" + item.Name + "</option>";
+        }
+        $(target).html(options);
+    }
+}
