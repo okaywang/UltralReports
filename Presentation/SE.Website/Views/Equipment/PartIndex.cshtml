@@ -50,9 +50,6 @@
                 })),
                 update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({
                     container: $(".module-update .modal"),
-                    initializer: function () {
-
-                    },
                     viewModelSetter: function (vm) {
                         vm.bind("change", function (item) {
                             if (item.field == "MachineSet") {

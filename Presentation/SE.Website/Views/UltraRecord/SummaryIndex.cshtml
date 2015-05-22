@@ -27,8 +27,18 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label">机组</label>
+            <select name="MachineSet" class="form-control input-sm">
+                <option value="">全部</option>
+                @Html.Raw(Html.Option(MachineSetType.MachineSet1))
+                @Html.Raw(Html.Option(MachineSetType.MachineSet2))
+            </select>
+        </div>
+        <div class="form-group">
             <label class="control-label">设备名称</label>
-            <input type="text" name="EquipmentNamePart" class="form-control input-sm" />
+            <select name="EquipmentId" class="form-control input-sm">
+                <option value=''>全部</option>
+            </select>
         </div>
         <div class="form-group">
             <label class="control-label">监控类别</label>
@@ -49,14 +59,6 @@
                 @Html.Raw(Html.Option(DutyType.Duty3))
                 @Html.Raw(Html.Option(DutyType.Duty4))
                 @Html.Raw(Html.Option(DutyType.Duty5))
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="control-label">机组</label>
-            <select name="MachineSet" class="form-control input-sm">
-                <option value="">全部</option>
-                @Html.Raw(Html.Option(MachineSetType.MachineSet1))
-                @Html.Raw(Html.Option(MachineSetType.MachineSet2))
             </select>
         </div>
         <div class="form-group">
@@ -119,11 +121,16 @@
             }
         }));
 
-        subView.init();
+        subView.init(); 
 
         $(function () {
             $(".date .form-control").datetimepicker({
                 format: 'YYYY-MM-DD HH:mm'
+            });
+
+            $(".search-criteria [name=MachineSet]").cascade({
+                target: ".search-criteria [name=EquipmentId]",
+                url: "/Equipment/Get"
             });
         });
     </script>
