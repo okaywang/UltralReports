@@ -121,8 +121,6 @@ namespace SmsUtility
 
         private void SendDTU()
         {
-            _mre4out.Set();
-            return;
             string str_Content = _currentPhoneNumber + ":0:" + _currentMessage;
             fSerialPort.Write(str_Content);
         }
