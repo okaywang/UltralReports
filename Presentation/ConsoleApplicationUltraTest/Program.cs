@@ -52,18 +52,10 @@ namespace ConsoleApplicationUltraTest
         }
 
         static void Main(string[] args)
-        { 
-
-            //var context = new UltralReportsEntities();
-            //var repository = new EfRepository<UltraRecord>(context);
-            //var bll = new UltraReportBussinessLogic(repository);
-            //var criteria = new UltraSummarySearchCriteria();
-            //criteria.PagingRequest = new WebExpress.Core.PagingRequest() { PageIndex = 1, PageSize = 10 };
-            ////criteria.Duty = 3;
-            ////criteria.MachineSet = Common.Types.MachineSetType.MachineSet1;
-            //var result = bll.SearchSummary(criteria);
-
-            GenerateData_UltraRecord();
+        {
+            using (var sms = new SmsUtility.SmsDevice("Com1"))
+            { 
+            }
 
             Console.WriteLine("abc");
         }

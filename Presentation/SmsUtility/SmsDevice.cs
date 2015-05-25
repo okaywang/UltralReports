@@ -13,10 +13,12 @@ namespace SmsUtility
     {
         private SerialPort fSerialPort;
 
-        private ManualResetEvent _mre = new ManualResetEvent(true);
+        private ManualResetEvent _mre4out = new ManualResetEvent(true);
+        private ManualResetEvent _mre4enter = new ManualResetEvent(true);
         private string _currentPhoneNumber;
         private string _currentMessage;
 
+        private object _sync = new object();
 
         private bool bHeadFinded;
 
@@ -81,13 +83,20 @@ namespace SmsUtility
 
         public void SendSms(string phoneNumber, string message)
         {
-            _mre.WaitOne();
+            _mre4enter.WaitOne(5000);
+            _mre4enter.Reset();
+
+
+            _mre4out.Reset();
             _currentPhoneNumber = phoneNumber;
             _currentMessage = message;
             Log("SendSms.txt", "----------------------------------------------------------------------------");
             Log("SendSms.txt", string.Format("正在发送......,{0},{1}", _currentPhoneNumber, _currentMessage));
             this.SendDTU();
-            _mre.Reset();
+            _mre4out.WaitOne(5000);
+
+
+            _mre4enter.Set();
         }
 
         public void Dispose()
@@ -112,6 +121,8 @@ namespace SmsUtility
 
         private void SendDTU()
         {
+            _mre4out.Set();
+            return;
             string str_Content = _currentPhoneNumber + ":0:" + _currentMessage;
             fSerialPort.Write(str_Content);
         }
@@ -157,14 +168,14 @@ namespace SmsUtility
                     send_Succeed = true;
 
                     Log("SendSms.txt", string.Format("发送成功,{0},{1}", _currentPhoneNumber, _currentMessage));
-                    _mre.Set();
+                    _mre4out.Set();
                 }
 
                 if (1 == SearchStrInStream(bufFail, buf[i], ref iSearchFail))
                 {
                     send_Succeed = false;
                     Log("SendSms.txt", string.Format("发送成功,{0},{1}", _currentPhoneNumber, _currentMessage));
-                    _mre.Set();
+                    _mre4out.Set();
                 }
 
                 //处理接收短信的部分，通过包头包围将短信内容分析出来，如果用户不需接收，不用关注
@@ -180,7 +191,7 @@ namespace SmsUtility
 
                         Log("RcvSms.txt", builder.ToString());
 
-                        _mre.Set();
+                        _mre4out.Set();
                     }
                 }
                 if (1 == SearchStrInStream(bufHead, buf[i], ref iSeachHead))
