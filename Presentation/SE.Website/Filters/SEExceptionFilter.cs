@@ -25,36 +25,49 @@ namespace Website
         }
         public void OnException(ExceptionContext filterContext)
         {
-            using (var entities = new UltralReportsEntities())
+            if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
-                var bll = new LogExceptionBussinessLogic(new EfRepository<LogException>(entities));
-
-                var exMsg = GetExceptionMessage(filterContext.Exception);
-                var model = new LogException()
+                var msg = string.Format("发生错误，请于管理员联系。<br />错误信息： {0}", GetExceptionMessage(filterContext.Exception));
+                var result = new ResultModel(false, msg);
+                filterContext.Result = new JsonResult() { Data = result };
+                filterContext.ExceptionHandled = true;
+            }
+            else
+            {
+                if (filterContext.Exception is DataNotFoundException)
                 {
-                    UserName = UserContext.Current.Name,
-                    StackTrace = filterContext.Exception.StackTrace,
-                    Message = exMsg,
-                    RequestInfo = HttpContext.Current.Request.ToRaw()
-                };
-
-                bll.Insert(model);
-
-                if (filterContext.HttpContext.Request.IsAjaxRequest())
-                {
-                    var result = new ResultModel(false, filterContext.Exception.Message);
-                    filterContext.Result = new JsonResult() { Data = result };
+                    filterContext.Result = new HttpNotFoundResult();
                     filterContext.ExceptionHandled = true;
                 }
-                else
+            }
+
+            LogException(filterContext.Exception);
+        }
+
+        private void LogException(Exception ex)
+        {
+            try
+            {
+                using (var entities = new UltralReportsEntities())
                 {
-                    if (filterContext.Exception is DataNotFoundException)
+                    var bll = new LogExceptionBussinessLogic(new EfRepository<LogException>(entities));
+
+                    var exMsg = GetExceptionMessage(ex);
+                    var model = new LogException()
                     {
-                        filterContext.Result = new HttpNotFoundResult();
-                        filterContext.ExceptionHandled = true;
-                    }
+                        UserName = UserContext.Current.Name,
+                        StackTrace = ex.StackTrace,
+                        Message = exMsg,
+                        RequestInfo = HttpContext.Current.Request.ToRaw()
+                    };
+                    bll.Insert(model);
                 }
             }
+            catch (Exception)
+            {
+                //
+            }
+
         }
     }
 }

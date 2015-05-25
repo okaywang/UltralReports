@@ -25,6 +25,7 @@ namespace Website.Models
         }
 
         public bool IsSuccess { get; private set; }
+        public int Code { get; set; }
         public string Message { get; private set; }
         public object Data { get; set; }
     }

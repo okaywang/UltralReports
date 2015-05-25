@@ -179,6 +179,17 @@ namespace Website.Controllers
             return Json(new ResultModel(true));
         }
 
+        public JsonResult TryPartDelete(int id)
+        {
+            var entity = _bllEquipment.PartGet(id);
+            if (entity.UltraRecord.Any())
+            {
+                return Json(new ResultModel(false, "该部件有超限记录存在，请确定是否要删除？") { Code = 1 });
+            }
+            _bllEquipment.PartDelete(entity);
+            return Json(new ResultModel(true));
+        }
+
         public JsonResult PartDelete(int id)
         {
             var entity = _bllEquipment.PartGet(id);

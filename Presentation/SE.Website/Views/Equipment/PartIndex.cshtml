@@ -85,10 +85,22 @@
                     se.helper.ajax.request({
                         confirmMessage: "您确定删除 " + model.Name + " 吗？",
                         container: container,
-                        url: "/Equipment/PartDelete",
+                        url: "/Equipment/TryPartDelete",
                         model: { Id: model.Id },
-                        onSuccess: function () {
+                        onSuccess: function (response) {
                             viewInstance.refresh();
+                        },
+                        onFailture: function (response) {
+                            if (response.Code == 1) {
+                                se.helper.ajax.request({
+                                    container: container,
+                                    url: "/Equipment/PartDelete",
+                                    model: { Id: model.Id },
+                                    onSuccess: function (response) {
+                                        viewInstance.refresh();
+                                    }
+                                });
+                            }
                         }
                     });
                 },
