@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b3c00939135b4a12a34c912c9d28310f" Name="关系图1">
+      <Diagram DiagramId="b3c00939135b4a12a34c912c9d28310f" Name="关系图1" ZoomLevel="115">
         <EntityTypeShape EntityType="UltralReportsModel.Account" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="UltralReportsModel.AccountAuthority" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="UltralReportsModel.Authority" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
@@ -18,7 +18,6 @@
         <EntityTypeShape EntityType="UltralReportsModel.Part" Width="1.5" PointX="2.2146189260364597" PointY="7.5184183453761131" />
         <AssociationConnector Association="UltralReportsModel.FK__Part__EquipmentI__3B75D760" />
         <EntityTypeShape EntityType="UltralReportsModel.UltraRecord" Width="1.5" PointX="6.5266699206673859" PointY="21.421976263365696" />
-        <AssociationConnector Association="UltralReportsModel.FK__UltraReco__PartI__403A8C7D" />
         <EntityTypeShape EntityType="UltralReportsModel.Major" Width="1.5" PointX="8.50785155804262" PointY="0.92036391837539333" />
         <AssociationConnector Association="UltralReportsModel.FK__Account__MajorId__07F6335A" />
         <AssociationConnector Association="UltralReportsModel.FK__Part__MajorId__398D8EEE" />
@@ -31,6 +30,7 @@
         <EntityTypeShape EntityType="UltralReportsModel.SmsGroupAccount" Width="1.5" PointX="3.3696021453335891" PointY="23.864495020296655" />
         <AssociationConnector Association="UltralReportsModel.FK__SmsGroupA__Accou__60A75C0F" />
         <AssociationConnector Association="UltralReportsModel.FK__SmsGroupA__Group__5FB337D6" />
+        <AssociationConnector Association="UltralReportsModel.FK__UltraRecord__Part" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

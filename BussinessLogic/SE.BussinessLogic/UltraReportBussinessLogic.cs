@@ -118,6 +118,8 @@ namespace BussinessLogic
                 query = query.Where(i => i.Duty == criteria.Duty.Value);
             }
 
+            query = query.Where(i => i.PartId.HasValue);
+
             var query2 = from r in query
                          group r by new { r.Part.EquipmentId, PartId = r.Part.Id, r.Duty } into gr
                          //orderby gr.Key.EquipmentId

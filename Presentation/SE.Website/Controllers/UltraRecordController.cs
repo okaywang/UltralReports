@@ -55,12 +55,16 @@ namespace Website.Controllers
             var entities = _bllUltraRecord.Search(criteria);
             var items = Mapper.Map<List<UltraRecord>, UltraRecordListItemModel[]>(entities);
             var model = new UltraRecordListPageModel();
-            var part = _bllEquipment.PartGet(criteria.PartId.Value);
-            model.PartName = part.Name;
-            model.EquipmentName = part.Equipment.Name;
             model.Records = new PagedModel<UltraRecordListItemModel>();
-            model.Records.PagingResult = entities.PagingResult;
-            model.Records.Items = items;
+            if (criteria.PartId.HasValue)
+            {
+                var part = _bllEquipment.PartGet(criteria.PartId.Value);
+                model.PartName = part.Name;
+                model.EquipmentName = part.Equipment.Name;
+                model.Records.PagingResult = entities.PagingResult;
+                model.Records.Items = items;
+
+            }
             return PartialView(model);
         }
 

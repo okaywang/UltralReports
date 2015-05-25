@@ -45,7 +45,7 @@ function AjaxHelperClass() {
                 }
                 else {
                     if (settings.onFailure) {
-                        settings.onFailure.call(this, data.Message);
+                        settings.onFailure.call(this, data);
                     }
                 }
             }, function () {

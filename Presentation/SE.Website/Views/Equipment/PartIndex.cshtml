@@ -90,14 +90,18 @@
                         onSuccess: function (response) {
                             viewInstance.refresh();
                         },
-                        onFailture: function (response) {
+                        onFailure: function (response) {
                             if (response.Code == 1) {
                                 se.helper.ajax.request({
+                                    confirmMessage:"该部件已有超限记录存在，请确定是否要删除？",
                                     container: container,
                                     url: "/Equipment/PartDelete",
                                     model: { Id: model.Id },
                                     onSuccess: function (response) {
                                         viewInstance.refresh();
+                                    },
+                                    onFailure: function (response) {
+                                        bootbox.alert(response.Message);
                                     }
                                 });
                             }

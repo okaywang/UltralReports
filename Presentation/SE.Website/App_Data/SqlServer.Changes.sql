@@ -16,3 +16,11 @@ end
 declare @times int
 exec SP_UltraTimes 2,@times output
 select @times
+
+
+ALTER TABLE UltraRecord ALTER COLUMN PartId int   
+
+alter table UltraRecord drop constraint FK__UltraReco__PartI__44FF419A 
+
+alter table UltraRecord add constraint FK__UltraRecord__Part
+     foreign key (PartId) references Part on delete set null
