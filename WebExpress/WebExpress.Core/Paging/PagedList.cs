@@ -16,6 +16,17 @@ namespace WebExpress.Core
     {
         public PagingResult PagingResult { get; set; }
 
+        public PagedList()
+        {
+
+        }
+
+        public PagedList(IEnumerable<T> source, PagingResult pagingResult)
+        {
+            this.AddRange(source);
+            this.PagingResult = pagingResult;
+        }
+
         /// <summary>
         /// Ctor
         /// </summary>

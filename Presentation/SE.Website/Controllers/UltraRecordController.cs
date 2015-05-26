@@ -41,7 +41,7 @@ namespace Website.Controllers
         [RequireAuthority(AuthorityNames.NormalUltraReport)]
         public ActionResult SummaryList(UltraSummarySearchCriteria criteria)
         {
-            var entities = _bllUltraRecord.SearchSummary(criteria);
+            var entities = _bllUltraRecord.SearchSummaryBySql(criteria);
             var items = Mapper.Map<PagedList<UltraSummary>, UltraSummaryListItemModel[]>(entities);
             var model = new PagedModel<UltraSummaryListItemModel>();
             model.Items = items;

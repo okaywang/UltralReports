@@ -71,9 +71,62 @@ namespace BussinessLogic
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        public PagedList<UltraSummary> SearchSummaryByNativeSql(UltraSummarySearchCriteria criteria)
+        public PagedList<UltraSummary> SearchSummaryBySql(UltraSummarySearchCriteria criteria)
         {
-            throw new NotImplementedException();
+            var sb = new StringBuilder();
+            sb.AppendLine(@"select
+            ROW_NUMBER() over(order by e.Id,p.Id,ur.Duty) row
+            ,e.Id EquipmentId
+            ,max(e.Name) EquipmentName
+            ,p.Id PartId
+            ,max(p.Name) PartName
+            ,ur.Duty,max(p.L1) L1
+            ,max(p.H1) H1
+            ,SUM(DATEDIFF(mi,ur.StartTime,ur.EndTime)) Duration
+            ,COUNT(1) Times
+            ,max(m.Name) MonitorTypeName
+            ,max(Major.Name) MajorName
+            from UltraRecord ur left join Part p on ur.PartId=p.Id
+	             left join Equipment e on p.EquipmentId=e.Id
+	             left join MonitorType m on e.MonitorTypeId=m.Id
+	             left join Major on p.MajorId=Major.Id");
+
+            sb.AppendLine("where");
+            sb.AppendLine().AppendFormat("ur.IsProRecord={0}", Convert.ToInt32(criteria.SearchProRecord));
+
+            if (criteria.StartTime.HasValue)
+            {
+                sb.AppendLine().AppendFormat("ur.StartTime>={0}", criteria.StartTime.Value.ToString());
+            }
+            if (criteria.EndTime.HasValue)
+            {
+                sb.AppendLine().AppendFormat("ur.EndTime<={0}", criteria.EndTime.Value.ToString());
+            }
+            if (criteria.MonitorTypeId.HasValue)
+            {
+                sb.AppendLine().AppendFormat("e.MonitorTypeId={0}", criteria.MonitorTypeId.Value);
+            }
+            if (criteria.EquipmentId.HasValue)
+            {
+                sb.AppendLine().AppendFormat("e.Id={0}", criteria.EquipmentId.Value);
+            }
+            if (!string.IsNullOrEmpty(criteria.EquipmentNamePart))
+            {
+                sb.AppendLine().AppendFormat("e.Name like '%{0}'%", criteria.EquipmentNamePart);
+            }
+            if (criteria.MachineSet.HasValue)
+            {
+                sb.AppendLine().AppendFormat("e.MachineSet={0}", criteria.MachineSet.Value);
+            }
+            if (criteria.Duty.HasValue)
+            {
+                sb.AppendLine().AppendFormat("ur.Duty={0}", criteria.Duty.Value);
+            }
+
+            sb.AppendLine().AppendLine("group by e.Id,p.Id,ur.Duty");
+            var sql = sb.ToString();
+            var result = PrimaryRepository.ExecuteSqlQuery2<UltraSummary>(sql, criteria.PagingRequest);
+            return result;
         }
 
         public PagedList<UltraSummary> SearchSummary(UltraSummarySearchCriteria criteria)
