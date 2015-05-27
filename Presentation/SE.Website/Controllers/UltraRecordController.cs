@@ -61,10 +61,9 @@ namespace Website.Controllers
                 var part = _bllEquipment.PartGet(criteria.PartId.Value);
                 model.PartName = part.Name;
                 model.EquipmentName = part.Equipment.Name;
-                model.Records.PagingResult = entities.PagingResult;
-                model.Records.Items = items;
-
             }
+            model.Records.PagingResult = entities.PagingResult;
+            model.Records.Items = items;
             return PartialView(model);
         }
 

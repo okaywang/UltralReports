@@ -172,7 +172,7 @@ namespace SmsUtility
                 if (1 == SearchStrInStream(bufFail, buf[i], ref iSearchFail))
                 {
                     send_Succeed = false;
-                    Log("SendSms.txt", string.Format("发送成功,{0},{1}", _currentPhoneNumber, _currentMessage));
+                    Log("SendSms.txt", string.Format("发送失败,{0},{1}", _currentPhoneNumber, _currentMessage));
                     _mre4out.Set();
                 }
 

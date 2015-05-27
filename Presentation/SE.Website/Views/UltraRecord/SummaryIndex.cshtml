@@ -101,7 +101,7 @@
                     subView.criteria.PartId = model.PartId;
                     subView.criteria.Duty = model.Duty;
                     subView.search();
-                    var title = webExpress.utility.string.format("<b>设备：</b>{0} <b>部件：</b>{1} 超限记录详情", model.EquipmentName, model.PartName);
+                    var title = webExpress.utility.string.format("<b>设备：</b>{0} <b>部件：</b>{1} 超限记录详情", model.EquipmentName || "", model.PartName || "");
                     $(".module-detail .modal-title").html(title);
                     $(".module-detail .modal").modal("show");
                 }
@@ -121,7 +121,7 @@
             }
         }));
 
-        subView.init(); 
+        subView.init();
 
         $(function () {
             $(".date .form-control").datetimepicker({

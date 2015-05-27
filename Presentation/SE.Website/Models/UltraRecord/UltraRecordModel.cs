@@ -97,7 +97,7 @@ namespace Website.Models
 
     public class UltraSummaryListItemModel : IListItemModel
     {
-        public int PartId { get; set; }
+        public int? PartId { get; set; }
 
         [DisplayName("设备名称")]
         public string EquipmentName { get; set; }

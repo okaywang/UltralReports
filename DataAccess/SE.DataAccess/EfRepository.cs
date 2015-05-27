@@ -30,7 +30,7 @@ namespace DataAccess
             sb.AppendLine("(");
             sb.AppendLine(sql);
             sb.AppendLine(")");
-            sb.AppendLine().AppendFormat("select * from tmpTable where row between {0} and {1}", pagingRequest.PageIndex * pagingRequest.PageSize, (pagingRequest.PageIndex + 1) * pagingRequest.PageSize);
+            sb.AppendLine().AppendFormat("select * from tmpTable where row between {0} and {1}", pagingRequest.PageIndex * pagingRequest.PageSize + 1, (pagingRequest.PageIndex + 1) * pagingRequest.PageSize);
 
             var items = _context.Database.SqlQuery<TResult>(sb.ToString()).ToList();
 

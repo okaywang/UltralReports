@@ -35,10 +35,11 @@ namespace BussinessLogic
             {
                 query = query.Where(i => i.Part.Equipment.MachineSet == criteria.MachineSet.Value);
             }
-            if (criteria.PartId.HasValue)
-            {
-                query = query.Where(i => i.PartId == criteria.PartId.Value);
-            }
+            //if (criteria.PartId.HasValue)
+            //{
+            //    query = query.Where(i => i.PartId == criteria.PartId.Value);
+            //}
+            query = query.Where(i => i.PartId == criteria.PartId);
             if (criteria.Duty.HasValue)
             {
                 query = query.Where(i => i.Duty == criteria.Duty.Value);
@@ -75,7 +76,7 @@ namespace BussinessLogic
         {
             var sb = new StringBuilder();
             sb.AppendLine(@"select
-            ROW_NUMBER() over(order by e.Id,p.Id,ur.Duty) row
+            ROW_NUMBER() over(order by isnull(e.Id,2147483647),isnull(p.Id,2147483647),ur.Duty) row
             ,e.Id EquipmentId
             ,max(e.Name) EquipmentName
             ,p.Id PartId
