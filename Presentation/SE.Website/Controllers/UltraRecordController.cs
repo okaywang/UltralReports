@@ -35,6 +35,8 @@ namespace Website.Controllers
             model.RequestListUrl = "/UltraRecord/SummaryList";
             var types = _bllEquipment.MonitorTypeGetAll();
             model.MonitorTypes = Mapper.Map<List<MonitorType>, NameValuePair[]>(types);
+            var majors = _bllMajor.GetAll();
+            model.Majors = Mapper.Map<List<Major>, NameValuePair[]>(majors);
             return View(model);
         }
 

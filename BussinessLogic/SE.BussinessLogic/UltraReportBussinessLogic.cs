@@ -126,6 +126,14 @@ namespace BussinessLogic
             {
                 sb.AppendLine("and ").AppendFormat("ur.Duty={0}", criteria.Duty.Value);
             }
+            if (criteria.MajorId.HasValue)
+            {
+                sb.AppendLine("and ").AppendFormat("a.MajorId={0}", criteria.MajorId.Value);
+            }
+            if (!string.IsNullOrEmpty(criteria.UserName))
+            {
+                sb.AppendLine("and ").AppendFormat("a.Name like '%{0}%'", criteria.UserName);
+            }
 
             sb.AppendLine().AppendLine("group by e.Id,p.Id,ur.Duty");
             var sql = sb.ToString();

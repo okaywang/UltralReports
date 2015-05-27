@@ -26,6 +26,10 @@ namespace BussinessLogic
         public string EquipmentNamePart { get; set; }
 
         public int? MonitorTypeId { get; set; }
+
+        public int? MajorId { get; set; }
+
+        public string UserName { get; set; }
     }
 
     public class UltraRecordSearchCriteria : SearchCriteria<UltraRecord>

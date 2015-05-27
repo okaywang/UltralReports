@@ -20,8 +20,10 @@ namespace Website.Models
         public UltraSummaryListPageModel()
         {
             MonitorTypes = new NameValuePair[0];
+            Majors = new NameValuePair[0];
         }
         public NameValuePair[] MonitorTypes { get; set; }
+        public NameValuePair[] Majors { get; set; }
         public string AddItemUrl { get; set; }
     }
     public class ProUltraRecordListPageModel : ListPageModal
@@ -109,10 +111,10 @@ namespace Website.Models
         public string MonitorTypeName { get; set; }
 
         [DisplayName("专业")]
-        public string MajorName { get; set; }
+        public string UserMajorName { get; set; }
 
         [DisplayName("姓名")]
-        public string UserMajorName { get; set; }
+        public string UserName { get; set; }
 
         //public decimal L3 { get; set; }
 

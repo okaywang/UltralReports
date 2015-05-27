@@ -48,14 +48,15 @@
         </div>
         <div class="form-group">
             <label class="control-label">值别</label>
-            <select name="Duty" class="form-control input-sm">
-                <option value="">全部</option>
-                @Html.Raw(Html.Option(DutyType.Duty1))
-                @Html.Raw(Html.Option(DutyType.Duty2))
-                @Html.Raw(Html.Option(DutyType.Duty3))
-                @Html.Raw(Html.Option(DutyType.Duty4))
-                @Html.Raw(Html.Option(DutyType.Duty5))
-            </select>
+            @Html.Raw(new NativeSelect("Duty", true, false) { Source = new EnumControlSourceAttribute(typeof(DutyType)).GetSource(), SelectedValue = "", EmptyPair = new NameValuePair { Name = "全部" } }.Render())
+        </div>
+        <div class="form-group">
+            <label class="control-label">专业</label>
+            @Html.Raw(new NativeSelect("MajorId", true, false) { Source = Model.Majors, SelectedValue = "", EmptyPair = new NameValuePair { Name = "全部" } }.Render())
+        </div>
+        <div class="form-group">
+            <label class="control-label">姓名</label>
+            <input type="text" name="UserName" class="form-control input-sm " />
         </div>
         <div class="form-group">
             <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
