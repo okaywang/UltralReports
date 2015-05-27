@@ -38,3 +38,14 @@ update Part set FADateTime=getdate()
 
 alter table Part alter column FAUserId int not null
 alter table Part alter column FADateTime datetime not null
+
+Create table SmsLog
+(
+	[Id] [int] IDENTITY(1,1) primary key,
+	GroupId int not null references SmsGroup,
+	SmsType int not null,--1 ³¬ÏÞ or 2 »Ö¸´
+	WarningType int,
+	Content nvarchar(300) not null,
+	IsSuccess bit not null default(1),
+	FADateTime datetime not null default(getdate()),
+)
