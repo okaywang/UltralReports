@@ -108,6 +108,12 @@ namespace Website.Models
         [DisplayName("监控类型")]
         public string MonitorTypeName { get; set; }
 
+        [DisplayName("专业")]
+        public string MajorName { get; set; }
+
+        [DisplayName("姓名")]
+        public string UserMajorName { get; set; }
+
         //public decimal L3 { get; set; }
 
         //public decimal H1 { get; set; }

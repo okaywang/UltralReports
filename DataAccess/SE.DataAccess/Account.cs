@@ -18,6 +18,8 @@ namespace DataAccess
         {
             this.AccountAuthorities = new HashSet<AccountAuthority>();
             this.SmsGroupAccounts = new HashSet<SmsGroupAccount>();
+            this.FAParts = new HashSet<Part>();
+            this.LCParts = new HashSet<Part>();
         }
     
         public int Id { get; set; }
@@ -35,5 +37,7 @@ namespace DataAccess
         public virtual ICollection<AccountAuthority> AccountAuthorities { get; set; }
         public virtual Major Major { get; set; }
         public virtual ICollection<SmsGroupAccount> SmsGroupAccounts { get; set; }
+        public virtual ICollection<Part> FAParts { get; set; }
+        public virtual ICollection<Part> LCParts { get; set; }
     }
 }

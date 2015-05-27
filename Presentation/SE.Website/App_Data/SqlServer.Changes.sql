@@ -24,3 +24,17 @@ alter table UltraRecord drop constraint FK__UltraReco__PartI__44FF419A
 
 alter table UltraRecord add constraint FK__UltraRecord__Part
      foreign key (PartId) references Part on delete set null
+
+
+
+alter table Part add  FADateTime datetime default(getdate())
+alter table Part add  FAUserId  int references Account
+alter table Part add  LCDateTime datetime
+alter table Part add  LCUserId int references Account
+
+update Part set FAUserId=1
+update Part set FADateTime=getdate()
+
+
+alter table Part alter column FAUserId int not null
+alter table Part alter column FADateTime datetime not null

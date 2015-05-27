@@ -80,48 +80,51 @@ namespace BussinessLogic
             ,e.Id EquipmentId
             ,max(e.Name) EquipmentName
             ,p.Id PartId
-            ,max(p.Name) PartName
+            ,max(p.Name) PartName 
             ,ur.Duty,max(p.L1) L1
             ,max(p.H1) H1
             ,SUM(DATEDIFF(mi,ur.StartTime,ur.EndTime)) Duration
             ,COUNT(1) Times
             ,max(m.Name) MonitorTypeName
-            ,max(Major.Name) MajorName
-            from UltraRecord ur left join Part p on ur.PartId=p.Id
+            ,max(Major.Name) UserMajorName
+            ,max(a.Name) UserName
+            from UltraRecord ur 
+                 left join Part p on ur.PartId=p.Id
 	             left join Equipment e on p.EquipmentId=e.Id
 	             left join MonitorType m on e.MonitorTypeId=m.Id
-	             left join Major on p.MajorId=Major.Id");
+                 left join Account a on p.FAUserId = a.Id
+	             left join Major on a.MajorId=Major.Id");
 
             sb.AppendLine("where");
             sb.AppendLine().AppendFormat("ur.IsProRecord={0}", Convert.ToInt32(criteria.SearchProRecord));
 
             if (criteria.StartTime.HasValue)
             {
-                sb.AppendLine().AppendFormat("ur.StartTime>={0}", criteria.StartTime.Value.ToString());
+                sb.AppendLine("and ").AppendFormat("ur.StartTime>='{0}'", criteria.StartTime.Value.ToString());
             }
             if (criteria.EndTime.HasValue)
             {
-                sb.AppendLine().AppendFormat("ur.EndTime<={0}", criteria.EndTime.Value.ToString());
+                sb.AppendLine("and ").AppendFormat("ur.EndTime<='{0}'", criteria.EndTime.Value.ToString());
             }
             if (criteria.MonitorTypeId.HasValue)
             {
-                sb.AppendLine().AppendFormat("e.MonitorTypeId={0}", criteria.MonitorTypeId.Value);
+                sb.AppendLine("and ").AppendFormat("e.MonitorTypeId={0}", criteria.MonitorTypeId.Value);
             }
             if (criteria.EquipmentId.HasValue)
             {
-                sb.AppendLine().AppendFormat("e.Id={0}", criteria.EquipmentId.Value);
+                sb.AppendLine("and ").AppendFormat("e.Id={0}", criteria.EquipmentId.Value);
             }
             if (!string.IsNullOrEmpty(criteria.EquipmentNamePart))
             {
-                sb.AppendLine().AppendFormat("e.Name like '%{0}'%", criteria.EquipmentNamePart);
+                sb.AppendLine("and ").AppendFormat("e.Name like '%{0}'%", criteria.EquipmentNamePart);
             }
             if (criteria.MachineSet.HasValue)
             {
-                sb.AppendLine().AppendFormat("e.MachineSet={0}", criteria.MachineSet.Value);
+                sb.AppendLine("and ").AppendFormat("e.MachineSet={0}", criteria.MachineSet.Value);
             }
             if (criteria.Duty.HasValue)
             {
-                sb.AppendLine().AppendFormat("ur.Duty={0}", criteria.Duty.Value);
+                sb.AppendLine("and ").AppendFormat("ur.Duty={0}", criteria.Duty.Value);
             }
 
             sb.AppendLine().AppendLine("group by e.Id,p.Id,ur.Duty");

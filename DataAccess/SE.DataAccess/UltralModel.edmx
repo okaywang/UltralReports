@@ -119,6 +119,10 @@
           <Property Name="PL" Type="decimal" Precision="10" Scale="2" />
           <Property Name="SendSms" Type="bit" Nullable="false" />
           <Property Name="UltraNum" Type="int" />
+          <Property Name="FADateTime" Type="datetime" Nullable="false" />
+          <Property Name="FAUserId" Type="int" Nullable="false" />
+          <Property Name="LCDateTime" Type="datetime" />
+          <Property Name="LCUserId" Type="int" />
         </EntityType>
         <EntityType Name="PartSms">
           <Key>
@@ -221,6 +225,30 @@
             </Principal>
             <Dependent Role="Part">
               <PropertyRef Name="EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Part__FAUserId__5441852A">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="FAUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Part__LCUserId__5535A963">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="LCUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -332,6 +360,14 @@
             <End Role="Equipment" EntitySet="Equipment" />
             <End Role="Part" EntitySet="Part" />
           </AssociationSet>
+          <AssociationSet Name="FK__Part__FAUserId__5441852A" Association="Self.FK__Part__FAUserId__5441852A">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__LCUserId__5535A963" Association="Self.FK__Part__LCUserId__5535A963">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
           <AssociationSet Name="FK__Part__MajorId__3E52440B" Association="Self.FK__Part__MajorId__3E52440B">
             <End Role="Major" EntitySet="Major" />
             <End Role="Part" EntitySet="Part" />
@@ -420,6 +456,14 @@
           <AssociationSet Name="FK__UltraRecord__Part" Association="UltralReportsModel.FK__UltraRecord__Part">
             <End Role="Part" EntitySet="Part" />
             <End Role="UltraRecord" EntitySet="UltraRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__FAUserId__5441852A" Association="UltralReportsModel.FK__Part__FAUserId__5441852A">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__LCUserId__5535A963" Association="UltralReportsModel.FK__Part__LCUserId__5535A963">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Part" EntitySet="Part" />
           </AssociationSet> 
         </EntityContainer>
         <EntityType Name="Account">
@@ -440,6 +484,8 @@
           <NavigationProperty Name="Major" Relationship="UltralReportsModel.FK__Account__MajorId__07F6335A" FromRole="Account" ToRole="Major" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SmsGroupAccounts" Relationship="UltralReportsModel.FK__SmsGroupA__Accou__60A75C0F" FromRole="Account" ToRole="SmsGroupAccount" />
+          <NavigationProperty Name="FAParts" Relationship="UltralReportsModel.FK__Part__FAUserId__5441852A" FromRole="Account" ToRole="Part" />
+          <NavigationProperty Name="LCParts" Relationship="UltralReportsModel.FK__Part__LCUserId__5535A963" FromRole="Account" ToRole="Part" />
         </EntityType>
         <EntityType Name="AccountAuthority">
           <Key>
@@ -563,6 +609,12 @@
           <Property Name="UltraNum" Type="Int32" />
           <NavigationProperty Name="PartSm" Relationship="UltralReportsModel.FK__PartSms__PartId__5FB337D6" FromRole="Part" ToRole="PartSm" />
           <NavigationProperty Name="UltraRecords" Relationship="UltralReportsModel.FK__UltraRecord__Part" FromRole="Part" ToRole="UltraRecord" />
+          <Property Name="FADateTime" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="FAUserId" Type="Int32" Nullable="false" />
+          <Property Name="LCDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LCUserId" Type="Int32" />
+          <NavigationProperty Name="FAAccount" Relationship="UltralReportsModel.FK__Part__FAUserId__5441852A" FromRole="Part" ToRole="Account" />
+          <NavigationProperty Name="LCAccount" Relationship="UltralReportsModel.FK__Part__LCUserId__5535A963" FromRole="Part" ToRole="Account" />
         </EntityType>
         <Association Name="FK__Part__EquipmentI__3B75D760">
           <End Type="UltralReportsModel.Equipment" Role="Equipment" Multiplicity="1" />
@@ -738,6 +790,30 @@
               <PropertyRef Name="PartId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Part__FAUserId__5441852A">
+          <End Type="UltralReportsModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="UltralReportsModel.Part" Role="Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="FAUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Part__LCUserId__5535A963">
+          <End Type="UltralReportsModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="UltralReportsModel.Part" Role="Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="LCUserId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association> 
       </Schema>
     </edmx:ConceptualModels>
@@ -825,6 +901,10 @@
           <EntitySetMapping Name="Part">
             <EntityTypeMapping TypeName="UltralReportsModel.Part">
               <MappingFragment StoreEntitySet="Part">
+                <ScalarProperty Name="LCUserId" ColumnName="LCUserId" />
+                <ScalarProperty Name="LCDateTime" ColumnName="LCDateTime" />
+                <ScalarProperty Name="FAUserId" ColumnName="FAUserId" />
+                <ScalarProperty Name="FADateTime" ColumnName="FADateTime" />
                 <ScalarProperty Name="UltraNum" ColumnName="UltraNum" />
                 <ScalarProperty Name="SendSms" ColumnName="SendSms" />
                 <ScalarProperty Name="PL" ColumnName="PL" />

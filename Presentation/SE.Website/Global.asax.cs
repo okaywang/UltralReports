@@ -65,8 +65,10 @@ namespace Website
 
             Mapper.CreateMap<Major, MajorListItemModel>();
             Mapper.CreateMap<Major, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
- 
-            Mapper.CreateMap<Part, PartListItemModel>().ForMember(dest => dest.MachineSet, opt => opt.MapFrom(src => src.Equipment.MachineSet));
+
+            Mapper.CreateMap<Part, PartListItemModel>().ForMember(dest => dest.MachineSet, opt => opt.MapFrom(src => src.Equipment.MachineSet))
+                .ForMember(dest => dest.CreateUser, opt => opt.MapFrom(src => string.Concat(src.FAAccount.Name, " ", src.FAAccount.Major == null ? string.Empty : src.FAAccount.Major.Name)))
+                .ForMember(dest => dest.UpdateUser, opt => opt.MapFrom(src => string.Concat(src.LCAccount == null ? string.Empty : src.LCAccount.Name, " ", src.LCAccount == null ? string.Empty : src.LCAccount.Major == null ? string.Empty : src.LCAccount.Major.Name)));
             Mapper.CreateMap<PartAddModel, Part>();
             Mapper.CreateMap<Part, NameValuePair>().ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
 
@@ -76,7 +78,7 @@ namespace Website
             Mapper.CreateMap<Equipment, EquipmentListItemModel>().ForMember(i => i.MonitorTypeName, opt => opt.MapFrom(src => src.MonitorType.Name));
             Mapper.CreateMap<EquipmentAddModel, Equipment>();
             Mapper.CreateMap<Equipment, NameValuePair>().ForMember(i => i.Value, opt => opt.MapFrom(src => src.Id));
- 
+
             Mapper.CreateMap<UltraSummary, UltraSummaryListItemModel>().ForMember(dest => dest.RatedRange, opt => opt.MapFrom(src => string.Format("{0}-{1}", src.L1, src.H1)));
             Mapper.CreateMap<UltraRecord, UltraRecordListItemModel>();
             Mapper.CreateMap<UltraRecord, ProUltraRecordListItemModel>().ForMember(dest => dest.EquipmentName, opt => opt.MapFrom(src => src.Part.Equipment.Name))

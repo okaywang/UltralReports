@@ -155,6 +155,8 @@ namespace Website.Controllers
         public JsonResult PartAdd(PartAddModel model)
         {
             var entity = Mapper.Map<PartAddModel, Part>(model);
+            entity.FAUserId = UserContext.Current.Id;
+            entity.FADateTime = DateTime.Now;
             _bllEquipment.PartAdd(entity);
             return Json(new ResultModel(true));
         }
@@ -174,7 +176,8 @@ namespace Website.Controllers
             entity.H3 = model.H3;
             entity.SendSms = model.SendSms;
             entity.UltraNum = model.UltraNum;
-
+            entity.LCUserId = UserContext.Current.Id;
+            entity.LCDateTime = DateTime.Now;
             _bllEquipment.PartUpdate(entity);
             return Json(new ResultModel(true));
         }

@@ -57,6 +57,10 @@ namespace BussinessLogic
 
         public string MajorName { get; set; }
 
+        public string UserMajorName { get; set; }
+
+        public string UserName { get; set; }
+
         public string Remarks { get; set; }
     }
 }

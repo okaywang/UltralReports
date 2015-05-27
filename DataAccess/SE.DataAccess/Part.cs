@@ -35,10 +35,16 @@ namespace DataAccess
         public Nullable<decimal> PL { get; set; }
         public bool SendSms { get; set; }
         public Nullable<int> UltraNum { get; set; }
+        public System.DateTime FADateTime { get; set; }
+        public int FAUserId { get; set; }
+        public Nullable<System.DateTime> LCDateTime { get; set; }
+        public Nullable<int> LCUserId { get; set; }
     
         public virtual Equipment Equipment { get; set; }
         public virtual Major Major { get; set; }
         public virtual PartSms PartSm { get; set; }
         public virtual ICollection<UltraRecord> UltraRecords { get; set; }
+        public virtual Account FAAccount { get; set; }
+        public virtual Account LCAccount { get; set; }
     }
 }

@@ -388,6 +388,12 @@ namespace Website.Models
         [DisplayName("低3")]
         public decimal? L3 { get; set; }
 
+        [DisplayName("创建人")]
+        public string CreateUser { get; set; }
+
+        [DisplayName("修改人")]
+        public string UpdateUser { get; set; }
+
         public bool SendSms { get; set; }
 
         public int? UltraNum { get; set; }

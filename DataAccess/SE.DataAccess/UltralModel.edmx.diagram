@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b3c00939135b4a12a34c912c9d28310f" Name="关系图1" ZoomLevel="115">
+      <Diagram DiagramId="b3c00939135b4a12a34c912c9d28310f" Name="关系图1" ZoomLevel="93">
         <EntityTypeShape EntityType="UltralReportsModel.Account" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="UltralReportsModel.AccountAuthority" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="UltralReportsModel.Authority" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
@@ -31,6 +31,8 @@
         <AssociationConnector Association="UltralReportsModel.FK__SmsGroupA__Accou__60A75C0F" />
         <AssociationConnector Association="UltralReportsModel.FK__SmsGroupA__Group__5FB337D6" />
         <AssociationConnector Association="UltralReportsModel.FK__UltraRecord__Part" />
+        <AssociationConnector Association="UltralReportsModel.FK__Part__FAUserId__5441852A" />
+        <AssociationConnector Association="UltralReportsModel.FK__Part__LCUserId__5535A963" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
