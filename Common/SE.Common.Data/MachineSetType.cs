@@ -13,6 +13,9 @@ namespace Common.Types
         MachineSet1 = 1,
 
         [DisplayText("2号机组")]
-        MachineSet2 = 2
+        MachineSet2 = 2,
+
+        [DisplayText("公用系统")]
+        MachineSet3 = 3,
     }
 }

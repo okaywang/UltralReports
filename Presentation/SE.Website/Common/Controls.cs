@@ -64,6 +64,8 @@ namespace Website.Common
     }
     public class NativeSelect : ControlBase, ISourceControl
     {
+        public static readonly NameValuePair EmptyOption = new NameValuePair { Value = "", Name = " " };
+
         private string _name;
         public NativeSelect(string name)
             : this(name, true, false) { }
@@ -72,10 +74,15 @@ namespace Website.Common
             _name = name;
             IsEnabled = enabled;
             IsRequired = required;
+
+            EmptyPair = NativeSelect.EmptyOption;
         }
+
         public override string Name { get { return _name; } }
 
         public string SelectedValue { get; set; }
+
+        public NameValuePair EmptyPair { get; set; }
 
         //public bool BindSource { get; set; }
 
@@ -97,7 +104,7 @@ namespace Website.Common
                 sb.Append(" disabled");
             }
             sb.Append(">");
-            sb.Append("<option value=''> </option>");
+            sb.AppendFormat("<option value='{0}'>{1}</option>", this.EmptyPair.Value, this.EmptyPair.Name);
             if (Source != null)
             {
                 foreach (var pair in Source)
