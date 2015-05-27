@@ -9,7 +9,7 @@
         <div class="form-group">
             <label class="control-label">开始时间</label>
             <div class="input-group date">
-                <input type="text" name="StartTime" class="form-control input-sm datetime" />
+                <input type="text" name="StartTime" class="form-control input-sm datetime" value="@DateTime.Now.Date.AddDays(-1).ToString("yyyy-MM-dd HH:mm")" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -18,7 +18,7 @@
         <div class="form-group">
             <label class="control-label">结束时间</label>
             <div class="input-group date">
-                <input type="text" name="EndTime" class="form-control input-sm datetime" />
+                <input type="text" name="EndTime" class="form-control input-sm datetime"  value="@(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59")"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
