@@ -21,7 +21,7 @@
             <div class="logo">超限统计</div>
             <div class="toptitle">
                 @*阜阳华润电力有限公司*@
-                <img src="~/Content/i/logo.png" alt="阜阳华润电力有限公司" style="height:50px;"/>
+                <img src="~/Content/i/logo.png" alt="阜阳华润电力有限公司" style="height: 50px;" />
             </div>
             <div class="loginInfo">
                 <span>@UserContext.Current.Name</span>,您好，欢迎使用<span class="line">|</span><a href="/Account/Logout" class="importMsg">退出</a>
@@ -49,7 +49,7 @@
                     </li>
                     <li>
                         <a class="dropdown-toggle" href="#">
-                            <i style="background:url(/content/i/MenuIcons/1.png) no-repeat"></i>
+                            <i style="background: url(/content/i/MenuIcons/1.png) no-repeat"></i>
                             <span class="menu-text">常规超限配置</span>
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -71,7 +71,7 @@
                     </li>
                     <li>
                         <a class="dropdown-toggle" href="#">
-                            <i style="background:url(/content/i/MenuIcons/2.png) no-repeat"></i>
+                            <i style="background: url(/content/i/MenuIcons/2.png) no-repeat"></i>
                             <span class="menu-text">专业超限配置</span>
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -107,6 +107,19 @@
                             {
                                 <li><a href="/Sms/GroupIndex">短信接收组管理</a></li>
                             }
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#">
+                            <i class="maintenanceicon"></i>
+                            <span class="menu-text">报表</span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="/Report/EconomicIndex">账号管理</a></li>
+
+                            <li><a href="/Report/EnvironmentalIndex">班次设置</a></li>
+
                         </ul>
                     </li>
                 </ul>

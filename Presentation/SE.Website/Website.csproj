@@ -162,6 +162,7 @@
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="Controllers\UltraRecordController.cs" />
     <Compile Include="Controllers\SmsLogController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Authentication\FormAuthenticationService.cs">
       <SubType>Code</SubType>
@@ -482,6 +483,8 @@
     <Content Include="Views\Duty\DutyTimeIndex.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SmsLog\Index.cshtml" />
+    <Content Include="Views\Report\EconomicIndex.cshtml" />
+    <Content Include="Views\Report\EnvironmentalIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

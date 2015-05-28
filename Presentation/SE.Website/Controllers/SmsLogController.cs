@@ -39,8 +39,5 @@ namespace Website.Controllers
             model.PagingResult = entities.PagingResult;
             return PartialView("_CommonList", model);
         }
-
-
-
     }
 }

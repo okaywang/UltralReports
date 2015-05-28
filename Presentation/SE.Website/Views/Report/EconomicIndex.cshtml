@@ -1,0 +1,276 @@
+﻿@{
+    ViewBag.Title = "经济指标报表";
+}
+@section styles{
+    <style>
+        .search-result-table table th { width: 100px; background-image: url(""); }
+        .search-result-table table tr td:first-child { background-color: #efefef; }
+    </style>
+}
+
+<div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label class="control-label">开始时间</label>
+            <div class="input-group date">
+                <input type="text" name="StartTime" class="form-control input-sm datetime" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
+        </div>
+    </form>
+</div>
+<div class="search-result table-responsive" style="margin-top: 10px;">
+    <div class="search-result-table">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>主给水流量</th>
+                    <th>主蒸汽流量</th>
+                    <th>省煤器入口压力</th>
+                    <th>给水温度</th>
+                    <th>送风机出口温度</th>
+                    <th>主蒸汽温度</th>
+                    <th>主蒸汽压力</th>
+                    <th>一级过热减温水流量</th>
+                    <th>二级减温水流量</th>
+                    <th>过热器减温水压力</th>
+                    <th>再热蒸汽温度</th>
+                    <th>再热蒸汽压力</th>
+                    <th>再热减温水流量</th>
+                    <th>再热器减温水温度</th>
+                    <th>再热器减温水压力</th>
+                    <th>循环水入口温度</th>
+                    <th>循环水出口温度</th>
+                    <th>循环水温升</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>单位</td>
+                    <td>t/h</td>
+                    <td>t/h</td>
+                    <td>MPa</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>%</td>
+                    <td>MPa</td>
+                    <td>t/h</td>
+                    <td>t/h</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>MPa</td>
+                    <td>t/h</td>
+                    <td>℃</td>
+                    <td>MPa</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                </tr>
+                <tr>
+                    <td>#1机组</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                </tr>
+                <tr>
+                    <td>#2机组</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>真空</th>
+                    <th>排汽温度</th>
+                    <th>凝汽器端差</th>
+                    <th>氧量</th>
+                    <th>#1高加入口水温</th>
+                    <th>#1高加出口水温</th>
+                    <th>#2高加入口水温</th>
+                    <th>#2高加出口水温</th>
+                    <th>#3高加入口水温</th>
+                    <th>#3高加出口水温</th>
+                    <th>#1高加抽汽压力</th>
+                    <th>#2高加抽汽压力</th>
+                    <th>#3高加抽汽压力</th>
+                    <th>#1高加抽汽温度</th>
+                    <th>#2高加抽汽温度</th>
+                    <th>#3高加抽汽温度</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>单位</td>
+                    <td>Pa</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>%</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>%</td>
+                    <td>MPa</td>
+                    <td>MPa</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                </tr>
+                <tr>
+                    <td>#1机组</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                </tr>
+                <tr>
+                    <td>#2机组</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>#1高加疏水温度</th>
+                    <th>#2高加疏水温度</th>
+                    <th>#3高加疏水温度</th>
+                    <th>飞灰含碳量</th>
+                    <th>排烟温度</th>
+                    <th>SCR入口NOx浓度</th>
+                    <th>SCR出口NOx浓度</th>
+                    <th>二氧化硫</th>
+                    <th>烟尘</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>单位</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>℃</td>
+                    <td>%</td>
+                    <td>℃</td>
+                    <td>%</td>
+                    <td>%</td>
+                    <td>%</td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td>#1机组</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                </tr>
+                <tr>
+                    <td>#2机组</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                    <td>月平均</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
+    <script>
+
+        //var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+        //    url: ''
+        //}));
+        //viewInstance.init();
+
+
+        $(function () {
+            $(".date .form-control").datetimepicker({
+                format: 'YYYY-MM',
+
+            });
+        });
+    </script>
+}
