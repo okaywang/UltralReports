@@ -18,6 +18,10 @@
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
+        </div>        
+        <div class="form-group">
+            <label class="control-label">机组</label>
+            @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource(), SelectedValue = "", EmptyPair = new NameValuePair { Name = "全部" } }.Render())
         </div>
         <div class="form-group">
             <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
