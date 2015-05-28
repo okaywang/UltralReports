@@ -4,18 +4,92 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels> 
-    <Schema Namespace="UltralReportsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UltralReportsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="UltralReportsModelStoreContainer">
+          <EntitySet Name="Account" EntityType="UltralReportsModel.Store.Account" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AccountAuthority" EntityType="UltralReportsModel.Store.AccountAuthority" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Authority" EntityType="UltralReportsModel.Store.Authority" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Duty" EntityType="UltralReportsModel.Store.Duty" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DutyTime" EntityType="UltralReportsModel.Store.DutyTime" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Equipment" EntityType="UltralReportsModel.Store.Equipment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LogException" EntityType="UltralReportsModel.Store.LogException" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LogOperation" EntityType="UltralReportsModel.Store.LogOperation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Major" EntityType="UltralReportsModel.Store.Major" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MonitorType" EntityType="UltralReportsModel.Store.MonitorType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Part" EntityType="UltralReportsModel.Store.Part" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PartSms" EntityType="UltralReportsModel.Store.PartSms" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SmsGroup" EntityType="UltralReportsModel.Store.SmsGroup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SmsGroupAccount" EntityType="UltralReportsModel.Store.SmsGroupAccount" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SmsLog" EntityType="UltralReportsModel.Store.SmsLog" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UltraRecord" EntityType="UltralReportsModel.Store.UltraRecord" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Account__MajorId__07F6335A" Association="UltralReportsModel.Store.FK__Account__MajorId__07F6335A">
+            <End Role="Major" EntitySet="Major" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountAu__Accou__145C0A3F" Association="UltralReportsModel.Store.FK__AccountAu__Accou__145C0A3F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountAuthority" EntitySet="AccountAuthority" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountAu__Autho__15502E78" Association="UltralReportsModel.Store.FK__AccountAu__Autho__15502E78">
+            <End Role="Authority" EntitySet="Authority" />
+            <End Role="AccountAuthority" EntitySet="AccountAuthority" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Monit__33D4B598" Association="UltralReportsModel.Store.FK__Equipment__Monit__33D4B598">
+            <End Role="MonitorType" EntitySet="MonitorType" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__EquipmentI__38996AB5" Association="UltralReportsModel.Store.FK__Part__EquipmentI__38996AB5">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__FAUserId__6E01572D" Association="UltralReportsModel.Store.FK__Part__FAUserId__6E01572D">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__LCUserId__6EF57B66" Association="UltralReportsModel.Store.FK__Part__LCUserId__6EF57B66">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__MajorId__398D8EEE" Association="UltralReportsModel.Store.FK__Part__MajorId__398D8EEE">
+            <End Role="Major" EntitySet="Major" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PartSms__GroupId__46E78A0C" Association="UltralReportsModel.Store.FK__PartSms__GroupId__46E78A0C">
+            <End Role="SmsGroup" EntitySet="SmsGroup" />
+            <End Role="PartSms" EntitySet="PartSms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PartSms__PartId__45F365D3" Association="UltralReportsModel.Store.FK__PartSms__PartId__45F365D3">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="PartSms" EntitySet="PartSms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SmsGroupA__Accou__60A75C0F" Association="UltralReportsModel.Store.FK__SmsGroupA__Accou__60A75C0F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="SmsGroupAccount" EntitySet="SmsGroupAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SmsGroupA__Group__5FB337D6" Association="UltralReportsModel.Store.FK__SmsGroupA__Group__5FB337D6">
+            <End Role="SmsGroup" EntitySet="SmsGroup" />
+            <End Role="SmsGroupAccount" EntitySet="SmsGroupAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SmsLog__GroupId__73BA3083" Association="UltralReportsModel.Store.FK__SmsLog__GroupId__73BA3083">
+            <End Role="SmsGroup" EntitySet="SmsGroup" />
+            <End Role="SmsLog" EntitySet="SmsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UltraRecord__Part" Association="UltralReportsModel.Store.FK__UltraRecord__Part">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="UltraRecord" EntitySet="UltraRecord" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="MajorId" Type="int" />
-          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="LoginName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="LoginName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="AccountType" Type="int" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="FADateTime" Type="datetime" />
           <Property Name="FAUser" Type="nvarchar" MaxLength="20" />
           <Property Name="LCDateTime" Type="datetime" />
@@ -25,7 +99,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AccountId" Type="int" Nullable="false" />
           <Property Name="AuthorityId" Type="int" Nullable="false" />
         </EntityType>
@@ -33,9 +107,9 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AuthorityType" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="Duty">
           <Key>
@@ -51,24 +125,24 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
-          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="StartTime" Type="time" Nullable="false" />
+          <Property Name="EndTime" Type="time" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="MachineSet" Type="int" Nullable="false" />
           <Property Name="MonitorTypeId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="LogException">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RequestInfo" Type="text" />
           <Property Name="UserName" Type="nvarchar" MaxLength="20" />
           <Property Name="Message" Type="nvarchar" MaxLength="500" />
@@ -79,7 +153,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RequestInfo" Type="text" />
           <Property Name="UserName" Type="nvarchar" MaxLength="20" />
           <Property Name="Message" Type="nvarchar" MaxLength="200" />
@@ -89,29 +163,29 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="MonitorType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Part">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="EquipmentId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DataKey" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Unit" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="L1" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DataKey" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Unit" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="L1" Type="decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="L2" Type="decimal" Precision="10" Scale="2" />
           <Property Name="L3" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="H1" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="H1" Type="decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="H2" Type="decimal" Precision="10" Scale="2" />
           <Property Name="H3" Type="decimal" Precision="10" Scale="2" />
           <Property Name="MajorId" Type="int" />
@@ -130,16 +204,16 @@
           </Key>
           <Property Name="PartId" Type="int" Nullable="false" />
           <Property Name="GroupId" Type="int" Nullable="false" />
-          <Property Name="Content" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="HRecover" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="LRecover" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="300" />
+          <Property Name="HRecover" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="LRecover" Type="decimal" Nullable="false" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="SmsGroup">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="SmsGroupAccount">
           <Key>
@@ -148,29 +222,42 @@
           </Key>
           <Property Name="GroupId" Type="int" Nullable="false" />
           <Property Name="AccountId" Type="int" Nullable="false" />
-          <Property Name="FADateTime" Type="datetime" />
+          <Property Name="FADateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SmsLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="SmsType" Type="int" Nullable="false" />
+          <Property Name="WarningType" Type="int" />
+          <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="300" />
+          <Property Name="IsSuccess" Type="bit" Nullable="false" />
+          <Property Name="FADateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="UltraRecord">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="PartId" Type="int" />
           <Property Name="StartTime" Type="datetime" Nullable="false" />
           <Property Name="EndTime" Type="datetime" />
-          <Property Name="Flag" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Flag" Type="bit" StoreGeneratedPattern="Computed" />
           <Property Name="Duty" Type="int" Nullable="false" />
-          <Property Name="UltraType" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="UltraType" Type="varchar" Nullable="false" MaxLength="2" />
           <Property Name="MinValue" Type="decimal" Precision="10" Scale="2" />
           <Property Name="MaxValue" Type="decimal" Precision="10" Scale="2" />
           <Property Name="AvgValue" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
-          <Property Name="HasRemarks" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="IsProRecord" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="HasRemarks" Type="bit" StoreGeneratedPattern="Computed" />
+          <Property Name="IsProRecord" Type="bit" StoreGeneratedPattern="Computed" />
+          <Property Name="SmsFlag" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK__Account__MajorId__07F6335A">
-          <End Role="Major" Type="Self.Major" Multiplicity="0..1" />
-          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <End Role="Major" Type="UltralReportsModel.Store.Major" Multiplicity="0..1" />
+          <End Role="Account" Type="UltralReportsModel.Store.Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Major">
               <PropertyRef Name="Id" />
@@ -181,8 +268,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__AccountAu__Accou__145C0A3F">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="AccountAuthority" Type="Self.AccountAuthority" Multiplicity="*" />
+          <End Role="Account" Type="UltralReportsModel.Store.Account" Multiplicity="1" />
+          <End Role="AccountAuthority" Type="UltralReportsModel.Store.AccountAuthority" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="Id" />
@@ -193,8 +280,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__AccountAu__Autho__15502E78">
-          <End Role="Authority" Type="Self.Authority" Multiplicity="1" />
-          <End Role="AccountAuthority" Type="Self.AccountAuthority" Multiplicity="*" />
+          <End Role="Authority" Type="UltralReportsModel.Store.Authority" Multiplicity="1" />
+          <End Role="AccountAuthority" Type="UltralReportsModel.Store.AccountAuthority" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Authority">
               <PropertyRef Name="Id" />
@@ -204,9 +291,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Equipment__Monit__38996AB5">
-          <End Role="MonitorType" Type="Self.MonitorType" Multiplicity="1" />
-          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+        <Association Name="FK__Equipment__Monit__33D4B598">
+          <End Role="MonitorType" Type="UltralReportsModel.Store.MonitorType" Multiplicity="1" />
+          <End Role="Equipment" Type="UltralReportsModel.Store.Equipment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MonitorType">
               <PropertyRef Name="Id" />
@@ -216,9 +303,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Part__EquipmentI__3D5E1FD2">
-          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
-          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+        <Association Name="FK__Part__EquipmentI__38996AB5">
+          <End Role="Equipment" Type="UltralReportsModel.Store.Equipment" Multiplicity="1" />
+          <End Role="Part" Type="UltralReportsModel.Store.Part" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Equipment">
               <PropertyRef Name="Id" />
@@ -228,9 +315,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Part__FAUserId__5441852A">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+        <Association Name="FK__Part__FAUserId__6E01572D">
+          <End Role="Account" Type="UltralReportsModel.Store.Account" Multiplicity="1" />
+          <End Role="Part" Type="UltralReportsModel.Store.Part" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="Id" />
@@ -240,9 +327,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Part__LCUserId__5535A963">
-          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+        <Association Name="FK__Part__LCUserId__6EF57B66">
+          <End Role="Account" Type="UltralReportsModel.Store.Account" Multiplicity="0..1" />
+          <End Role="Part" Type="UltralReportsModel.Store.Part" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="Id" />
@@ -252,9 +339,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Part__MajorId__3E52440B">
-          <End Role="Major" Type="Self.Major" Multiplicity="0..1" />
-          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+        <Association Name="FK__Part__MajorId__398D8EEE">
+          <End Role="Major" Type="UltralReportsModel.Store.Major" Multiplicity="0..1" />
+          <End Role="Part" Type="UltralReportsModel.Store.Part" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Major">
               <PropertyRef Name="Id" />
@@ -264,9 +351,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PartSms__GroupId__4BAC3F29">
-          <End Role="SmsGroup" Type="Self.SmsGroup" Multiplicity="1" />
-          <End Role="PartSms" Type="Self.PartSms" Multiplicity="*" />
+        <Association Name="FK__PartSms__GroupId__46E78A0C">
+          <End Role="SmsGroup" Type="UltralReportsModel.Store.SmsGroup" Multiplicity="1" />
+          <End Role="PartSms" Type="UltralReportsModel.Store.PartSms" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SmsGroup">
               <PropertyRef Name="Id" />
@@ -276,9 +363,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PartSms__PartId__4AB81AF0">
-          <End Role="Part" Type="Self.Part" Multiplicity="1" />
-          <End Role="PartSms" Type="Self.PartSms" Multiplicity="0..1" />
+        <Association Name="FK__PartSms__PartId__45F365D3">
+          <End Role="Part" Type="UltralReportsModel.Store.Part" Multiplicity="1" />
+          <End Role="PartSms" Type="UltralReportsModel.Store.PartSms" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Part">
               <PropertyRef Name="Id" />
@@ -288,9 +375,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SmsGroupA__Accou__2E1BDC42">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="SmsGroupAccount" Type="Self.SmsGroupAccount" Multiplicity="*" />
+        <Association Name="FK__SmsGroupA__Accou__60A75C0F">
+          <End Role="Account" Type="UltralReportsModel.Store.Account" Multiplicity="1" />
+          <End Role="SmsGroupAccount" Type="UltralReportsModel.Store.SmsGroupAccount" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="Id" />
@@ -300,9 +387,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SmsGroupA__Group__2D27B809">
-          <End Role="SmsGroup" Type="Self.SmsGroup" Multiplicity="1" />
-          <End Role="SmsGroupAccount" Type="Self.SmsGroupAccount" Multiplicity="*" />
+        <Association Name="FK__SmsGroupA__Group__5FB337D6">
+          <End Role="SmsGroup" Type="UltralReportsModel.Store.SmsGroup" Multiplicity="1" />
+          <End Role="SmsGroupAccount" Type="UltralReportsModel.Store.SmsGroupAccount" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SmsGroup">
               <PropertyRef Name="Id" />
@@ -312,9 +399,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__SmsLog__GroupId__73BA3083">
+          <End Role="SmsGroup" Type="UltralReportsModel.Store.SmsGroup" Multiplicity="1" />
+          <End Role="SmsLog" Type="UltralReportsModel.Store.SmsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmsGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SmsLog">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UltraRecord__Part">
-          <End Role="Part" Type="Self.Part" Multiplicity="0..1" />
-          <End Role="UltraRecord" Type="Self.UltraRecord" Multiplicity="*" />
+          <End Role="Part" Type="UltralReportsModel.Store.Part" Multiplicity="0..1" />
+          <End Role="UltraRecord" Type="UltralReportsModel.Store.UltraRecord" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Part">
               <PropertyRef Name="Id" />
@@ -324,75 +423,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UltralReportsModelStoreContainer">
-          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AccountAuthority" EntityType="Self.AccountAuthority" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Authority" EntityType="Self.Authority" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Duty" EntityType="Self.Duty" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DutyTime" EntityType="Self.DutyTime" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LogException" EntityType="Self.LogException" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LogOperation" EntityType="Self.LogOperation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MonitorType" EntityType="Self.MonitorType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Part" EntityType="Self.Part" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PartSms" EntityType="Self.PartSms" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SmsGroup" EntityType="Self.SmsGroup" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SmsGroupAccount" EntityType="Self.SmsGroupAccount" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UltraRecord" EntityType="Self.UltraRecord" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Account__MajorId__07F6335A" Association="Self.FK__Account__MajorId__07F6335A">
-            <End Role="Major" EntitySet="Major" />
-            <End Role="Account" EntitySet="Account" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AccountAu__Accou__145C0A3F" Association="Self.FK__AccountAu__Accou__145C0A3F">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="AccountAuthority" EntitySet="AccountAuthority" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AccountAu__Autho__15502E78" Association="Self.FK__AccountAu__Autho__15502E78">
-            <End Role="Authority" EntitySet="Authority" />
-            <End Role="AccountAuthority" EntitySet="AccountAuthority" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Equipment__Monit__38996AB5" Association="Self.FK__Equipment__Monit__38996AB5">
-            <End Role="MonitorType" EntitySet="MonitorType" />
-            <End Role="Equipment" EntitySet="Equipment" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Part__EquipmentI__3D5E1FD2" Association="Self.FK__Part__EquipmentI__3D5E1FD2">
-            <End Role="Equipment" EntitySet="Equipment" />
-            <End Role="Part" EntitySet="Part" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Part__FAUserId__5441852A" Association="Self.FK__Part__FAUserId__5441852A">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Part" EntitySet="Part" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Part__LCUserId__5535A963" Association="Self.FK__Part__LCUserId__5535A963">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Part" EntitySet="Part" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Part__MajorId__3E52440B" Association="Self.FK__Part__MajorId__3E52440B">
-            <End Role="Major" EntitySet="Major" />
-            <End Role="Part" EntitySet="Part" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PartSms__GroupId__4BAC3F29" Association="Self.FK__PartSms__GroupId__4BAC3F29">
-            <End Role="SmsGroup" EntitySet="SmsGroup" />
-            <End Role="PartSms" EntitySet="PartSms" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PartSms__PartId__4AB81AF0" Association="Self.FK__PartSms__PartId__4AB81AF0">
-            <End Role="Part" EntitySet="Part" />
-            <End Role="PartSms" EntitySet="PartSms" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SmsGroupA__Accou__2E1BDC42" Association="Self.FK__SmsGroupA__Accou__2E1BDC42">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="SmsGroupAccount" EntitySet="SmsGroupAccount" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SmsGroupA__Group__2D27B809" Association="Self.FK__SmsGroupA__Group__2D27B809">
-            <End Role="SmsGroup" EntitySet="SmsGroup" />
-            <End Role="SmsGroupAccount" EntitySet="SmsGroupAccount" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UltraRecord__Part" Association="Self.FK__UltraRecord__Part">
-            <End Role="Part" EntitySet="Part" />
-            <End Role="UltraRecord" EntitySet="UltraRecord" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -464,6 +494,11 @@
           <AssociationSet Name="FK__Part__LCUserId__5535A963" Association="UltralReportsModel.FK__Part__LCUserId__5535A963">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <EntitySet Name="SmsLogs" EntityType="UltralReportsModel.SmsLog" />
+          <AssociationSet Name="FK__SmsLog__GroupId__73BA3083" Association="UltralReportsModel.FK__SmsLog__GroupId__73BA3083">
+            <End Role="SmsGroup" EntitySet="SmsGroups" />
+            <End Role="SmsLog" EntitySet="SmsLogs" />
           </AssociationSet> 
         </EntityContainer>
         <EntityType Name="Account">
@@ -641,11 +676,12 @@
           <Property Type="Decimal" Name="MaxValue" Precision="10" Scale="2" />
           <Property Type="Decimal" Name="AvgValue" Precision="10" Scale="2" />
           <Property Type="DateTime" Name="StartTime" Nullable="false" Precision="3" />
-          <Property Type="Boolean" Name="Flag" annotation:StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Type="Boolean" Name="Flag" annotation:StoreGeneratedPattern="Computed" />
           <Property Type="String" Name="Remarks" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="HasRemarks" annotation:StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Type="Boolean" Name="IsProRecord" annotation:StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Type="Boolean" Name="HasRemarks" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Boolean" Name="IsProRecord" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Part" Relationship="UltralReportsModel.FK__UltraRecord__Part" FromRole="UltraRecord" ToRole="Part" />
+          <Property Type="Boolean" Name="SmsFlag" Nullable="false" />
         </EntityType>
         <EntityType Name="Major">
           <Key>
@@ -731,6 +767,7 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PartSms" Relationship="UltralReportsModel.FK__PartSms__GroupId__46E78A0C" FromRole="SmsGroup" ToRole="PartSms" />
           <NavigationProperty Name="SmsGroupAccounts" Relationship="UltralReportsModel.FK__SmsGroupA__Group__5FB337D6" FromRole="SmsGroup" ToRole="SmsGroupAccount" />
+          <NavigationProperty Name="SmsLogs" Relationship="UltralReportsModel.FK__SmsLog__GroupId__73BA3083" FromRole="SmsGroup" ToRole="SmsLog" />
         </EntityType>
         <Association Name="FK__PartSms__GroupId__46E78A0C">
           <End Type="UltralReportsModel.SmsGroup" Role="SmsGroup" Multiplicity="1" />
@@ -751,7 +788,7 @@
           </Key>
           <Property Type="Int32" Name="GroupId" Nullable="false" />
           <Property Type="Int32" Name="AccountId" Nullable="false" />
-          <Property Type="DateTime" Name="FADateTime" Precision="3" />
+          <Property Type="DateTime" Name="FADateTime" Precision="3" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="UltralReportsModel.FK__SmsGroupA__Accou__60A75C0F" FromRole="SmsGroupAccount" ToRole="Account" />
           <NavigationProperty Name="SmsGroup" Relationship="UltralReportsModel.FK__SmsGroupA__Group__5FB337D6" FromRole="SmsGroupAccount" ToRole="SmsGroup" />
         </EntityType>
@@ -812,6 +849,31 @@
             </Principal>
             <Dependent Role="Part">
               <PropertyRef Name="LCUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SmsLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="GroupId" Nullable="false" />
+          <Property Type="Int32" Name="SmsType" Nullable="false" />
+          <Property Type="Int32" Name="WarningType" />
+          <Property Type="String" Name="Content" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsSuccess" Nullable="false" />
+          <Property Type="DateTime" Name="FADateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SmsGroup" Relationship="UltralReportsModel.FK__SmsLog__GroupId__73BA3083" FromRole="SmsLog" ToRole="SmsGroup" />
+        </EntityType>
+        <Association Name="FK__SmsLog__GroupId__73BA3083">
+          <End Type="UltralReportsModel.SmsGroup" Role="SmsGroup" Multiplicity="1" />
+          <End Type="UltralReportsModel.SmsLog" Role="SmsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmsGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SmsLog">
+              <PropertyRef Name="GroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association> 
@@ -927,6 +989,7 @@
           <EntitySetMapping Name="UltraRecord">
             <EntityTypeMapping TypeName="UltralReportsModel.UltraRecord">
               <MappingFragment StoreEntitySet="UltraRecord">
+                <ScalarProperty Name="SmsFlag" ColumnName="SmsFlag" />
                 <ScalarProperty Name="IsProRecord" ColumnName="IsProRecord" />
                 <ScalarProperty Name="HasRemarks" ColumnName="HasRemarks" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
@@ -994,6 +1057,19 @@
                 <ScalarProperty Name="FADateTime" ColumnName="FADateTime" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SmsLogs">
+            <EntityTypeMapping TypeName="UltralReportsModel.SmsLog">
+              <MappingFragment StoreEntitySet="SmsLog">
+                <ScalarProperty Name="FADateTime" ColumnName="FADateTime" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="WarningType" ColumnName="WarningType" />
+                <ScalarProperty Name="SmsType" ColumnName="SmsType" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping> 

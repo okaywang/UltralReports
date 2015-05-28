@@ -12,20 +12,16 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipment
+    public partial class SmsLog
     {
-        public Equipment()
-        {
-            this.Part = new HashSet<Part>();
-        }
-    
         public int Id { get; set; }
-        public Common.Types.MachineSetType MachineSet { get; set; }
-        public int MonitorTypeId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int GroupId { get; set; }
+        public int SmsType { get; set; }
+        public Nullable<int> WarningType { get; set; }
+        public string Content { get; set; }
+        public bool IsSuccess { get; set; }
+        public System.DateTime FADateTime { get; set; }
     
-        public virtual MonitorType MonitorType { get; set; }
-        public virtual ICollection<Part> Part { get; set; }
+        public virtual SmsGroup SmsGroup { get; set; }
     }
 }

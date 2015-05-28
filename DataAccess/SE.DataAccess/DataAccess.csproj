@@ -94,6 +94,9 @@
     <Compile Include="SmsGroupAccount.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SmsLog.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UltralModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,0 +1,55 @@
+﻿@using WebExpress.Website
+@model SmsLogListPageModel
+@{
+    ViewBag.Title = Model.Title;
+}
+@section styles{
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+}
+<div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label class="control-label">开始时间</label>
+            <div class="input-group date">
+                <input type="text" name="StartTime" class="form-control input-sm datetime" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">结束时间</label>
+            <div class="input-group date">
+                <input type="text" name="EndTime" class="form-control input-sm datetime"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
+        </div>
+    </form>
+</div>
+<div class="search-result table-responsive" style="margin-top: 10px;">
+</div>
+
+@section scripts{
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
+    <script>
+
+        var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+            url: '@Model.RequestListUrl'
+        }));
+        viewInstance.init();
+         
+
+        $(function () {
+            $(".date .form-control").datetimepicker({
+                format: 'YYYY-MM-DD'
+            }); 
+        });
+    </script>
+}

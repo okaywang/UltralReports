@@ -22,6 +22,7 @@ namespace Website
 
             builder.RegisterType<AccountBussinessLogic>().InstancePerHttpRequest();
             builder.RegisterType<SmsBussinessLogic>().InstancePerHttpRequest();
+            builder.RegisterType<SmsLogBussinessLogic>().InstancePerHttpRequest();
             builder.RegisterType<EquipmentBussinessLogic>().InstancePerHttpRequest();
             builder.RegisterType<UltraReportBussinessLogic>().InstancePerHttpRequest();
             builder.RegisterType<MajorBussinessLogic>().InstancePerHttpRequest();

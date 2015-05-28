@@ -51,6 +51,7 @@
     <Compile Include="Entities\AccountSearchCriteria.cs" />
     <Compile Include="Entities\UltraRecordSearchCriteria.cs" />
     <Compile Include="Entities\UltraSummary.cs" />
+    <Compile Include="Entities\SmsLogSearchCriteria.cs" />
     <Compile Include="MajorBussinessLogic.cs" />
     <Compile Include="LogExceptionBussinessLogic.cs" />
     <Compile Include="LogOperationBussinessLogic.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="SmsBussinessLogic.cs" />
     <Compile Include="EquipmentBussinessLogic.cs" />
     <Compile Include="UltraReportBussinessLogic.cs" />
+    <Compile Include="SmsLogBussinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataAccess\SE.DataAccess\DataAccess.csproj">

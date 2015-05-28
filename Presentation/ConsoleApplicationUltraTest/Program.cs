@@ -54,16 +54,7 @@ namespace ConsoleApplicationUltraTest
 
         static void Main(string[] args)
         {
-            var query = HttpUtility.ParseQueryString("http://www.baidu.com");
-            query["city"] = "5";
-            query["code"] = "6";
-            query["code"] = "7";
-
-            var url = query.ToString();
-
-            UriBuilder builder = new UriBuilder("http://www.baidu.com");
- 
-            var url2 = builder.ToString();
+            GenerateData_SmsLog();
 
             Console.WriteLine("abc");
         }
@@ -83,6 +74,28 @@ namespace ConsoleApplicationUltraTest
             Console.WriteLine(100);
             await device.SendSmsAysc(new string[] { "aa", "bb", "cc" }, "bad");
             Console.WriteLine(200);
+        }
+
+        private static void GenerateData_SmsLog()
+        {
+            var context = new UltralReportsEntities();
+            var repository = new EfRepository<SmsLog>(context);
+            var bll = new SmsLogBussinessLogic(repository);
+            var records = new List<SmsLog>();
+            var groups = new[] { 5, 6, 7 };
+            var rand = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                var record = new SmsLog();
+                record.GroupId = groups[rand.Next(groups.Length)];
+                record.IsSuccess = rand.Next(10) > 5 ? true : false;
+                record.SmsType = rand.Next(10) > 5 ? 1 : 2;
+                record.Content = "this is conent" + i.ToString();
+                record.FADateTime = DateTime.Now;
+                records.Add(record);
+            }
+
+            bll.InsertRange(records);
         }
 
         private static void GenerateData_UltraRecord()
