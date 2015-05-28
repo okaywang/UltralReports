@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ConsoleApplicationUltraTest
 {
@@ -53,9 +54,16 @@ namespace ConsoleApplicationUltraTest
 
         static void Main(string[] args)
         {
-            using (var sms = new SmsUtility.SmsDevice("Com1"))
-            { 
-            }
+            var query = HttpUtility.ParseQueryString("http://www.baidu.com");
+            query["city"] = "5";
+            query["code"] = "6";
+            query["code"] = "7";
+
+            var url = query.ToString();
+
+            UriBuilder builder = new UriBuilder("http://www.baidu.com");
+ 
+            var url2 = builder.ToString();
 
             Console.WriteLine("abc");
         }
