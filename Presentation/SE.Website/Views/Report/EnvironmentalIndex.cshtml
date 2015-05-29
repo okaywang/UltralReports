@@ -3,8 +3,14 @@
 }
 @section styles{
     <style>
-        .search-result-table table th { width: 100px; background-image: url(""); }
-        .search-result-table table tr td:first-child { background-color: #efefef; }
+        .search-result-table table th {
+            width: 100px;
+            background-image: url("");
+        }
+
+        .search-result-table table tr td:first-child {
+            background-color: #efefef;
+        }
     </style>
 }
 
@@ -18,6 +24,10 @@
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">机组</label>
+            @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource().Where(i => i.Value != ((int)MachineSetType.MachineSet3).ToString()).ToArray(), SelectedValue = "", EmptyPair = new NameValuePair { Name = "全部" } }.Render())
         </div>
         <div class="form-group">
             <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
@@ -45,9 +55,9 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 0; i <= 31; i++)
+                @for (int i = 1; i <= 31; i++)
                 {
-                    
+
                     <tr>
                         <td>@(i)日</td>
                         <td>统计计算点</td>
