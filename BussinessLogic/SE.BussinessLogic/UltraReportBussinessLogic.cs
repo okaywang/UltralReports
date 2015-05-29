@@ -120,7 +120,7 @@ namespace BussinessLogic
             }
             if (criteria.MachineSet.HasValue)
             {
-                sb.AppendLine("and ").AppendFormat("e.MachineSet={0}", criteria.MachineSet.Value);
+                sb.AppendLine("and ").AppendFormat("e.MachineSet={0}", (int)criteria.MachineSet.Value);
             }
             if (criteria.Duty.HasValue)
             {
