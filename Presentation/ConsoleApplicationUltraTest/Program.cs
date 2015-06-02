@@ -82,7 +82,7 @@ namespace ConsoleApplicationUltraTest
             var repository = new EfRepository<SmsLog>(context);
             var bll = new SmsLogBussinessLogic(repository);
             var records = new List<SmsLog>();
-            var groups = new[] { 5, 6, 7 };
+            var groups = new[] { 1, 2 };
             var rand = new Random();
             for (int i = 0; i < 100; i++)
             {
@@ -94,8 +94,16 @@ namespace ConsoleApplicationUltraTest
                 record.FADateTime = DateTime.Now;
                 records.Add(record);
             }
-
+            try
+            {
             bll.InsertRange(records);
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
         }
 
         private static void GenerateData_UltraRecord()
