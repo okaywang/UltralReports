@@ -49,3 +49,10 @@ Create table SmsLog
 	IsSuccess bit not null default(1),
 	FADateTime datetime not null default(getdate()),
 )
+
+
+
+alter table PartSms drop constraint FK__PartSms__PartId__45F365D3 
+
+alter table PartSms add constraint FK__PartSms__PartId__45F365D3
+     foreign key (PartId) references Part on delete CASCADE
