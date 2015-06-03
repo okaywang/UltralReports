@@ -2,6 +2,29 @@
 @{
     ViewBag.Title = Model.Title;
 }
+<div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label class="control-label">机组</label>
+            @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource(), SelectedValue = "", EmptyPair = new NameValuePair { Name = "全部" } }.Render())
+        </div> 
+        <div class="form-group">
+            <label class="control-label">设备</label>
+            <input type="text" name="EquipmentName" class="form-control input-sm " />
+        </div>
+        <div class="form-group">
+            <label class="control-label">部件</label>
+            <input type="text" name="PartName" class="form-control input-sm " />
+        </div>
+        <div class="form-group">
+            <label class="control-label">添加人</label>
+            <input type="text" name="UserName" class="form-control input-sm " />
+        </div>
+        <div class="form-group">
+            <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
+        </div>
+    </form>
+</div>
 <div class="search-action" style="margin-top: 30px;">
     <button class="btn btn-default" command-name="add" command-url="@Model.AddItemUrl">新增</button>
 </div>
@@ -93,7 +116,7 @@
                         onFailure: function (response) {
                             if (response.Code == 1) {
                                 se.helper.ajax.request({
-                                    confirmMessage:"该部件已有超限记录存在，请确定是否要删除？",
+                                    confirmMessage: "该部件已有超限记录存在，请确定是否要删除？",
                                     container: container,
                                     url: "/Equipment/PartDelete",
                                     model: { Id: model.Id },

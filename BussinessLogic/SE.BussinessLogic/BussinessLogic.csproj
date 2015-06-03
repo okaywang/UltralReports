@@ -50,6 +50,7 @@
     <Compile Include="Base\BussinessLogicBase.cs" />
     <Compile Include="Entities\AccountSearchCriteria.cs" />
     <Compile Include="Entities\UltraRecordSearchCriteria.cs" />
+    <Compile Include="Entities\PartSearchCriteria.cs" />
     <Compile Include="Entities\UltraSummary.cs" />
     <Compile Include="Entities\SmsLogSearchCriteria.cs" />
     <Compile Include="MajorBussinessLogic.cs" />

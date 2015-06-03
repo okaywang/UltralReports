@@ -142,13 +142,14 @@ namespace Website.Controllers
             return View(model);
         }
 
-        public PartialViewResult PartList()
+        public PartialViewResult PartList(PartSearchCriteria criteria)
         {
-            var entities = _bllEquipment.PartGetAll();
+            var entities = _bllEquipment.PartSearch(criteria);
 
-            var items = Mapper.Map<List<Part>, List<PartListItemModel>>(entities);
+            var items = Mapper.Map<PagedList<Part>, PartListItemModel[]>(entities);
             var model = new PagedModel<PartListItemModel>();
             model.Items = items.ToArray();
+            model.PagingResult = entities.PagingResult;
             return PartialView("_CommonList", model);
         }
 
@@ -185,7 +186,7 @@ namespace Website.Controllers
         public JsonResult TryPartDelete(int id)
         {
             var entity = _bllEquipment.PartGet(id);
-            
+
             if (entity.UltraRecords.Any())
             {
                 return Json(new ResultModel(false, "该部件有超限记录存在，请确定是否要删除？") { Code = 1 });

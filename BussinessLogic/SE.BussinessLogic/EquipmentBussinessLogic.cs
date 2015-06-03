@@ -82,6 +82,38 @@ namespace BussinessLogic
             return _partRepository.Table.Where(predicate).ToList();
         }
 
+        public PagedList<Part> PartSearch(PartSearchCriteria criteria)
+        {
+            if (criteria.OrderByFields.Count == 0)
+            {
+                criteria.OrderByFields.Add(new OrderByField<Part>(i => i.Id, SortOrder.Descending));
+            }
+            if (criteria.PagingRequest == null)
+            {
+                criteria.PagingRequest = new PagingRequest(0, int.MaxValue);
+            }
+            var query = _partRepository.Table;
+            if (criteria.MachineSet.HasValue)
+            {
+                query = query.Where(i => i.Equipment.MachineSet == criteria.MachineSet.Value);
+            }
+            if (!string.IsNullOrEmpty(criteria.EquipmentName))
+            {
+                query = query.Where(i => i.Equipment.Name.Contains(criteria.EquipmentName));
+            }
+            if (!string.IsNullOrEmpty(criteria.PartName))
+            {
+                query = query.Where(i => i.Name.Contains(criteria.PartName));
+            }
+            if (!string.IsNullOrEmpty(criteria.UserName))
+            {
+                query = query.Where(i => i.FAAccount.Name.Contains(criteria.UserName));
+            }
+            query = query.OrderBy<Part>(criteria.OrderByFields);
+            var result = new PagedList<Part>(query, criteria.PagingRequest.PageIndex, criteria.PagingRequest.PageSize);
+            return result;
+        }
+
         public PartSms PartSmsGet(int partId)
         {
             return _partSmsRepository.Get(partId);
