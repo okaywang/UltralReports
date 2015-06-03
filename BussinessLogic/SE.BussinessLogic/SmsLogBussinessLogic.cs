@@ -14,7 +14,38 @@ namespace BussinessLogic
         public SmsLogBussinessLogic(EfRepository<SmsLog> repository)
             : base(repository)
         {
+            //string conn = @"Data Source=mas;User Id=foaapp;Password=foaapp;";
+            //OracleConnection oc = new OracleConnection(conn);
+
+            //try
+            //{
+            //    oc.Open();
+            //    //OracleCommand 被标注为已过时
+            //    OracleCommand cmd = oc.CreateCommand();
+            //    cmd.CommandText = "select * from message where to_char(sendertime,'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')";
+            //    OracleDataReader odr = cmd.ExecuteReader();
+            //    while (odr.Read())
+            //    {
+            //        Console.WriteLine(odr.GetOracleDateTime(0).ToString());
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
+            //finally
+            //{
+            //    oc.Close();
+            //}
+
         }
+
+//SELECT distinct SenderTime FADateTime,FlowID GroupName,TaskID SmsType,Context Content
+//FROM Message 
+//WHERE  SenderID = '超限报警' 
+//      and to_char(SenderTime,'yyyy-mm-dd')>='2015-06-01'
+//      and to_char(SenderTime,'yyyy-mm-dd')>='2015-06-02'
+//order by SenderTime asc;
 
         public PagedList<SmsLog> Search(SmsLogSearchCriteria criteria)
         {
