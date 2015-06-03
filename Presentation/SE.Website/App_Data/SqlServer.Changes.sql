@@ -51,8 +51,7 @@ Create table SmsLog
 )
 
 
+alter table PartSms drop constraint FK__PartSms__PartId__4AB81AF0 
 
-alter table PartSms drop constraint FK__PartSms__PartId__45F365D3 
-
-alter table PartSms add constraint FK__PartSms__PartId__45F365D3
+alter table PartSms add constraint FK__PartSms__PartId__4AB81AF0
      foreign key (PartId) references Part on delete CASCADE
