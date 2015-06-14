@@ -32,11 +32,7 @@ namespace Website.Controllers
 
         public PartialViewResult List(SmsLogSearchCriteria criteria)
         {
-            var entities = _bllSms.Search(criteria);
-            var items = Mapper.Map<PagedList<SmsLog>, SmsLogListItemModel[]>(entities);
-            var model = new PagedModel<SmsLogListItemModel>();
-            model.Items = items;
-            model.PagingResult = entities.PagingResult;
+            var model = _bllSms.Search(criteria);
             return PartialView("_CommonList", model);
         }
     }

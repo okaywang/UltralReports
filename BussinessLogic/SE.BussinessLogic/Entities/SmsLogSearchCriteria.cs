@@ -14,4 +14,12 @@ namespace BussinessLogic
 
         public DateTime? EndTime { get; set; }
     }
+
+    public class SmsLogItem
+    {
+        public DateTime FADateTime { get; set; }
+        public string GroupName { get; set; }
+        public string Content { get; set; }
+        public int SmsType { get; set; }
+    }
 }

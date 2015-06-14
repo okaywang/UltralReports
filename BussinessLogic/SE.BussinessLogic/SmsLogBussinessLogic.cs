@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using System;
 using System.Collections.Generic;
+using System.Data.OracleClient;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -14,40 +15,77 @@ namespace BussinessLogic
         public SmsLogBussinessLogic(EfRepository<SmsLog> repository)
             : base(repository)
         {
-            //string conn = @"Data Source=mas;User Id=foaapp;Password=foaapp;";
-            //OracleConnection oc = new OracleConnection(conn);
-
-            //try
-            //{
-            //    oc.Open();
-            //    //OracleCommand 被标注为已过时
-            //    OracleCommand cmd = oc.CreateCommand();
-            //    cmd.CommandText = "select * from message where to_char(sendertime,'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')";
-            //    OracleDataReader odr = cmd.ExecuteReader();
-            //    while (odr.Read())
-            //    {
-            //        Console.WriteLine(odr.GetOracleDateTime(0).ToString());
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
-            //finally
-            //{
-            //    oc.Close();
-            //}
 
         }
 
-//SELECT distinct SenderTime FADateTime,FlowID GroupName,TaskID SmsType,Context Content
-//FROM Message 
-//WHERE  SenderID = '超限报警' 
-//      and to_char(SenderTime,'yyyy-mm-dd')>='2015-06-01'
-//      and to_char(SenderTime,'yyyy-mm-dd')>='2015-06-02'
-//order by SenderTime asc;
+        //SELECT distinct SenderTime FADateTime,FlowID GroupName,TaskID SmsType,Context Content
+        //FROM Message 
+        //WHERE  SenderID = '超限报警' 
+        //      and to_char(SenderTime,'yyyy-mm-dd')>='2015-06-01'
+        //      and to_char(SenderTime,'yyyy-mm-dd')>='2015-06-02'
+        //order by SenderTime asc;
 
-        public PagedList<SmsLog> Search(SmsLogSearchCriteria criteria)
+        public PagedList<SmsLogItem> Search(SmsLogSearchCriteria criteria)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("select rownum RowIndex,FADateTime,GroupName,SmsType,Content from");
+            sb.AppendLine("(");
+            sb.AppendLine(@"SELECT distinct SenderTime FADateTime,FlowID GroupName,TaskID SmsType,Context Content
+                            FROM Message 
+                            WHERE  SenderID = '超限报警' ");
+            sb.AppendLine("and to_char(SenderTime,'yyyy-mm-dd')>='2015-06-01'");
+            sb.AppendLine("and to_char(SenderTime,'yyyy-mm-dd')>='2015-06-02'");
+            sb.AppendLine("order by SenderTime asc");
+            sb.Append(")a");
+            var sql = sb.ToString();
+
+            var sb1 = new StringBuilder("with tmpTable as");
+            sb1.AppendLine("(");
+            sb1.AppendLine(sql);
+            sb1.AppendLine(")");
+            sb1.AppendFormat("select * from tmpTable where RowIndex between {0} and {1}", criteria.PagingRequest.PageIndex * criteria.PagingRequest.PageSize + 1, (criteria.PagingRequest.PageIndex + 1) * criteria.PagingRequest.PageSize);
+
+            var sql1 = sb1.ToString();
+
+            var sb2 = new StringBuilder("with tmpTable2 as");
+            sb2.AppendLine("(");
+            sb2.AppendLine(sql);
+            sb2.AppendLine(")");
+            sb2.AppendLine("select COUNT(*) from tmpTable2");
+
+            var sql2 = sb2.ToString();
+
+            var result = new PagedList<SmsLogItem>();
+            result.PagingResult = new WebExpress.Core.Paging.PagingResult(criteria.PagingRequest.PageIndex, criteria.PagingRequest.PageSize);
+
+
+            string cnstr = @"Data Source=mas;User Id=foaapp;Password=foaapp;";
+            using (var cn = new OracleConnection(cnstr))
+            { 
+                using (var cm = new OracleCommand(string.Empty, cn))
+                {
+                    cm.CommandText = sql1;
+                    var reader = cm.ExecuteReader();
+                    var items = new List<SmsLogItem>();
+                    while (reader.Read())
+                    {
+                        var item = new SmsLogItem();
+                        item.Content = reader["Content"].ToString();
+                        item.FADateTime = Convert.ToDateTime(reader["FADateTime"]);
+                        item.GroupName = reader["GroupName"].ToString();
+                        item.SmsType = Convert.ToInt32(reader["SmsType"]); 
+                        items.Add(item);
+                    }
+                    result.AddRange(items);
+
+                    cm.CommandText = sql2;
+                    result.PagingResult.TotalCount = Convert.ToInt32(cm.ExecuteScalar());
+                }
+            }
+            return result;
+        }
+
+        public PagedList<SmsLog> Search2(SmsLogSearchCriteria criteria)
         {
             if (criteria.OrderByFields.Count == 0)
             {
