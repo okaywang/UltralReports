@@ -84,5 +84,32 @@ CREATE TABLE [dbo].[RtMonthData](
 	[Value] [decimal](18, 0) NULL,
 	[remark] [nvarchar](50) NULL,
 )
+alter table [RtMonthData]
+	add constraint FK_PointId_RtPoints foreign key (PointId) references RtPoints
+
+CREATE TABLE [dbo].[RtDayData](
+	[Id] [int] IDENTITY(1,1) NOT NULL Primary Key,
+	[DayTime] [date] NOT NULL,
+	[PointId] [int] NOT NULL,
+	[Value] [decimal](18, 2) NULL,
+	[Remark] [nvarchar](50) NULL
+) 
+
+alter table [RtDayData]
+	add constraint FK_PointId foreign key (PointId) references RtPoints
 
 
+
+declare @month int = 1
+declare @i int = 1;
+while @month <=6
+begin
+	set @i = 1
+	while @i <= 86
+	begin
+		insert into RtMonthData([year],[month],pointId,value) values(2015,@month,@i,ROUND( RAND() * 100,2))
+		set @i = @i + 1
+	end
+	set @month = @month + 1
+end
+ 
