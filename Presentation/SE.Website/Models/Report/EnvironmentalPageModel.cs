@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Common.Types;
 
 namespace Website.Models
 {
     public class EnvironmentalPageModel
     {
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public MachineSetType MachineSet { get; set; }
         public EnvironmentalListItemModel[] Items { get; set; }
     }
 

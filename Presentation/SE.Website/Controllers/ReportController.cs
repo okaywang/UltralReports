@@ -44,7 +44,7 @@ namespace Website.Controllers
             var obj = bindingContext.ValueProvider.GetValue("Date");
             if (obj == null)
             {
-                return DateTime.Now.Year;
+                return DateTime.Now.Month;
             }
             var val = obj.AttemptedValue;
             var items = val.Split('-');
@@ -83,10 +83,13 @@ namespace Website.Controllers
             return View(model);
         }
 
-        public ActionResult EnvironmentalIndex(MachineSetType machineSet, [ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month)
+        public ActionResult EnvironmentalIndex([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month, MachineSetType machineSet = MachineSetType.MachineSet1)
         {
             var entiteis = _bllDayData.Where(i => i.RtPoint.MachNO == (int)machineSet && i.DayTime.Year == year && i.DayTime.Month == month).ToList();
             var model = new EnvironmentalPageModel();
+            model.Year = year;
+            model.Month = month;
+            model.MachineSet = machineSet;
             var days = DateTime.DaysInMonth(year, month);
             model.Items = new EnvironmentalListItemModel[days];
             for (int i = 1; i <= days; i++)
@@ -128,7 +131,7 @@ namespace Website.Controllers
                     }
                 }
 
-                model.Items[i] = item;
+                model.Items[i - 1] = item;
             }
             return View(model);
         }

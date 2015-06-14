@@ -16,11 +16,11 @@
 }
 
 <div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
-    <form class="form-inline" role="form">
+    <form class="form-inline" action="/Report/EnvironmentalIndex" role="form">
         <div class="form-group">
             <label class="control-label">开始时间</label>
             <div class="input-group date">
-                <input type="text" name="StartTime" class="form-control input-sm datetime" />
+                <input type="text" name="Date" class="form-control input-sm datetime" value="@string.Format("{0}-{1}",Model.Year,Model.Month)" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -28,10 +28,10 @@
         </div>
         <div class="form-group">
             <label class="control-label">机组</label>
-            @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource().Where(i => i.Value != ((int)MachineSetType.MachineSet3).ToString()).ToArray(), SelectedValue = "" }.Render())
+            @Html.Raw(new NativeSelect("MachineSet", true, false) { EmptyPair = null, Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource().Where(i => i.Value != ((int)MachineSetType.MachineSet3).ToString()).ToArray(), SelectedValue = ((int)Model.MachineSet).ToString() }.Render())
         </div>
         <div class="form-group">
-            <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
+            <button type="submit" role="search" class="btn btn-primary btn-sm">查询</button>
         </div>
     </form>
 </div>
@@ -58,7 +58,6 @@
             <tbody>
                 @foreach (var item in Model.Items)
                 {
-
                     <tr>
                         <td>@(item.Day)日</td>
                         <td>统计计算点</td>
@@ -76,19 +75,22 @@
                     </tr>
                 }
                 <tr>
+                    @{
+                        var days = DateTime.DaysInMonth(Model.Year, Model.Month);
+                    }
                     <td>月平均</td>
                     <td>月平均</td>
                     <td>月平均</td>
                     <td>月平均</td>
                     <td>月平均</td>
-                    <td>@Model.Items.Average(i => i.Col_1A脱硝率)</td>
-                    <td>@Model.Items.Average(i => i.Col_1B脱硝率)</td>
-                    <td>@Model.Items.Average(i => i.Col_1机综合脱硝率)</td>
+                    <td>@(((Model.Items.Sum(i => i.Col_1A脱硝率) ?? 0 )/ days).ToString("0.00"))</td>
+                    <td>@(((Model.Items.Sum(i => i.Col_1B脱硝率) ?? 0) / days).ToString("0.00"))</td>
+                    <td>@(((Model.Items.Sum(i => i.Col_1机综合脱硝率) ?? 0) / days).ToString("0.00"))</td>
                     <td>月平均</td>
                     <td>月平均</td>
-                    <td>@Model.Items.Average(i => i.Col_1机NOx排放)</td>
-                    <td>@Model.Items.Average(i => i.Col_1机SO2排放)</td>
-                    <td>@Model.Items.Average(i => i.Col_1机粉尘排放)</td>
+                    <td>@(((Model.Items.Sum(i => i.Col_1机NOx排放) ?? 0) / days).ToString("0.00"))</td>
+                    <td>@(((Model.Items.Sum(i => i.Col_1机SO2排放) ?? 0 )/ days).ToString("0.00"))</td>
+                    <td>@(((Model.Items.Sum(i => i.Col_1机粉尘排放) ?? 0) / days).ToString("0.00"))</td>
                 </tr>
             </tbody>
         </table>

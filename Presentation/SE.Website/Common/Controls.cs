@@ -104,7 +104,10 @@ namespace Website.Common
                 sb.Append(" disabled");
             }
             sb.Append(">");
-            sb.AppendFormat("<option value='{0}'>{1}</option>", this.EmptyPair.Value, this.EmptyPair.Name);
+            if (this.EmptyPair != null)
+            {
+                sb.AppendFormat("<option value='{0}'>{1}</option>", this.EmptyPair.Value, this.EmptyPair.Name);
+            }
             if (Source != null)
             {
                 foreach (var pair in Source)
