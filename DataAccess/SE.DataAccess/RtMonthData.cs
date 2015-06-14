@@ -19,6 +19,8 @@ namespace DataAccess
         public int Month { get; set; }
         public int PointId { get; set; }
         public Nullable<decimal> Value { get; set; }
-        public string remark { get; set; }
+        public string Remark { get; set; }
+    
+        public virtual RtPoint RtPoint { get; set; }
     }
 }

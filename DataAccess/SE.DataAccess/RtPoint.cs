@@ -14,6 +14,11 @@ namespace DataAccess
     
     public partial class RtPoint
     {
+        public RtPoint()
+        {
+            this.RtMonthDatas = new HashSet<RtMonthData>();
+        }
+    
         public int Id { get; set; }
         public string PointName { get; set; }
         public string Position { get; set; }
@@ -21,5 +26,7 @@ namespace DataAccess
         public int MachNO { get; set; }
         public string Description { get; set; }
         public string Unit { get; set; }
+    
+        public virtual ICollection<RtMonthData> RtMonthDatas { get; set; }
     }
 }

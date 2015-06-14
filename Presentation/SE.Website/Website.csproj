@@ -186,6 +186,7 @@
     <Compile Include="Models\Common\ValueTextModel.cs" />
     <Compile Include="Models\Duty\DutyModel.cs" />
     <Compile Include="Models\Equipment\EquipmentModel.cs" />
+    <Compile Include="Models\Report\EconomicPageModel.cs" />
     <Compile Include="Models\Report\ReportModel.cs" />
     <Compile Include="Models\Sms\SmsRecipientModel.cs" />
     <Compile Include="Models\Sms\SmsGroupModel.cs" />

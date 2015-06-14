@@ -38,6 +38,7 @@
         <EntityTypeShape EntityType="UltralReportsModel.RtMonthData" Width="1.5" PointX="9.375" PointY="6.75" />
         <EntityTypeShape EntityType="UltralReportsModel.RtMonthTime" Width="1.5" PointX="7.375" PointY="9.75" />
         <EntityTypeShape EntityType="UltralReportsModel.RtPoint" Width="1.5" PointX="9.375" PointY="9.75" />
+        <AssociationConnector Association="UltralReportsModel.FK_PointId_RtPoints" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

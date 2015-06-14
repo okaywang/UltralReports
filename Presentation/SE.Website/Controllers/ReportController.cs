@@ -13,17 +13,71 @@ using Website.Models;
 
 namespace Website.Controllers
 {
+    public class YearModelBinder : DefaultModelBinder
+    {
+        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            var obj = bindingContext.ValueProvider.GetValue("Date");
+            if (obj == null)
+            {
+                return DateTime.Now.Year;
+            }
+            var val = obj.AttemptedValue;
+            var items = val.Split('-');
+            if (items.Length == 0)
+            {
+                return null;
+            }
+            int result;
+            if (!int.TryParse(items[0], out result))
+            {
+                return null;
+            }
+            return result;
+        }
+    }
+    public class MonthModelBinder : DefaultModelBinder
+    {
+        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            var obj = bindingContext.ValueProvider.GetValue("Date");
+            if (obj == null)
+            {
+                return DateTime.Now.Year;
+            }
+            var val = obj.AttemptedValue;
+            var items = val.Split('-');
+            if (items.Length < 2)
+            {
+                return null;
+            }
+            int result;
+            if (!int.TryParse(items[1], out result))
+            {
+                return null;
+            }
+            return result;
+        }
+    }
     [Authorize]
     public class ReportController : Controller
     {
         private BussinessLogicBase<RtMonthTime> _bllGap;
-        public ReportController(BussinessLogicBase<RtMonthTime> bllGap)
+        private BussinessLogicBase<RtMonthData> _bllMonthData;
+        public ReportController(BussinessLogicBase<RtMonthTime> bllGap, BussinessLogicBase<RtMonthData> bllMonthData)
         {
             _bllGap = bllGap;
+            _bllMonthData = bllMonthData;
         }
-        public ActionResult EconomicIndex()
+
+        public ActionResult EconomicIndex([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month)
         {
-            return View();
+            var entities = _bllMonthData.Where(i => i.Year == year && i.Month == month);
+            var items = entities.ToDictionary(i => i.RtPoint.PointName, i => i.Value);
+            var model = new EconomicPageModel(items);
+            model.Year = year;
+            model.Month = month;
+            return View(model);
         }
 
         public ActionResult EnvironmentalIndex()
@@ -62,7 +116,7 @@ namespace Website.Controllers
         {
             var entity = _bllGap.Get(model.Id);
             entity.StartTime = model.StartTime;
-            entity.EndTime = model.EndTime; 
+            entity.EndTime = model.EndTime;
             _bllGap.Update(entity);
             return Json(new ResultModel(true));
         }

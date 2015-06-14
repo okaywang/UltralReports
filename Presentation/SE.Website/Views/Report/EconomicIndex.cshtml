@@ -1,26 +1,33 @@
-﻿@{
+﻿@model EconomicPageModel
+@{
     ViewBag.Title = "经济指标报表";
 }
 @section styles{
     <style>
-        .search-result-table table th { width: 100px; background-image: url(""); }
-        .search-result-table table tr td:first-child { background-color: #efefef; }
+        .search-result-table table th {
+            width: 100px;
+            background-image: url("");
+        }
+
+        .search-result-table table tr td:first-child {
+            background-color: #efefef;
+        }
     </style>
 }
 
 <div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
-    <form class="form-inline" role="form">
+    <form class="form-inline" role="form" action="/Report/EconomicIndex">
         <div class="form-group">
-            <label class="control-label">开始时间</label>
+            <label class="control-label">时间</label>
             <div class="input-group date">
-                <input type="text" name="StartTime" class="form-control input-sm datetime" />
+                <input type="text" name="Date" class="form-control input-sm datetime" value="@string.Format("{0}-{1}",Model.Year,Model.Month)" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
         </div>
         <div class="form-group">
-            <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
+            <button type="submit" role="search" class="btn btn-primary btn-sm">查询</button>
         </div>
     </form>
 </div>
@@ -74,45 +81,45 @@
                 </tr>
                 <tr>
                     <td>#1机组</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
+                    <td>@Model["Fysis.U1DCSAI.C0328"]</td>
+                    <td>@Model["Fysis.U1DCSAI.C1344"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A2053"]</td>
+                    <td>@Model["Fysis.CALC.A1001"]</td>
+                    <td>@Model["Fysis.CALC.A1002"]</td>
+                    <td>@Model["Fysis.CALC.A1003"]</td>
+                    <td>@Model["Fysis.CALC.A1004"]</td>
+                    <td>@Model["Fysis.CALC.A1005"]</td>
+                    <td>@Model["Fysis.CALC.A1006"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0353"]</td>
+                    <td>@Model["Fysis.CALC.A1007"]</td>
+                    <td>@Model["Fysis.CALC.A1008"]</td>
+                    <td>@Model["Fysis.CALC.A1009"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0072"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0349"]</td>
+                    <td>@Model["Fysis.CALC.A1010"]</td>
+                    <td>@Model["Fysis.CALC.A1011"]</td>
+                    <td>@Model["Fysis.CALC.C1001"]</td>
                 </tr>
                 <tr>
                     <td>#2机组</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
+                    <td>@Model["Fysis.U2DCSAI.C0328"]</td>
+                    <td>@Model["Fysis.U2DCSAI.C1344"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A2053"]</td>
+                    <td>@Model["Fysis.CALC.A2001"]</td>
+                    <td>@Model["Fysis.CALC.A2002"]</td>
+                    <td>@Model["Fysis.CALC.A2003"]</td>
+                    <td>@Model["Fysis.CALC.A2004"]</td>
+                    <td>@Model["Fysis.CALC.A2005"]</td>
+                    <td>@Model["Fysis.CALC.A2006"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0353"]</td>
+                    <td>@Model["Fysis.CALC.A2007"]</td>
+                    <td>@Model["Fysis.CALC.A2008"]</td>
+                    <td>@Model["Fysis.CALC.A2009"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0072"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0349"]</td>
+                    <td>@Model["Fysis.CALC.A2010"]</td>
+                    <td>@Model["Fysis.CALC.A2011"]</td>
+                    <td>@Model["Fysis.CALC.C2001"]</td>
                 </tr>
             </tbody>
 
@@ -159,41 +166,41 @@
                 </tr>
                 <tr>
                     <td>#1机组</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
+                    <td>@Model["Fysis.CALC.A1012"]</td>
+                    <td>@Model["Fysis.CALC.A1013"]</td>
+                    <td>@Model["Fysis.U1DCSAI.G1301"]</td>
+                    <td>@Model["Fysis.U1DCSAI.C1329"]</td>
+                    <td>@Model["Fysis.U1DCSAI.G1305"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0037 "]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0058"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0039"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0073"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0058 "]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0324"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0325"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0326"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0027 "]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0038"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0004"]</td>
                 </tr>
                 <tr>
                     <td>#2机组</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
+                    <td>@Model["Fysis.CALC.A2012"]</td>
+                    <td>@Model["Fysis.CALC.A2013"]</td>
+                    <td>@Model["Fysis.U2DCSAI.G1301"]</td>
+                    <td>@Model["Fysis.U2DCSAI.C1329"]</td>
+                    <td>@Model["Fysis.U2DCSAI.G1305"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0037 "]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0058"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0039"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0073"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0058 "]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0324"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0325"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0326"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0027 "]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0038"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0004"]</td>
                 </tr>
             </tbody>
 
@@ -226,27 +233,27 @@
                 </tr>
                 <tr>
                     <td>#1机组</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
+                    <td>@Model["Fysis.U1DCSAI.A0043"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0044 "]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0045"]</td>
+                    <td>@Model["Fysis.CALC.A1014"]</td>
+                    <td>@Model["Fysis.U1DCSAI.A0725"]</td>
+                    <td>@Model["Fysis.CALC.A1015"]</td>
+                    <td>@Model["Fysis.CALC.A1016 "]</td>
+                    <td>@Model["Fysis.TLOPCRTS.MCS02B:HBZS.RO01"]</td>
+                    <td>@Model["Fysis.TLOPCRTS.MCS02B:HBZS.RO03"]</td>
                 </tr>
                 <tr>
                     <td>#2机组</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
+                    <td>@Model["Fysis.U2DCSAI.A0043"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0044 "]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0045"]</td>
+                    <td>@Model["Fysis.CALC.A2014"]</td>
+                    <td>@Model["Fysis.U2DCSAI.A0725"]</td>
+                    <td>@Model["Fysis.CALC.A2015"]</td>
+                    <td>@Model["Fysis.CALC.A2016 "]</td>
+                    <td>@Model["Fysis.TLOPCRTS.MCS04B:HBZS.RO01"]</td>
+                    <td>@Model["Fysis.TLOPCRTS.MCS04B:HBZS.RO03"]</td>
                 </tr>
             </tbody>
         </table>
@@ -269,6 +276,9 @@
         $(function () {
             $(".date .form-control").datetimepicker({
                 format: 'YYYY-MM',
+
+            });
+            $("[role=search]").click(function () {
 
             });
         });

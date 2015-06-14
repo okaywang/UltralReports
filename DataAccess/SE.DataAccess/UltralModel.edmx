@@ -143,7 +143,7 @@
           <Property Name="Month" Type="int" Nullable="false" />
           <Property Name="PointId" Type="int" Nullable="false" />
           <Property Name="Value" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="remark" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="RtMonthTime">
           <Key>
@@ -384,6 +384,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PointId_RtPoints">
+          <End Role="RtPoints" Type="Self.RtPoints" Multiplicity="1" />
+          <End Role="RtMonthData" Type="Self.RtMonthData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RtPoints">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RtMonthData">
+              <PropertyRef Name="PointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="UltralReportsModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountAuthority" EntityType="Self.AccountAuthority" Schema="dbo" store:Type="Tables" />
@@ -459,6 +471,10 @@
           <AssociationSet Name="FK__UltraRecord__Part" Association="Self.FK__UltraRecord__Part">
             <End Role="Part" EntitySet="Part" />
             <End Role="UltraRecord" EntitySet="UltraRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PointId_RtPoints" Association="Self.FK_PointId_RtPoints">
+            <End Role="RtPoints" EntitySet="RtPoints" />
+            <End Role="RtMonthData" EntitySet="RtMonthData" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -540,7 +556,11 @@
           </AssociationSet>
           <EntitySet Name="RtMonthDatas" EntityType="UltralReportsModel.RtMonthData" />
           <EntitySet Name="RtMonthTimes" EntityType="UltralReportsModel.RtMonthTime" />
-          <EntitySet Name="RtPoints" EntityType="UltralReportsModel.RtPoint" /> 
+          <EntitySet Name="RtPoints" EntityType="UltralReportsModel.RtPoint" />
+          <AssociationSet Name="FK_PointId_RtPoints" Association="UltralReportsModel.FK_PointId_RtPoints">
+            <End Role="RtPoint" EntitySet="RtPoints" />
+            <End Role="RtMonthData" EntitySet="RtMonthDatas" />
+          </AssociationSet> 
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -927,7 +947,8 @@
           <Property Name="Month" Type="Int32" Nullable="false" />
           <Property Name="PointId" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RtPoint" Relationship="UltralReportsModel.FK_PointId_RtPoints" FromRole="RtMonthData" ToRole="RtPoint" />
         </EntityType>
         <EntityType Name="RtMonthTime">
           <Key>
@@ -950,7 +971,20 @@
           <Property Name="MachNO" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType> 
+          <NavigationProperty Name="RtMonthDatas" Relationship="UltralReportsModel.FK_PointId_RtPoints" FromRole="RtPoint" ToRole="RtMonthData" />
+        </EntityType>
+        <Association Name="FK_PointId_RtPoints">
+          <End Type="UltralReportsModel.RtPoint" Role="RtPoint" Multiplicity="1" />
+          <End Type="UltralReportsModel.RtMonthData" Role="RtMonthData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RtPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RtMonthData">
+              <PropertyRef Name="PointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association> 
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1150,7 +1184,7 @@
           <EntitySetMapping Name="RtMonthDatas">
             <EntityTypeMapping TypeName="UltralReportsModel.RtMonthData">
               <MappingFragment StoreEntitySet="RtMonthData">
-                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="PointId" ColumnName="PointId" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
