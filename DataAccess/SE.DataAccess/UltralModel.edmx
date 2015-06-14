@@ -134,6 +134,16 @@
           <Property Name="HRecover" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="LRecover" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
+        <EntityType Name="RtDayData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DayTime" Type="date" Nullable="false" />
+          <Property Name="PointId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="RtMonthData">
           <Key>
             <PropertyRef Name="Id" />
@@ -384,6 +394,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PointId">
+          <End Role="RtPoints" Type="Self.RtPoints" Multiplicity="1" />
+          <End Role="RtDayData" Type="Self.RtDayData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RtPoints">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RtDayData">
+              <PropertyRef Name="PointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PointId_RtPoints">
           <End Role="RtPoints" Type="Self.RtPoints" Multiplicity="1" />
           <End Role="RtMonthData" Type="Self.RtMonthData" Multiplicity="*" />
@@ -409,6 +431,7 @@
           <EntitySet Name="MonitorType" EntityType="Self.MonitorType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Part" EntityType="Self.Part" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PartSms" EntityType="Self.PartSms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RtDayData" EntityType="Self.RtDayData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RtMonthData" EntityType="Self.RtMonthData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RtMonthTime" EntityType="Self.RtMonthTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RtPoints" EntityType="Self.RtPoints" Schema="dbo" store:Type="Tables" />
@@ -471,6 +494,10 @@
           <AssociationSet Name="FK__UltraRecord__Part" Association="Self.FK__UltraRecord__Part">
             <End Role="Part" EntitySet="Part" />
             <End Role="UltraRecord" EntitySet="UltraRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PointId" Association="Self.FK_PointId">
+            <End Role="RtPoints" EntitySet="RtPoints" />
+            <End Role="RtDayData" EntitySet="RtDayData" />
           </AssociationSet>
           <AssociationSet Name="FK_PointId_RtPoints" Association="Self.FK_PointId_RtPoints">
             <End Role="RtPoints" EntitySet="RtPoints" />
@@ -560,6 +587,11 @@
           <AssociationSet Name="FK_PointId_RtPoints" Association="UltralReportsModel.FK_PointId_RtPoints">
             <End Role="RtPoint" EntitySet="RtPoints" />
             <End Role="RtMonthData" EntitySet="RtMonthDatas" />
+          </AssociationSet>
+          <EntitySet Name="RtDayDatas" EntityType="UltralReportsModel.RtDayData" />
+          <AssociationSet Name="FK_PointId" Association="UltralReportsModel.FK_PointId">
+            <End Role="RtPoint" EntitySet="RtPoints" />
+            <End Role="RtDayData" EntitySet="RtDayDatas" />
           </AssociationSet> 
         </EntityContainer>
         <EntityType Name="Account">
@@ -972,6 +1004,7 @@
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RtMonthDatas" Relationship="UltralReportsModel.FK_PointId_RtPoints" FromRole="RtPoint" ToRole="RtMonthData" />
+          <NavigationProperty Name="RtDayDatas" Relationship="UltralReportsModel.FK_PointId" FromRole="RtPoint" ToRole="RtDayData" />
         </EntityType>
         <Association Name="FK_PointId_RtPoints">
           <End Type="UltralReportsModel.RtPoint" Role="RtPoint" Multiplicity="1" />
@@ -981,6 +1014,29 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="RtMonthData">
+              <PropertyRef Name="PointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RtDayData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DayTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PointId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RtPoint" Relationship="UltralReportsModel.FK_PointId" FromRole="RtDayData" ToRole="RtPoint" />
+        </EntityType>
+        <Association Name="FK_PointId">
+          <End Type="UltralReportsModel.RtPoint" Role="RtPoint" Multiplicity="1" />
+          <End Type="UltralReportsModel.RtDayData" Role="RtDayData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RtPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RtDayData">
               <PropertyRef Name="PointId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1213,6 +1269,17 @@
                 <ScalarProperty Name="TableType" ColumnName="TableType" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="PointName" ColumnName="PointName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RtDayDatas">
+            <EntityTypeMapping TypeName="UltralReportsModel.RtDayData">
+              <MappingFragment StoreEntitySet="RtDayData">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="PointId" ColumnName="PointId" />
+                <ScalarProperty Name="DayTime" ColumnName="DayTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

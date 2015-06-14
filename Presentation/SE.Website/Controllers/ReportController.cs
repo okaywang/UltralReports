@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BussinessLogic;
 using BussinessLogic.Entities;
+using Common.Types;
 using DataAccess;
 using System;
 using System.Collections.Generic;
@@ -64,10 +65,12 @@ namespace Website.Controllers
     {
         private BussinessLogicBase<RtMonthTime> _bllGap;
         private BussinessLogicBase<RtMonthData> _bllMonthData;
-        public ReportController(BussinessLogicBase<RtMonthTime> bllGap, BussinessLogicBase<RtMonthData> bllMonthData)
+        private BussinessLogicBase<RtDayData> _bllDayData;
+        public ReportController(BussinessLogicBase<RtMonthTime> bllGap, BussinessLogicBase<RtMonthData> bllMonthData, BussinessLogicBase<RtDayData> bllDayData)
         {
             _bllGap = bllGap;
             _bllMonthData = bllMonthData;
+            _bllDayData = bllDayData;
         }
 
         public ActionResult EconomicIndex([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month)
@@ -80,9 +83,54 @@ namespace Website.Controllers
             return View(model);
         }
 
-        public ActionResult EnvironmentalIndex()
+        public ActionResult EnvironmentalIndex(MachineSetType machineSet, [ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month)
         {
-            return View();
+            var entiteis = _bllDayData.Where(i => i.RtPoint.MachNO == (int)machineSet && i.DayTime.Year == year && i.DayTime.Month == month).ToList();
+            var model = new EnvironmentalPageModel();
+            var days = DateTime.DaysInMonth(year, month);
+            model.Items = new EnvironmentalListItemModel[days];
+            for (int i = 1; i <= days; i++)
+            {
+                var item = new EnvironmentalListItemModel();
+                item.Day = i;
+                var dayEntities = entiteis.Where(p => p.DayTime.Day == i).ToList();
+                if (dayEntities.Any())
+                {
+                    var tmp1 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.U1DCSAI.G1308");
+                    if (tmp1 != null)
+                    {
+                        item.Col_1A脱硝率 = tmp1.Value;
+                    }
+                    var tmp2 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.U1DCSAI.G1310");
+                    if (tmp2 != null)
+                    {
+                        item.Col_1B脱硝率 = tmp2.Value;
+                    }
+                    var tmp3 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.CALC.C1002");
+                    if (tmp3 != null)
+                    {
+                        item.Col_1机综合脱硝率 = tmp3.Value;
+                    }
+                    var tmp4 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.TLOPCRTS.MCS02B:HBZS.RO0");
+                    if (tmp4 != null)
+                    {
+                        item.Col_1机NOx排放 = tmp4.Value;
+                    }
+                    var tmp5 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.TLOPCRTS.MCS02B:HBZS.RO01");
+                    if (tmp5 != null)
+                    {
+                        item.Col_1机SO2排放 = tmp5.Value;
+                    }
+                    var tmp6 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.TLOPCRTS.MCS02B:HBZS.RO03");
+                    if (tmp6 != null)
+                    {
+                        item.Col_1机粉尘排放 = tmp6.Value;
+                    }
+                }
+
+                model.Items[i] = item;
+            }
+            return View(model);
         }
 
         public ActionResult GapIndex()

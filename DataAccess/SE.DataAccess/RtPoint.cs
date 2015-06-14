@@ -17,6 +17,7 @@ namespace DataAccess
         public RtPoint()
         {
             this.RtMonthDatas = new HashSet<RtMonthData>();
+            this.RtDayDatas = new HashSet<RtDayData>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,6 @@ namespace DataAccess
         public string Unit { get; set; }
     
         public virtual ICollection<RtMonthData> RtMonthDatas { get; set; }
+        public virtual ICollection<RtDayData> RtDayDatas { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model EnvironmentalPageModel
+@{
     ViewBag.Title = "经济指标报表";
 }
 @section styles{
@@ -24,14 +25,10 @@
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
-        </div>        
-        <div class="form-group">
-            <label class="control-label">机组</label>
-            @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource(), SelectedValue = "", EmptyPair = new NameValuePair { Name = "全部" } }.Render())
         </div>
         <div class="form-group">
             <label class="control-label">机组</label>
-            @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource().Where(i => i.Value != ((int)MachineSetType.MachineSet3).ToString()).ToArray(), SelectedValue = "", EmptyPair = new NameValuePair { Name = "全部" } }.Render())
+            @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource().Where(i => i.Value != ((int)MachineSetType.MachineSet3).ToString()).ToArray(), SelectedValue = "" }.Render())
         </div>
         <div class="form-group">
             <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
@@ -59,40 +56,39 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 1; i <= 31; i++)
+                @foreach (var item in Model.Items)
                 {
 
                     <tr>
-                        <td>@(i)日</td>
+                        <td>@(item.Day)日</td>
                         <td>统计计算点</td>
                         <td>统计计算点</td>
                         <td>未确定</td>
                         <td>未确定</td>
-                        <td>日平均</td>
-                        <td>日平均</td>
-                        <td>日平均</td>
+                        <td>@item.Col_1A脱硝率</td>
+                        <td>@item.Col_1B脱硝率</td>
+                        <td>@item.Col_1机综合脱硝率</td>
                         <td>统计计算点</td>
                         <td>统计计算点</td>
-                        <td>日平均</td>
-                        <td>日平均</td>
-                        <td>日平均</td>
+                        <td>@item.Col_1机NOx排放</td>
+                        <td>@item.Col_1机SO2排放</td>
+                        <td>@item.Col_1机粉尘排放</td>
                     </tr>
                 }
-
                 <tr>
                     <td>月平均</td>
                     <td>月平均</td>
                     <td>月平均</td>
                     <td>月平均</td>
                     <td>月平均</td>
+                    <td>@Model.Items.Average(i => i.Col_1A脱硝率)</td>
+                    <td>@Model.Items.Average(i => i.Col_1B脱硝率)</td>
+                    <td>@Model.Items.Average(i => i.Col_1机综合脱硝率)</td>
                     <td>月平均</td>
                     <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
-                    <td>月平均</td>
+                    <td>@Model.Items.Average(i => i.Col_1机NOx排放)</td>
+                    <td>@Model.Items.Average(i => i.Col_1机SO2排放)</td>
+                    <td>@Model.Items.Average(i => i.Col_1机粉尘排放)</td>
                 </tr>
             </tbody>
         </table>
@@ -105,17 +101,9 @@
     <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
     <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
     <script>
-
-        //var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
-        //    url: ''
-        //}));
-        //viewInstance.init();
-
-
         $(function () {
             $(".date .form-control").datetimepicker({
                 format: 'YYYY-MM',
-
             });
         });
     </script>
