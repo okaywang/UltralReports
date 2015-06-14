@@ -55,3 +55,34 @@ alter table PartSms drop constraint FK__PartSms__PartId__4AB81AF0
 
 alter table PartSms add constraint FK__PartSms__PartId__4AB81AF0
      foreign key (PartId) references Part on delete CASCADE
+
+
+CREATE TABLE [dbo].[RtMonthTime](
+	[Id] [int] IDENTITY(1,1) NOT NULL Primary Key,
+	[Year] [int] NOT NULL,
+	[Month] [int] NOT NULL,
+	[StartTime] [smalldatetime] NOT NULL,
+	[EndTime] [smalldatetime] NOT NULL
+)
+
+ 
+CREATE TABLE [dbo].[RtPoints](
+	[Id] [int] IDENTITY(1,1) NOT NULL Primary Key,
+	[PointName] [nvarchar](50) NOT NULL,
+	[Position] [nvarchar](50) NOT NULL,
+	[TableType] [int] NOT NULL,
+	[MachNO] [int] NOT NULL,
+	[Description] [nvarchar](200) NULL,
+	[Unit] [nvarchar](50) NULL,
+ )
+
+CREATE TABLE [dbo].[RtMonthData](
+	[Id] [int] IDENTITY(1,1) NOT NULL Primary Key,
+	[Year] [int] NOT NULL,
+	[Month] [int] NOT NULL,
+	[PointId] [int] NOT NULL,
+	[Value] [decimal](18, 0) NULL,
+	[remark] [nvarchar](50) NULL,
+)
+
+

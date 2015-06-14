@@ -186,6 +186,7 @@
     <Compile Include="Models\Common\ValueTextModel.cs" />
     <Compile Include="Models\Duty\DutyModel.cs" />
     <Compile Include="Models\Equipment\EquipmentModel.cs" />
+    <Compile Include="Models\Report\ReportModel.cs" />
     <Compile Include="Models\Sms\SmsRecipientModel.cs" />
     <Compile Include="Models\Sms\SmsGroupModel.cs" />
     <Compile Include="Models\Sms\SmsLogModel.cs" />
@@ -485,6 +486,7 @@
     <Content Include="Views\SmsLog\Index.cshtml" />
     <Content Include="Views\Report\EconomicIndex.cshtml" />
     <Content Include="Views\Report\EnvironmentalIndex.cshtml" />
+    <Content Include="Views\Report\GapIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

@@ -1,0 +1,116 @@
+﻿@model GapListPageModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label class="control-label">时间</label>
+            <div class="input-group date">
+                <input type="text" class="form-control input-sm datetime" value="@DateTime.Now.ToString("yyyy-MM")" /> 
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
+        </div>
+    </form>
+</div>
+
+<div class="search-action" style="margin-top: 30px;">
+    <button class="btn btn-default" command-name="add" command-url="@Model.AddItemUrl">新增</button>
+</div>
+<div class="module-add">
+    @Html.Partial("_Modal", new ModalModel<GapAddModel> { Title = "新增停机时间" })
+</div>
+
+<div class="module-update">
+    @Html.Partial("_Modal", new ModalModel<GapUpdateModel> { Title = "编辑停机时间" })
+</div>
+
+<div class="search-result table-responsive" style="margin-top: 10px;">
+</div>
+
+@section scripts{
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
+    <script>
+        $(function () {
+            $(".search-criteria .date .form-control").datetimepicker({
+                format: 'YYYY-MM'
+            });
+
+            $(".module-add .date .form-control,.module-update .date .form-control").datetimepicker({
+                format: 'YYYY-MM-DD HH:mm'
+            });
+        });
+
+        var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+            url: '@Model.RequestListUrl',
+            getCriteriaModel: function () {
+                var criteria = {}; 
+                var ym = $(".search-criteria .date .form-control").data("date");
+                criteria.Year = ym.split("-")[0];
+                criteria.Month = ym.split("-")[1];
+                return criteria;
+            },
+            modules: {
+                add: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-add .modal") })),
+                update: new se.ui.module.Dialog(new se.ui.module.Dialog.Settings({ container: $(".module-update .modal") }))
+            },
+            viewCommands: {
+                add: function () {
+                    var ym = $(".search-criteria .date .form-control").data("date");
+                    var year = ym.split("-")[0];
+                    var month = ym.split("-")[1];
+                    var days = webExpress.utility.date.daysInMonth(year, month);
+
+                    $(".module-add .date .form-control").each(function (index, elem) {
+                        var control = $(elem).data("DateTimePicker");
+                        control.minDate(ym + "-01");
+                        control.maxDate(ym + "-" + days);
+                    });                   
+                     
+                    viewInstance.modules.add.dialog.show();
+                    viewInstance.modules.add.bindModel({});
+                }
+            },
+            rowCommands: {
+                update: function (model) {
+                    var ym = model.StartTime;
+                    var year = ym.split("-")[0];
+                    var month = ym.split("-")[1];
+                    var days = webExpress.utility.date.daysInMonth(year, month);
+
+                    $(".module-update .date .form-control").each(function (index, elem) {
+                        var control = $(elem).data("DateTimePicker");
+                        control.minDate(year + "-" + month + "-01");
+                        control.maxDate(year + "-" + month + "-" + days);
+                    });
+
+                    viewInstance.modules.update.dialog.show();
+                    viewInstance.modules.update.bindModel(model);
+                },
+                remove: function (model) {
+                    var container = $(this).closest(".table");
+                    se.helper.ajax.request({
+                        confirmMessage: "您确定删除吗？",
+                        container: container,
+                        url: "/Report/GapRemove",
+                        model: { Id: model.Id },
+                        onSuccess: function () {
+                            viewInstance.refresh();
+                        }
+                    });
+                },
+            }
+        }));
+        viewInstance.init();
+        viewInstance.modules.add.on("saved", function () { viewInstance.refresh(); });
+        viewInstance.modules.update.on("saved", function () { viewInstance.refresh(); });
+    </script>
+}

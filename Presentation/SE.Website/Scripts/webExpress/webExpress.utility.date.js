@@ -9,6 +9,7 @@
         function _init() {
             _self.toDate = toDate;
             _self.toStandardDateString = toStandardDateString;
+            _self.daysInMonth = daysInMonth;
         }
 
         function toDate(dateExpression) {
@@ -27,6 +28,10 @@
             }
             return date.getFullYear() + dateDelimiter + webExpress.utility.string.padLeft((date.getMonth() + 1), 2, "0") + dateDelimiter + webExpress.utility.string.padLeft(date.getDate(), 2, "0");
         };
+
+        function daysInMonth(month, year) {
+            return new Date(year, month, 0).getDate();
+        }
 
         _init();
     }

@@ -12,13 +12,12 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class AccountAuthority
+    public partial class RtMonthTime
     {
         public int Id { get; set; }
-        public int AccountId { get; set; }
-        public int AuthorityId { get; set; }
-    
-        public virtual Account Account { get; set; }
-        public virtual Authority Authority { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public System.DateTime EndTime { get; set; }
     }
 }

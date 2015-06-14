@@ -25,6 +25,12 @@ namespace BussinessLogic
         //      and to_char(SenderTime,'yyyy-mm-dd')>='2015-06-02'
         //order by SenderTime asc;
 
+        /// <summary>
+        /// http://stackoverflow.com/questions/7176252/oracle-ora-12154-error-on-local-iis-but-not-with-visual-studio-development-serv
+        /// http://stackoverflow.com/questions/14486632/asp-net-webapp-ora-12154-tnscould-not-resolve-the-connect-identifier-specifi
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
         public PagedList<SmsLogItem> Search(SmsLogSearchCriteria criteria)
         {
             var sb = new StringBuilder();

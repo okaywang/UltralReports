@@ -267,7 +267,6 @@ namespace Website.Common
         }
     }
 
-
     public class StatisticControl : ControlBase
     {
         private string _name;
@@ -282,7 +281,43 @@ namespace Website.Common
             return string.Format("<p class='form-control-static' name='{0}'></p>", Name);
         }
     }
+     
+    public class BootstrapDateTimePicker : ControlBase
+    {
+        private string _name;
 
+        public BootstrapDateTimePicker(string name) : this(name, true) { }
+        public BootstrapDateTimePicker(string name, bool enabled) : this(name, true, false) { }
+        public BootstrapDateTimePicker(string name, bool enabled, bool required)
+        {
+            _name = name;
+            IsEnabled = enabled;
+            IsRequired = required;
+        }
+
+        public override string Name { get { return _name; } }
+  
+        public override string Render()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("<div class='input-group date'>");
+            sb.AppendFormat("<input class='form-control' type='text' name='{0}' data-bind='value:{0}' ", Name);
+            if (!IsEnabled)
+            {
+                sb.Append(" disabled");
+            }
+            sb.Append("/>");
+            if (!IsEnabled)
+            {
+                sb.AppendFormat("<input type='hidden' name='{0}'>", Name);
+            }
+            sb.AppendLine(@"<span class='input-group-addon'>
+                    <span class='glyphicon glyphicon-calendar'></span>
+                </span>");
+            sb.Append("</div>"); 
+            return sb.ToString();
+        }
+    }
     #endregion
 
 

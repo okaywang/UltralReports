@@ -12,13 +12,13 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class AccountAuthority
+    public partial class RtMonthData
     {
         public int Id { get; set; }
-        public int AccountId { get; set; }
-        public int AuthorityId { get; set; }
-    
-        public virtual Account Account { get; set; }
-        public virtual Authority Authority { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int PointId { get; set; }
+        public Nullable<decimal> Value { get; set; }
+        public string remark { get; set; }
     }
 }

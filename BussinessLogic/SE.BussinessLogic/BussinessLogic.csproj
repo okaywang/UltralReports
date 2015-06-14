@@ -50,6 +50,7 @@
     <Compile Include="AccountBussinessLogic.cs" />
     <Compile Include="Base\BussinessLogicBase.cs" />
     <Compile Include="Entities\AccountSearchCriteria.cs" />
+    <Compile Include="Entities\GapSearchCriteria.cs" />
     <Compile Include="Entities\UltraRecordSearchCriteria.cs" />
     <Compile Include="Entities\PartSearchCriteria.cs" />
     <Compile Include="Entities\UltraSummary.cs" />

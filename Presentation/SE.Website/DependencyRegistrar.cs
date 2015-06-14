@@ -19,6 +19,7 @@ namespace Website
 
             builder.RegisterType<UltralReportsEntities>().As<DbContext>().InstancePerHttpRequest();
             builder.RegisterGeneric(typeof(EfRepository<>)).InstancePerHttpRequest();
+            builder.RegisterGeneric(typeof(BussinessLogicBase<>)).InstancePerHttpRequest();
 
             builder.RegisterType<AccountBussinessLogic>().InstancePerHttpRequest();
             builder.RegisterType<SmsBussinessLogic>().InstancePerHttpRequest();

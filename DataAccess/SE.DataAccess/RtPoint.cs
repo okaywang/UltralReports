@@ -12,13 +12,14 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class AccountAuthority
+    public partial class RtPoint
     {
         public int Id { get; set; }
-        public int AccountId { get; set; }
-        public int AuthorityId { get; set; }
-    
-        public virtual Account Account { get; set; }
-        public virtual Authority Authority { get; set; }
+        public string PointName { get; set; }
+        public string Position { get; set; }
+        public int TableType { get; set; }
+        public int MachNO { get; set; }
+        public string Description { get; set; }
+        public string Unit { get; set; }
     }
 }
