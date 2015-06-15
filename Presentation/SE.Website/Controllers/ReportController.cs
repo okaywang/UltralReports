@@ -108,7 +108,7 @@ namespace Website.Controllers
                 var dayEntities = entiteis.Where(p => p.DayTime.Day == i).ToList();
                 if (dayEntities.Any())
                 {
-                    var machNo = (int)machineSet;
+                    var machNo = (int)machineSet - 1;
                     var tmp1 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == _colPoints[0][machNo]);
                     if (tmp1 != null)
                     {
