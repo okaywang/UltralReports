@@ -99,22 +99,22 @@ namespace Website.Controllers
                 var dayEntities = entiteis.Where(p => p.DayTime.Day == i).ToList();
                 if (dayEntities.Any())
                 {
-                    var tmp1 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.U1DCSAI.G1308");
+                    var tmp1 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.U1DCSAI.G1308");
                     if (tmp1 != null)
                     {
                         item.Col_1A脱硝率 = tmp1.Value;
                     }
-                    var tmp2 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.U1DCSAI.G1310");
+                    var tmp2 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.U1DCSAI.G1310");
                     if (tmp2 != null)
                     {
                         item.Col_1B脱硝率 = tmp2.Value;
                     }
-                    var tmp3 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.CALC.C1002");
+                    var tmp3 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.CALC.C1002");
                     if (tmp3 != null)
                     {
                         item.Col_1机综合脱硝率 = tmp3.Value;
                     }
-                    var tmp4 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.TLOPCRTS.MCS02B:HBZS.RO0");
+                    var tmp4 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.TLOPCRTS.MCS02B:HBZS.RO0");
                     if (tmp4 != null)
                     {
                         item.Col_1机NOx排放 = tmp4.Value;
@@ -124,7 +124,7 @@ namespace Website.Controllers
                     {
                         item.Col_1机SO2排放 = tmp5.Value;
                     }
-                    var tmp6 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.TLOPCRTS.MCS02B:HBZS.RO03");
+                    var tmp6 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == "Fysis.TLOPCRTS.MCS02B:HBZS.RO03");
                     if (tmp6 != null)
                     {
                         item.Col_1机粉尘排放 = tmp6.Value;
