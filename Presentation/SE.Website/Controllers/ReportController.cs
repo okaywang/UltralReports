@@ -77,9 +77,9 @@ namespace Website.Controllers
             _colPoints.Add(0, new[] { "Fysis.U1DCSAI.G1308", "Fysis.U2DCSAI.G1308" });
             _colPoints.Add(1, new[] { "Fysis.U1DCSAI.G1310", "Fysis.U2DCSAI.G1310" });
             _colPoints.Add(2, new[] { "Fysis.CALC.C1002", "Fysis.CALC.C2002" });
-            _colPoints.Add(3, new[] { "Fysis.TLOPCRTS.MCS02B:HBZS.RO0", "Fysis.TLOPCRTS.MCS04B:HBZS.RO0" });
-            _colPoints.Add(4, new[] { "Fysis.TLOPCRTS.MCS02B:HBZS.RO01", "Fysis.TLOPCRTS.MCS04B:HBZS.RO01" });
-            _colPoints.Add(5, new[] { "Fysis.TLOPCRTS.MCS02B:HBZS.RO03", "Fysis.TLOPCRTS.MCS04B:HBZS.RO03" });
+            _colPoints.Add(3, new[] { "Fysis.TLOPCRTS.TLAIO536", "Fysis.TLOPCRTS.TLAIO538" });
+            _colPoints.Add(4, new[] { "Fysis.TLOPCRTS.TLAIO535", "Fysis.TLOPCRTS.TLAIO539" });
+            _colPoints.Add(5, new[] { "Fysis.TLOPCRTS.TLAIO537", "Fysis.TLOPCRTS.TLAIO540" });
         }
 
         public ActionResult EconomicIndex([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month)
