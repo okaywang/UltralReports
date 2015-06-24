@@ -129,7 +129,7 @@ namespace Website.Controllers
                     {
                         item.Col_1机NOx排放 = tmp4.Value;
                     }
-                    var tmp5 = entiteis.SingleOrDefault(p => p.RtPoint.PointName == _colPoints[4][machNo]);
+                    var tmp5 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == _colPoints[4][machNo]);
                     if (tmp5 != null)
                     {
                         item.Col_1机SO2排放 = tmp5.Value;
