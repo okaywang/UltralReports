@@ -18,11 +18,23 @@ namespace Website.Models
     {
         public int Day { get; set; }
 
+        public decimal? Col_1A投入小时 { get; set; }
+
+        public decimal? Col_1B投入小时 { get; set; }
+
+        public decimal? Col_A侧液氨量 { get; set; }
+
+        public decimal? Col_B侧液氨量 { get; set; }
+
         public decimal? Col_1A脱硝率 { get; set; }
 
         public decimal? Col_1B脱硝率 { get; set; }
 
         public decimal? Col_1机综合脱硝率 { get; set; }
+
+        public decimal? Col_1A投入率 { get; set; }
+
+        public decimal? Col_1B投入率 { get; set; }
 
         public decimal? Col_1机NOx排放 { get; set; }
 

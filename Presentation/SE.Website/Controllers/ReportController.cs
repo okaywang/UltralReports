@@ -68,18 +68,21 @@ namespace Website.Controllers
         private BussinessLogicBase<RtMonthTime> _bllGap;
         private BussinessLogicBase<RtMonthData> _bllMonthData;
         private BussinessLogicBase<RtDayData> _bllDayData;
-        public ReportController(BussinessLogicBase<RtMonthTime> bllGap, BussinessLogicBase<RtMonthData> bllMonthData, BussinessLogicBase<RtDayData> bllDayData)
+        private BussinessLogicBase<RtPoint> _bllPoints;
+        public ReportController(BussinessLogicBase<RtMonthTime> bllGap, BussinessLogicBase<RtMonthData> bllMonthData, BussinessLogicBase<RtDayData> bllDayData, BussinessLogicBase<RtPoint> bllPoints)
         {
             _bllGap = bllGap;
             _bllMonthData = bllMonthData;
             _bllDayData = bllDayData;
+            _bllPoints = bllPoints;
 
-            _colPoints.Add(0, new[] { "Fysis.U1DCSAI.G1308", "Fysis.U2DCSAI.G1308" });
-            _colPoints.Add(1, new[] { "Fysis.U1DCSAI.G1310", "Fysis.U2DCSAI.G1310" });
-            _colPoints.Add(2, new[] { "Fysis.CALC.C1002", "Fysis.CALC.C2002" });
-            _colPoints.Add(3, new[] { "Fysis.TLOPCRTS.TLAIO536", "Fysis.TLOPCRTS.TLAIO538" });
-            _colPoints.Add(4, new[] { "Fysis.TLOPCRTS.TLAIO535", "Fysis.TLOPCRTS.TLAIO539" });
-            _colPoints.Add(5, new[] { "Fysis.TLOPCRTS.TLAIO537", "Fysis.TLOPCRTS.TLAIO540" });
+            //_colPoints.Add(0, new[] { "Fysis.U1DCSAI.G1308", "Fysis.U2DCSAI.G1308" });
+            //_colPoints.Add(1, new[] { "Fysis.U1DCSAI.G1310", "Fysis.U2DCSAI.G1310" });
+            //_colPoints.Add(2, new[] { "Fysis.CALC.C1002", "Fysis.CALC.C2002" });
+            //_colPoints.Add(3, new[] { "Fysis.TLOPCRTS.TLAIO536", "Fysis.TLOPCRTS.TLAIO538" });
+            //_colPoints.Add(4, new[] { "Fysis.TLOPCRTS.TLAIO535", "Fysis.TLOPCRTS.TLAIO539" });
+            //_colPoints.Add(5, new[] { "Fysis.TLOPCRTS.TLAIO537", "Fysis.TLOPCRTS.TLAIO540" });
+
         }
 
         public ActionResult EconomicIndex([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month)
@@ -95,6 +98,7 @@ namespace Website.Controllers
         public ActionResult EnvironmentalIndex([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month, MachineSetType machineSet = MachineSetType.MachineSet1)
         {
             var entiteis = _bllDayData.Where(i => i.RtPoint.MachNO == (int)machineSet && i.DayTime.Year == year && i.DayTime.Month == month).ToList();
+            var points = _bllPoints.Where(i => new[] { 2, 3, 4 }.Contains(i.TableType)).ToList();
             var model = new EnvironmentalPageModel();
             model.Year = year;
             model.Month = month;
@@ -109,35 +113,66 @@ namespace Website.Controllers
                 if (dayEntities.Any())
                 {
                     var machNo = (int)machineSet - 1;
-                    var tmp1 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == _colPoints[0][machNo]);
-                    if (tmp1 != null)
+                    RtDayData data;
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "1");
+                    if (data != null)
                     {
-                        item.Col_1A脱硝率 = tmp1.Value;
+                        item.Col_1A投入小时 = data.Value;
                     }
-                    var tmp2 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == _colPoints[1][machNo]);
-                    if (tmp2 != null)
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "2");
+                    if (data != null)
                     {
-                        item.Col_1B脱硝率 = tmp2.Value;
+                        item.Col_1B投入小时 = data.Value;
                     }
-                    var tmp3 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == _colPoints[2][machNo]);
-                    if (tmp3 != null)
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "3");
+                    if (data != null)
                     {
-                        item.Col_1机综合脱硝率 = tmp3.Value;
+                        item.Col_A侧液氨量 = data.Value;
                     }
-                    var tmp4 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == _colPoints[3][machNo]);
-                    if (tmp4 != null)
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "4");
+                    if (data != null)
                     {
-                        item.Col_1机NOx排放 = tmp4.Value;
+                        item.Col_B侧液氨量 = data.Value;
                     }
-                    var tmp5 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == _colPoints[4][machNo]);
-                    if (tmp5 != null)
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "5");
+                    if (data != null)
                     {
-                        item.Col_1机SO2排放 = tmp5.Value;
+                        item.Col_1A脱硝率 = data.Value;
                     }
-                    var tmp6 = dayEntities.SingleOrDefault(p => p.RtPoint.PointName == _colPoints[5][machNo]);
-                    if (tmp6 != null)
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "6");
+                    if (data != null)
                     {
-                        item.Col_1机粉尘排放 = tmp6.Value;
+                        item.Col_1B脱硝率 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "7");
+                    if (data != null)
+                    {
+                        item.Col_1机综合脱硝率 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "8");
+                    if (data != null)
+                    {
+                        item.Col_1A投入率 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "9");
+                    if (data != null)
+                    {
+                        item.Col_1B投入率 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "10");
+                    if (data != null)
+                    {
+                        item.Col_1机NOx排放 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "11");
+                    if (data != null)
+                    {
+                        item.Col_1机SO2排放 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "12");
+                    if (data != null)
+                    {
+                        item.Col_1机粉尘排放 = data.Value;
                     }
                 }
 
