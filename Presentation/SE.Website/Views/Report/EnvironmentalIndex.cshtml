@@ -78,6 +78,7 @@
                     @{
                         var days = DateTime.DaysInMonth(Model.Year, Model.Month);
                     }
+                    <td>月平均</td>
                     <td>@(((Model.Items.Sum(i => i.Col_1A投入小时) ?? 0) / days).ToString("0.00"))</td>
                     <td>@(((Model.Items.Sum(i => i.Col_1B投入小时) ?? 0) / days).ToString("0.00"))</td>
                     <td>@(((Model.Items.Sum(i => i.Col_A侧液氨量) ?? 0) / days).ToString("0.00"))</td>
