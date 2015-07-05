@@ -19,6 +19,7 @@ namespace DataAccess
         public string Content { get; set; }
         public decimal HRecover { get; set; }
         public decimal LRecover { get; set; }
+        public int UltraNum { get; set; }
     
         public virtual Part Part { get; set; }
         public virtual SmsGroup SmsGroup { get; set; }

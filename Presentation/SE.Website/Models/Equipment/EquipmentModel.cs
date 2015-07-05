@@ -249,16 +249,16 @@ namespace Website.Models
         [DisplayName("低3限")]
         public decimal? L3 { get; set; }
 
-        [Required]
-        [DisplayName("是否发短信")]
-        [ControlType(typeof(NativeRadios))]
-        [SimpleSourceAttribute("发送-true", "不发送-false")]
-        public bool SendSms { get; set; }
+        //[Required]
+        //[DisplayName("是否发短信")]
+        //[ControlType(typeof(NativeRadios))]
+        //[SimpleSourceAttribute("发送-true", "不发送-false")]
+        //public bool SendSms { get; set; }
 
-        [RequiredIf("SendSms", true, ":radio:eq(0):checked")]
-        //[RequiredIf("SendSms", true, ".module-add")]
-        [DisplayName("短信超限次数")]
-        public int? UltraNum { get; set; }
+        //[RequiredIf("SendSms", true, ":radio:eq(0):checked")]
+        ////[RequiredIf("SendSms", true, ".module-add")]
+        //[DisplayName("短信超限次数")]
+        //public int? UltraNum { get; set; }
     }
 
     [RequestUrl("/Equipment/PartUpdate")]
@@ -310,16 +310,16 @@ namespace Website.Models
         [DisplayName("低3限")]
         public decimal? L3 { get; set; }
 
-        [Required]
-        [DisplayName("是否发短信")]
-        [ControlType(typeof(NativeRadios))]
-        [SimpleSourceAttribute("发送-true", "不发送-false")]
-        public bool SendSms { get; set; }
+        //[Required]
+        //[DisplayName("是否发短信")]
+        //[ControlType(typeof(NativeRadios))]
+        //[SimpleSourceAttribute("发送-true", "不发送-false")]
+        //public bool SendSms { get; set; }
 
         //[Required]
-        [DisplayName("短信超限次数")]
-        [RequiredIf("SendSms", true, ":radio:eq(2):checked")]
-        public int? UltraNum { get; set; }
+        //[DisplayName("短信超限次数")]
+        //[RequiredIf("SendSms", true, ":radio:eq(2):checked")]
+        //public int? UltraNum { get; set; }
     }
 
     [RequestUrl("/Equipment/PartSmsEdit")]
@@ -327,6 +327,10 @@ namespace Website.Models
     {
         [ControlType(typeof(NativeInputHidden))]
         public int PartId { get; set; }
+
+        [Required]
+        [DisplayName("短信超限次数")]
+        public int UltraNum { get; set; }
 
         [Required]
         [DisplayName("短信接收组")]
@@ -394,11 +398,15 @@ namespace Website.Models
         [DisplayName("修改人")]
         public string UpdateUser { get; set; }
 
-        [DisplayName("状态")] 
+        [DisplayName("短信")]
+        [ValueConvertor(typeof(SmsValueConvertor))]
+        public bool SendSms { get; set; }
+
+        [DisplayName("状态")]
         [ValueConvertor(typeof(BooleanValueConvertor))]
         public bool Enabled { get; set; }
 
-        public bool SendSms { get; set; }
+        //public bool SendSms { get; set; }
 
         public int? UltraNum { get; set; }
 
@@ -410,7 +418,7 @@ namespace Website.Models
             {
                 return new IListItemCommand[]
                 {   
-                    new ListItemCommand("state", "状态修改", "/Equipment/PartState"), 
+                    //new ListItemCommand("state", "状态修改", "/Equipment/PartState"), 
                     new ListItemCommand("update", "编辑", "/Equipment/PartUpdate"), 
                     new ListItemCommand("remove","删除","/Equipment/PartRemove") , 
                     new ListItemCommand("sms", "短信设置", "/Equipment/PartSms")
@@ -428,9 +436,18 @@ namespace Website.Models
         public object Convert(object obj)
         {
             var model = obj as PartListItemModel;
-            return model.Enabled ? "<span class='label label-success'>启用</span>" : "<span class='label label-default'>停用</span>";
+            return model.Enabled ? "<span style='cursor:pointer' command-name='state' class='label label-success'>启用</span>" : "<span style='cursor:pointer' command-name='state' class='label label-default'>停用</span>";
         }
     }
+    public class SmsValueConvertor : IValueConvertor
+    {
+        public object Convert(object obj)
+        {
+            var model = obj as PartListItemModel;
+            return model.SendSms ? "<span style='cursor:pointer' command-name='smsSwitch' class='label label-success'>发送</span>" : "<span style='cursor:pointer' command-name='smsSwitch' class='label label-default'>不发送</span>";
+        }
+    }
+
     #endregion
 
     #region Pro Part

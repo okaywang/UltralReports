@@ -175,20 +175,35 @@ namespace Website.Controllers
             entity.H1 = model.H1;
             entity.H2 = model.H2;
             entity.H3 = model.H3;
-            entity.SendSms = model.SendSms;
-            entity.UltraNum = model.UltraNum;
+            //entity.SendSms = model.SendSms;
+            //entity.UltraNum = model.UltraNum;
             entity.LCUserId = UserContext.Current.Id;
             entity.LCDateTime = DateTime.Now;
             _bllEquipment.PartUpdate(entity);
             return Json(new ResultModel(true));
         }
         public JsonResult PartState(int id)
-        { 
+        {
             var entity = _bllEquipment.PartGet(id);
             entity.Enabled = !entity.Enabled;
             _bllEquipment.PartUpdate(entity);
             return Json(new ResultModel(true));
         }
+        public JsonResult PartSmsSwitch(int id)
+        {
+            var entity = _bllEquipment.PartGet(id);
+            entity.SendSms = !entity.SendSms;
+            if (entity.SendSms)
+            {
+                if (entity.PartSm == null)
+                {
+                    return Json(new ResultModel(false, "请先进行短信设置"));
+                }
+            }
+            _bllEquipment.PartUpdate(entity);
+            return Json(new ResultModel(true));
+        }
+
         public JsonResult TryPartDelete(int id)
         {
             var entity = _bllEquipment.PartGet(id);
@@ -218,7 +233,9 @@ namespace Website.Controllers
         [HttpPost]
         public JsonResult PartSmsEdit(PartSmsEditModel model)
         {
-            var sms = _bllEquipment.PartSmsGet(model.PartId);
+            var part = _bllEquipment.PartGet(model.PartId);
+            part.UltraNum = model.UltraNum;
+            var sms = part.PartSm;
             if (sms == null)
             {
                 var entity = Mapper.Map<PartSmsEditModel, PartSms>(model);
@@ -226,6 +243,7 @@ namespace Website.Controllers
             }
             else
             {
+                sms.UltraNum = model.UltraNum;
                 sms.GroupId = model.GroupId;
                 sms.Content = model.Content;
                 sms.HRecover = model.HRecover;

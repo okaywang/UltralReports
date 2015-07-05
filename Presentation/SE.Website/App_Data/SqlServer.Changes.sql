@@ -114,3 +114,5 @@ begin
 end
  
  alter table Part add [Enabled] bit not null default(1)
+
+ alter table PartSms add UltraNum int not null default(0)

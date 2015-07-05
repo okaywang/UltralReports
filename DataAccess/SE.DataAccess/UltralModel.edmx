@@ -134,6 +134,7 @@
           <Property Name="Content" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="HRecover" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="LRecover" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="UltraNum" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RtDayData">
           <Key>
@@ -822,6 +823,7 @@
           <Property Name="LRecover" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <NavigationProperty Name="Part" Relationship="UltralReportsModel.FK__PartSms__PartId__5FB337D6" FromRole="PartSm" ToRole="Part" />
           <NavigationProperty Name="SmsGroup" Relationship="UltralReportsModel.FK__PartSms__GroupId__46E78A0C" FromRole="PartSms" ToRole="SmsGroup" />
+          <Property Name="UltraNum" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK__PartSms__PartId__5FB337D6">
           <End Type="UltralReportsModel.Part" Role="Part" Multiplicity="1" />
@@ -1184,6 +1186,7 @@
           <EntitySetMapping Name="PartSms1">
             <EntityTypeMapping TypeName="UltralReportsModel.PartSms">
               <MappingFragment StoreEntitySet="PartSms">
+                <ScalarProperty Name="UltraNum" ColumnName="UltraNum" />
                 <ScalarProperty Name="LRecover" ColumnName="LRecover" />
                 <ScalarProperty Name="HRecover" ColumnName="HRecover" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
