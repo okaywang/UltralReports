@@ -39,6 +39,7 @@ namespace DataAccess
         public int FAUserId { get; set; }
         public Nullable<System.DateTime> LCDateTime { get; set; }
         public Nullable<int> LCUserId { get; set; }
+        public bool Enabled { get; set; }
     
         public virtual Equipment Equipment { get; set; }
         public virtual Major Major { get; set; }

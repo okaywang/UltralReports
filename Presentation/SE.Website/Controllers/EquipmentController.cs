@@ -182,7 +182,13 @@ namespace Website.Controllers
             _bllEquipment.PartUpdate(entity);
             return Json(new ResultModel(true));
         }
-
+        public JsonResult PartState(int id)
+        { 
+            var entity = _bllEquipment.PartGet(id);
+            entity.Enabled = !entity.Enabled;
+            _bllEquipment.PartUpdate(entity);
+            return Json(new ResultModel(true));
+        }
         public JsonResult TryPartDelete(int id)
         {
             var entity = _bllEquipment.PartGet(id);

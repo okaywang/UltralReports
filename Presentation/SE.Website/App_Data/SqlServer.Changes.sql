@@ -113,3 +113,4 @@ begin
 	set @month = @month + 1
 end
  
+ alter table Part add [Enabled] bit not null default(1)

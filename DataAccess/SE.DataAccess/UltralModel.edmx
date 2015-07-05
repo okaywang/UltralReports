@@ -123,6 +123,7 @@
           <Property Name="FAUserId" Type="int" Nullable="false" />
           <Property Name="LCDateTime" Type="datetime" />
           <Property Name="LCUserId" Type="int" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PartSms">
           <Key>
@@ -743,6 +744,7 @@
           <Property Name="LCUserId" Type="Int32" />
           <NavigationProperty Name="FAAccount" Relationship="UltralReportsModel.FK__Part__FAUserId__5441852A" FromRole="Part" ToRole="Account" />
           <NavigationProperty Name="LCAccount" Relationship="UltralReportsModel.FK__Part__LCUserId__5535A963" FromRole="Part" ToRole="Account" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__Part__EquipmentI__3B75D760">
           <End Type="UltralReportsModel.Equipment" Role="Equipment" Multiplicity="1" />
@@ -1127,6 +1129,7 @@
           <EntitySetMapping Name="Part">
             <EntityTypeMapping TypeName="UltralReportsModel.Part">
               <MappingFragment StoreEntitySet="Part">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="LCUserId" ColumnName="LCUserId" />
                 <ScalarProperty Name="LCDateTime" ColumnName="LCDateTime" />
                 <ScalarProperty Name="FAUserId" ColumnName="FAUserId" />

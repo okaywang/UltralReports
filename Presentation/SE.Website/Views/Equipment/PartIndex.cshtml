@@ -103,6 +103,18 @@
                         viewInstance.modules.update.bindModel(model);
                     });
                 },
+                state: function (model) {
+                    var container = $(this).closest(".table");
+                    se.helper.ajax.request({
+                        confirmMessage: "您确定修改 " + model.Name + " 的状态吗？",
+                        container: container,
+                        url: "/Equipment/PartState",
+                        model: { Id: model.Id },
+                        onSuccess: function (response) {
+                            viewInstance.refresh();
+                        }
+                    });
+                },
                 remove: function (model) {
                     var container = $(this).closest(".table");
                     se.helper.ajax.request({

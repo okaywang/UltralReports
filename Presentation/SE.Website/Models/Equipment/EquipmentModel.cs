@@ -394,6 +394,10 @@ namespace Website.Models
         [DisplayName("修改人")]
         public string UpdateUser { get; set; }
 
+        [DisplayName("状态")] 
+        [ValueConvertor(typeof(BooleanValueConvertor))]
+        public bool Enabled { get; set; }
+
         public bool SendSms { get; set; }
 
         public int? UltraNum { get; set; }
@@ -405,7 +409,8 @@ namespace Website.Models
             get
             {
                 return new IListItemCommand[]
-                { 
+                {   
+                    new ListItemCommand("state", "状态修改", "/Equipment/PartState"), 
                     new ListItemCommand("update", "编辑", "/Equipment/PartUpdate"), 
                     new ListItemCommand("remove","删除","/Equipment/PartRemove") , 
                     new ListItemCommand("sms", "短信设置", "/Equipment/PartSms")
@@ -416,6 +421,14 @@ namespace Website.Models
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);
+        }
+    }
+    public class BooleanValueConvertor : IValueConvertor
+    {
+        public object Convert(object obj)
+        {
+            var model = obj as PartListItemModel;
+            return model.Enabled ? "<span class='label label-success'>启用</span>" : "<span class='label label-default'>停用</span>";
         }
     }
     #endregion
