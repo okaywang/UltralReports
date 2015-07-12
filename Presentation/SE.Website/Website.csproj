@@ -157,6 +157,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DutyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndicatorController.cs" />
     <Compile Include="Controllers\MajorController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Models\Common\ValueTextModel.cs" />
     <Compile Include="Models\Duty\DutyModel.cs" />
     <Compile Include="Models\Equipment\EquipmentModel.cs" />
+    <Compile Include="Models\Indicator\IndicatorModel.cs" />
     <Compile Include="Models\Report\EnvironmentalPageModel.cs" />
     <Compile Include="Models\Report\EconomicPageModel.cs" />
     <Compile Include="Models\Report\ReportModel.cs" />
@@ -489,6 +491,8 @@
     <Content Include="Views\Report\EconomicIndex.cshtml" />
     <Content Include="Views\Report\EnvironmentalIndex.cshtml" />
     <Content Include="Views\Report\GapIndex.cshtml" />
+    <Content Include="Views\Indicator\Weight.cshtml" />
+    <Content Include="Views\Indicator\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

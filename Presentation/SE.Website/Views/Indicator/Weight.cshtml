@@ -1,0 +1,60 @@
+﻿@model IndicatorItemModel[]
+@{
+    ViewBag.Title = "指标权重配置";
+}
+    
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>指标名称</th>
+            <th>权重</th>
+            <th>生效时间</th>
+        </tr>
+    </thead>
+    <tbody>
+            @for (int i = 0; i < Model.Length; i++)
+            {
+                var item = Model[i];
+                <tr>
+                    <td>@item.Name</td>
+                    <td style="width:40%"><input type="text" class="form-control input-sm " value="@item.Weight"></td>
+                    <td style="width:40%">
+                        <div class="input-group date">
+                            <input type="text" class="form-control input-sm datetime" value="@item.EffectiveTime.ToString("yyyy-MM-dd")">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+    </tbody>
+</table>
+<div>
+    <button class="btn btn-primary" type="button" id="dutyTime">保存</button>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
+    <script>
+
+        //var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+        //    url: ''
+        //}));
+        //viewInstance.init();
+
+
+        $(function () {
+            $(".date .form-control").datetimepicker({
+                format: 'YYYY-MM-DD',
+
+            });
+            $("[role=search]").click(function () {
+
+            });
+        });
+    </script>
+}

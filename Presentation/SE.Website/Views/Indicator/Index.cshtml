@@ -1,0 +1,381 @@
+﻿@{
+    ViewBag.Title = "小指标单项得分明细";
+}
+@section styles{
+    <style>
+        .search-result-table table th {
+            width: 100px;
+            background-image: url("");
+        }
+         
+    </style>
+}
+
+<div class="search-criteria" style="padding: 20px 0; border-bottom: 1px dotted #e2e2e2">
+    <form class="form-inline" role="form" action="/Report/EconomicIndex">
+        <div class="form-group">
+            <label class="control-label">开始时间</label>
+            <div class="input-group date">
+                <input type="text" name="Date" class="form-control input-sm datetime" value="" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">结束时间</label>
+            <div class="input-group date">
+                <input type="text" name="Date" class="form-control input-sm datetime" value="" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" role="search" class="btn btn-primary btn-sm">查询</button>
+        </div>
+    </form>
+</div>
+<div class="search-result table-responsive" style="margin-top: 10px;">
+    <div class="search-result-table">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>值次</th>
+                    <th colspan="2">#1机主汽温越限</th>
+                    <th colspan="2">#1机再热汽温越限</th>
+                    <th colspan="2">#1机主汽温限内偏差</th>
+                    <th colspan="2">#1机再热汽温限内偏差</th>
+                    <th colspan="2">#1机排烟损失</th>
+                    <th colspan="2">#1机管壁超温</th>
+                    <th colspan="2">#1机氨单耗</th>
+                    <th colspan="2">综合厂用电率</th>
+                    <th colspan="2">#1负荷完成率</th>
+                    <th>掺烧率</th>
+                    <th>积分</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>权重</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">20（5-20）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">20（10-20）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th></th>
+                    <th>#1机</th>
+                    <th>值际</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>一值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>58.50</td>
+                    <td>60.33</td>
+                    <td>156.60</td>
+                </tr>
+                <tr>
+                    <td>二值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>58.50</td>
+                    <td>60.33</td>
+                    <td>156.60</td>
+                </tr>
+                <tr>
+                    <td>三值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>58.50</td>
+                    <td>60.33</td>
+                    <td>156.60</td>
+                </tr>
+                <tr>
+                    <td>四值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>58.50</td>
+                    <td>60.33</td>
+                    <td>156.60</td>
+                </tr>
+                <tr>
+                    <td>五值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>58.50</td>
+                    <td>60.33</td>
+                    <td>156.60</td>
+                </tr>
+                <tr>
+                    <td colspan="22"></td> 
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>值次</th>
+                    <th colspan="2">#2机主汽温越限</th>
+                    <th colspan="2">#2机再热汽温越限</th>
+                    <th colspan="2">#2机主汽温限内偏差</th>
+                    <th colspan="2">#2机再热汽温限内偏差</th>
+                    <th colspan="2">#2机排烟损失</th>
+                    <th colspan="2">#2机管壁超温</th>
+                    <th colspan="2">#2机氨单耗</th>
+                    <th colspan="2">全厂负荷完成率</th>
+                    <th colspan="2">#2负荷完成率</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>权重</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">20（5-20）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th colspan="2">20（10-20）</th>
+                    <th colspan="2">10（3-10）</th>
+                    <th></th>
+                    <th>#2机</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>一值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td></td>
+                    <td>60.33</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>二值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td></td>
+                    <td>60.33</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>三值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td></td>
+                    <td>60.33</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>四值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td></td>
+                    <td>60.33</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>五值</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td>1838.52</td>
+                    <td>6.72</td>
+                    <td></td>
+                    <td>60.33</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/views/base/se.ui.view.SearchViewBase.js"></script>
+    <script>
+
+        //var viewInstance = new se.ui.view.SearchViewBase(new se.ui.view.SearchViewBase.Settings({
+        //    url: ''
+        //}));
+        //viewInstance.init();
+
+
+        $(function () {
+            $(".date .form-control").datetimepicker({
+                format: 'YYYY-MM-DD',
+
+            });
+            $("[role=search]").click(function () {
+
+            });
+        });
+    </script>
+}
