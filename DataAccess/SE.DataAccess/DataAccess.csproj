@@ -69,6 +69,15 @@
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IRepository.cs" />
+    <Compile Include="KPIData.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KPIItem.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KPIWeight.cs">
+      <DependentUpon>UltralModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LogException.cs">
       <DependentUpon>UltralModel.tt</DependentUpon>
     </Compile>

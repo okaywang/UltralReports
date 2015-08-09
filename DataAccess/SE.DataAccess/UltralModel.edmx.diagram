@@ -41,6 +41,9 @@
         <AssociationConnector Association="UltralReportsModel.FK_PointId_RtPoints" />
         <EntityTypeShape EntityType="UltralReportsModel.RtDayData" Width="1.5" PointX="11.625" PointY="10" />
         <AssociationConnector Association="UltralReportsModel.FK_PointId" />
+        <EntityTypeShape EntityType="UltralReportsModel.KPIData" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="UltralReportsModel.KPIItem" Width="1.5" PointX="11.375" PointY="3.75" />
+        <EntityTypeShape EntityType="UltralReportsModel.KPIWeight" Width="1.5" PointX="4.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

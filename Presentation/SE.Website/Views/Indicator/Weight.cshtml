@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "指标权重配置";
 }
-    
+
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -12,27 +12,27 @@
         </tr>
     </thead>
     <tbody>
-            @for (int i = 0; i < Model.Length; i++)
-            {
-                var item = Model[i];
-                <tr>
-                    <td>@item.Name</td>
-                    <td style="width:40%"><input type="text" class="form-control input-sm " value="@item.Weight"></td>
-                    <td style="width:40%">
-                        <div class="input-group date">
-                            <input type="text" class="form-control input-sm datetime" value="@item.EffectiveTime.ToString("yyyy-MM-dd")">
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-            }
+        @for (int i = 0; i < Model.Length; i++)
+        {
+            var item = Model[i];
+            <tr class="kpi-item" itemtype="@item.ItemType">
+                <td>@item.Name</td>
+                <td style="width:40%"><input type="text" class="form-control input-sm weight" ></td>
+                <td style="width:40%">
+                    <div class="input-group date">
+                        <input type="text" class="form-control input-sm datetime" >
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        }
 
     </tbody>
 </table>
 <div>
-    <button class="btn btn-primary" type="button" id="dutyTime">保存</button>
+    <button class="btn btn-primary" type="button" id="save">保存</button>
 </div>
 
 @section scripts{
@@ -49,11 +49,31 @@
 
         $(function () {
             $(".date .form-control").datetimepicker({
-                format: 'YYYY-MM-DD',
-
+                format: 'YYYY-MM-DD'
             });
-            $("[role=search]").click(function () {
-
+            $("#save").click(function () {
+                var data = $.makeArray($("tr.kpi-item").map(function (index, element) {
+                    var item = {};
+                    item.ItemType = $(element).attr("itemtype");
+                    item.Weight = $(element).find(":text.weight").val();
+                    item.BeginDate = $(element).find(":text.datetime").val();
+                    return item;
+                }));
+                $.ajax({
+                    url: "/Indicator/SetWeight",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        if (response.IsSuccess == true) {
+                            bootbox.alert("保存成功", function () {
+                                location.href = location.href;
+                            });
+                        } else {
+                            bootbox.alert(response.Message);
+                        }
+                    }
+                });
             });
         });
     </script>

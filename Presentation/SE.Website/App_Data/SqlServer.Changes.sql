@@ -116,3 +116,14 @@ end
  alter table Part add [Enabled] bit not null default(1)
 
  alter table PartSms add UltraNum int not null default(0)
+
+
+ create table KPIWeight
+(
+	[Id] [int] IDENTITY(1,1) NOT NULL Primary Key,
+	ItemType int not null,
+	[Weight] int not null,
+	BeginDate date not null	
+)
+
+

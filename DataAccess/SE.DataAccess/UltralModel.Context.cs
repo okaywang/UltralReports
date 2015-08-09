@@ -45,5 +45,8 @@ namespace DataAccess
         public DbSet<RtMonthTime> RtMonthTimes { get; set; }
         public DbSet<RtPoint> RtPoints { get; set; }
         public DbSet<RtDayData> RtDayDatas { get; set; }
+        public DbSet<KPIData> KPIDatas { get; set; }
+        public DbSet<KPIItem> KPIItems { get; set; }
+        public DbSet<KPIWeight> KPIWeights { get; set; }
     }
 }

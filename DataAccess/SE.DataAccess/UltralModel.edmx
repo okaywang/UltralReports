@@ -64,6 +64,34 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="KPIData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PointKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Duty" Type="int" Nullable="false" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="KPIItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="PointKay" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="KPIWeight">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemType" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="BeginDate" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="LogException">
           <Key>
             <PropertyRef Name="Id" />
@@ -427,6 +455,9 @@
           <EntitySet Name="Duty" EntityType="Self.Duty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DutyTime" EntityType="Self.DutyTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KPIData" EntityType="Self.KPIData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KPIItem" EntityType="Self.KPIItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KPIWeight" EntityType="Self.KPIWeight" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogException" EntityType="Self.LogException" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogOperation" EntityType="Self.LogOperation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
@@ -594,7 +625,10 @@
           <AssociationSet Name="FK_PointId" Association="UltralReportsModel.FK_PointId">
             <End Role="RtPoint" EntitySet="RtPoints" />
             <End Role="RtDayData" EntitySet="RtDayDatas" />
-          </AssociationSet> 
+          </AssociationSet>
+          <EntitySet Name="KPIDatas" EntityType="UltralReportsModel.KPIData" />
+          <EntitySet Name="KPIItems" EntityType="UltralReportsModel.KPIItem" />
+          <EntitySet Name="KPIWeights" EntityType="UltralReportsModel.KPIWeight" /> 
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -1044,7 +1078,35 @@
               <PropertyRef Name="PointId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association> 
+        </Association>
+        <EntityType Name="KPIData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PointKey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Duty" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="KPIItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PointKay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="KPIWeight">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemType" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="BeginDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType> 
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1286,6 +1348,37 @@
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="PointId" ColumnName="PointId" />
                 <ScalarProperty Name="DayTime" ColumnName="DayTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KPIDatas">
+            <EntityTypeMapping TypeName="UltralReportsModel.KPIData">
+              <MappingFragment StoreEntitySet="KPIData">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Duty" ColumnName="Duty" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PointKey" ColumnName="PointKey" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KPIItems">
+            <EntityTypeMapping TypeName="UltralReportsModel.KPIItem">
+              <MappingFragment StoreEntitySet="KPIItem">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="PointKay" ColumnName="PointKay" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KPIWeights">
+            <EntityTypeMapping TypeName="UltralReportsModel.KPIWeight">
+              <MappingFragment StoreEntitySet="KPIWeight">
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
