@@ -85,7 +85,6 @@
                 @{
                     var dict = Model.Data.ToDictionary(i => string.Format("{0}{1}", (int)i.Duty, i.PointKey));
                 }
-
                 <tr>
                     <td>一值</td>
                     @for (int i = 0; i < colsA.Length; i++)
@@ -102,7 +101,7 @@
                             {
                                 var v = (info.Max - val) * info.Delta + info.Addition;
                                 @(v.ToString("0.00"))
-                            } 
+                            }
                         </td>
                     }
                     <td></td>
@@ -219,7 +218,7 @@
                         var key = "B" + (i + 1).ToString();
                         var max = dataGroup.ContainsKey(key) ? dataGroup[key].Max : 0;
                         var min = dataGroup.ContainsKey(key) ? dataGroup[key].Min : 0;
-                        var delta = max - min == 0 ? 0m : weight / (max - min);
+                        var delta = max - min == 0 ? decimal.MaxValue : weight / (max - min);
                         dictKpiGroupInfo.Add(key, new KpiGroupInfo { Max = max, Delta = delta, Addition = additionB[i] });
                         <th colspan="2" max="@max" delta="@delta">@weight</th>
                     }
@@ -233,7 +232,7 @@
                     <td>一值</td>
                     @for (int i = 0; i < colsB.Length; i++)
                     {
-                        var subKey = colsA[i];
+                        var subKey = colsB[i];
                         var key = "1" + subKey;
                         var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
                         var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
@@ -254,7 +253,7 @@
                     <td>二值</td>
                     @for (int i = 0; i < colsB.Length; i++)
                     {
-                        var subKey = colsA[i];
+                        var subKey = colsB[i];
                         var key = "2" + subKey;
                         var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
                         var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
@@ -275,7 +274,7 @@
                     <td>三值</td>
                     @for (int i = 0; i < colsB.Length; i++)
                     {
-                        var subKey = colsA[i];
+                        var subKey = colsB[i];
                         var key = "3" + subKey;
                         var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
                         var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
@@ -296,7 +295,7 @@
                     <td>四值</td>
                     @for (int i = 0; i < colsB.Length; i++)
                     {
-                        var subKey = colsA[i];
+                        var subKey = colsB[i];
                         var key = "4" + subKey;
                         var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
                         var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
@@ -317,7 +316,7 @@
                     <td>五值</td>
                     @for (int i = 0; i < colsB.Length; i++)
                     {
-                        var subKey = colsA[i];
+                        var subKey = colsB[i];
                         var key = "5" + subKey;
                         var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
                         var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
@@ -359,6 +358,20 @@
             });
             $("[role=search]").click(function () {
 
+            });
+            $("tbody tr td:nth-child(21)").each(function (index, item) {
+                var tr = $($(item).parent());
+                var val = tr.find("td:eq(2)").text() * 1 + tr.find("td:eq(4)").text() * 1 + tr.find("td:eq(6)").text() * 1
+                        + tr.find("td:eq(8)").text() * 1 + tr.find("td:eq(10)").text() * 1 + tr.find("td:eq(12)").text() * 1
+                        + tr.find("td:eq(14)").text() * 1;
+                $(item).text(val.toFixed(2));
+            });
+            $("tbody:eq(0) tr td:nth-child(22)").each(function (index, item) {
+                var tr1 = $($(item).parent());
+                var tr2 = $("tbody:eq(1)").find("tr:eq(" + index + ")");
+                var val = tr1.find("td:eq(16)").text() * 1 + tr1.find("td:eq(20)").text() * 1
+                        + tr2.find("td:eq(16)").text() * 1 + tr2.find("td:eq(20)").text() * 1;
+                $(item).text(val.toFixed(2));
             });
         });
     </script>
