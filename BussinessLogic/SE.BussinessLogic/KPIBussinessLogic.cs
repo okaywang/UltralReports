@@ -27,11 +27,11 @@ namespace BussinessLogic
                             where 1=1");
             if (beginDate.HasValue)
             {
-                sql.AppendFormat(" and [date]>={0} \n", beginDate.Value.ToString("yyyy-MM-dd"));
+                sql.AppendFormat(" and [date]>='{0}' \n", beginDate.Value.ToString("yyyy-MM-dd"));
             }
             if (endDate.HasValue)
             {
-                sql.AppendFormat(" and [date]<={0} \n", endDate.Value.ToString("yyyy-MM-dd"));
+                sql.AppendFormat(" and [date]<='{0}' \n", endDate.Value.ToString("yyyy-MM-dd"));
             }
             sql.AppendLine("group by pointkey,duty");
 

@@ -27,4 +27,13 @@ namespace Website.Models
         [DisplayName("生效时间")]
         public DateTime BeginDate { get; set; }
     }
+
+    public class KpiGroupInfo
+    {
+        public decimal Max { get; set; }
+
+        public decimal Delta { get; set; }
+
+        public decimal Addition { get; set; }
+    }
 }
