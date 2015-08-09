@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BussinessLogic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +7,14 @@ using System.Linq;
 using System.Web;
 
 namespace Website.Models
-{ 
+{
+    public class KPIListPageModel
+    {
+        public KPIWeightItem[] Weights { get; set; }
+
+        public KPIDataItem[] Data { get; set; }
+    }
+
     public class IndicatorItemModel
     {
         public int ItemType { get; set; }
@@ -18,5 +26,5 @@ namespace Website.Models
 
         [DisplayName("生效时间")]
         public DateTime BeginDate { get; set; }
-    }    
+    }
 }

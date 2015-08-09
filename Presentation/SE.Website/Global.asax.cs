@@ -92,6 +92,8 @@ namespace Website
 
             Mapper.CreateMap<SmsLog, SmsLogListItemModel>().ForMember(dest => dest.GroupName, opt => opt.MapFrom(src => src.SmsGroup.Name));
             Mapper.CreateMap<RtMonthTime, GapListItemModel>();
+
+            Mapper.CreateMap<KPIWeight, IndicatorItemModel>();
         }
 
 

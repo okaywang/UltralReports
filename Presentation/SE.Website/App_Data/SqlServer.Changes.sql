@@ -125,5 +125,41 @@ end
 	[Weight] int not null,
 	BeginDate date not null	
 )
+alter table KPIWeight add constraint UQ_ItemType_BeginDate unique(ItemType,BeginDate)
 
 
+declare @duty int = 1
+while @duty<=5
+begin	
+	declare @thedate datetime
+	set @thedate = '2015-07-20'
+	while @thedate < '2015-08-03'
+	begin
+		insert into kpidata(PointKey,[date],duty,value)
+		values 
+		('A1',@thedate,@duty,RAND()*100),
+		('A2',@thedate,@duty,RAND()*100),
+		('A3',@thedate,@duty,RAND()*100),
+		('A4',@thedate,@duty,RAND()*100),
+		('A5',@thedate,@duty,RAND()*100),
+		('A5',@thedate,@duty,RAND()*100),
+		('A7',@thedate,@duty,RAND()*100),
+		('A8',@thedate,@duty,RAND()*100),
+		('A9',@thedate,@duty,RAND()*100),
+		('A10',@thedate,@duty,RAND()*100),
+		('B1',@thedate,@duty,RAND()*100),
+		('B2',@thedate,@duty,RAND()*100),
+		('B3',@thedate,@duty,RAND()*100),
+		('B4',@thedate,@duty,RAND()*100),
+		('B5',@thedate,@duty,RAND()*100),
+		('B5',@thedate,@duty,RAND()*100),
+		('B7',@thedate,@duty,RAND()*100),
+		('B8',@thedate,@duty,RAND()*100),
+		('B9',@thedate,@duty,RAND()*100)
+	 
+		set @thedate = DATEADD(DD,1,@thedate)
+	end
+	
+	set @duty =@duty + 1;
+end
+ 

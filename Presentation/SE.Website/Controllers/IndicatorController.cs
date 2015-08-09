@@ -11,18 +11,24 @@ namespace Website.Controllers
 {
     public class IndicatorController : Controller
     {
-        //
-        // GET: /Indicator/
-
+        private KPIBussinessLogic _bllKpi;
         private BussinessLogicBase<KPIWeight> _bllWeight;
-        public IndicatorController(BussinessLogicBase<KPIWeight> bllWeight)
+        public IndicatorController(BussinessLogicBase<KPIWeight> bllWeight, KPIBussinessLogic bllKpi)
         {
             _bllWeight = bllWeight;
+            _bllKpi = bllKpi;
         }
 
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+        public ActionResult Index(DateTime? beginDate, DateTime? endDate)
         {
-            return View();
+            var model = new KPIListPageModel();
+            model.Weights = _bllKpi.GetLastestWeight(endDate.HasValue ? endDate.Value : DateTime.Now);
+            model.Data = _bllKpi.Search(beginDate, endDate);
+            return View(model);
         }
 
         [HttpPost]
@@ -30,13 +36,22 @@ namespace Website.Controllers
         {
             foreach (var item in model)
             {
-                var entity = new KPIWeight
+                var entity = _bllWeight.Where(i => i.ItemType == item.ItemType && i.BeginDate == item.BeginDate).FirstOrDefault();
+                if (entity == null)
                 {
-                    ItemType = item.ItemType,
-                    Weight = item.Weight,
-                    BeginDate = item.BeginDate
-                };
-                _bllWeight.Insert(entity);
+                    entity = new KPIWeight
+                    {
+                        ItemType = item.ItemType,
+                        Weight = item.Weight,
+                        BeginDate = item.BeginDate
+                    };
+                    _bllWeight.Insert(entity);
+                }
+                else
+                {
+                    entity.Weight = item.Weight;
+                    _bllWeight.Update(entity);
+                }
             }
             return Json(new ResultModel(true));
         }

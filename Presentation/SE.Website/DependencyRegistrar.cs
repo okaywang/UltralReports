@@ -29,6 +29,7 @@ namespace Website
             builder.RegisterType<MajorBussinessLogic>().InstancePerHttpRequest();
             builder.RegisterType<DutyBussinessLogic>().InstancePerHttpRequest();
             builder.RegisterType<LogExceptionBussinessLogic>().InstancePerHttpRequest();
+            builder.RegisterType<KPIBussinessLogic>().InstancePerHttpRequest();
         }
     }
 }

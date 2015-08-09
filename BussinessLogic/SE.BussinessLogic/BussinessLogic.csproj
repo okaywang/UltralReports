@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="AccountBussinessLogic.cs" />
     <Compile Include="Base\BussinessLogicBase.cs" />
+    <Compile Include="Entities\KPIWeightItem.cs" />
+    <Compile Include="KPIBussinessLogic.cs" />
     <Compile Include="Entities\AccountSearchCriteria.cs" />
     <Compile Include="Entities\GapSearchCriteria.cs" />
     <Compile Include="Entities\UltraRecordSearchCriteria.cs" />
