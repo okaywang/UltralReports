@@ -11,5 +11,7 @@ namespace BussinessLogic
         public int ItemType { get; set; }
 
         public int Weight { get; set; }
+
+        public string Range { get; set; }
     }
 }

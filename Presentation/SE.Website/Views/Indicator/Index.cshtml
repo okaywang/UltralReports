@@ -68,13 +68,13 @@
                     }
                     @for (int i = 1; i <= colsA.Length - 1; i++)
                     {
-                        var weight = dictWeight.ContainsKey(i) ? dictWeight[i].Weight : 0;
+                        var weightItem = dictWeight[i];
                         var key = "A" + i.ToString();
                         var max = dataGroup.ContainsKey(key) ? dataGroup[key].Max : 0;
                         var min = dataGroup.ContainsKey(key) ? dataGroup[key].Min : 0;
-                        var delta = max - min == 0 ? decimal.MaxValue : weight / (max - min);
+                        var delta = max - min == 0 ? decimal.MaxValue : weightItem.Weight / (max - min);
                         dictKpiGroupInfo.Add(key, new KpiGroupInfo { Max = max, Delta = delta, Addition = additionA[i - 1] });
-                        <th colspan="2" max="@max" delta="@delta">@weight</th>
+                        <th colspan="2" max="@max" delta="@delta">@(weightItem.Weight)(@weightItem.Range)</th>
                     }
                     <th></th>
                     <th>#1机</th>
@@ -97,11 +97,11 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                var v = (info.Max - val) * info.Delta + info.Addition;
-                                @(v.ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    var v = (info.Max - val) * info.Delta + info.Addition;
+                                    @(v.ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -117,11 +117,11 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                var v = (info.Max - val) * info.Delta + info.Addition;
-                                @(v.ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    var v = (info.Max - val) * info.Delta + info.Addition;
+                                    @(v.ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -137,11 +137,11 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                var v = (info.Max - val) * info.Delta + info.Addition;
-                                @(v.ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    var v = (info.Max - val) * info.Delta + info.Addition;
+                                    @(v.ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -157,11 +157,11 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                var v = (info.Max - val) * info.Delta + info.Addition;
-                                @(v.ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    var v = (info.Max - val) * info.Delta + info.Addition;
+                                    @(v.ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -177,11 +177,11 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                var v = (info.Max - val) * info.Delta + info.Addition;
-                                @(v.ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    var v = (info.Max - val) * info.Delta + info.Addition;
+                                    @(v.ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -214,13 +214,13 @@
                     }
                     @for (int i = 0; i < weightType.Length; i++)
                     {
-                        var weight = dictWeight.ContainsKey(weightType[i]) ? dictWeight[weightType[i]].Weight : 0;
+                        var weightItem = dictWeight[weightType[i]];
                         var key = "B" + (i + 1).ToString();
                         var max = dataGroup.ContainsKey(key) ? dataGroup[key].Max : 0;
                         var min = dataGroup.ContainsKey(key) ? dataGroup[key].Min : 0;
-                        var delta = max - min == 0 ? decimal.MaxValue : weight / (max - min);
+                        var delta = max - min == 0 ? decimal.MaxValue : weightItem.Weight / (max - min);
                         dictKpiGroupInfo.Add(key, new KpiGroupInfo { Max = max, Delta = delta, Addition = additionB[i] });
-                        <th colspan="2" max="@max" delta="@delta">@weight</th>
+                        <th colspan="2" max="@max" delta="@delta">@(weightItem.Weight)(@weightItem.Range)</th>
                     }
                     <th></th>
                     <th>#2机</th>
@@ -239,10 +239,10 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -260,10 +260,10 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -281,10 +281,10 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -302,10 +302,10 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -323,10 +323,10 @@
                         <td>@val</td>
 
                         <td>
-                            @if (info != null && info.Delta != decimal.MaxValue)
-                            {
-                                @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
-                            }
+                            @*@if (info != null && info.Delta != decimal.MaxValue)
+                                {
+                                    @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                                }*@
                         </td>
                     }
                     <td></td>
@@ -359,20 +359,20 @@
             $("[role=search]").click(function () {
 
             });
-            $("tbody tr td:nth-child(21)").each(function (index, item) {
-                var tr = $($(item).parent());
-                var val = tr.find("td:eq(2)").text() * 1 + tr.find("td:eq(4)").text() * 1 + tr.find("td:eq(6)").text() * 1
-                        + tr.find("td:eq(8)").text() * 1 + tr.find("td:eq(10)").text() * 1 + tr.find("td:eq(12)").text() * 1
-                        + tr.find("td:eq(14)").text() * 1;
-                $(item).text(val.toFixed(2));
-            });
-            $("tbody:eq(0) tr td:nth-child(22)").each(function (index, item) {
-                var tr1 = $($(item).parent());
-                var tr2 = $("tbody:eq(1)").find("tr:eq(" + index + ")");
-                var val = tr1.find("td:eq(16)").text() * 1 + tr1.find("td:eq(20)").text() * 1
-                        + tr2.find("td:eq(16)").text() * 1 + tr2.find("td:eq(20)").text() * 1;
-                $(item).text(val.toFixed(2));
-            });
+            //$("tbody tr td:nth-child(21)").each(function (index, item) {
+            //    var tr = $($(item).parent());
+            //    var val = tr.find("td:eq(2)").text() * 1 + tr.find("td:eq(4)").text() * 1 + tr.find("td:eq(6)").text() * 1
+            //            + tr.find("td:eq(8)").text() * 1 + tr.find("td:eq(10)").text() * 1 + tr.find("td:eq(12)").text() * 1
+            //            + tr.find("td:eq(14)").text() * 1;
+            //    $(item).text(val.toFixed(2));
+            //});
+            //$("tbody:eq(0) tr td:nth-child(22)").each(function (index, item) {
+            //    var tr1 = $($(item).parent());
+            //    var tr2 = $("tbody:eq(1)").find("tr:eq(" + index + ")");
+            //    var val = tr1.find("td:eq(16)").text() * 1 + tr1.find("td:eq(20)").text() * 1
+            //            + tr2.find("td:eq(16)").text() * 1 + tr2.find("td:eq(20)").text() * 1;
+            //    $(item).text(val.toFixed(2));
+            //});
         });
     </script>
 }

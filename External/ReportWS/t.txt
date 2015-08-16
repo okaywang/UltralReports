@@ -1,0 +1,16 @@
+
+insert rtpoints values('Fysis.U1DCSDI.M5935',1,3,1,'1A投入小时','')
+insert rtpoints values('Fysis.U2DCSDI.M5935',1,3,2,'1A投入小时','')
+insert rtpoints values('Fysis.U1DCSDI.M5945',2,3,1,'1B投入小时','')
+insert rtpoints values('Fysis.U2DCSDI.M5945',2,3,2,'1B投入小时','')
+insert rtpoints values('Fysis.U1DCSAI.E00041',8,3,1,'1A投入率','')
+insert rtpoints values('Fysis.U2DCSAI.E00042',8,3,2,'1A投入率','')
+insert rtpoints values('Fysis.U1DCSAI.E00041',9,3,1,'1B投入率','')
+insert rtpoints values('Fysis.U2DCSAI.E00042',9,3,2,'1B投入率','')
+
+
+
+insert rtpoints values('FYSIS.U1DCSAI.G1330',3,4,1,'A侧液氨量（DCS统计）','')
+insert rtpoints values('FYSIS.U2DCSAI.G1330',3,4,2,'A侧液氨量（DCS统计）','')
+insert rtpoints values('FYSIS.U1DCSAI.G1331',4,4,1,'B侧液氨量（DCS统计）','')
+insert rtpoints values('FYSIS.U2DCSAI.G1331',4,4,2,'B侧液氨量（DCS统计）','')

@@ -10,7 +10,25 @@ namespace Website.Models
 {
     public class KPIListPageModel
     {
-        public KPIWeightItem[] Weights { get; set; }
+        private static readonly KPIWeightItem[] _weights;
+        static KPIListPageModel()
+        {
+            _weights = new KPIWeightItem[10];
+            var weights = new[] {10, 10, 10, 10, 10, 20, 10, 20, 10, 10};
+            var ranges = new[] { "3-10", "3-10", "3-10", "3-10", "3-10", "5-20", "3-10", "10-20", "3-10", "3-10"};
+            for (int i = 1; i <= _weights.Length; i++)
+            {
+                _weights[i - 1] = new KPIWeightItem
+                {
+                    ItemType = i,
+                    Weight = weights[i - 1],
+                    Range = ranges[i - 1]
+                };
+            }
+
+        }
+
+        public KPIWeightItem[] Weights { get { return _weights; } }
 
         public KPIDataItem[] Data { get; set; }
     }

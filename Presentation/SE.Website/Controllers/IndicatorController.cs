@@ -26,7 +26,7 @@ namespace Website.Controllers
         public ActionResult Index(DateTime? beginDate, DateTime? endDate)
         {
             var model = new KPIListPageModel();
-            model.Weights = _bllKpi.GetLastestWeight(endDate.HasValue ? endDate.Value : DateTime.Now);
+            //model.Weights = _bllKpi.GetLastestWeight(endDate.HasValue ? endDate.Value : DateTime.Now);
             model.Data = _bllKpi.Search(beginDate, endDate);
             return View(model);
         }
