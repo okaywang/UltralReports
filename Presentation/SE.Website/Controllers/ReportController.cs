@@ -87,6 +87,11 @@ namespace Website.Controllers
 
         public ActionResult EconomicIndex([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month)
         {
+            if (Request.QueryString["recalc"] != null)
+            {
+                var instance = new ReportWS.CalcMonthReport();
+                instance.ReCalcReport(year, month);
+            }
             var entities = _bllMonthData.Where(i => i.Year == year && i.Month == month);
             var items = entities.ToDictionary(i => i.RtPoint.PointName, i => i.Value);
             var model = new EconomicPageModel(items);
