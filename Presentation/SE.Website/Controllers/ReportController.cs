@@ -200,6 +200,7 @@ namespace Website.Controllers
         public JsonResult GapAdd(GapAddModel model)
         {
             var entity = new RtMonthTime();
+            entity.MachNO = model.MachNO;
             entity.StartTime = model.StartTime;
             entity.EndTime = model.EndTime;
             entity.Year = model.StartTime.Year;
@@ -211,6 +212,7 @@ namespace Website.Controllers
         public JsonResult GapUpdate(GapUpdateModel model)
         {
             var entity = _bllGap.Get(model.Id);
+            entity.MachNO = model.MachNO;
             entity.StartTime = model.StartTime;
             entity.EndTime = model.EndTime;
             _bllGap.Update(entity);

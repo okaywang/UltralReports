@@ -194,6 +194,7 @@
           <Property Name="Month" Type="int" Nullable="false" />
           <Property Name="StartTime" Type="smalldatetime" Nullable="false" />
           <Property Name="EndTime" Type="smalldatetime" Nullable="false" />
+          <Property Name="MachNO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RtPoints">
           <Key>
@@ -1029,6 +1030,7 @@
           <Property Name="Month" Type="Int32" Nullable="false" />
           <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MachNO" Type="UltralReportsModel.MachineSetType" Nullable="false" />
         </EntityType>
         <EntityType Name="RtPoint">
           <Key>
@@ -1320,6 +1322,7 @@
           <EntitySetMapping Name="RtMonthTimes">
             <EntityTypeMapping TypeName="UltralReportsModel.RtMonthTime">
               <MappingFragment StoreEntitySet="RtMonthTime">
+                <ScalarProperty Name="MachNO" ColumnName="MachNO" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="Month" ColumnName="Month" />

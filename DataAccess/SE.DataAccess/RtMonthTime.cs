@@ -19,5 +19,6 @@ namespace DataAccess
         public int Month { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
+        public Common.Types.MachineSetType MachNO { get; set; }
     }
 }

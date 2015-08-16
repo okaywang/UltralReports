@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Common.Types;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,12 @@ namespace Website.Models
     [RequestUrl("/Report/GapAdd")]
     public class GapAddModel
     {
+        [Required]
+        [DisplayName("机组号")]
+        [ControlType(typeof(NativeSelect))]
+        [EnumControlSource(typeof(SimpleMachineSetType))]
+        public MachineSetType MachNO { get; set; }
+
         [Required]
         [DisplayName("开始时间")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm}")]
@@ -37,6 +44,12 @@ namespace Website.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("机组号")]
+        [ControlType(typeof(NativeSelect))]
+        [EnumControlSource(typeof(SimpleMachineSetType))]
+        public MachineSetType MachNO { get; set; }
+
+        [Required]
         [DisplayName("开始时间")] 
         [ControlType(typeof(BootstrapDateTimePicker))]
         public System.DateTime StartTime { get; set; }
@@ -50,6 +63,9 @@ namespace Website.Models
     public class GapListItemModel : IListItemModel
     {
         public int Id { get; set; }
+
+        [DisplayName("机组号")]
+        public MachineSetType MachNO { get; set; }
 
         [DisplayName("开始时间")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm}")]

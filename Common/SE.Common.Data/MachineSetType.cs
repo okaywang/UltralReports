@@ -18,4 +18,13 @@ namespace Common.Types
         [DisplayText("公用系统")]
         MachineSet3 = 3,
     }
+
+    public enum SimpleMachineSetType
+    {
+        [DisplayText("1号机组")]
+        MachineSet1 = 1,
+
+        [DisplayText("2号机组")]
+        MachineSet2 = 2
+    }
 }
