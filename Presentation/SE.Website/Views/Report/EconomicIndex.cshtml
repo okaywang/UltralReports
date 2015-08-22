@@ -20,7 +20,7 @@
         <div class="form-group">
             <label class="control-label">时间</label>
             <div class="input-group date">
-                <input type="text" name="Date" class="form-control input-sm datetime" value="@string.Format("{0}-{1}",Model.Year,Model.Month)" />
+                <input type="text" name="Date" class="form-control input-sm datetime" value="@string.Format("{0}-{1}", Model.Year, Model.Month)" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -99,7 +99,7 @@
                     <td>@Model["Fysis.U1DCSAI.A0349"]</td>
                     <td>@Model["Fysis.CALC.A1010"]</td>
                     <td>@Model["Fysis.CALC.A1011"]</td>
-                    <td>@Model["Fysis.CALC.C1001"]</td>
+                    <td>@(Model["Fysis.CALC.A1011"] - Model["Fysis.CALC.A1010"])</td>
                 </tr>
                 <tr>
                     <td>#2机组</td>
@@ -120,7 +120,7 @@
                     <td>@Model["Fysis.U2DCSAI.A0349"]</td>
                     <td>@Model["Fysis.CALC.A2010"]</td>
                     <td>@Model["Fysis.CALC.A2011"]</td>
-                    <td>@Model["Fysis.CALC.C2001"]</td>
+                    <td>@(Model["Fysis.CALC.A2011"] - Model["Fysis.CALC.A2010"])</td>
                 </tr>
             </tbody>
 
@@ -150,6 +150,7 @@
                 <tr>
                     <td>单位</td>
                     <td>Pa</td>
+                    <td>℃</td>
                     <td>℃</td>
                     <td>℃</td>
                     <td>%</td>
@@ -188,7 +189,7 @@
                 </tr>
                 <tr>
                     <td>#2机组</td>
-                    <td>@Model["Fysis.CALC.A2012"]</td>                    
+                    <td>@Model["Fysis.CALC.A2012"]</td>
                     <td>@Model["FYSIS.CALC.A2017"]</td>
                     <td>@Model["FYSIS.CALC.A2018"]</td>
                     <td>@Model["Fysis.U2DCSAI.G1301"]</td>
