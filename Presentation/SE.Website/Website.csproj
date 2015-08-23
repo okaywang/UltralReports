@@ -493,6 +493,7 @@
     <Content Include="Views\Report\GapIndex.cshtml" />
     <Content Include="Views\Indicator\Weight.cshtml" />
     <Content Include="Views\Indicator\Index.cshtml" />
+    <Content Include="Views\Indicator\_ExcelTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

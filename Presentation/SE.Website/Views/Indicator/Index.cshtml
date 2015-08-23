@@ -33,6 +33,8 @@
         </div>
         <div class="form-group">
             <button type="submit" role="search" class="btn btn-primary btn-sm">查询</button>
+            <a class="btn btn-primary btn-sm" url="/indicator/exportexcel" href="/indicator/exportexcel" style="width:100px" onclick="javascript: this.href = $(this).attr('url') + '?' + $('form').serialize()">导出</a>
+            @*<button type="submit" name="export" role="export" style="width:100px;" class="btn btn-primary btn-sm">导出</button>*@
         </div>
     </form>
 </div>

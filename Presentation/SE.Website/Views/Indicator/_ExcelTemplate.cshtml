@@ -1,0 +1,298 @@
+﻿@model KPIListPageModel
+<table border='1' cellspacing='0' cellpadding='0'>
+    <thead>
+        <tr>
+            <th>值次</th>
+            <th colspan="2">#1机主汽温越限</th>
+            <th colspan="2">#1机再热汽温越限</th>
+            <th colspan="2">#1机主汽温限内偏差</th>
+            <th colspan="2">#1机再热汽温限内偏差</th>
+            <th colspan="2">#1机排烟损失</th>
+            <th colspan="2">#1机管壁超温</th>
+            <th colspan="2">#1机氨单耗</th>
+            <th colspan="2">综合厂用电率</th>
+            <th colspan="2">#1负荷完成率</th>
+            <th>掺烧率</th>
+            <th>积分</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>权重</th>
+            @{
+                var dictWeight = Model.Weights.ToDictionary(i => i.ItemType);
+                var dataGroup = Model.Data.GroupBy(i => i.PointKey).Select(i => new { key = i.Key, Max = i.Max(p => p.Value), Min = i.Min(p => p.Value) }).ToDictionary(i => i.key);
+                var colsA = new[] { "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10" };
+                var additionA = new[] { 0m, 0m, 0m, 0m, 6m, 0m, 3m, 10m, 5m };
+                var additionB = new[] { 0m, 0m, 0m, 0m, 6m, 0m, 3m, 5m, 5m };
+                var colsB = new[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9" };
+                var dictKpiGroupInfo = new Dictionary<string, KpiGroupInfo>();
+            }
+            @for (int i = 1; i <= colsA.Length - 1; i++)
+            {
+                var weightItem = dictWeight[i];
+                var key = "A" + i.ToString();
+                var max = dataGroup.ContainsKey(key) ? dataGroup[key].Max : 0;
+                var min = dataGroup.ContainsKey(key) ? dataGroup[key].Min : 0;
+                var delta = max - min == 0 ? decimal.MaxValue : weightItem.Weight / (max - min);
+                dictKpiGroupInfo.Add(key, new KpiGroupInfo { Max = max, Delta = delta, Addition = additionA[i - 1] });
+                <th colspan="2" max="@max" delta="@delta">@(weightItem.Weight)(@weightItem.Range)</th>
+            }
+            <th></th>
+            <th>#1机</th>
+            <th>值际</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var dict = Model.Data.ToDictionary(i => string.Format("{0}{1}", (int)i.Duty, i.PointKey));
+        }
+        <tr>
+            <td>一值</td>
+            @for (int i = 0; i < colsA.Length; i++)
+            {
+
+                var subKey = colsA[i];
+                var key = "1" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            var v = (info.Max - val) * info.Delta + info.Addition;
+                            @(v.ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+        </tr>
+        <tr>
+            <td>二值</td>
+            @for (int i = 0; i < colsA.Length; i++)
+            {
+                var subKey = colsA[i];
+                var key = "2" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            var v = (info.Max - val) * info.Delta + info.Addition;
+                            @(v.ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+        </tr>
+        <tr>
+            <td>三值</td>
+            @for (int i = 0; i < colsA.Length; i++)
+            {
+                var subKey = colsA[i];
+                var key = "3" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            var v = (info.Max - val) * info.Delta + info.Addition;
+                            @(v.ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+        </tr>
+        <tr>
+            <td>四值</td>
+            @for (int i = 0; i < colsA.Length; i++)
+            {
+                var subKey = colsA[i];
+                var key = "4" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            var v = (info.Max - val) * info.Delta + info.Addition;
+                            @(v.ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+        </tr>
+        <tr>
+            <td>五值</td>
+            @for (int i = 0; i < colsA.Length; i++)
+            {
+                var subKey = colsA[i];
+                var key = "5" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            var v = (info.Max - val) * info.Delta + info.Addition;
+                            @(v.ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="22"></td>
+        </tr>
+    </tbody>
+
+    <thead>
+        <tr>
+            <th>值次</th>
+            <th colspan="2">#2机主汽温越限</th>
+            <th colspan="2">#2机再热汽温越限</th>
+            <th colspan="2">#2机主汽温限内偏差</th>
+            <th colspan="2">#2机再热汽温限内偏差</th>
+            <th colspan="2">#2机排烟损失</th>
+            <th colspan="2">#2机管壁超温</th>
+            <th colspan="2">#2机氨单耗</th>
+            <th colspan="2">全厂负荷完成率</th>
+            <th colspan="2">#2负荷完成率</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>权重</th>
+            @{
+                var weightType = new[] { 1, 2, 3, 4, 5, 6, 7, 10, 9 };
+            }
+            @for (int i = 0; i < weightType.Length; i++)
+            {
+                var weightItem = dictWeight[weightType[i]];
+                var key = "B" + (i + 1).ToString();
+                var max = dataGroup.ContainsKey(key) ? dataGroup[key].Max : 0;
+                var min = dataGroup.ContainsKey(key) ? dataGroup[key].Min : 0;
+                var delta = max - min == 0 ? decimal.MaxValue : weightItem.Weight / (max - min);
+                dictKpiGroupInfo.Add(key, new KpiGroupInfo { Max = max, Delta = delta, Addition = additionB[i] });
+                <th colspan="2" max="@max" delta="@delta">@(weightItem.Weight)(@weightItem.Range)</th>
+            }
+            <th></th>
+            <th>#2机</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>一值</td>
+            @for (int i = 0; i < colsB.Length; i++)
+            {
+                var subKey = colsB[i];
+                var key = "1" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>二值</td>
+            @for (int i = 0; i < colsB.Length; i++)
+            {
+                var subKey = colsB[i];
+                var key = "2" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>三值</td>
+            @for (int i = 0; i < colsB.Length; i++)
+            {
+                var subKey = colsB[i];
+                var key = "3" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>四值</td>
+            @for (int i = 0; i < colsB.Length; i++)
+            {
+                var subKey = colsB[i];
+                var key = "4" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>五值</td>
+            @for (int i = 0; i < colsB.Length; i++)
+            {
+                var subKey = colsB[i];
+                var key = "5" + subKey;
+                var val = dict.ContainsKey(key) ? dict[key].Value : 0.00m;
+                var info = dictKpiGroupInfo.ContainsKey(subKey) ? dictKpiGroupInfo[subKey] : null;
+                <td>@val</td>
+
+                <td>
+                    @*@if (info != null && info.Delta != decimal.MaxValue)
+                        {
+                            @(((info.Max - val) * info.Delta + info.Addition).ToString("0.00"))
+                        }*@
+                </td>
+            }
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
