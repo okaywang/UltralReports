@@ -22,7 +22,7 @@ namespace BussinessLogic
         public KPIDataItem[] Search(DateTime? beginDate, DateTime? endDate)
         {
             var sql = new StringBuilder();
-            sql.AppendLine(@"select Duty,Pointkey,SUM(value) Value
+            sql.AppendLine(@"select Duty,Pointkey,case when PointKey in('A1','A2','B1','B2') then SUM(value) else AVG(value) end Value
                             from kpidata
                             where 1=1");
             if (beginDate.HasValue)
