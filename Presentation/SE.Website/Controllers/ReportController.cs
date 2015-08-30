@@ -5,7 +5,9 @@ using Common.Types;
 using DataAccess;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using WebExpress.Core;
@@ -100,6 +102,27 @@ namespace Website.Controllers
             return View(model);
         }
 
+        public ActionResult Exportexcel4Economic([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month)
+        {
+            var entities = _bllMonthData.Where(i => i.Year == year && i.Month == month);
+            var items = entities.ToDictionary(i => i.RtPoint.PointName, i => i.Value);
+            var model = new EconomicPageModel(items);
+            model.Year = year;
+            model.Month = month;
+
+            this.ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                ViewEngineResult viewResult = System.Web.Mvc.ViewEngines.Engines.FindPartialView(this.ControllerContext, "_EconomicExcelTemplate");
+                var viewContext = new ViewContext(this.ControllerContext, viewResult.View, this.ViewData, this.TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                var html = sw.GetStringBuilder().ToString();
+                byte[] fileContents = Encoding.UTF8.GetBytes(html);
+                return File(fileContents, "application/ms-excel", "环保指标报表.xls");
+            }
+        }
+
         public ActionResult EnvironmentalIndex([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month, MachineSetType machineSet = MachineSetType.MachineSet1)
         {
             var entiteis = _bllDayData.Where(i => i.RtPoint.MachNO == (int)machineSet && i.DayTime.Year == year && i.DayTime.Month == month).ToList();
@@ -184,6 +207,102 @@ namespace Website.Controllers
                 model.Items[i - 1] = item;
             }
             return View(model);
+        }
+
+        public ActionResult ExportExcel4Environmental([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month, MachineSetType machineSet = MachineSetType.MachineSet1)
+        {
+            var entiteis = _bllDayData.Where(i => i.RtPoint.MachNO == (int)machineSet && i.DayTime.Year == year && i.DayTime.Month == month).ToList();
+            var points = _bllPoints.Where(i => new[] { 2, 3, 4 }.Contains(i.TableType)).ToList();
+            var model = new EnvironmentalPageModel();
+            model.Year = year;
+            model.Month = month;
+            model.MachineSet = machineSet;
+            var days = DateTime.DaysInMonth(year, month);
+            model.Items = new EnvironmentalListItemModel[days];
+            for (int i = 1; i <= days; i++)
+            {
+                var item = new EnvironmentalListItemModel();
+                item.Day = i;
+                var dayEntities = entiteis.Where(p => p.DayTime.Day == i).ToList();
+                if (dayEntities.Any())
+                {
+                    var machNo = (int)machineSet - 1;
+                    RtDayData data;
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "1");
+                    if (data != null)
+                    {
+                        item.Col_1A投入小时 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "2");
+                    if (data != null)
+                    {
+                        item.Col_1B投入小时 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "3");
+                    if (data != null)
+                    {
+                        item.Col_A侧液氨量 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "4");
+                    if (data != null)
+                    {
+                        item.Col_B侧液氨量 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "5");
+                    if (data != null)
+                    {
+                        item.Col_1A脱硝率 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "6");
+                    if (data != null)
+                    {
+                        item.Col_1B脱硝率 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "7");
+                    if (data != null)
+                    {
+                        item.Col_1机综合脱硝率 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "8");
+                    if (data != null)
+                    {
+                        item.Col_1A投入率 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "9");
+                    if (data != null)
+                    {
+                        item.Col_1B投入率 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "10");
+                    if (data != null)
+                    {
+                        item.Col_1机NOx排放 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "11");
+                    if (data != null)
+                    {
+                        item.Col_1机SO2排放 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "12");
+                    if (data != null)
+                    {
+                        item.Col_1机粉尘排放 = data.Value;
+                    }
+                }
+                model.Items[i - 1] = item;
+            }
+
+            this.ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                ViewEngineResult viewResult = System.Web.Mvc.ViewEngines.Engines.FindPartialView(this.ControllerContext, "_EnvironmentalExcelTemplate");
+                var viewContext = new ViewContext(this.ControllerContext, viewResult.View, this.ViewData, this.TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                var html = sw.GetStringBuilder().ToString();
+                byte[] fileContents = Encoding.UTF8.GetBytes(html);
+                return File(fileContents, "application/ms-excel", "环保指标报表.xls");
+            }
         }
 
         public ActionResult GapIndex()

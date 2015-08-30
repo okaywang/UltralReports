@@ -1,0 +1,60 @@
+﻿@model EnvironmentalPageModel
+
+<table border='1' cellspacing='0' cellpadding='0'>
+    <thead>
+        <tr>
+            <th>时间</th>
+            <th>1A投入小时</th>
+            <th>1B投入小时</th>
+            <th>A侧液氨量（DCS统计）</th>
+            <th>B侧液氨量（DCS统计）</th>
+            <th>1A脱硝率</th>
+            <th>1B脱硝率</th>
+            <th>#1机综合脱硝率</th>
+            <th>1A投入率</th>
+            <th>1B投入率</th>
+            <th>#1机NOx排放</th>
+            <th>#1机SO2排放</th>
+            <th>#1机粉尘排放</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@(item.Day)日</td>
+                <td>@item.Col_1A投入小时</td>
+                <td>@item.Col_1B投入小时</td>
+                <td>@item.Col_A侧液氨量</td>
+                <td>@item.Col_B侧液氨量</td>
+                <td>@item.Col_1A脱硝率</td>
+                <td>@item.Col_1B脱硝率</td>
+                <td>@item.Col_1机综合脱硝率</td>
+                <td>@item.Col_1A投入率</td>
+                <td>@item.Col_1B投入率</td>
+                <td>@item.Col_1机NOx排放</td>
+                <td>@item.Col_1机SO2排放</td>
+                <td>@item.Col_1机粉尘排放</td>
+            </tr>
+        }
+        <tr>
+            @{
+                var days = DateTime.DaysInMonth(Model.Year, Model.Month);
+            }
+            <td>月平均</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1A投入小时) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1B投入小时) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_A侧液氨量) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_B侧液氨量) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1A脱硝率) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1B脱硝率) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机综合脱硝率) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1A投入率) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1B投入率) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机NOx排放) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机SO2排放) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机粉尘排放) ?? 0) / days).ToString("0.00"))</td>
+        </tr>
+    </tbody>
+</table>
+

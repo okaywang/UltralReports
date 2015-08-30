@@ -2,4 +2,166 @@
     ViewBag.Title = "欢迎访问";
 }
 
-<h2>欢迎访问超限统计系统</h2>
+<div class="panel panel-primary">
+    <div class="panel-heading">24小时报警信息</div>
+    <div class="panel-body">
+        <div id="container1"></div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">24小时专业报警信息</div>
+    <div class="panel-body">
+        <div id="container2"></div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">24小时短信报警次数</div>
+    <div class="panel-body">
+        <div id="container3"></div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/highcharts.js"></script>
+    <script>
+        $(function () {
+            $('#container1').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '24小时报警信息'
+                },
+                //tooltip: {
+                //    pointFormat: '{series.name}: <b>{point.y}</b>'
+                //},
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.y}'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name:"次数",
+                    data: [
+                    ['总报警次数', 80],
+                    ['高I限报警次数', 50],
+                    ['高II限报警次数', 15],
+                    ['高III限报警次数', 5],
+                    ]
+                }]
+            });
+
+            $('#container2').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '24小时专业报警信息'
+                },
+                //tooltip: {
+                //    pointFormat: '{series.name}: <b>{point.y}</b>'
+                //},
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.y}'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: "次数",
+                    data: [
+                    ['专业报警次数', 70],
+                    ['已处理', 48],
+                    ['未处理', 22],
+                    ]
+                }]
+            });
+
+            $('#container3').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '24小时短信报警次数'
+                },
+                //subtitle: {
+                //    text: 'Source: WorldClimate.com'
+                //},
+                xAxis: {
+                    categories: [
+                        '0',
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                        '5',
+                        '6',
+                        '7',
+                        '8',
+                        '9',
+                        '10',
+                        '11',
+                        '12',
+                        '13',
+                        '14',
+                        '15',
+                        '16',
+                        '17',
+                        '18',
+                        '19',
+                        '20',
+                        '21',
+                        '22',
+                        '23'
+                    ]
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: ''
+                    }
+                },
+                //tooltip: {
+                //    headerFormat: '<span style="font-size:10px">{point.key}</span>',
+                //    pointFormat: '' +
+                //        '',
+                //    footerFormat: '<table><tbody><tr><td style="color:{series.color};padding:0">{series.name}: </td><td style="padding:0"><b>{point.y:.1f} mm</b></td></tr></tbody></table>',
+                //    shared: true,
+                //    useHTML: true
+                //},
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: '次数',
+                    data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+
+                }]
+            });
+        });
+    </script>
+}

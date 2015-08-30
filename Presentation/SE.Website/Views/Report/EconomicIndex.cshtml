@@ -29,6 +29,7 @@
         <div class="form-group">
             <button type="submit" role="search" name="search" class="btn btn-primary btn-sm">查询</button>
             <button type="submit" role="recalc" name="recalc" class="btn btn-primary btn-sm">重新计算</button>
+            <a class="btn btn-primary btn-sm" url="/report/exportexcel4Economic" href="/report/exportexcel4Economic" style="width:100px" onclick="javascript: this.href = $(this).attr('url') + '?' + $('form').serialize()">导出</a>
         </div>
     </form>
 </div>
