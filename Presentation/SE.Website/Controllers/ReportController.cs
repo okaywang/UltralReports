@@ -119,7 +119,7 @@ namespace Website.Controllers
 
                 var html = sw.GetStringBuilder().ToString();
                 byte[] fileContents = Encoding.UTF8.GetBytes(html);
-                return File(fileContents, "application/ms-excel", "环保指标报表.xls");
+                return File(fileContents, "application/ms-excel", "经济指标报表.xls");
             }
         }
 
