@@ -10,7 +10,6 @@
 </div>
 
 <div class="panel panel-primary">
-    <div class="panel-heading"></div>
     <div class="panel-body">
         <div id="container1" class="col-md-6"></div>
         <div id="container2" class="col-md-6"></div>
@@ -18,7 +17,6 @@
 </div>
 
 <div class="panel panel-primary">
-    <div class="panel-heading"></div>
     <div class="panel-body">
         <div id="container3">
             @Html.Partial("_Table1Partial", new Table1Model())
@@ -204,6 +202,7 @@
         function table1() {
             var url = "/Home/Table1";
             webExpress.utility.ajax.request(url, "", function (response) {
+                //var html = response.replace("非数字","")
                 $("#container3").html(response);
             });
         }

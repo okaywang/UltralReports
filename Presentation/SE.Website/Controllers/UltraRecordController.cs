@@ -30,16 +30,17 @@ namespace Website.Controllers
         public JsonResult Pie()
         {
             var model = new PieModel();
-            var records = _bllUltraRecord.Where(i => i.IsProRecord == false && i.StartTime.Year == DateTime.Now.Year && i.StartTime.Month == DateTime.Now.Month && i.StartTime.Day == DateTime.Now.Day).ToList();
+            var startDate = DateTime.Now.AddDays(-1);
+            var records = _bllUltraRecord.Where(i => i.IsProRecord == false && i.StartTime >= startDate).ToList();
             model.Pie1.总报警次数 = records.Count;
-            model.Pie1.高I限报警次数 = records.Where(i=>i.UltraType == "H1").Count();
+            model.Pie1.高I限报警次数 = records.Where(i => i.UltraType == "H1").Count();
             model.Pie1.高II限报警次数 = records.Where(i => i.UltraType == "H2").Count();
             model.Pie1.高III限报警次数 = records.Where(i => i.UltraType == "H3").Count();
             model.Pie1.低I限报警次数 = records.Where(i => i.UltraType == "L1").Count();
             model.Pie1.低II限报警次数 = records.Where(i => i.UltraType == "L2").Count();
             model.Pie1.低III限报警次数 = records.Where(i => i.UltraType == "L3").Count();
 
-            var proRecords = _bllUltraRecord.Where(i => i.IsProRecord == true && i.StartTime.Year == DateTime.Now.Year && i.StartTime.Month == DateTime.Now.Month && i.StartTime.Day == DateTime.Now.Day).ToList();
+            var proRecords = _bllUltraRecord.Where(i => i.IsProRecord == true && i.StartTime >= startDate).ToList();
             model.Pie2.专业报警次数 = proRecords.Count;
             model.Pie2.已处理 = proRecords.Where(i => i.HasRemarks).Count();
             model.Pie2.未处理 = proRecords.Where(i => !i.HasRemarks).Count();

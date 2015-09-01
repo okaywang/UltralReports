@@ -16,24 +16,24 @@
     <tbody>
         <tr>
             <td>1#</td>
-            <td>@Model.A1</td>
-            <td>@Model.B1</td>
-            <td>@Model.C1</td>
-            <td>@Model.D1</td>
-            <td>@Model.E1</td>
-            <td>@Model.F1</td>
-            <td>@Model.G1</td>
-            <td>@Model.H1</td>
+            <td>@(double.IsNaN(Model.A1) ? "" : Model.A1.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.B1) ? "" : Model.B1.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.C1) ? "" : Model.C1.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.D1) ? "" : Model.D1.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.E1) ? "" : Model.E1.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.F1) ? "" : Model.F1.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.G1) ? "" : Model.G1.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.H1) ? "" : Model.H1.ToString("0.00"))</td>
         </tr>
         <tr>
             <td>2#</td>
-            <td>@Model.A2</td>
-            <td>@Model.B2</td>
-            <td>@Model.C2</td>
-            <td>@Model.D2</td>
-            <td>@Model.E2</td>
-            <td>@Model.F2</td>
-            <td>@Model.G2</td>
+            <td>@(double.IsNaN(Model.A2) ? "" : Model.A2.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.B2) ? "" : Model.B2.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.C2) ? "" : Model.C2.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.D2) ? "" : Model.D2.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.E2) ? "" : Model.E2.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.F2) ? "" : Model.F2.ToString("0.00"))</td>
+            <td>@(double.IsNaN(Model.G2) ? "" : Model.G2.ToString("0.00"))</td>
         </tr>
     </tbody>
 </table>
