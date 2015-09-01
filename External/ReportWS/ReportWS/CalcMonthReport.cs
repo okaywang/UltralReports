@@ -20,6 +20,11 @@ namespace ReportWS
         DateTime endTime = new DateTime();
         String logstr = String.Empty;
 
+        public double GetValue(string pointName)
+        {
+            return edna.GetHistory(pointName, DateTime.Now);
+        }
+
         public void ReCalcReport(int year,int month)
         {
             startTime = new DateTime(year, month, 1);
