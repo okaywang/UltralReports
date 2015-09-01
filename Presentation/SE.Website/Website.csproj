@@ -188,12 +188,14 @@
     <Compile Include="Models\Duty\DutyModel.cs" />
     <Compile Include="Models\Equipment\EquipmentModel.cs" />
     <Compile Include="Models\Indicator\IndicatorModel.cs" />
+    <Compile Include="Models\PieModel.cs" />
     <Compile Include="Models\Report\EnvironmentalPageModel.cs" />
     <Compile Include="Models\Report\EconomicPageModel.cs" />
     <Compile Include="Models\Report\ReportModel.cs" />
     <Compile Include="Models\Sms\SmsRecipientModel.cs" />
     <Compile Include="Models\Sms\SmsGroupModel.cs" />
     <Compile Include="Models\Sms\SmsLogModel.cs" />
+    <Compile Include="Models\Table1Model.cs" />
     <Compile Include="Models\UltraRecord\UltraRecordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\MajorModel.cs" />
@@ -496,6 +498,7 @@
     <Content Include="Views\Indicator\_ExcelTemplate.cshtml" />
     <Content Include="Views\Report\_EnvironmentalExcelTemplate.cshtml" />
     <Content Include="Views\Report\_EconomicExcelTemplate.cshtml" />
+    <Content Include="Views\Home\_Table1Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

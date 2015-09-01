@@ -2,7 +2,7 @@
     ViewBag.Title = "欢迎访问";
 }
 
-<div class="panel panel-primary" style="visibility:hidden;height:0px;">
+<div class="panel panel-primary" style="visibility: hidden; height: 0px;">
     <div class="panel-heading"></div>
     <div class="panel-body">
         <div id="container0"></div>
@@ -10,16 +10,10 @@
 </div>
 
 <div class="panel panel-primary">
-    <div class="panel-heading">24小时报警信息</div>
+    <div class="panel-heading"></div>
     <div class="panel-body">
-        <div id="container1"></div>
-    </div>
-</div>
-
-<div class="panel panel-primary">
-    <div class="panel-heading">24小时专业报警信息</div>
-    <div class="panel-body">
-        <div id="container2"></div>
+        <div id="container1" class="col-md-6"></div>
+        <div id="container2" class="col-md-6"></div>
     </div>
 </div>
 
@@ -27,44 +21,7 @@
     <div class="panel-heading"></div>
     <div class="panel-body">
         <div id="container3">
-            <table class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>负荷</th>
-                        <th>主蒸汽温度</th>
-                        <th>再热蒸汽温度</th>
-                        <th>真空kpa</th>
-                        <th>SCR入口NOx浓度</th>
-                        <th>SCR出口NOx浓度</th>
-                        <th>二氧化硫</th>
-                        <th>综合厂用率</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1#</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2#</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            @Html.Partial("_Table1Partial", new Table1Model())
         </div>
     </div>
 </div>
@@ -73,20 +30,11 @@
     <script src="~/Scripts/highcharts.js"></script>
     <script>
 
-
-        // Load the fonts
-        Highcharts.createElement('link', {
-            href: 'http://fonts.googleapis.com/css?family=Signika:400,700',
-            rel: 'stylesheet',
-            type: 'text/css'
-        }, null, document.getElementsByTagName('head')[0]);
-
         // Add the background image to the container
         Highcharts.wrap(Highcharts.Chart.prototype, 'getContainer', function (proceed) {
             proceed.call(this);
             this.container.style.background = 'url(http://www.highcharts.com/samples/graphics/sand.png)';
         });
-
 
         Highcharts.theme = {
             colors: ["#f45b5b", "#8085e9", "#8d4654", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
@@ -176,6 +124,16 @@
     </script>
     <script>
         $(function () {
+            var url = "/UltraRecord/Pie";
+            webExpress.utility.ajax.request(url, "", function (response) {
+                pie1(getArray(response.Pie1));
+                pie2(getArray(response.Pie2));
+            });
+
+            self.setInterval(table1, 5000);
+        });
+
+        function pie1(data1) {
             $('#container1').highcharts({
                 chart: {
                     plotBackgroundColor: null,
@@ -204,15 +162,12 @@
                 series: [{
                     type: 'pie',
                     name: "次数",
-                    data: [
-                    ['总报警次数', 80],
-                    ['高I限报警次数', 50],
-                    ['高II限报警次数', 15],
-                    ['高III限报警次数', 5],
-                    ]
+                    data: data1
                 }]
             });
+        }
 
+        function pie2(data2) {
             $('#container2').highcharts({
                 chart: {
                     plotBackgroundColor: null,
@@ -241,15 +196,24 @@
                 series: [{
                     type: 'pie',
                     name: "次数",
-                    data: [
-                    ['专业报警次数', 70],
-                    ['已处理', 48],
-                    ['未处理', 22],
-                    ]
+                    data: data2
                 }]
             });
+        }
 
-             
-        });
+        function table1() {
+            var url = "/Home/Table1";
+            webExpress.utility.ajax.request(url, "", function (response) {
+                $("#container3").html(response);
+            });
+        }
+
+        function getArray(obj) {
+            var tmp = [];
+            for (var key in obj) {
+                tmp.push([key, obj[key]]);
+            }
+            return tmp;
+        }
     </script>
 }
