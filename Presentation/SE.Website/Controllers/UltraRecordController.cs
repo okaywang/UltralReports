@@ -47,7 +47,7 @@ namespace Website.Controllers
             return Json(model);
         }
 
-        [RequireAuthority(AuthorityNames.NormalUltraReport)]
+        //[RequireAuthority(AuthorityNames.NormalUltraReport)]
         public ActionResult SummaryIndex()
         {
             var model = new UltraSummaryListPageModel();
