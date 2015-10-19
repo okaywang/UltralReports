@@ -25,6 +25,7 @@ namespace Website.Controllers
         //{
         //    return View();
         //}
+        [Authorize]
         public ActionResult Index(DateTime? beginDate, DateTime? endDate)
         {
             var model = new KPIListPageModel();
