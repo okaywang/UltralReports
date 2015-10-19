@@ -60,7 +60,7 @@ namespace Website.Controllers
             return View(model);
         }
 
-        [RequireAuthority(AuthorityNames.NormalUltraReport)]
+        //[RequireAuthority(AuthorityNames.NormalUltraReport)]
         public ActionResult SummaryList(UltraSummarySearchCriteria criteria)
         {
             var entities = _bllUltraRecord.SearchSummaryBySql(criteria);
@@ -71,7 +71,7 @@ namespace Website.Controllers
             return PartialView("_CommonList", model);
         }
 
-        [RequireAuthority(AuthorityNames.NormalUltraReport)]
+        //[RequireAuthority(AuthorityNames.NormalUltraReport)]
         public ActionResult List(UltraRecordSearchCriteria criteria)
         {
             var entities = _bllUltraRecord.Search(criteria);
