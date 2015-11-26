@@ -30,11 +30,19 @@
             <label class="control-label">机组</label>
             @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource(), SelectedValue = "", EmptyPair = new NameValuePair { Name = "全部" } }.Render())
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label class="control-label">设备名称</label>
             <select name="EquipmentId" class="form-control input-sm">
                 <option value=''>全部</option>
             </select>
+        </div>*@
+        <div class="form-group">
+            <label class="control-label">设备名称</label>
+            <input type="text" name="EquipmentName" class="form-control input-sm" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">测点名称</label>
+            <input type="text" name="PointName" class="form-control input-sm" />
         </div>
         <div class="form-group">
             <label class="control-label">监控类别</label>

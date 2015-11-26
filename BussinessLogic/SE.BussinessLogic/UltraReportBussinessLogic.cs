@@ -48,7 +48,14 @@ namespace BussinessLogic
             {
                 query = query.Where(i => i.Part.MajorId == criteria.MajorId.Value);
             }
-
+            if (!string.IsNullOrEmpty(criteria.EquipmentName))
+            {
+                query = query.Where(i => i.Part.Equipment.Name.Contains(criteria.EquipmentName));
+            }
+            if (!string.IsNullOrEmpty(criteria.PointName))
+            {
+                query = query.Where(i => i.Part.DataKey.Contains(criteria.PointName));
+            }
             if (criteria.StartTime.HasValue)
             {
                 query = query.Where(i => i.StartTime >= criteria.StartTime.Value);
@@ -113,6 +120,14 @@ namespace BussinessLogic
             if (criteria.EquipmentId.HasValue)
             {
                 sb.AppendLine("and ").AppendFormat("e.Id={0}", criteria.EquipmentId.Value);
+            }
+            if (!string.IsNullOrEmpty(criteria.EquipmentName))
+            {
+                sb.AppendLine("and ").AppendFormat("e.Name like '{0}'", criteria.EquipmentName);
+            }
+            if (!string.IsNullOrEmpty(criteria.PointName))
+            {
+                sb.AppendLine("and ").AppendFormat("p.DataKey like '{0}'", criteria.PointName);
             }
             if (!string.IsNullOrEmpty(criteria.EquipmentNamePart))
             {

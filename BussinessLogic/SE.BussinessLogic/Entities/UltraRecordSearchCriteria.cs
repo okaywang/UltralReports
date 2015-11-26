@@ -23,6 +23,10 @@ namespace BussinessLogic
 
         public int? EquipmentId { get; set; }
 
+        public string EquipmentName { get; set; }
+
+        public string PointName { get; set; }
+
         public string EquipmentNamePart { get; set; }
 
         public int? MonitorTypeId { get; set; }
@@ -37,6 +41,10 @@ namespace BussinessLogic
         public MachineSetType? MachineSet { get; set; }
 
         public bool SearchProRecord { get; set; }
+        
+        public string EquipmentName { get; set; }
+
+        public string PointName { get; set; }
          
         public int? PartId { get; set; } 
 
