@@ -35,11 +35,11 @@ namespace BussinessLogic
             {
                 query = query.Where(i => i.Part.Equipment.MachineSet == criteria.MachineSet.Value);
             }
-            //if (criteria.PartId.HasValue)
-            //{
-            //    query = query.Where(i => i.PartId == criteria.PartId.Value);
-            //}
-            query = query.Where(i => i.PartId == criteria.PartId);
+            if (criteria.PartId.HasValue)
+            {
+                query = query.Where(i => i.PartId == criteria.PartId.Value);
+            }
+            //query = query.Where(i => i.PartId == criteria.PartId);
             if (criteria.Duty.HasValue)
             {
                 query = query.Where(i => i.Duty == criteria.Duty.Value);
@@ -123,11 +123,11 @@ namespace BussinessLogic
             }
             if (!string.IsNullOrEmpty(criteria.EquipmentName))
             {
-                sb.AppendLine("and ").AppendFormat("e.Name like '{0}'", criteria.EquipmentName);
+                sb.AppendLine("and ").AppendFormat("e.Name like '%{0}%'", criteria.EquipmentName);
             }
             if (!string.IsNullOrEmpty(criteria.PointName))
             {
-                sb.AppendLine("and ").AppendFormat("p.DataKey like '{0}'", criteria.PointName);
+                sb.AppendLine("and ").AppendFormat("p.DataKey like '%{0}%'", criteria.PointName);
             }
             if (!string.IsNullOrEmpty(criteria.EquipmentNamePart))
             {
