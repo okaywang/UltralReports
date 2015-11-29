@@ -14,8 +14,14 @@
             <th>@((int)Model.MachineSet)A投入率</th>
             <th>@((int)Model.MachineSet)B投入率</th>
             <th>#@((int)Model.MachineSet)机NOx排放</th>
+            <th>#@((int)Model.MachineSet)机NOx排放max</th>
+            <th>#@((int)Model.MachineSet)机NOx排放min</th>
             <th>#@((int)Model.MachineSet)机SO2排放</th>
+            <th>#@((int)Model.MachineSet)机SO2排放max</th>
+            <th>#@((int)Model.MachineSet)机SO2排放min</th>
             <th>#@((int)Model.MachineSet)机粉尘排放</th>
+            <th>#@((int)Model.MachineSet)机粉尘排放max</th>
+            <th>#@((int)Model.MachineSet)机粉尘排放min</th>
         </tr>
     </thead>
     <tbody>
@@ -33,8 +39,14 @@
                 <td>@item.Col_1A投入率</td>
                 <td>@item.Col_1B投入率</td>
                 <td>@item.Col_1机NOx排放</td>
+                <td>@item.Col_1机NOx排放max</td>
+                <td>@item.Col_1机NOx排放min</td>
                 <td>@item.Col_1机SO2排放</td>
+                <td>@item.Col_1机SO2排放max</td>
+                <td>@item.Col_1机SO2排放min</td>
                 <td>@item.Col_1机粉尘排放</td>
+                <td>@item.Col_1机粉尘排放max</td>
+                <td>@item.Col_1机粉尘排放min</td>
             </tr>
         }
         <tr>
@@ -52,8 +64,14 @@
             <td>@(((Model.Items.Sum(i => i.Col_1A投入率) ?? 0) / days).ToString("0.00"))</td>
             <td>@(((Model.Items.Sum(i => i.Col_1B投入率) ?? 0) / days).ToString("0.00"))</td>
             <td>@(((Model.Items.Sum(i => i.Col_1机NOx排放) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机NOx排放max) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机NOx排放min) ?? 0) / days).ToString("0.00"))</td>
             <td>@(((Model.Items.Sum(i => i.Col_1机SO2排放) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机SO2排放max) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机SO2排放min) ?? 0) / days).ToString("0.00"))</td>
             <td>@(((Model.Items.Sum(i => i.Col_1机粉尘排放) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机粉尘排放max) ?? 0) / days).ToString("0.00"))</td>
+            <td>@(((Model.Items.Sum(i => i.Col_1机粉尘排放min) ?? 0) / days).ToString("0.00"))</td>
         </tr>
     </tbody>
 </table>

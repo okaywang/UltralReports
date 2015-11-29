@@ -38,8 +38,20 @@ namespace Website.Models
 
         public decimal? Col_1机NOx排放 { get; set; }
 
+        public decimal? Col_1机NOx排放max { get; set; }
+
+        public decimal? Col_1机NOx排放min { get; set; }
+
         public decimal? Col_1机SO2排放 { get; set; }
 
+        public decimal? Col_1机SO2排放max { get; set; }
+
+        public decimal? Col_1机SO2排放min { get; set; }
+
         public decimal? Col_1机粉尘排放 { get; set; }
+
+        public decimal? Col_1机粉尘排放max { get; set; }
+
+        public decimal? Col_1机粉尘排放min { get; set; }
     }
 }

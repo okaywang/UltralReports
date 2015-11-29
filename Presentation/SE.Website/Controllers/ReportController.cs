@@ -126,7 +126,7 @@ namespace Website.Controllers
         public ActionResult EnvironmentalIndex([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month, MachineSetType machineSet = MachineSetType.MachineSet1)
         {
             var entiteis = _bllDayData.Where(i => i.RtPoint.MachNO == (int)machineSet && i.DayTime.Year == year && i.DayTime.Month == month).ToList();
-            var points = _bllPoints.Where(i => new[] { 2, 3, 4 }.Contains(i.TableType)).ToList();
+            var points = _bllPoints.Where(i => new[] { 2, 3, 4, 5, 6 }.Contains(i.TableType) && i.MachNO == (int)machineSet).ToList();
             var model = new EnvironmentalPageModel();
             model.Year = year;
             model.Month = month;
@@ -142,6 +142,9 @@ namespace Website.Controllers
                 {
                     var machNo = (int)machineSet - 1;
                     RtDayData data;
+
+                    var entity = dayEntities.Where(i1 => i1.PointId == 99).ToList();
+
                     data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "1");
                     if (data != null)
                     {
@@ -192,15 +195,45 @@ namespace Website.Controllers
                     {
                         item.Col_1机NOx排放 = data.Value;
                     }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "10A");
+                    if (data != null)
+                    {
+                        item.Col_1机NOx排放max = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "10B");
+                    if (data != null)
+                    {
+                        item.Col_1机NOx排放min = data.Value;
+                    }
                     data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "11");
                     if (data != null)
                     {
                         item.Col_1机SO2排放 = data.Value;
                     }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "11A");
+                    if (data != null)
+                    {
+                        item.Col_1机SO2排放max = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "11B");
+                    if (data != null)
+                    {
+                        item.Col_1机SO2排放min = data.Value;
+                    }
                     data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "12");
                     if (data != null)
                     {
                         item.Col_1机粉尘排放 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "12A");
+                    if (data != null)
+                    {
+                        item.Col_1机粉尘排放max = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "12B");
+                    if (data != null)
+                    {
+                        item.Col_1机粉尘排放min = data.Value;
                     }
                 }
 
@@ -212,7 +245,7 @@ namespace Website.Controllers
         public ActionResult ExportExcel4Environmental([ModelBinder(typeof(YearModelBinder))]int year, [ModelBinder(typeof(MonthModelBinder))]int month, MachineSetType machineSet = MachineSetType.MachineSet1)
         {
             var entiteis = _bllDayData.Where(i => i.RtPoint.MachNO == (int)machineSet && i.DayTime.Year == year && i.DayTime.Month == month).ToList();
-            var points = _bllPoints.Where(i => new[] { 2, 3, 4 }.Contains(i.TableType)).ToList();
+            var points = _bllPoints.Where(i => new[] { 2, 3, 4, 5, 6 }.Contains(i.TableType)).ToList();
             var model = new EnvironmentalPageModel();
             model.Year = year;
             model.Month = month;
@@ -278,15 +311,45 @@ namespace Website.Controllers
                     {
                         item.Col_1机NOx排放 = data.Value;
                     }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "10A");
+                    if (data != null)
+                    {
+                        item.Col_1机NOx排放max = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "10B");
+                    if (data != null)
+                    {
+                        item.Col_1机NOx排放min = data.Value;
+                    }
                     data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "11");
                     if (data != null)
                     {
                         item.Col_1机SO2排放 = data.Value;
                     }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "11A");
+                    if (data != null)
+                    {
+                        item.Col_1机SO2排放max = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "11B");
+                    if (data != null)
+                    {
+                        item.Col_1机SO2排放min = data.Value;
+                    }
                     data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "12");
                     if (data != null)
                     {
                         item.Col_1机粉尘排放 = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "12A");
+                    if (data != null)
+                    {
+                        item.Col_1机粉尘排放max = data.Value;
+                    }
+                    data = dayEntities.SingleOrDefault(p => points.Single(p1 => p1.Id == p.PointId).Position == "12B");
+                    if (data != null)
+                    {
+                        item.Col_1机粉尘排放min = data.Value;
                     }
                 }
                 model.Items[i - 1] = item;
