@@ -147,6 +147,54 @@ namespace Website.Models
         }
     }
 
+    public class UltraSummaryListItemModelExcel : IListItemModel
+    {
+        public int? PartId { get; set; }
+
+        [DisplayName("设备名称")]
+        public string EquipmentName { get; set; }
+
+        [DisplayName("部件名称")]
+        public string PartName { get; set; }
+
+        [DisplayName("监控类型")]
+        public string MonitorTypeName { get; set; }
+
+        [DisplayName("专业")]
+        public string UserMajorName { get; set; }
+
+        [DisplayName("姓名")]
+        public string UserName { get; set; }
+
+        //public decimal L3 { get; set; }
+
+        //public decimal H1 { get; set; }
+
+        [DisplayName("额定运行范围")]
+        public string RatedRange { get; set; }
+
+        [DisplayName("班值")]
+        public int Duty { get; set; }
+
+        [DisplayName("超限次数")]
+        public int Times { get; set; }
+
+        [DisplayName("超限时长")]
+        public int Duration { get; set; }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
+        public IListItemCommand[] Commands
+        {
+            get
+            {
+                return new ListItemCommand[0];
+            }
+        }
+    }
 
 
     public class RemarksValueConvertor : IValueConvertor

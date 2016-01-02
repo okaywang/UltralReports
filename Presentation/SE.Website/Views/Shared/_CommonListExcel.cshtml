@@ -1,0 +1,43 @@
+﻿@model IPagedModel<IListItemModel>
+@{
+    if (Model.Items.Any())
+    {
+        var itemType = Model.Items.First().GetType();
+        var props = itemType.GetProperties().Where(p => p.CustomAttributes.Any(i => i.AttributeType == typeof(System.ComponentModel.DisplayNameAttribute))).ToList();
+
+        <div class="search-result-table">
+            <table border='1' cellspacing='0' cellpadding='0'>
+                <thead>
+                    <tr>
+                        @foreach (var prop in props)
+                        {
+                            <th>@prop.GetDisplayName()</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr model-field-entry="@item.ToJson()">
+                            @foreach (var prop in props)
+                            {
+                                <td>
+                                    @if (prop.PropertyType.Name == "IListItemCommand[]")
+                                    {
+                                        var commands = prop.GetValue(item) as IListItemCommand[];
+                                        foreach (var cmd in commands)
+                                        {
+                                            <a href="javascript:;" url="@cmd.CommandAction" command-name="@cmd.CommandName">@cmd.CommandText</a>
+                                        }
+                                        continue;
+                                    }
+                                    @Html.Raw(prop.GetFormatedString(item))
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}

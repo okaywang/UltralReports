@@ -4,7 +4,9 @@ using Common.Types;
 using DataAccess;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using WebExpress.Core;
@@ -58,6 +60,27 @@ namespace Website.Controllers
             var majors = _bllMajor.GetAll();
             model.Majors = Mapper.Map<List<Major>, NameValuePair[]>(majors);
             return View(model);
+        }
+
+        public FileResult ExportExcelSummary(UltraSummarySearchCriteria criteria)
+        { 
+            var entities = _bllUltraRecord.SearchSummaryBySql(criteria);
+            var items = Mapper.Map<PagedList<UltraSummary>, UltraSummaryListItemModelExcel[]>(entities);
+
+            var model = new PagedModel<UltraSummaryListItemModelExcel>();
+            model.Items = items;
+
+            this.ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                ViewEngineResult viewResult = System.Web.Mvc.ViewEngines.Engines.FindPartialView(this.ControllerContext, "_CommonListExcel");
+                var viewContext = new ViewContext(this.ControllerContext, viewResult.View, this.ViewData, this.TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                var html = sw.GetStringBuilder().ToString();
+                byte[] fileContents = Encoding.UTF8.GetBytes(html);
+                return File(fileContents, "application/ms-excel", "常规超限统计.xls");
+            } 
         }
 
         //[RequireAuthority(AuthorityNames.NormalUltraReport)]

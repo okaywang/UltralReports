@@ -499,6 +499,8 @@
     <Content Include="Views\Report\_EnvironmentalExcelTemplate.cshtml" />
     <Content Include="Views\Report\_EconomicExcelTemplate.cshtml" />
     <Content Include="Views\Home\_Table1Partial.cshtml" />
+    <Content Include="Views\UltraRecord\_SummaryIndexExcelTemplate.cshtml" />
+    <Content Include="Views\Shared\_CommonListExcel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

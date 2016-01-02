@@ -81,6 +81,10 @@ namespace BussinessLogic
         /// <returns></returns>
         public PagedList<UltraSummary> SearchSummaryBySql(UltraSummarySearchCriteria criteria)
         {
+            if (criteria.PagingRequest == null)
+            {
+                criteria.PagingRequest = new PagingRequest() { PageIndex = 0, PageSize = int.MaxValue };
+            }
             var sb = new StringBuilder();
             sb.AppendLine(@"select
             ROW_NUMBER() over(order by isnull(e.Id,2147483647),isnull(p.Id,2147483647),ur.Duty) row
