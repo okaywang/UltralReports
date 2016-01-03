@@ -31,11 +31,11 @@
             @Html.Raw(new NativeSelect("MachineSet", true, false) { Source = new EnumControlSourceAttribute(typeof(MachineSetType)).GetSource(), SelectedValue = "", EmptyPair = new NameValuePair { Name = "全部" } }.Render())
         </div>
         @*<div class="form-group">
-            <label class="control-label">设备名称</label>
-            <select name="EquipmentId" class="form-control input-sm">
-                <option value=''>全部</option>
-            </select>
-        </div>*@
+                <label class="control-label">设备名称</label>
+                <select name="EquipmentId" class="form-control input-sm">
+                    <option value=''>全部</option>
+                </select>
+            </div>*@
         <div class="form-group">
             <label class="control-label">设备名称</label>
             <input type="text" name="EquipmentName" class="form-control input-sm" />
@@ -88,6 +88,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <a class="btn btn-primary btn-sm export" url="/UltraRecord/ExportExcelList" href="/UltraRecord/ExportExcelList" style="width:100px">导出</a>
                 </div>
             </div>
         </div>
@@ -110,6 +111,7 @@
                     var title = webExpress.utility.string.format("<b>设备：</b>{0} <b>部件：</b>{1} 超限记录详情", model.EquipmentName || "", model.PartName || "");
                     $(".module-detail .modal-title").html(title);
                     $(".module-detail .modal").modal("show");
+                    $(".module-detail a.export").attr("href", $(".module-detail a.export").attr("url") + "?" + $.param(subView.criteria));
                 }
             }
         }));

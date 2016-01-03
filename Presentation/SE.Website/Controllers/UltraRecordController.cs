@@ -63,7 +63,7 @@ namespace Website.Controllers
         }
 
         public FileResult ExportExcelSummary(UltraSummarySearchCriteria criteria)
-        { 
+        {
             var entities = _bllUltraRecord.SearchSummaryBySql(criteria);
             var items = Mapper.Map<PagedList<UltraSummary>, UltraSummaryListItemModelExcel[]>(entities);
 
@@ -80,7 +80,7 @@ namespace Website.Controllers
                 var html = sw.GetStringBuilder().ToString();
                 byte[] fileContents = Encoding.UTF8.GetBytes(html);
                 return File(fileContents, "application/ms-excel", "常规超限统计.xls");
-            } 
+            }
         }
 
         //[RequireAuthority(AuthorityNames.NormalUltraReport)]
@@ -92,6 +92,28 @@ namespace Website.Controllers
             model.Items = items;
             model.PagingResult = entities.PagingResult;
             return PartialView("_CommonList", model);
+        }
+
+        public ActionResult ExportExcelList(UltraRecordSearchCriteria criteria)
+        {
+            criteria.PagingRequest = null;
+            var entities = _bllUltraRecord.Search(criteria);
+            var items = Mapper.Map<List<UltraRecord>, UltraRecordListItemModel[]>(entities);
+
+            var model = new PagedModel<UltraRecordListItemModel>();
+            model.Items = items;
+
+            this.ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                ViewEngineResult viewResult = System.Web.Mvc.ViewEngines.Engines.FindPartialView(this.ControllerContext, "_CommonListExcel");
+                var viewContext = new ViewContext(this.ControllerContext, viewResult.View, this.ViewData, this.TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                var html = sw.GetStringBuilder().ToString();
+                byte[] fileContents = Encoding.UTF8.GetBytes(html);
+                return File(fileContents, "application/ms-excel", "超限统计详情.xls");
+            }
         }
 
         //[RequireAuthority(AuthorityNames.NormalUltraReport)]
@@ -122,6 +144,30 @@ namespace Website.Controllers
             var majors = _bllMajor.GetAll();
             model.Majors = Mapper.Map<List<Major>, NameValuePair[]>(majors);
             return View(model);
+        }
+
+        public ActionResult ExportExcelProUltraRecordList(UltraRecordSearchCriteria criteria)
+        {
+            criteria.SearchProRecord = true;
+
+            var entities = _bllUltraRecord.Search(criteria);
+            var items = Mapper.Map<PagedList<UltraRecord>, ProUltraRecordListItemModel[]>(entities);
+
+            var model = new PagedModel<ProUltraRecordListItemModel>();
+            model.Items = items;
+
+
+            this.ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                ViewEngineResult viewResult = System.Web.Mvc.ViewEngines.Engines.FindPartialView(this.ControllerContext, "_CommonListExcel");
+                var viewContext = new ViewContext(this.ControllerContext, viewResult.View, this.ViewData, this.TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                var html = sw.GetStringBuilder().ToString();
+                byte[] fileContents = Encoding.UTF8.GetBytes(html);
+                return File(fileContents, "application/ms-excel", "专业超限统计.xls");
+            }
         }
 
         [RequireAuthority(AuthorityNames.ProUltraReport)]
