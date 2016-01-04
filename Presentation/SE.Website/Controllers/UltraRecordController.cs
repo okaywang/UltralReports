@@ -69,7 +69,7 @@ namespace Website.Controllers
 
             var model = new PagedModel<UltraSummaryListItemModelExcel>();
             model.Items = items;
-
+            model.Items.Each(i => i.RatedRange = "&nbsp;" + i.RatedRange);
             this.ViewData.Model = model;
             using (var sw = new StringWriter())
             {
