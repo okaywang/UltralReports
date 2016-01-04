@@ -29,7 +29,7 @@
             return date.getFullYear() + dateDelimiter + webExpress.utility.string.padLeft((date.getMonth() + 1), 2, "0") + dateDelimiter + webExpress.utility.string.padLeft(date.getDate(), 2, "0");
         };
 
-        function daysInMonth(month, year) {
+        function daysInMonth(year, month) {
             return new Date(year, month, 0).getDate();
         }
 
