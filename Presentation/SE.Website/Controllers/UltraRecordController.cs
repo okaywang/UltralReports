@@ -82,6 +82,29 @@ namespace Website.Controllers
                 return File(fileContents, "application/ms-excel", "常规超限统计.xls");
             }
         }
+        public ActionResult ExportExcelDetail(UltraRecordSearchCriteria criteria)
+        {
+            criteria.PagingRequest = null;
+            criteria.OrderByFields.Add(new OrderByField<UltraRecord>(i => i.Part.Equipment.Name, System.Data.SqlClient.SortOrder.Ascending));
+            criteria.OrderByFields.Add(new OrderByField<UltraRecord>(i => i.Part.Name, System.Data.SqlClient.SortOrder.Ascending));
+            var entities = _bllUltraRecord.Search(criteria);
+            var items = Mapper.Map<List<UltraRecord>, UltraRecordListItemExcelModel[]>(entities);
+
+            var model = new PagedModel<UltraRecordListItemExcelModel>();
+            model.Items = items;
+
+            this.ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                ViewEngineResult viewResult = System.Web.Mvc.ViewEngines.Engines.FindPartialView(this.ControllerContext, "_CommonListExcel");
+                var viewContext = new ViewContext(this.ControllerContext, viewResult.View, this.ViewData, this.TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                var html = sw.GetStringBuilder().ToString();
+                byte[] fileContents = Encoding.UTF8.GetBytes(html);
+                return File(fileContents, "application/ms-excel", "超限统计详情.xls");
+            }
+        }
 
         //[RequireAuthority(AuthorityNames.NormalUltraReport)]
         public ActionResult SummaryList(UltraSummarySearchCriteria criteria)

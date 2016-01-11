@@ -82,6 +82,8 @@ namespace Website
             Mapper.CreateMap<UltraSummary, UltraSummaryListItemModel>().ForMember(dest => dest.RatedRange, opt => opt.MapFrom(src => string.Format("{0}-{1}", src.L1, src.H1)));
             Mapper.CreateMap<UltraSummary, UltraSummaryListItemModelExcel>().ForMember(dest => dest.RatedRange, opt => opt.MapFrom(src => string.Format("{0}-{1}", src.L1, src.H1)));
             Mapper.CreateMap<UltraRecord, UltraRecordListItemModel>();
+            Mapper.CreateMap<UltraRecord, UltraRecordListItemExcelModel>().ForMember(dest => dest.EquipmentName, opt => opt.MapFrom(src => src.Part.Equipment.Name))
+                .ForMember(dest => dest.PartName, opt => opt.MapFrom(src => src.Part.Name)); ;
             Mapper.CreateMap<UltraRecord, ProUltraRecordListItemModel>().ForMember(dest => dest.EquipmentName, opt => opt.MapFrom(src => src.Part.Equipment.Name))
                 .ForMember(dest => dest.MajorName, opt => opt.MapFrom(src => src.Part.Major.Name));
 

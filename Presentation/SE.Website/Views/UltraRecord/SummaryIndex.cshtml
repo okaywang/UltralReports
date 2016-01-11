@@ -68,7 +68,9 @@
         </div>
         <div class="form-group">
             <button type="button" role="search" class="btn btn-primary btn-sm">查询</button>
-            <a class="btn btn-primary btn-sm" url="/UltraRecord/ExportExcelSummary" href="/UltraRecord/ExportExcelSummary" style="width:100px" onclick="javascript: this.href = $(this).attr('url') + '?' + $('form').serialize()">导出</a>
+            <a class="btn btn-primary btn-sm" style="width:100px" onclick="javascript: document.getElementById('btnExportSummary').click(); document.getElementById('btnExportDetail').click();">导出</a>
+            <a class="btn btn-primary btn-sm" id="btnExportSummary" target="_blank" url="/UltraRecord/ExportExcelSummary" href="/UltraRecord/ExportExcelSummary" style="width:100px;display:none" onclick="javascript: this.href = $(this).attr('url') + '?' + $('form').serialize()">导出</a>
+            <a class="btn btn-primary btn-sm" id="btnExportDetail" target="_blank" url="/UltraRecord/ExportExcelDetail" href="/UltraRecord/ExportExcelDetail" style="width:100px;display:none" onclick="javascript: this.href = $(this).attr('url') + '?' + $('form').serialize()">导出</a>
         </div>
     </form>
 </div>

@@ -46,7 +46,7 @@ namespace Website.Models
     {
         public object Convert(object obj)
         {
-            var model = obj as UltraRecordListItemModel;
+            dynamic model = obj;
             if (model.StartTime > model.EndTime || String.IsNullOrEmpty(model.EndTime.ToString()) || model.EndTime == DateTime.MinValue)
             {
                 return "超限未结束";
@@ -59,6 +59,53 @@ namespace Website.Models
     public class UltraRecordListItemModel : IListItemModel
     {
         public int PartId { get; set; }
+
+        [DisplayName("开始时间")]
+        public DateTime StartTime { get; set; }
+
+        [DisplayName("结束时间")]
+        public DateTime? EndTime { get; set; }
+
+        [DisplayName("超限类型")]
+        [ValueConvertor(typeof(UltraTypeValueConvertor))]
+        public string UltraType { get; set; }
+
+        [DisplayName("超限时长")]
+        [ValueConvertor(typeof(DurationValueConvertor))]
+        public string Duration { get; set; }
+
+        [DisplayName("最小值")]
+        public decimal? MinValue { get; set; }
+
+        [DisplayName("最大值")]
+        public decimal? MaxValue { get; set; }
+
+        [DisplayName("平均值")]
+        public decimal? AvgValue { get; set; }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
+        public IListItemCommand[] Commands
+        {
+            get
+            {
+                return new ListItemCommand[0];
+            }
+        }
+    }
+
+    public class UltraRecordListItemExcelModel : IListItemModel
+    {
+        public int PartId { get; set; }
+
+        [DisplayName("设备名称")]
+        public string EquipmentName { get; set; }
+
+        [DisplayName("部件名称")]
+        public string PartName { get; set; }
 
         [DisplayName("开始时间")]
         public DateTime StartTime { get; set; }

@@ -156,7 +156,7 @@ namespace BussinessLogic
 
             sb.AppendLine().AppendLine("group by e.Id,p.Id,ur.Duty");
             var sql = sb.ToString();
-            var result = PrimaryRepository.ExecuteSqlQuery2<UltraSummary>(sql, criteria.PagingRequest);
+            var result = PrimaryRepository.ExecuteSqlQuery2<UltraSummary>(sql, "EquipmentName,PartName", criteria.PagingRequest);
             return result;
         }
 

@@ -24,13 +24,13 @@ namespace DataAccess
             return _context.Database.SqlQuery<TResult>(sql).ToList();
         }
 
-        public PagedList<TResult> ExecuteSqlQuery2<TResult>(string sql, PagingRequest pagingRequest)
+        public PagedList<TResult> ExecuteSqlQuery2<TResult>(string sql, string orderby, PagingRequest pagingRequest)
         {
             var sb = new StringBuilder("with tmpTable as");
             sb.AppendLine("(");
             sb.AppendLine(sql);
             sb.AppendLine(")");
-            sb.AppendLine().AppendFormat("select * from tmpTable where row between {0} and {1}", pagingRequest.PageIndex * pagingRequest.PageSize + 1, (pagingRequest.PageIndex + 1) * pagingRequest.PageSize);
+            sb.AppendLine().AppendFormat("select * from tmpTable where row between {0} and {1} order by {2}", pagingRequest.PageIndex * pagingRequest.PageSize + 1, (pagingRequest.PageIndex + 1) * pagingRequest.PageSize, orderby);
 
             var items = _context.Database.SqlQuery<TResult>(sb.ToString()).ToList();
 
