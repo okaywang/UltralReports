@@ -52,13 +52,17 @@ namespace Website.Models
                 return "超限未结束";
             }
             var span = (DateTime.Parse(model.EndTime.ToString())).Subtract(model.StartTime);
-            return string.Format("{0}分{1}秒", span.Days * 60 + span.Minutes, span.Seconds);
+            //return string.Format("{0}分{1}秒", span.Days * 60 + span.Minutes, span.Seconds);
+            return string.Format("{0}秒",(int)span.TotalSeconds);
         }
     }
 
     public class UltraRecordListItemModel : IListItemModel
     {
         public int PartId { get; set; }
+
+        [DisplayName("点名")]
+        public string PointName { get; set; }
 
         [DisplayName("开始时间")]
         public DateTime StartTime { get; set; }
@@ -106,6 +110,9 @@ namespace Website.Models
 
         [DisplayName("部件名称")]
         public string PartName { get; set; }
+
+        [DisplayName("点名")]
+        public string PointName { get; set; }
 
         [DisplayName("开始时间")]
         public DateTime StartTime { get; set; }
