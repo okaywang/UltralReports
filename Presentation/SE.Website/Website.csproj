@@ -501,6 +501,7 @@
     <Content Include="Views\Home\_Table1Partial.cshtml" />
     <Content Include="Views\UltraRecord\_SummaryIndexExcelTemplate.cshtml" />
     <Content Include="Views\Shared\_CommonListExcel.cshtml" />
+    <Content Include="Views\Report\EconomicIndex_bypoint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\config\" />

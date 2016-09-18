@@ -95,7 +95,8 @@ namespace Website.Controllers
                 instance.ReCalcReport(year, month);
             }
             var entities = _bllMonthData.Where(i => i.Year == year && i.Month == month);
-            var items = entities.ToDictionary(i => i.RtPoint.PointName, i => i.Value);
+            //var items = entities.ToDictionary(i => i.RtPoint.PointName, i => i.Value);
+            var items = entities.ToDictionary(i => i.RtPoint.Position, i => i.Value);
             var model = new EconomicPageModel(items);
             model.Year = year;
             model.Month = month;
